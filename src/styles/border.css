@@ -1,0 +1,9 @@
+.orangeBorder {
+    border: 1px solid #E37E31;
+    border-radius: 20px;
+}
+
+.grayBorder {
+    border: 1px solid #CBCBCB;
+    border-radius: 10px;
+}

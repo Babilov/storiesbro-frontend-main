@@ -1,0 +1,12 @@
+.uploadBLock .dropZoneArea {
+    height: 60vh;
+    background-color: #EDEDED;
+    border: 1px solid #818181;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.uploadBLock .hidden {
+    display: none;
+}

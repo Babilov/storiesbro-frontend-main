@@ -1,0 +1,21 @@
+.grid .centerForm {
+    width: 40%;
+    margin: 0 auto;
+    padding: 10px 20px;
+  }
+.grid .centerForm50 {
+    width: 50%;
+    margin: 0 auto;
+    padding: 10px 20px;
+  }
+
+  @media (max-width: 899.5px) {
+    .grid .centerForm {
+      width: 60%;
+    }
+  }
+  @media (max-width: 576.5px) {
+    .grid .centerForm {
+      width: 90%;
+    }
+  }

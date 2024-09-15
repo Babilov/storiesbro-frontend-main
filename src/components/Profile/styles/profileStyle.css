@@ -1,0 +1,18 @@
+.navLink {
+    color: black;
+    text-decoration: none;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+}
+
+.navLink img{
+    margin-right: 12px;
+}
+
+.active {
+    color: #E37E31;
+}

@@ -1,0 +1,8 @@
+.swiper-pagination-bullet {
+    margin-bottom: -8px !important;
+    --swiper-theme-color: #E37E31;
+}
+
+.swiper-wrapper{
+    height: 35vh;
+}

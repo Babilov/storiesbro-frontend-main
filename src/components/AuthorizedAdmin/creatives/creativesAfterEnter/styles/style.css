@@ -1,0 +1,16 @@
+.adminTitles h4 {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.adminPublics p {
+    font-size: 18px;
+    font-weight: 400;
+    text-align: center;
+}
+
+.adminPublics .delete {
+    font-size: 16px;
+    font-weight: 400;
+    text-align: center;
+}
