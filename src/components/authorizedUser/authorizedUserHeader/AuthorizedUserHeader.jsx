@@ -25,7 +25,7 @@ const AuthorizedUserHeader = ({ ismainpage = false, isCustomer }) => {
         src={logo}
         item
         lg={1}
-        xs={5}
+        sm={5}
         order={{ xs: 2, lg: 1 }}
         sx={{
           height: { xs: "40px", sm: "100px" },
@@ -40,7 +40,7 @@ const AuthorizedUserHeader = ({ ismainpage = false, isCustomer }) => {
         item
         xs={2}
         sx={{
-          height: { xs: "50px" },
+          height: { xs: "50px", sm: "20px" },
           display: {
             xs: "block",
             lg: "none",
