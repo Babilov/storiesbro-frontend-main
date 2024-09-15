@@ -35,7 +35,11 @@ const AdminLeftSideBar = ({ open, setOpen }) => {
             alt="cross"
             src={cross}
             onClick={() => setOpen(false)}
-            sx={{ cursor: "pointer", mr: 2, ml: 1 }}
+            sx={{ cursor: "pointer", mr: 2, ml: 1, 
+              height: { xs: "40px", sm: "100px" },
+              width: { xs: "60px", sm: "90px" },
+              cursor: "pointer",
+           }}
           />
           <Box component="img" alt="logo" src={logo} />
         </Box>
