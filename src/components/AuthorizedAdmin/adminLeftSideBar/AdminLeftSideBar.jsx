@@ -41,7 +41,7 @@ const AdminLeftSideBar = ({ open, setOpen }) => {
               cursor: "pointer",
            }}
           />
-          <Box component="img" alt="logo" src={logo} />
+          <Box component="img" alt="logo" src={logo} /> {/* check */}
         </Box>
         <Divider sx={{ display: { xs: "flex", lg: "none" } }} />
         <Box
