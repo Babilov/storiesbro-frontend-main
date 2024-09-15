@@ -28,8 +28,8 @@ const AuthorizedUserHeader = ({ ismainpage = false, isCustomer }) => {
         sm={5}
         order={{ xs: 2, lg: 1 }}
         sx={{
-          height: { xs: "40px", sm: "100px" },
-          width: { xs: "60px", sm: "90px" },
+          height: { xs: "40px", md: "70px" },
+          width: { xs: "60px", md: "90px" },
           cursor: "pointer",
         }}
         onClick={navigateToHelp}
@@ -40,7 +40,7 @@ const AuthorizedUserHeader = ({ ismainpage = false, isCustomer }) => {
         item
         xs={2}
         sx={{
-          height: { xs: "50px", sm: "20px" },
+          height: { xs: "20px" },
           display: {
             xs: "block",
             lg: "none",
