@@ -24,8 +24,8 @@ const AuthorizedUserHeader = ({ ismainpage = false, isCustomer }) => {
         alt="logo"
         src={logo}
         item
-        lg={2}
-        xs={8}
+        lg={1}
+        xs={5}
         order={{ xs: 2, lg: 1 }}
         sx={{
           height: { xs: "40px", sm: "100px" },
@@ -55,7 +55,7 @@ const AuthorizedUserHeader = ({ ismainpage = false, isCustomer }) => {
       />
  
       {/* Средняя часть (например, для Switcher) */}
-      <Grid
+      {/* <Grid
         item
         lg={8}
         xs={12}
@@ -71,8 +71,8 @@ const AuthorizedUserHeader = ({ ismainpage = false, isCustomer }) => {
           alignItems: "center",
         }}
       >
-        {/* <Switcher ismainpage={ismainpage} /> */}
-      </Grid>
+        {/* <Switcher ismainpage={ismainpage} /> 
+      </Grid> */}
 
       {/* Правая часть (выход и баланс) */}
       <Grid
