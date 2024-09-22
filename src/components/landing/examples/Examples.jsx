@@ -9,7 +9,12 @@ const Examples = () => {
     <Box sx={{ mt: 5 }}>
       <Typography
         variant="h4"
-        sx={{ fontWeight: 600, fontSize: "32px", textAlign: "center" }}
+        sx={{
+          fontWeight: 600,
+          fontSize: "32px",
+          textAlign: "center",
+          mb: "30px",
+        }}
       >
         Примеры рекламных креативов
       </Typography>

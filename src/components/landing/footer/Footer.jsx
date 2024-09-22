@@ -49,8 +49,22 @@ const Footer = () => {
           fontSize: "18px",
         }}
       >
-        <FooterText><a href="./registrationFiles/PrivacyPolicy.docx" download="PrivacyPolicy.docx">Политика конфиденциальности</a></FooterText>
-        <FooterText><a href="./registrationFiles/UserAgreement.docx" download="UserAgreement.docx">Пользовательское соглашение</a></FooterText>
+        <FooterText>
+          <a
+            href="./registrationFiles/PrivacyPolicy.pdf"
+            download="PrivacyPolicy.pdf"
+          >
+            Политика конфиденциальности
+          </a>
+        </FooterText>
+        <FooterText>
+          <a
+            href="./registrationFiles/UserAgreement.pdf"
+            download="UserAgreement.pdf"
+          >
+            Пользовательское соглашение
+          </a>
+        </FooterText>
       </Grid>
       <Grid
         order={{ xs: 3, md: 4 }}
