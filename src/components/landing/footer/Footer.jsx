@@ -6,6 +6,7 @@ import FooterImage from "./FooterImage";
 import vkBlack from "../../../images/icons/commonIcons/vkBlack.svg";
 import vkWhite from "../../../images/icons/commonIcons/vkWhite.svg";
 import { Context } from "../../../context/Context";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   const [isCustomer, _] = useContext(Context);
@@ -50,20 +51,14 @@ const Footer = () => {
         }}
       >
         <FooterText>
-          <a
-            href="./registrationFiles/PrivacyPolicy.pdf"
-            download="PrivacyPolicy.pdf"
-          >
+          <Link to="/PrivacyPolicy.pdf" target="_blank" download>
             Политика конфиденциальности
-          </a>
+          </Link>
         </FooterText>
         <FooterText>
-          <a
-            href="./registrationFiles/UserAgreement.pdf"
-            download="UserAgreement.pdf"
-          >
+          <Link to="/UserAgreement.pdf" target="_blank" download>
             Пользовательское соглашение
-          </a>
+          </Link>
         </FooterText>
       </Grid>
       <Grid
