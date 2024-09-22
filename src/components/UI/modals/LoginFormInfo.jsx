@@ -7,8 +7,8 @@ import axios from "axios";
 import { setTokken } from "../../../store/userReducer";
 import { useDispatch } from "react-redux";
 import { API_URL } from "../../../constants/constatns";
-import { useNavigate } from 'react-router-dom';
-import * as VKID from '@vkid/sdk'; // Импорт VKID SDK
+import { useNavigate } from "react-router-dom";
+import * as VKID from "@vkid/sdk"; // Импорт VKID SDK
 
 const LoginFormInfo = ({
   handleChangeConfirm,
@@ -16,7 +16,7 @@ const LoginFormInfo = ({
   handleRegistrationForm,
   setIsLoginFormOpen,
   setIsConfirmPageOpen,
-  handleConfirmForm
+  handleConfirmForm,
 }) => {
   const [error, setError] = useState(false);
   const [email, setEmail] = useState("");
@@ -30,52 +30,53 @@ const LoginFormInfo = ({
   function generateCodeVerifier() {
     const array = new Uint32Array(56 / 2);
     window.crypto.getRandomValues(array);
-    return Array.from(array, dec => ('0' + dec.toString(16)).substr(-2)).join('');
+    return Array.from(array, (dec) => ("0" + dec.toString(16)).substr(-2)).join(
+      ""
+    );
   }
 
   // Функция для генерации codeChallenge из codeVerifier
   async function generateCodeChallenge(codeVerifier) {
     const encoder = new TextEncoder();
     const data = encoder.encode(codeVerifier);
-    const digest = await window.crypto.subtle.digest('SHA-256', data);
+    const digest = await window.crypto.subtle.digest("SHA-256", data);
     return btoa(String.fromCharCode.apply(null, new Uint8Array(digest)))
-      .replace(/\+/g, '-')
-      .replace(/\//g, '_')
-      .replace(/=+$/, '');
+      .replace(/\+/g, "-")
+      .replace(/\//g, "_")
+      .replace(/=+$/, "");
   }
 
-  /*useEffect(() => {
+  useEffect(() => {
     // Генерация codeVerifier и codeChallenge
     const codeVerifier = generateCodeVerifier();
-    generateCodeChallenge(codeVerifier).then(codeChallenge => {
+    generateCodeChallenge(codeVerifier).then((codeChallenge) => {
       // Инициализация VKID SDK
       VKID.Config.init({
-        app: '51786441',  // Укажите ваш VK app ID
-        redirectUrl: 'https://storisbro.com/admin',  // Укажите ваш redirect URL
-        state: 'state',  // Дополнительный параметр состояния
-        codeVerifier: codeVerifier,  // Используем сгенерированный codeVerifier
-        scope: 'phone email',  // Запрашиваемые разрешения
+        app: "51786441", // Укажите ваш VK app ID
+        redirectUrl: "https://storisbro.com/admin", // Укажите ваш redirect URL
+        state: "state", // Дополнительный параметр состояния
+        codeVerifier: codeVerifier, // Используем сгенерированный codeVerifier
+        scope: "phone email", // Запрашиваемые разрешения
       });
-  
+
       const oneTap = new VKID.OneTap();
-      const container = document.getElementById('VkIdSdkOneTap');
-  
+      const container = document.getElementById("VkIdSdkOneTap");
+
       if (container) {
         oneTap
           .render({ container })
-          .on(VKID.WidgetEvents.SUCCESS, handleVkAuth)  // Обработка успеха
-          .on(VKID.WidgetEvents.ERROR, console.error);  // Обработка ошибок
+          .on(VKID.WidgetEvents.SUCCESS, handleVkAuth) // Обработка успеха
+          .on(VKID.WidgetEvents.ERROR, console.error); // Обработка ошибок
       }
     });
   }, []);
-  */
 
   const handleVkAuth = (data) => {
     const { code, device_id } = data;
 
     // Обмен кода на токены
     VKID.Auth.exchangeCode(code, device_id)
-      .then(response => {
+      .then((response) => {
         const { access_token, refresh_token, user_id, vk_id } = response;
 
         // Сохранение токенов и других данных в localStorage
@@ -88,10 +89,10 @@ const LoginFormInfo = ({
         dispatch(setTokken(access_token));
 
         // Проверка и перенаправление пользователя
-        navigate('/admin');
+        navigate("/admin");
       })
-      .catch(error => {
-        console.error('Ошибка при обмене кода на токены:', error);
+      .catch((error) => {
+        console.error("Ошибка при обмене кода на токены:", error);
         setError(true);
       });
   };
@@ -99,12 +100,19 @@ const LoginFormInfo = ({
   const handleConfirmFormInternal = () => {
     const email_lower = email.toLowerCase();
     axios
-      .post(`${API_URL}login/`, {
-        email: email_lower,
-        password: password,
-      }, { withCredentials: true, headers: {
-        Authorization: "Bearer " + localStorage.getItem("token"), }
-      })
+      .post(
+        `${API_URL}login/`,
+        {
+          email: email_lower,
+          password: password,
+        },
+        {
+          withCredentials: true,
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        }
+      )
       .then(function (response) {
         setUserId(response.data.id);
         handleConfirmForm(response.data.id);
@@ -116,19 +124,22 @@ const LoginFormInfo = ({
         localStorage.setItem("token", response.data["access"]);
         localStorage.setItem("refresh", response.data["refresh"]);
         localStorage.setItem("id", response.data["id"]);
-        localStorage.setItem("count_of_visit", response.data["count_of_visit"] + 1);
+        localStorage.setItem(
+          "count_of_visit",
+          response.data["count_of_visit"] + 1
+        );
         localStorage.setItem("UID", response.data["UID"]);
         localStorage.setItem("vk_id", response.data["vk_id"]);
-        localStorage.setItem('is_active', response.data["is_active"]);
+        localStorage.setItem("is_active", response.data["is_active"]);
         localStorage.setItem("statusAccount", "admin");
         dispatch(setTokken(response.data["access"]));
-        
+
         const checkStatus = localStorage.getItem("statusAccount");
 
         if (checkStatus === "admin") {
-          navigate('/admin');
+          navigate("/admin");
         } else if (checkStatus === "customer") {
-          navigate('/customer');
+          navigate("/customer");
         }
       })
       .catch(function (error) {
@@ -163,9 +174,12 @@ const LoginFormInfo = ({
       >
         Восстановить пароль
       </Link>
-      <GradientButton handleClick={handleConfirmFormInternal}>Войти</GradientButton>
+      <GradientButton handleClick={handleConfirmFormInternal}>
+        Войти
+      </GradientButton>
       <Box sx={{ mt: 1, mb: 1 }}></Box>
-      <Box id="VkIdSdkOneTap" sx={{ mt: 2 }}></Box> {/* Контейнер для рендера VKID */}
+      <Box id="VkIdSdkOneTap" sx={{ mt: 2 }}></Box>{" "}
+      {/* Контейнер для рендера VKID */}
       <Typography
         sx={{
           mt: 2,
