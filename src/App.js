@@ -61,11 +61,11 @@ function App() {
   const [isLoginFormOpen, setIsLoginFormOpen] = useState(false);
   const [isCustomer, setIsCustomer] = useState(false);
 
-  const [allPublics, setAllPublics] = useState([])
-  const [publics, setPublics] = useState([])
+  const [allPublics, setAllPublics] = useState([]);
+  const [publics, setPublics] = useState([]);
   const [creatives, setCreatives] = useState([]);
   const [arhive, setArhive] = useState([]);
-  const userId = localStorage.getItem('id')
+  const userId = localStorage.getItem("id");
 
   const navigate = useNavigate();
 
@@ -73,10 +73,12 @@ function App() {
     // Функция для получения сообществ с бэкенда
     const fetchPublics = async () => {
       try {
-        const response = await axios.get(`${API_URL}api_communities/communities`);
+        const response = await axios.get(
+          `${API_URL}api_communities/communities`
+        );
         setAllPublics(response.data);
       } catch (error) {
-        console.error('Ошибка при загрузке сообществ', error);
+        console.error("Ошибка при загрузке сообществ", error);
       }
     };
 
@@ -88,10 +90,13 @@ function App() {
     // Функция для получения сообществ с бэкенда
     const fetchPublics = async () => {
       try {
-        const response = await axios.get(`${API_URL}api_communities/own_communities/${userId}`);
+        console.log(`User ID: ${userId}`);
+        const response = await axios.get(
+          `${API_URL}api_communities/own_communities/${userId}`
+        );
         setPublics(response.data);
       } catch (error) {
-        console.error('Ошибка при загрузке сообществ', error);
+        console.error("Ошибка при загрузке сообществ", error);
       }
     };
 
@@ -99,17 +104,18 @@ function App() {
     fetchPublics();
   }, [userId]); // Пустой массив зависимостей означает, что эффект будет выполнен только один раз при монтировании
 
-
   useEffect(() => {
     // Функция для получения креативов с бэкенда
     const fetchCreativesAll = async () => {
       try {
-        const response = await axios.get(`${API_URL}api_creatives/own_all_creatives/${userId}`);
-        setCreatives(response.data.filter(item => item.archive === false));
-        setArhive(response.data.filter(item => item.archive === true));
-        console.log('Данные с бэкенда (креативы):', response.data); // Добавление вывода в консоль
-      }   catch (error) {
-        console.error('Ошибка при загрузке креативов', error);
+        const response = await axios.get(
+          `${API_URL}api_creatives/own_all_creatives/${userId}`
+        );
+        setCreatives(response.data.filter((item) => item.archive === false));
+        setArhive(response.data.filter((item) => item.archive === true));
+        console.log("Данные с бэкенда (креативы):", response.data); // Добавление вывода в консоль
+      } catch (error) {
+        console.error("Ошибка при загрузке креативов", error);
       }
     };
 
@@ -117,359 +123,356 @@ function App() {
     fetchCreativesAll();
   }, [userId]); // Пустой массив зависимостей означает, что эффект будет выполнен только один раз при монтировании
 
-// автоматическая очистка кэша
-    
-  if(localStorage.getItem('token')){
-      setTimeout(() => {
-        localStorage.clear();
-        navigate('/');
-        console.log("Обновление");
-      }, 3600000)
-  };
+  // автоматическая очистка кэша
 
-  
+  if (localStorage.getItem("token")) {
+    setTimeout(() => {
+      localStorage.clear();
+      navigate("/");
+      console.log("Обновление");
+    }, 3600000);
+  }
+
   return (
     <Context.Provider value={[isCustomer, setIsCustomer]}>
-      {localStorage.getItem('token') &&
-      <Routes>
+      {localStorage.getItem("token") && (
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <Profile title="Настройка профиля">
+                <ProfileData />
+              </Profile>
+            }
+          />
 
-        <Route
-          path="/"
-          element={
-            <Profile title="Настройка профиля">
-              <ProfileData />
-            </Profile>
-          }
-        />
+          <Route
+            path="/profile"
+            element={
+              <Profile title="Настройка профиля">
+                <ProfileData />
+              </Profile>
+            }
+          />
 
-        <Route
-          path="/profile"
-          element={
-            <Profile title="Настройка профиля">
-              <ProfileData />
-            </Profile>
-          }
-        />
+          <Route
+            path="/cash"
+            element={
+              <Profile title="Настройка профиля">
+                <ProfileCash />
+              </Profile>
+            }
+          />
 
-        <Route
-          path="/cash"
-          element={
-            <Profile title="Настройка профиля">
-              <ProfileCash />
-            </Profile>
-          }
-        />
+          <Route
+            path="/cash/deposit"
+            element={
+              <CashPattern isDeposit={true} title="Пополние">
+                <Deposit />
+              </CashPattern>
+            }
+          />
 
-        <Route
-          path="/cash/deposit"
-          element={
-            <CashPattern isDeposit={true} title="Пополние">
-              <Deposit />
-            </CashPattern>
-          }
-        />
+          <Route
+            path="/cash/get-money"
+            element={
+              <CashPattern title="Вывод">
+                <GetMoney />
+              </CashPattern>
+            }
+          />
 
-        <Route
-          path="/cash/get-money"
-          element={
-            <CashPattern title="Вывод">
-              <GetMoney />
-            </CashPattern>
-          }
-        />
+          <Route path="/cash/low-comission" element={<LowComission />} />
+          <Route
+            path="/cash/low-comission-admin"
+            element={<LowComissionAdmin />}
+          />
 
-        <Route path="/cash/low-comission" element={<LowComission />} />
-        <Route path="/cash/low-comission-admin" element={<LowComissionAdmin />} />
+          <Route
+            path="/password"
+            element={
+              <Profile title="Пароль">
+                <ProfilePassword />
+              </Profile>
+            }
+          />
 
-        <Route
-          path="/password"
-          element={
-            <Profile title="Пароль">
-              <ProfilePassword />
-            </Profile>
-          }
-        />
+          <Route
+            path="/password/change-password"
+            element={
+              <Profile title="Новый пароль">
+                <ChangePassword />
+              </Profile>
+            }
+          />
 
-        <Route
-          path="/password/change-password"
-          element={
-            <Profile title="Новый пароль">
-              <ChangePassword />
-            </Profile>
-          }
-        />
+          <Route
+            path="/alerts"
+            element={
+              <Profile title="Настройка уведомлений">
+                <ProfileAlerts />
+              </Profile>
+            }
+          />
 
-        <Route
-          path="/alerts"
-          element={
-            <Profile title="Настройка уведомлений">
-              <ProfileAlerts />
-            </Profile>
-          }
-        />
+          <Route
+            path="/history"
+            element={
+              <Profile title="История уведомлений">
+                <ProfileHistory />
+              </Profile>
+            }
+          />
 
-        <Route
-          path="/history"
-          element={
-            <Profile title="История уведомлений">
-              <ProfileHistory />
-            </Profile>
-          }
-        />
+          <Route path="/admin" element={<AuthorizedAdminHelp />} />
 
-        <Route
-          path="/admin"
-          element={
-            <AuthorizedAdminHelp/>
-          }
-        />
-
-        <Route
-          path="/publics"
-          element={
-            <PublicsContext.Provider value={[publics, setPublics]}>
-              <AuthorizedUserPattern>
-                <Grid item xs={12} lg={10}>
-                  <Creatives />
-                </Grid>
-              </AuthorizedUserPattern>
-            </PublicsContext.Provider>
-          }
-        />
-
-        <Route
-          path="/statistic"
-          element={
-            <PublicsContext.Provider value={[publics, setPublics]}>
-              <AuthorizedUserPattern>
-                <Grid item xs={12} lg={10}>
-                  <Statistic />
-                </Grid>
-              </AuthorizedUserPattern>
-            </PublicsContext.Provider>
-          }
-        />
-
-        <Route path="/admin-help" element={<AuthorizedAdminHelp />} />
-
-        <Route
-          path="/referal"
-          element={
-            <AuthorizedUserPattern>
-              <Referal />
-            </AuthorizedUserPattern>
-          }
-        />
-
-        <Route
-          path="/support"
-          element={
-            <AuthorizedUserPattern>
-              <Support />
-            </AuthorizedUserPattern>
-          }
-        />
-
-        <Route
-          path="/publics/setting/:id"
-          element={
-            <PublicsContext.Provider value={[publics, setPublics]}>
-              <PublicSettings />
-            </PublicsContext.Provider>
-          }
-        />
-
-        <Route
-          path="/customer"
-          element={
-            <AuthorizedUserPattern ismainpage={true} isCustomer={true}>
-              <AuthorizedAdminPage />
-            </AuthorizedUserPattern>
-          }
-        />
-
-        <Route
-          path="/creatives"
-          element={
-            <AuthorizedUserPattern isCustomer={true}>
-              <CreativesContext.Provider
-                value={[creatives, setCreatives, arhive, setArhive]}
-              >
-                <CreativesCustomer />
-              </CreativesContext.Provider>
-            </AuthorizedUserPattern>
-          }
-        />
-
-        <Route
-          path="/creatives/:creative_type/:id"
-          element={
-            <AuthorizedUserPattern isCustomer={true} menu={false}>
-              <CreativesContext.Provider value={[creatives, setCreatives]}>
-                <CreativeDetail />
-              </CreativesContext.Provider>
-            </AuthorizedUserPattern>
-          }
-        />
-
-        <Route
-          path="/creatives/statistic/:id"
-          element={
-            <AuthorizedUserPattern isCustomer={true} menu={false}>
-              <CreativesContext.Provider
-                value={[creatives, setCreatives, arhive, setArhive]}
-              >
-                <StorisStatistic />
-              </CreativesContext.Provider>
-            </AuthorizedUserPattern>
-          }
-        />
-
-        <Route
-          path="/creatives/add-creative"
-          element={
-            <AuthorizedUserPattern isCustomer={true} menu={false}>
-              <AddCreative />
-            </AuthorizedUserPattern>
-          }
-        />
-
-        <Route
-          path="/creatives/add-creative/single"
-          element={
-            <AuthorizedUserPattern isCustomer={true} menu={false}>
-              <SingleStori />
-            </AuthorizedUserPattern>
-          }
-        />
-
-        <Route
-          path="/creatives/add-creative/double/1"
-          element={
-            <AuthorizedUserPattern isCustomer={true} menu={false}>
-              <DoubleStori />
-            </AuthorizedUserPattern>
-          }
-        />
-
-        <Route
-          path="/creatives/add-creative/double/2"
-          element={
-            <AuthorizedUserPattern isCustomer={true} menu={false}>
-              <DoubleStoriSecond />
-            </AuthorizedUserPattern>
-          }
-        />
-
-        <Route
-          path="/creatives/add-creative/repost"
-          element={
-            <AuthorizedUserPattern isCustomer={true} menu={false}>
-              <Repost />
-            </AuthorizedUserPattern>
-          }
-        />
-
-        <Route
-          path="/creatives/add-creative/sticker-link"
-          element={
-            <AuthorizedUserPattern isCustomer={true} menu={false}>
-              <StickerLink />
-            </AuthorizedUserPattern>
-          }
-        />
-
-        <Route
-          path="/creatives/add-creative/double-sticker-link"
-          element={
-            <AuthorizedUserPattern isCustomer={true} menu={false}>
-              <DoubleStickerLink />
-            </AuthorizedUserPattern>
-          }
-        />
-
-        <Route path="/reservations" element={<Reserve />} />
-
-        <Route
-          path="/reservation/choose-creative"
-          element={
-            <AuthorizedUserPattern isCustomer={true} menu={false}>
-              <CreativesContext.Provider value={[creatives, setCreatives]}>
-                <ChooseCreative />
-              </CreativesContext.Provider>
-            </AuthorizedUserPattern>
-          }
-        />
-
-        <Route
-          path="/reservation/result"
-          element={
-            <AuthorizedUserPattern isCustomer={true} menu={false}>
-              <Result />
-            </AuthorizedUserPattern>
-          }
-        />
-        <Route
-          path="/reservation/success"
-          element={
-            <AuthorizedUserPattern isCustomer={true} menu={true}>
-              <ReservationSuccess />
-            </AuthorizedUserPattern>
-          }
-        />
-
-        <Route
-          path="/reservation/last-step"
-          element={
-            <AuthorizedUserPattern isCustomer={true} menu={false}>
-              <NoMoney />
-            </AuthorizedUserPattern>
-          }
-        />
-
-        <Route
-          path="/customer-publics"
-          element={
-            <AuthorizedUserPattern isCustomer={true} menu={true}>
-              <PublicsContext.Provider value={[allPublics, setAllPublics]}>
-                <Publics />
+          <Route
+            path="/publics"
+            element={
+              <PublicsContext.Provider value={[publics, setPublics]}>
+                <AuthorizedUserPattern>
+                  <Grid item xs={12} lg={10}>
+                    <Creatives />
+                  </Grid>
+                </AuthorizedUserPattern>
               </PublicsContext.Provider>
-            </AuthorizedUserPattern>
-          }
-        />
+            }
+          />
 
-        <Route
-          path="/customer-referal"
-          element={
-            <AuthorizedUserPattern isCustomer={true} menu={true}>
-              <Referal />
-            </AuthorizedUserPattern>
-          }
-        />
+          <Route
+            path="/statistic"
+            element={
+              <PublicsContext.Provider value={[publics, setPublics]}>
+                <AuthorizedUserPattern>
+                  <Grid item xs={12} lg={10}>
+                    <Statistic />
+                  </Grid>
+                </AuthorizedUserPattern>
+              </PublicsContext.Provider>
+            }
+          />
 
-        <Route
-          path="/customer-help"
-          element={
-            <AuthorizedUserPattern ismainpage={true} isCustomer={true} menu={true}>
-              <AuthorizedAdminPage />
-            </AuthorizedUserPattern>
-          }
-        />
-        <Route
-          path="/customer-support"
-          element={
-            <AuthorizedUserPattern isCustomer={true} menu={true}>
-              <Support />
-            </AuthorizedUserPattern>
-          }
-        />
-        <Route
-          path='/qr'
-          element={<AuthQRCode/>}
-        />
-      </Routes>
-      }
-      {!localStorage.getItem('token') &&
+          <Route path="/admin-help" element={<AuthorizedAdminHelp />} />
+
+          <Route
+            path="/referal"
+            element={
+              <AuthorizedUserPattern>
+                <Referal />
+              </AuthorizedUserPattern>
+            }
+          />
+
+          <Route
+            path="/support"
+            element={
+              <AuthorizedUserPattern>
+                <Support />
+              </AuthorizedUserPattern>
+            }
+          />
+
+          <Route
+            path="/publics/setting/:id"
+            element={
+              <PublicsContext.Provider value={[publics, setPublics]}>
+                <PublicSettings />
+              </PublicsContext.Provider>
+            }
+          />
+
+          <Route
+            path="/customer"
+            element={
+              <AuthorizedUserPattern ismainpage={true} isCustomer={true}>
+                <AuthorizedAdminPage />
+              </AuthorizedUserPattern>
+            }
+          />
+
+          <Route
+            path="/creatives"
+            element={
+              <AuthorizedUserPattern isCustomer={true}>
+                <CreativesContext.Provider
+                  value={[creatives, setCreatives, arhive, setArhive]}
+                >
+                  <CreativesCustomer />
+                </CreativesContext.Provider>
+              </AuthorizedUserPattern>
+            }
+          />
+
+          <Route
+            path="/creatives/:creative_type/:id"
+            element={
+              <AuthorizedUserPattern isCustomer={true} menu={false}>
+                <CreativesContext.Provider value={[creatives, setCreatives]}>
+                  <CreativeDetail />
+                </CreativesContext.Provider>
+              </AuthorizedUserPattern>
+            }
+          />
+
+          <Route
+            path="/creatives/statistic/:id"
+            element={
+              <AuthorizedUserPattern isCustomer={true} menu={false}>
+                <CreativesContext.Provider
+                  value={[creatives, setCreatives, arhive, setArhive]}
+                >
+                  <StorisStatistic />
+                </CreativesContext.Provider>
+              </AuthorizedUserPattern>
+            }
+          />
+
+          <Route
+            path="/creatives/add-creative"
+            element={
+              <AuthorizedUserPattern isCustomer={true} menu={false}>
+                <AddCreative />
+              </AuthorizedUserPattern>
+            }
+          />
+
+          <Route
+            path="/creatives/add-creative/single"
+            element={
+              <AuthorizedUserPattern isCustomer={true} menu={false}>
+                <SingleStori />
+              </AuthorizedUserPattern>
+            }
+          />
+
+          <Route
+            path="/creatives/add-creative/double/1"
+            element={
+              <AuthorizedUserPattern isCustomer={true} menu={false}>
+                <DoubleStori />
+              </AuthorizedUserPattern>
+            }
+          />
+
+          <Route
+            path="/creatives/add-creative/double/2"
+            element={
+              <AuthorizedUserPattern isCustomer={true} menu={false}>
+                <DoubleStoriSecond />
+              </AuthorizedUserPattern>
+            }
+          />
+
+          <Route
+            path="/creatives/add-creative/repost"
+            element={
+              <AuthorizedUserPattern isCustomer={true} menu={false}>
+                <Repost />
+              </AuthorizedUserPattern>
+            }
+          />
+
+          <Route
+            path="/creatives/add-creative/sticker-link"
+            element={
+              <AuthorizedUserPattern isCustomer={true} menu={false}>
+                <StickerLink />
+              </AuthorizedUserPattern>
+            }
+          />
+
+          <Route
+            path="/creatives/add-creative/double-sticker-link"
+            element={
+              <AuthorizedUserPattern isCustomer={true} menu={false}>
+                <DoubleStickerLink />
+              </AuthorizedUserPattern>
+            }
+          />
+
+          <Route path="/reservations" element={<Reserve />} />
+
+          <Route
+            path="/reservation/choose-creative"
+            element={
+              <AuthorizedUserPattern isCustomer={true} menu={false}>
+                <CreativesContext.Provider value={[creatives, setCreatives]}>
+                  <ChooseCreative />
+                </CreativesContext.Provider>
+              </AuthorizedUserPattern>
+            }
+          />
+
+          <Route
+            path="/reservation/result"
+            element={
+              <AuthorizedUserPattern isCustomer={true} menu={false}>
+                <Result />
+              </AuthorizedUserPattern>
+            }
+          />
+          <Route
+            path="/reservation/success"
+            element={
+              <AuthorizedUserPattern isCustomer={true} menu={true}>
+                <ReservationSuccess />
+              </AuthorizedUserPattern>
+            }
+          />
+
+          <Route
+            path="/reservation/last-step"
+            element={
+              <AuthorizedUserPattern isCustomer={true} menu={false}>
+                <NoMoney />
+              </AuthorizedUserPattern>
+            }
+          />
+
+          <Route
+            path="/customer-publics"
+            element={
+              <AuthorizedUserPattern isCustomer={true} menu={true}>
+                <PublicsContext.Provider value={[allPublics, setAllPublics]}>
+                  <Publics />
+                </PublicsContext.Provider>
+              </AuthorizedUserPattern>
+            }
+          />
+
+          <Route
+            path="/customer-referal"
+            element={
+              <AuthorizedUserPattern isCustomer={true} menu={true}>
+                <Referal />
+              </AuthorizedUserPattern>
+            }
+          />
+
+          <Route
+            path="/customer-help"
+            element={
+              <AuthorizedUserPattern
+                ismainpage={true}
+                isCustomer={true}
+                menu={true}
+              >
+                <AuthorizedAdminPage />
+              </AuthorizedUserPattern>
+            }
+          />
+          <Route
+            path="/customer-support"
+            element={
+              <AuthorizedUserPattern isCustomer={true} menu={true}>
+                <Support />
+              </AuthorizedUserPattern>
+            }
+          />
+          <Route path="/qr" element={<AuthQRCode />} />
+        </Routes>
+      )}
+      {!localStorage.getItem("token") && (
         <Routes>
           <Route
             path="/"
@@ -490,7 +493,7 @@ function App() {
             }
           />
         </Routes>
-      }
+      )}
     </Context.Provider>
   );
 }
