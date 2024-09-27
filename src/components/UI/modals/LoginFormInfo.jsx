@@ -53,7 +53,8 @@ const LoginFormInfo = ({
       // Инициализация VKID SDK
       VKID.Config.init({
         app: "51786441", // Укажите ваш VK app ID
-        redirectUrl: "https://storisbro.com/admin", // Укажите ваш redirect URL
+        // redirectUrl: "https://storisbro.com/admin", // Укажите ваш redirect URL
+        redirectUrl: "https://storisbro.com", // Укажите ваш redirect URL
         state: "state", // Дополнительный параметр состояния
         codeVerifier: codeVerifier, // Используем сгенерированный codeVerifier
         scope: "phone email", // Запрашиваемые разрешения
