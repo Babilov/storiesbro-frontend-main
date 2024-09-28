@@ -56,10 +56,10 @@ const LoginFormInfo = ({
         redirectUrl: "https://storisbro.com/accounts/vk/login/callback/", // Укажите ваш redirect URL
         state: "state", // Дополнительный параметр состояния
         codeVerifier: codeVerifier, // Используем сгенерированный codeVerifier
-        scope: "phone email", // Запрашиваемые разрешения
+        scope: "email", // Запрашиваемые разрешения
       });
 
-      const oneTap = new VKID.OneTap();
+      const oneTap = new VKID.();
       const container = document.getElementById("VkIdSdkOneTap");
 
       if (container) {
