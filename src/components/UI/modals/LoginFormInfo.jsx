@@ -48,18 +48,19 @@ const LoginFormInfo = ({
 
   useEffect(() => {
     // Генерация codeVerifier и codeChallenge
+    const state = generateCodeVerifier();
     const codeVerifier = generateCodeVerifier();
     generateCodeChallenge(codeVerifier).then((codeChallenge) => {
       // Инициализация VKID SDK
       VKID.Config.init({
         app: "51786441", // Укажите ваш VK app ID
         redirectUrl: "https://storisbro.com/accounts/vk/login/callback/", // Укажите ваш redirect URL
-        state: "state", // Дополнительный параметр состояния
+        state: state, // Дополнительный параметр состояния
         codeVerifier: codeVerifier, // Используем сгенерированный codeVerifier
         scope: "email", // Запрашиваемые разрешения
       });
 
-      const oneTap = new VKID.();
+      const oneTap = new VKID.OneTap();
       const container = document.getElementById("VkIdSdkOneTap");
 
       if (container) {
