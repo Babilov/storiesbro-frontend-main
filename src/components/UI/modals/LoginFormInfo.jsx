@@ -1,4 +1,4 @@
-import { Box, Link, Typography } from "@mui/material";
+import { Box, Button, Link, Typography } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import ErrorMessage from "../errors/ErrorMessage";
 import GradientButton from "../buttons/GradientButton";
@@ -54,7 +54,7 @@ const LoginFormInfo = ({
       // Инициализация VKID SDK
       VKID.Config.init({
         app: "51786441", // Укажите ваш VK app ID
-        redirectUrl: "https://storisbro.com/accounts/vk/login/?process=login", // Укажите ваш redirect URL
+        redirectUrl: "https://storisbro.com/accounts/vk/login/callback/", // Укажите ваш redirect URL
         state: state, // Дополнительный параметр состояния
         codeVerifier: codeVerifier, // Используем сгенерированный codeVerifier
         scope: "email", // Запрашиваемые разрешения
@@ -175,6 +175,7 @@ const LoginFormInfo = ({
       >
         Восстановить пароль
       </Link>
+      <Button>Вк</Button>
       <GradientButton handleClick={handleConfirmFormInternal}>
         Войти
       </GradientButton>
