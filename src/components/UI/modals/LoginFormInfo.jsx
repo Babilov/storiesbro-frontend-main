@@ -175,7 +175,11 @@ const LoginFormInfo = ({
       >
         Восстановить пароль
       </Link>
-      <Button>Вк</Button>
+      <Button>
+        <Link href="https://storisbro.com/accounts/vk/login/?process=login">
+          Вк
+        </Link>
+      </Button>
       <GradientButton handleClick={handleConfirmFormInternal}>
         Войти
       </GradientButton>
