@@ -176,7 +176,8 @@ const LoginFormInfo = ({
         Восстановить пароль
       </Link>
       <Button>
-        <Link href="https://storisbro.com/accounts/vk/login/?process=login">
+        <Link href="https://id.vk.com/auth?return_auth_hash=9577ab308ee1b3094c&redirect_uri=https%3A%2F%2Fstorisbro.com%2Faccounts%2Fvk%2Flogin%2Fcallback%2F&redirect_uri_hash=22b1e4d5bb7556a5fc&force_hash=&app_id=51786441&response_type=code&code_challenge=&code_challenge_method=&scope=4194304&state=qvMKURKIiCZNbi1g">
+          {/*https://storisbro.com/accounts/vk/login/?process=login*/}
           Вк
         </Link>
       </Button>
