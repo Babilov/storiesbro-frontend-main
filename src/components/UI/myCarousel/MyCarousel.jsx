@@ -12,6 +12,7 @@ import storisImage2 from "./images/mediatmpIMG_6316.jpg";
 import video1 from "./images/IMG_6315.mp4";
 import video2 from "./images/IMG_6313.mp4";
 import video3 from "./images/FullSizeRender.mp4";
+import video4 from "./images/1.mp4";
 
 const MyCarousel = () => {
   // Стиль для слайдов (и для видео, и для изображений)
@@ -80,14 +81,13 @@ const MyCarousel = () => {
         </Box>
       </SwiperSlide>
 
-      {/* Четвертый слайд - Изображение 1 */}
+      {/* Четвертый слайд - видео 4 */}
       <SwiperSlide>
         <Box sx={slideWrapperStyle}>
-          <Box
-            component="img"
-            src={storisImage1}
-            sx={slideStyle} // Применяем стили для изображений
-          />
+          <video style={slideStyle} controls>
+            <source src={video4} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
         </Box>
       </SwiperSlide>
 
