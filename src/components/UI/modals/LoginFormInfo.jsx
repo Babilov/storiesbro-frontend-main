@@ -175,10 +175,13 @@ const LoginFormInfo = ({
       >
         Восстановить пароль
       </Link>
-      <Button sx={{ backgroundColor: "#07f", color: "white" }}>
-        <Link href="https://storisbro.com/accounts/vk/login/?process=login">
+      <Button sx={{ backgroundColor: "#07f" }}>
+        <Link
+          href="https://storisbro.com/accounts/vk/login/?process=login"
+          sx={{ color: "white" }}
+        >
           {/*https://storisbro.com/accounts/vk/login/?process=login*/}
-          Вк
+          Войти через ВК
         </Link>
       </Button>
       <GradientButton handleClick={handleConfirmFormInternal}>
