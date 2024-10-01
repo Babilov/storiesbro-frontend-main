@@ -65,7 +65,11 @@ const LoginFormInfo = ({
 
       if (container) {
         oneTap
-          .render({ container })
+          .render(
+            <Link href="https://storisbro.com/accounts/vk/login/?process=login">
+              жопа{container}
+            </Link>
+          )
           .on(VKID.WidgetEvents.SUCCESS, handleVkAuth) // Обработка успеха
           .on(VKID.WidgetEvents.ERROR, console.error); // Обработка ошибок
       }
@@ -97,11 +101,6 @@ const LoginFormInfo = ({
         setError(true);
       });
   };
-  axios
-    .get(
-      "https://id.vk.com/button_one_tap_auth?style_height=44&style_border_radius=8&show_alternative_login=0&button_skin=primary&content_id=0&scheme=light&lang_id=0&providers=&uuid=qiytra&origin=https%3A%2F%2Fstorisbro.com&oauth_version=2&v=2.3.0&sdk_type=vkid&app_id=51786441&redirect_uri=https%3A%2F%2Fstorisbro.com%2Faccounts%2Fvk%2Flogin%2Fcallback%2F"
-    )
-    .then((e) => console.log(e));
 
   const handleConfirmFormInternal = () => {
     const email_lower = email.toLowerCase();
