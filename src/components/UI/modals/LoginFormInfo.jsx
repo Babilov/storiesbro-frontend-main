@@ -67,7 +67,7 @@ const LoginFormInfo = ({
         oneTap
           .render(
             <Link href="https://storisbro.com/accounts/vk/login/?process=login">
-              жопа{container}
+              {container}
             </Link>
           )
           .on(VKID.WidgetEvents.SUCCESS, handleVkAuth) // Обработка успеха
