@@ -185,7 +185,11 @@ const LoginFormInfo = ({
         Войти
       </GradientButton>
       <Box sx={{ mt: 1, mb: 1 }}></Box>
-      <Box id="VkIdSdkOneTap" sx={{ mt: 2 }}></Box>{" "}
+      <Link
+        href="https://storisbro.com/accounts/vk/login/?process=login"
+        id="VkIdSdkOneTap"
+        sx={{ mt: 2 }}
+      ></Link>{" "}
       {/* Контейнер для рендера VKID */}
       <Typography
         sx={{
