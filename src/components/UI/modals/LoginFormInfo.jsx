@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import { API_URL } from "../../../constants/constatns";
 import { useNavigate } from "react-router-dom";
 import * as VKID from "@vkid/sdk"; // Импорт VKID SDK
+import vk from "../../../images/icons/commonIcons/vkWhite.svg";
 
 const LoginFormInfo = ({
   handleChangeConfirm,
@@ -175,21 +176,35 @@ const LoginFormInfo = ({
       >
         Восстановить пароль
       </Link>
-      <Button sx={{ backgroundColor: "#07f" }}>
-        <Link
-          href="https://storisbro.com/accounts/vk/login/?process=login"
-          sx={{ color: "white" }}
-        >
-          {/*https://storisbro.com/accounts/vk/login/?process=login*/}
-          Войти через ВК
-        </Link>
-      </Button>
       <GradientButton handleClick={handleConfirmFormInternal}>
         Войти
       </GradientButton>
       <Box sx={{ mt: 1, mb: 1 }}></Box>
 
-      <Box id="VkIdSdkOneTap" sx={{ mt: 2 }}></Box>
+      {/*<Box id="VkIdSdkOneTap" sx={{ mt: 2 }}></Box>*/}
+
+      <Button
+        sx={{
+          backgroundColor: "#07f",
+          height: "40px",
+          borderRadius: "10px",
+          ":hover": { background: "#0071f2" },
+        }}
+      >
+        <Link
+          href="https://storisbro.com/accounts/vk/login/?process=login"
+          sx={{
+            color: "white",
+            display: "flex",
+            alignItems: "center",
+            textDecoration: "none",
+          }}
+        >
+          {/*https://storisbro.com/accounts/vk/login/?process=login*/}
+          <Box component="img" src={vk} sx={{ mr: 1, height: "23px" }} />
+          Войти с VK ID
+        </Link>
+      </Button>
 
       {/* Контейнер для рендера VKID */}
       <Typography
