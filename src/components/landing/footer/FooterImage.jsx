@@ -10,7 +10,12 @@ const FooterImage = ({ isCustomer }) => {
       component="img"
       alt="logo"
       src={isCustomer ? blackLogo : logo}
-      sx={{ mr: 1, width: "50%" }}
+      sx={{
+        mr: 1,
+        height: { xs: "40px", md: "70px" },
+        width: { xs: "60px", md: "90px" },
+        cursor: "pointer",
+      }}
     />
   );
 };
