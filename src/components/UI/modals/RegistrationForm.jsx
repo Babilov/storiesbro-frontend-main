@@ -13,7 +13,7 @@ import EmailConfirmationForm from "./EmailConfiramtionForm";
 import axios from "axios";
 import { API_URL } from "../../../constants/constatns";
 import { useDispatch } from "react-redux";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import { setTokken } from "../../../store/userReducer";
 import ErrorMessage from "../errors/ErrorMessage";
 
@@ -23,7 +23,7 @@ const RegistrationForm = ({
   isRegistrationForm,
   setIsRegistrationForm,
   handleLoginForm,
-  handleConfirmForm
+  handleConfirmForm,
 }) => {
   const handleConfirmEmail = () => {
     setIsEmailConfirm(false);
@@ -84,14 +84,14 @@ const RegistrationForm = ({
       changeChecked();
       return;
     }
-  
+
     const emailExists = await checkIsEmail(email);
     if (emailExists) {
       setIsEmailConfirm(false);
       setIsRegistrationForm(true);
       return;
     }
-  
+
     if (password.length < 6) {
       setErrorMessage("*В пароле должно быть минимум 6 символов");
       setError(true);
@@ -105,9 +105,11 @@ const RegistrationForm = ({
       }
       return;
     }
-  
+
     if (!checkSymbolsPassword(password)) {
-      setErrorMessage("*В пароле должны быть только латинские и специальные символы");
+      setErrorMessage(
+        "*В пароле должны быть только латинские и специальные символы"
+      );
       setError(true);
       setIsEmailConfirm(false);
       setIsRegistrationForm(true);
@@ -119,12 +121,15 @@ const RegistrationForm = ({
       }
       return;
     }
-  
+
     setIsRegistrationForm(false);
     try {
-      const response = await axios.post(REGISTER_LINK, { email: email, password: password });
+      const response = await axios.post(REGISTER_LINK, {
+        email: email,
+        password: password,
+      });
       setUserId(response.data.id);
-      console.log(response.data.id);  // Получение id пользователя и сохранение его в состоянии
+      console.log(response.data.id); // Получение id пользователя и сохранение его в состоянии
       console.log(userId);
       setIsEmailConfirm(true);
       localStorage.removeItem("lastError");
@@ -145,7 +150,7 @@ const RegistrationForm = ({
       <EmailConfirmationForm
         isEmailConfirm={isEmailConfirm}
         setIsEmailConfirm={setIsEmailConfirm}
-        userId={userId}  // Передайте userId в компонент EmailConfirmationForm
+        userId={userId} // Передайте userId в компонент EmailConfirmationForm
         handleConfirmForm={(userId) => {
           setIsConfirmPageOpen(true);
           setUserId(userId);
@@ -165,34 +170,49 @@ const RegistrationForm = ({
           value={password}
           setValue={setPassword}
         />
-        <ErrorMessage
-          error={error}
-          errorMessage={errorMessage}
-        />
-        {localStorage.getItem("lastError") && 
+        <ErrorMessage error={error} errorMessage={errorMessage} />
+        {localStorage.getItem("lastError") && (
           <FormControlLabel
             control={<Checkbox />}
             label={
               <Typography>
-                Согласны с <Link>правилами пользования</Link> и{"  "}
-                <Link>политикой конфиденциальности</Link>
+                Согласны с{" "}
+                <Link to="/UserAgreement.pdf" target="_blank" download>
+                  пользовательским соглашением
+                </Link>{" "}
+                и{"  "}
+                <Link to="/PrivacyPolicy.pdf" target="_blank" download>
+                  политикой конфиденциальности
+                </Link>
               </Typography>
             }
             onChange={changeChecked}
           />
-        }
-        {!localStorage.getItem("lastError") &&
+        )}
+        {!localStorage.getItem("lastError") && (
           <FormControlLabel
             control={<Checkbox />}
             label={
               <Typography>
-                Согласны с <Link href="./registrationFiles/UserAgreement.docx" download="UserAgreement.docx">правилами пользования</Link> и{" "}
-                <Link href="./registrationFiles/PrivacyPolicy.docx" download="PrivacyPolicy.docx">политикой конфиденциальности</Link>
+                Согласны с{" "}
+                <Link
+                  href="./registrationFiles/UserAgreement.docx"
+                  download="UserAgreement.docx"
+                >
+                  правилами пользования
+                </Link>{" "}
+                и{" "}
+                <Link
+                  href="./registrationFiles/PrivacyPolicy.docx"
+                  download="PrivacyPolicy.docx"
+                >
+                  политикой конфиденциальности
+                </Link>
               </Typography>
             }
             onChange={changeChecked}
           />
-        }
+        )}
         <Box
           onClick={() => handleConfirmEmail()}
           sx={{ width: "300px", m: "20px auto" }}
@@ -208,7 +228,7 @@ const RegistrationForm = ({
           </GradientButton>
         </Box>
         <Typography sx={{ textAlign: "center" }}>
-          Есть аккаунт? {" "}
+          Есть аккаунт?{" "}
           <Link onClick={() => handleLoginForm()} sx={{ cursor: "pointer" }}>
             Войти
           </Link>
