@@ -195,17 +195,11 @@ const RegistrationForm = ({
             label={
               <Typography>
                 Согласны с{" "}
-                <Link
-                  href="./registrationFiles/UserAgreement.docx"
-                  download="UserAgreement.docx"
-                >
-                  правилами пользования
+                <Link to="/UserAgreement.pdf" target="_blank" download>
+                  пользовательским соглашением
                 </Link>{" "}
                 и{" "}
-                <Link
-                  href="./registrationFiles/PrivacyPolicy.docx"
-                  download="PrivacyPolicy.docx"
-                >
+                <Link to="/PrivacyPolicy.pdf" target="_blank" download>
                   политикой конфиденциальности
                 </Link>
               </Typography>
@@ -215,7 +209,7 @@ const RegistrationForm = ({
         )}
         <Box
           onClick={() => handleConfirmEmail()}
-          sx={{ width: "300px", m: "20px auto" }}
+          sx={{ width: "450px", m: "20px auto" }}
         >
           <GradientButton
             handleClick={handleRegister}
