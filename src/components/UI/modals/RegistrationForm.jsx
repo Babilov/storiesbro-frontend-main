@@ -21,7 +21,7 @@ const RegistrationForm = ({
 }) => {
   const handleConfirmEmail = () => {
     setIsEmailConfirm(false);
-    setIsChecked(false);
+    // setIsChecked(false);
   };
 
   const handleCloseRegistration = () => {
@@ -75,7 +75,7 @@ const RegistrationForm = ({
       setError(true);
       setIsEmailConfirm(false);
       setIsRegistrationForm(true);
-      changeChecked();
+      // changeChecked();
       return;
     }
 
@@ -91,7 +91,7 @@ const RegistrationForm = ({
       setError(true);
       setIsEmailConfirm(false);
       setIsRegistrationForm(true);
-      changeChecked();
+      // changeChecked();
       if (!localStorage.getItem("lastError")) {
         localStorage.setItem("lastError", true);
       } else if (localStorage.getItem("lastError")) {
@@ -107,7 +107,7 @@ const RegistrationForm = ({
       setError(true);
       setIsEmailConfirm(false);
       setIsRegistrationForm(true);
-      changeChecked();
+      // changeChecked();
       if (!localStorage.getItem("lastError")) {
         localStorage.setItem("lastError", true);
       } else if (localStorage.getItem("lastError")) {
@@ -165,7 +165,7 @@ const RegistrationForm = ({
           setValue={setPassword}
         />
         <ErrorMessage error={error} errorMessage={errorMessage} />
-        {/*
+
         {localStorage.getItem("lastError") && (
           <FormControlLabel
             control={<Checkbox />}
@@ -184,9 +184,7 @@ const RegistrationForm = ({
             onChange={changeChecked}
           />
         )}
-        */}
-
-        {!localStorage.getItem("lastError") && (
+        {/* {!localStorage.getItem("lastError") && (
           <Box sx={{ display: "flex", alignItems: "center" }}>
             <FormControlLabel control={<Checkbox />} onChange={changeChecked} />
             <Typography>
@@ -200,21 +198,16 @@ const RegistrationForm = ({
               </Link>
             </Typography>
           </Box>
-        )}
-        <Box
-          onClick={() => handleConfirmEmail()}
-          sx={{ width: { md: "450px", xs: "150px" }, m: "20px auto" }}
-        >
-          <GradientButton
-            handleClick={handleRegister}
-            height="52px"
-            disabled={!isChecked}
-          >
+        )} */}
+
+        <Box onClick={() => handleConfirmEmail()} sx={{ m: "20px auto" }}>
+          <GradientButton handleClick={handleRegister} disabled={!isChecked}>
             <Typography sx={{ fontSize: "18px", fontWeight: 600 }}>
               Зарегистрироваться
             </Typography>
           </GradientButton>
         </Box>
+
         <Typography sx={{ textAlign: "center" }}>
           Есть аккаунт?{" "}
           <Link onClick={() => handleLoginForm()} sx={{ cursor: "pointer" }}>

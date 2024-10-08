@@ -62,6 +62,7 @@ const GradientButton = ({
       className="orangeGradient"
       sx={{
         ...buttonStyles,
+        padding: "20px",
       }}
     >
       {children}
@@ -70,4 +71,3 @@ const GradientButton = ({
 };
 
 export default GradientButton;
-
