@@ -165,42 +165,23 @@ const RegistrationForm = ({
           setValue={setPassword}
         />
         <ErrorMessage error={error} errorMessage={errorMessage} />
-
-        {localStorage.getItem("lastError") && (
-          <FormControlLabel
-            control={<Checkbox />}
-            label={
-              <Typography>
-                Согласны с{" "}
-                <Link to="/UserAgreement.pdf" target="_blank" download>
-                  пользовательским соглашением
-                </Link>{" "}
-                и{"  "}
-                <Link to="/PrivacyPolicy.pdf" target="_blank" download>
-                  политикой конфиденциальности
-                </Link>
-              </Typography>
-            }
-            onChange={changeChecked}
-          />
-        )}
-        {!localStorage.getItem("lastError") && (
-          <Box sx={{ display: "flex", alignItems: "center" }}>
-            <FormControlLabel control={<Checkbox />} onChange={changeChecked} />
-            <Typography>
-              Согласны с{" "}
-              <Link to="/UserAgreement.pdf" target="_blank" download>
-                пользовательским соглашением
-              </Link>{" "}
-              и{" "}
-              <Link to="/PrivacyPolicy.pdf" target="_blank" download>
-                политикой конфиденциальности
-              </Link>
-            </Typography>
-          </Box>
-        )}
-
-        <Box onClick={() => handleConfirmEmail()} sx={{ m: "20px auto" }}>
+        <Box sx={{ display: "flex", alignItems: "center" }}>
+          <FormControlLabel control={<Checkbox />} onChange={changeChecked} />
+          <Typography>
+            Согласны с{" "}
+            <Link to="/UserAgreement.pdf" target="_blank" download>
+              пользовательским соглашением
+            </Link>{" "}
+            и{"  "}
+            <Link to="/PrivacyPolicy.pdf" target="_blank" download>
+              политикой конфиденциальности
+            </Link>
+          </Typography>
+        </Box>
+        <Box
+          onClick={() => handleConfirmEmail()}
+          sx={{ m: "20px auto", width: "100%" }}
+        >
           <GradientButton handleClick={handleRegister} disabled={!isChecked}>
             <Typography sx={{ fontSize: "18px", fontWeight: 600 }}>
               Зарегистрироваться
