@@ -184,7 +184,7 @@ const RegistrationForm = ({
             onChange={changeChecked}
           />
         )}
-        {/* {!localStorage.getItem("lastError") && (
+        {!localStorage.getItem("lastError") && (
           <Box sx={{ display: "flex", alignItems: "center" }}>
             <FormControlLabel control={<Checkbox />} onChange={changeChecked} />
             <Typography>
@@ -198,7 +198,7 @@ const RegistrationForm = ({
               </Link>
             </Typography>
           </Box>
-        )} */}
+        )}
 
         <Box onClick={() => handleConfirmEmail()} sx={{ m: "20px auto" }}>
           <GradientButton handleClick={handleRegister} disabled={!isChecked}>
