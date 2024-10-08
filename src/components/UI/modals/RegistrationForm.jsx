@@ -1,19 +1,13 @@
 import React, { useState } from "react";
 import MyModal from "./MyModal";
 import MyInput from "../input/MyInput";
-import {
-  Box,
-  Checkbox,
-  FormControlLabel,
-  Link,
-  Typography,
-} from "@mui/material";
+import { Box, Checkbox, FormControlLabel, Typography } from "@mui/material";
 import GradientButton from "../buttons/GradientButton";
 import EmailConfirmationForm from "./EmailConfiramtionForm";
 import axios from "axios";
 import { API_URL } from "../../../constants/constatns";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { setTokken } from "../../../store/userReducer";
 import ErrorMessage from "../errors/ErrorMessage";
 
@@ -171,6 +165,7 @@ const RegistrationForm = ({
           setValue={setPassword}
         />
         <ErrorMessage error={error} errorMessage={errorMessage} />
+        {/*
         {localStorage.getItem("lastError") && (
           <FormControlLabel
             control={<Checkbox />}
@@ -189,27 +184,26 @@ const RegistrationForm = ({
             onChange={changeChecked}
           />
         )}
+        */}
+
         {!localStorage.getItem("lastError") && (
-          <FormControlLabel
-            control={<Checkbox />}
-            label={
-              <Typography>
-                Согласны с{" "}
-                <Link to="/UserAgreement.pdf" target="_blank" download>
-                  пользовательским соглашением
-                </Link>{" "}
-                и{" "}
-                <Link to="/PrivacyPolicy.pdf" target="_blank" download>
-                  политикой конфиденциальности
-                </Link>
-              </Typography>
-            }
-            onChange={changeChecked}
-          />
+          <Box sx={{ display: "flex", alignItems: "center" }}>
+            <FormControlLabel control={<Checkbox />} onChange={changeChecked} />
+            <Typography>
+              Согласны с{" "}
+              <Link to="/UserAgreement.pdf" target="_blank" download>
+                пользовательским соглашением
+              </Link>{" "}
+              и{" "}
+              <Link to="/PrivacyPolicy.pdf" target="_blank" download>
+                политикой конфиденциальности
+              </Link>
+            </Typography>
+          </Box>
         )}
         <Box
           onClick={() => handleConfirmEmail()}
-          sx={{ width: "450px", m: "20px auto" }}
+          sx={{ width: { md: "450px", xs: "150px" }, m: "20px auto" }}
         >
           <GradientButton
             handleClick={handleRegister}
