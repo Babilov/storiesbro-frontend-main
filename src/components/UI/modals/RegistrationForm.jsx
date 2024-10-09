@@ -20,7 +20,7 @@ const RegistrationForm = ({
   handleConfirmForm,
 }) => {
   const handleConfirmEmail = () => {
-    setIsEmailConfirm(false);
+    setIsEmailConfirm(true);
     // setIsChecked(false);
   };
 
@@ -70,6 +70,7 @@ const RegistrationForm = ({
   };
 
   const handleRegister = async () => {
+    handleConfirmEmail();
     if (!isValidEmail(email)) {
       setErrorMessage("*Некорректный формат email");
       setError(true);
@@ -138,7 +139,7 @@ const RegistrationForm = ({
   const [password, setPassword] = useState("");
 
   const [isConfirmFormOpen, setIsConfirmPageOpen] = useState(false);
-
+  console.log(isConfirmFormOpen);
   return (
     <>
       <EmailConfirmationForm
@@ -166,7 +167,10 @@ const RegistrationForm = ({
         />
         <ErrorMessage error={error} errorMessage={errorMessage} />
         <Box sx={{ display: "flex", alignItems: "center" }}>
-          <FormControlLabel control={<Checkbox />} onChange={changeChecked} />
+          <FormControlLabel
+            control={<Checkbox checked={isChecked} />}
+            onChange={changeChecked}
+          />
           <Typography>
             Согласны с{" "}
             <Link to="/UserAgreement.pdf" target="_blank" download>
@@ -179,7 +183,7 @@ const RegistrationForm = ({
           </Typography>
         </Box>
         <Box
-          onClick={() => handleConfirmEmail()}
+          /*onClick={() => handleConfirmEmail()} */
           sx={{ m: "20px auto", width: "100%" }}
         >
           <GradientButton handleClick={handleRegister} disabled={!isChecked}>
