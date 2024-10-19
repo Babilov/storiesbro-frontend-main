@@ -139,7 +139,6 @@ const RegistrationForm = ({
   const [password, setPassword] = useState("");
 
   const [isConfirmFormOpen, setIsConfirmPageOpen] = useState(false);
-  console.log(isConfirmFormOpen);
   return (
     <>
       <EmailConfirmationForm

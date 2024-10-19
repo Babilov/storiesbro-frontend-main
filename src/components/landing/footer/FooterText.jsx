@@ -5,8 +5,8 @@ const FooterText = ({ children }) => {
     <Typography
       sx={{
         fontWeight: 400,
-        fontSize: { xs: "12px", sm: "18px" },
-        textAlign: { xs: "start", md: "center" },
+        fontSize: { xs: "10px", sm: "18px" },
+        textAlign: { xs: "center", md: "center" },
       }}
     >
       {children}

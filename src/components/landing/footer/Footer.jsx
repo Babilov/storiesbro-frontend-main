@@ -24,7 +24,7 @@ const Footer = () => {
         xs={1}
         md={1}
         order={{ xs: 1 }}
-        sx={{ display: "flex", alignItems: "flex-end" }}
+        sx={{ display: "flex", alignItems: { xs: "center", md: "flex-end" } }}
       >
         <FooterImage isCustomer={isCustomer} />
       </Grid>
@@ -43,7 +43,7 @@ const Footer = () => {
       <Grid
         order={{ xs: 2, md: 3 }}
         md={5}
-        xs={6}
+        xs={10}
         item
         sx={{
           fontWeight: 400,
@@ -65,7 +65,7 @@ const Footer = () => {
         order={{ xs: 3, md: 4 }}
         item
         md={2}
-        xs={4}
+        xs={1}
         sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
       >
         <FooterText>Наши соцсети</FooterText>
@@ -73,7 +73,7 @@ const Footer = () => {
           component="img"
           alt="vk"
           src={isCustomer ? vkWhite : vkBlack}
-          sx={{ width: "15%", color: "white" }}
+          sx={{ width: { xs: "50%", md: "15%" }, color: "white" }}
         />
       </Grid>
     </Grid>
