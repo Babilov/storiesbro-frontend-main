@@ -1,0 +1,211 @@
+.w100 {
+    font-weight: 100;
+}
+
+.w200 {
+    font-weight: 200;
+}
+
+.w300 {
+    font-weight: 300;
+}
+
+.w400 {
+    font-weight: 400;
+}
+
+.grid .w700 {
+    font-weight: 700;
+}
+
+.grid .w600 {
+    font-weight: 600;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.w900 {
+    font-weight: 900;
+}
+
+.grid .xlSizeText {
+    font-size: 38px;
+    font-weight: 600;
+}
+
+.grid .xlSizeText500 {
+    font-size: 38px;
+    font-weight: 500;
+}
+
+
+.grid .mdSizeText {
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.grid .md500SizeText {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.grid .mdBoldSizeText {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.grid .title {
+    font-size: 32px;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.grid .lSizeText {
+    font-size: 32px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.grid .Size25Text {
+    font-size: 25px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.grid .lSizeTextLeft {
+    font-size: 32px;
+    font-weight: 600;
+}
+
+.grid .centerText {
+    text-align: center;
+}
+
+.grid .description {
+    font-size: 24px;
+    font-weight: 400;
+
+}
+
+.grid .bold {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.grid .md500 {
+    font-size: 24px;
+    font-weight: 500;
+}
+
+.grid .quote {
+    font-size: 18px;
+    font-weight: 400;
+    color: #2A5885;
+}
+
+button .buttonFont {
+    font-size: 26px;
+    font-weight: 600;
+}
+
+
+@media (max-width: 899.5px) {
+    .grid .title {
+        font-size: 22px;
+    }
+
+    .grid .description {
+        font-size: 16px;
+    }
+
+    .grid span .description {
+        font-size: 16px;
+    }
+
+    .grid .bold {
+        font-size: 16px;
+    }
+
+    .grid .caruselItem {
+        width: 80%;
+        margin: 0 auto;
+    }
+
+    .grid .quote {
+        font-size: 12px;
+    }
+
+    button .buttonFont {
+        font-size: 16px;
+    }
+
+    .grid .xlSizeText {
+        font-size: 18px;
+    }
+
+    .grid .md500 {
+        font-size: 14px;
+        font-weight: 400;
+    }
+
+    .grid .lSizeTextLeft {
+        font-size: 18px;
+    }
+
+    .grid .xlSizeText500 {
+        font-size: 24px;
+    }
+
+    .grid .Size25Text {
+        font-size: 16px;
+    }
+
+    .grid .mdBoldSizeText {
+        font-size: 14px;
+    }
+
+    .grid .mdSizeText {
+        font-size: 14px;
+    }
+}
+
+.grid .sm600 {
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.grid .sm {
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.grid .mdSizeTextCenter {
+    font-size: 18px;
+    font-weight: 400;
+    text-align: center;
+}
+
+.grid .sm500 {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+
+.grid .gradient {
+    font-size: 40px;
+    font-weight: 600;
+    background: -webkit-linear-gradient(#E37E31, #E37E3100);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    border: 1px solid #E37E31;
+    border-radius: 50%;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    width: 58px;
+    height: 58px;
+    text-align: center;
+    margin-right: 5px;
+}

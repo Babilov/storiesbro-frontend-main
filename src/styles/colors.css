@@ -1,0 +1,12 @@
+.orange {
+    color: #E37E31;
+}
+
+.orangeGradient {
+    background: linear-gradient(90.15deg, #EDB955 0.13%, #F1583F 72.67%, #F23939 108.56%);
+}
+
+.whiteButton {
+    background-color: white;
+    border: 1px solid white;
+}
