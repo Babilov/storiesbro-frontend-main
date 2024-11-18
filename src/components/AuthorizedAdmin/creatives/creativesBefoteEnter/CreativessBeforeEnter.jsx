@@ -37,6 +37,38 @@ const CreativessBeforeEnter = ({setAuthed}) => {
     }
 
     useEffect(() => {
+        // Генерация codeVerifier
+        const codeVerifier = generateCodeVerifier();
+
+        // Сохраняем state
+        const state = generateCodeVerifier();
+
+        console.log("State & codeVerifier: ", state, codeVerifier);
+
+        generateCodeChallenge(codeVerifier).then((codeChallenge) => {
+            // Инициализация VKID SDK
+            VKID.Config.init({
+                app: "51786441",
+                redirectUrl: "https://storisbro.com/accounts/vk/login/callback/",
+                state: state, // Передаём state
+                codeVerifier: codeVerifier, // Передаём codeVerifier
+                scope: "email",
+            });
+
+            const oneTap = new VKID.OneTap();
+            const container = document.getElementById("VkIdSdkOneTap");
+
+            if (container) {
+                oneTap
+                    .render({ container })
+                    .on(VKID.WidgetEvents.SUCCESS, handleVkAuth)
+                    .on(VKID.WidgetEvents.ERROR, console.error);
+            }
+        });
+    }, []);
+
+    /*
+    useEffect(() => {
         // Генерация codeVerifier и codeChallenge
         const state = generateCodeVerifier();
         const codeVerifier = generateCodeVerifier();
@@ -61,7 +93,7 @@ const CreativessBeforeEnter = ({setAuthed}) => {
             }
         });
     }, []);
-
+    */
     const handleVkAuth = (data) => {
         const {code, device_id} = data;
         console.log("Code & device id: ", code, device_id);
