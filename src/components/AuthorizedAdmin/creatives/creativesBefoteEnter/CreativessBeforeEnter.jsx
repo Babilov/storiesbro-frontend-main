@@ -47,7 +47,7 @@ const CreativessBeforeEnter = ({setAuthed}) => {
                 redirectUrl: "https://storisbro.com/accounts/vk/login/callback/", // Укажите ваш redirect URL
                 state: state, // Дополнительный параметр состояния
                 codeVerifier: codeVerifier, // Используем сгенерированный codeVerifier
-                scope: "email,groups,offline", // Запрашиваемые разрешения
+                scope: "email", // Запрашиваемые разрешения
             });
 
             const oneTap = new VKID.OneTap();
@@ -64,7 +64,7 @@ const CreativessBeforeEnter = ({setAuthed}) => {
 
     const handleVkAuth = (data) => {
         const {code, device_id} = data;
-
+        console.log("Code & device id: ", code, device_id);
         // Обмен кода на токены
         VKID.Auth.exchangeCode(code, device_id)
             .then((response) => {

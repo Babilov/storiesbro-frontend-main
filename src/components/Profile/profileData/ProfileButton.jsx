@@ -37,6 +37,37 @@ const ProfileButton = () => {
     }
 
     useEffect(() => {
+        // Генерация codeVerifier
+        const codeVerifier = generateCodeVerifier();
+
+        // Сохраняем state
+        const state = generateCodeVerifier();
+
+        console.log("State & codeVerifier: ", state, codeVerifier);
+
+        generateCodeChallenge(codeVerifier).then((codeChallenge) => {
+            // Инициализация VKID SDK
+            VKID.Config.init({
+                app: "51786441",
+                redirectUrl: "https://storisbro.com/accounts/vk/login/callback/",
+                state: state, // Передаём state
+                codeVerifier: codeVerifier, // Передаём codeVerifier
+                scope: "email",
+            });
+
+            const oneTap = new VKID.OneTap();
+            const container = document.getElementById("VkIdSdkOneTap");
+
+            if (container) {
+                oneTap
+                    .render({ container })
+                    .on(VKID.WidgetEvents.SUCCESS, handleVkAuth)
+                    .on(VKID.WidgetEvents.ERROR, console.error);
+            }
+        });
+    }, []);
+
+    /*useEffect(() => {
         // Генерация codeVerifier и codeChallenge
         const state = generateCodeVerifier();
         const codeVerifier = generateCodeVerifier();
@@ -47,7 +78,7 @@ const ProfileButton = () => {
                 redirectUrl: "https://storisbro.com/accounts/vk/login/callback/", // Укажите ваш redirect URL
                 state: state, // Дополнительный параметр состояния
                 codeVerifier: codeVerifier, // Используем сгенерированный codeVerifier
-                scope: "email,groups,offline", // Запрашиваемые разрешения
+                scope: "email", // Запрашиваемые разрешения
             });
 
             const oneTap = new VKID.OneTap();
@@ -60,11 +91,11 @@ const ProfileButton = () => {
                     .on(VKID.WidgetEvents.ERROR, console.error); // Обработка ошибок
             }
         });
-    }, []);
+    }, []);*/
 
     const handleVkAuth = (data) => {
         const {code, device_id} = data;
-
+        console.log("Code & device id: ", code, device_id);
         // Обмен кода на токены
         VKID.Auth.exchangeCode(code, device_id)
             .then((response) => {
