@@ -180,6 +180,9 @@ const CreativessBeforeEnter = ({setAuthed}) => {
                 Вы не можете добавить сообщества, так как ваш аккаунт ВКонтакте не
                 подключен
             </Typography>
+            <a href="https://storisbro.com/communities/api/start_vk_auth">
+                тест
+            </a>
             <Box
                 sx={{width: {xs: "50%", sm: "35%", md: "25%"}, m: "0 auto", mt: 2}}
             >
