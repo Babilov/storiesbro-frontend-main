@@ -39,7 +39,7 @@ const CreativessBeforeEnter = ({setAuthed}) => {
 
     useEffect(() => {
         // Получаем state и code_challenge с бэка
-        fetch(`${API_URL}start_vk_auth`)
+        fetch("https://storisbro.com/communities/api/start_vk_auth")
             .then((res) => res.json())
             .then(({ state, code_challenge }) => {
                 console.log(`State: ${state}, code_challenge: ${code_challenge}`);
