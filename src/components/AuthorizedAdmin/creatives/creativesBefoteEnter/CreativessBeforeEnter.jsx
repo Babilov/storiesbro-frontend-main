@@ -11,6 +11,7 @@ import {useNavigate} from "react-router-dom";
 import * as VKID from "@vkid/sdk";
 import {setTokken} from "../../../../store/userReducer";
 import {API_URL} from "../../../../constants/constatns";
+import axios from "axios";
 
 const CreativessBeforeEnter = ({setAuthed}) => {
     const [error, setError] = useState(false);
@@ -36,6 +37,11 @@ const CreativessBeforeEnter = ({setAuthed}) => {
             .replace(/\//g, "_")
             .replace(/=+$/, "");
     }
+
+    useEffect(async () => {
+        const res = await axios.get("https://storisbro.com/communities/api/start_vk_auth");
+        console.log(`Response: ${res.data}`, res);
+    })
 
     useEffect(() => {
         // Получаем state и code_challenge с бэка
