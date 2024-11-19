@@ -9,6 +9,7 @@ import whiteVk from "../../../images/profileImages/dataIcons/whiteVk.svg";
 import avatar from "../../../images/profileImages/dataIcons/avatar.svg";
 import cross from "../../../images/profileImages/dataIcons/cross.svg";
 import MyButton from "../../UI/buttons/MyButton";
+import {API_URL} from "../../../constants/constatns";
 
 const ProfileButton = () => {
     const [error, setError] = useState(false);
@@ -36,6 +37,36 @@ const ProfileButton = () => {
             .replace(/=+$/, "");
     }
 
+    useEffect(() => {
+        // Получаем state и code_challenge с бэка
+        fetch(`${API_URL}/save_pkce`)
+            .then((res) => res.json())
+            .then(({ state, code_challenge }) => {
+                console.log(`State: ${state}, code_challenge: ${code_challenge}`);
+                VKID.Config.init({
+                    app: "51786441",
+                    redirectUrl: "https://storisbro.com/accounts/vk/login/callback/",
+                    state: state,
+                    codeChallenge: code_challenge,
+                    codeChallengeMethod: "S256",
+                    scope: "email",
+                });
+
+                const oneTap = new VKID.OneTap();
+                const container = document.getElementById("VkIdSdkOneTap");
+
+                if (container) {
+                    oneTap
+                        .render({ container })
+                        .on(VKID.WidgetEvents.SUCCESS, handleVkAuth)
+                        .on(VKID.WidgetEvents.ERROR, console.error);
+                }
+            })
+            .catch(console.error);
+    }, []);
+
+
+    /*
     useEffect(() => {
         // Генерация codeVerifier
         const codeVerifier = generateCodeVerifier();
@@ -66,6 +97,7 @@ const ProfileButton = () => {
             }
         });
     }, []);
+    */
 
     /*useEffect(() => {
         // Генерация codeVerifier и codeChallenge
