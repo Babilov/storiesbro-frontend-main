@@ -39,10 +39,24 @@ const CreativessBeforeEnter = ({setAuthed}) => {
     }
 
     useEffect(async () => {
-        const res = await axios.get("https://storisbro.com/communities/api/start_vk_auth");
-        console.log(`Response: ${res.data}`, res);
+        fetch("https://storisbro.com/communities/api/start_vk_auth")
+            .then((res) => {
+                if (!res.ok) {
+                    throw new Error(`HTTP status ${res.status}`);
+                }
+                return res.json();
+            })
+            .then(({ state, code_challenge }) => {
+                console.log(`State: ${state}, Code Challenge: ${code_challenge}`);
+            })
+            .catch((error) => {
+                console.error("Error fetching VK auth data:", error);
+            });
     })
 
+    // ОСНОВНОЙ
+
+    /*
     useEffect(() => {
         // Получаем state и code_challenge с бэка
         fetch("https://storisbro.com/communities/api/start_vk_auth")
@@ -70,7 +84,7 @@ const CreativessBeforeEnter = ({setAuthed}) => {
             })
             .catch(console.error);
     }, []);
-
+    */
 /*
     useEffect(() => {
         // Генерация codeVerifier
