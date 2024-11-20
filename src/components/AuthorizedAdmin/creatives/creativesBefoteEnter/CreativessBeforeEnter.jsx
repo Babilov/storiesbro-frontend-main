@@ -39,7 +39,7 @@ const CreativessBeforeEnter = ({setAuthed}) => {
     }
 
     useEffect(async () => {
-        fetch("https://storisbro.com/communities/api/prefetch_vk_auth_data")
+        fetch("https://storisbro.com/communities/prefetch_vk_auth_data")
             .then((res) => {
                 if (!res.ok) {
                     throw new Error(`HTTP status ${res.status}`);
@@ -184,7 +184,7 @@ const CreativessBeforeEnter = ({setAuthed}) => {
                 Вы не можете добавить сообщества, так как ваш аккаунт ВКонтакте не
                 подключен
             </Typography>
-            <a href="https://storisbro.com/communities/api/prefetch_vk_auth_data">
+            <a href="https://storisbro.com/communities/prefetch_vk_auth_data">
                 тест
             </a>
             <Box
