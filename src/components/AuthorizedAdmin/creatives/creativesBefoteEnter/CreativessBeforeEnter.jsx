@@ -57,10 +57,10 @@ const CreativessBeforeEnter = ({setAuthed}) => {
 
     // ОСНОВНОЙ
 
-    /*
+
     useEffect(() => {
         // Получаем state и code_challenge с бэка
-        fetch("https://storisbro.com/communities/api/prefetch_vk_auth_data")
+        fetch("https://storisbro.com/communities/prefetch_vk_auth_data")
             .then((res) => res.json())
             .then(({ state, code_challenge }) => {
                 console.log(`State: ${state}, code_challenge: ${code_challenge}`);
@@ -85,8 +85,6 @@ const CreativessBeforeEnter = ({setAuthed}) => {
             })
             .catch(console.error);
     }, []);
-    */
-
 
 
 /*
