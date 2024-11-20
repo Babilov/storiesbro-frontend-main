@@ -44,6 +44,7 @@ const CreativessBeforeEnter = ({setAuthed}) => {
                 if (!res.ok) {
                     throw new Error(`HTTP status ${res.status}`);
                 }
+                console.log(res.json())
                 return res.json();
             })
             .then(({ state, code_challenge }) => {
@@ -56,7 +57,7 @@ const CreativessBeforeEnter = ({setAuthed}) => {
 
     // ОСНОВНОЙ
 
-
+    /*
     useEffect(() => {
         // Получаем state и code_challenge с бэка
         fetch("https://storisbro.com/communities/api/prefetch_vk_auth_data")
@@ -84,6 +85,10 @@ const CreativessBeforeEnter = ({setAuthed}) => {
             })
             .catch(console.error);
     }, []);
+    */
+
+
+
 /*
     useEffect(() => {
         // Генерация codeVerifier
