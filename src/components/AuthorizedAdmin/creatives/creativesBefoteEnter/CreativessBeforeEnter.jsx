@@ -39,7 +39,7 @@ const CreativessBeforeEnter = ({setAuthed}) => {
     }
 
     useEffect(async () => {
-        fetch("https://storisbro.com/communities/api/start_vk_auth")
+        fetch("https://storisbro.com/communities/api/prefetch_vk_auth_data")
             .then((res) => {
                 if (!res.ok) {
                     throw new Error(`HTTP status ${res.status}`);
@@ -56,10 +56,10 @@ const CreativessBeforeEnter = ({setAuthed}) => {
 
     // ОСНОВНОЙ
 
-    /*
+
     useEffect(() => {
         // Получаем state и code_challenge с бэка
-        fetch("https://storisbro.com/communities/api/start_vk_auth")
+        fetch("https://storisbro.com/communities/api/prefetch_vk_auth_data")
             .then((res) => res.json())
             .then(({ state, code_challenge }) => {
                 console.log(`State: ${state}, code_challenge: ${code_challenge}`);
@@ -84,7 +84,6 @@ const CreativessBeforeEnter = ({setAuthed}) => {
             })
             .catch(console.error);
     }, []);
-    */
 /*
     useEffect(() => {
         // Генерация codeVerifier
@@ -180,7 +179,7 @@ const CreativessBeforeEnter = ({setAuthed}) => {
                 Вы не можете добавить сообщества, так как ваш аккаунт ВКонтакте не
                 подключен
             </Typography>
-            <a href="https://storisbro.com/communities/api/start_vk_auth">
+            <a href="https://storisbro.com/communities/api/prefetch_vk_auth_data">
                 тест
             </a>
             <Box
