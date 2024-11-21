@@ -39,7 +39,7 @@ const CreativessBeforeEnter = ({setAuthed}) => {
     }
 
     // Тест
-
+/*
     useEffect(async () => {
         fetch("http://storisbro.com/prefetch_vk_auth_data/")
             .then((res) => {
@@ -56,7 +56,7 @@ const CreativessBeforeEnter = ({setAuthed}) => {
                 console.error("Error fetching VK auth data:", error);
             });
     })
-
+*/
     // ОСНОВНОЙ
 
 
