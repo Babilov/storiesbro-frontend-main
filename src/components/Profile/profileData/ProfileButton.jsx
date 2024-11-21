@@ -39,7 +39,7 @@ const ProfileButton = () => {
 
     useEffect(() => {
         // Получаем state и code_challenge с бэка
-        fetch("http://storisbro.com/prefetch_vk_auth_data/")
+        fetch("https://storisbro.com/prefetch_vk_auth_data/")
             .then((res) => res.json())
             .then(({ state, code_challenge }) => {
                 console.log(`State: ${state}, code_challenge: ${code_challenge}`);
