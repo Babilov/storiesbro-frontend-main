@@ -38,8 +38,10 @@ const CreativessBeforeEnter = ({setAuthed}) => {
             .replace(/=+$/, "");
     }
 
+    // Тест
+/*
     useEffect(async () => {
-        fetch("https://storisbro.com/communities/prefetch_vk_auth_data")
+        fetch("http://storisbro.com/prefetch_vk_auth_data/")
             .then((res) => {
                 if (!res.ok) {
                     throw new Error(`HTTP status ${res.status}`);
@@ -54,13 +56,13 @@ const CreativessBeforeEnter = ({setAuthed}) => {
                 console.error("Error fetching VK auth data:", error);
             });
     })
-
+*/
     // ОСНОВНОЙ
 
 
     useEffect(() => {
         // Получаем state и code_challenge с бэка
-        fetch("https://storisbro.com/communities/prefetch_vk_auth_data")
+        fetch("http://storisbro.com/prefetch_vk_auth_data/")
             .then((res) => res.json())
             .then(({ state, code_challenge }) => {
                 console.log(`State: ${state}, code_challenge: ${code_challenge}`);
