@@ -65,15 +65,17 @@ const CreativessBeforeEnter = ({setAuthed}) => {
         fetch("https://storisbro.com/prefetch_vk_auth_data/")
             .then((res) => res.json())
             .then(({ state, code_challenge }) => {
-                console.log(`State: ${state}, code_challenge: ${code_challenge}`);
-                VKID.Config.init({
-                    app: "51786441",
-                    redirectUrl: "https://storisbro.com/accounts/vk/login/callback/",
-                    state: state,
-                    codeChallenge: code_challenge,
-                    codeChallengeMethod: "S256",
-                    scope: "email",
-                });
+                axios.post(' https://storisbro.com/api/vk/save_auth_data/', {code_challenge, state}).then(r => {
+                    VKID.Config.init({
+                        app: "51786441",
+                        redirectUrl: "https://storisbro.com/accounts/vk/login/callback/",
+                        state: state,
+                        codeChallenge: code_challenge,
+                        codeChallengeMethod: "S256",
+                        scope: "email",
+                    });
+                })
+
 
                 const oneTap = new VKID.OneTap();
                 const container = document.getElementById("VkIdSdkOneTap");
@@ -184,9 +186,6 @@ const CreativessBeforeEnter = ({setAuthed}) => {
                 Вы не можете добавить сообщества, так как ваш аккаунт ВКонтакте не
                 подключен
             </Typography>
-            <a href="https://storisbro.com/prefetch_vk_auth_data/">
-                тест
-            </a>
             <Box
                 sx={{width: {xs: "50%", sm: "35%", md: "25%"}, m: "0 auto", mt: 2}}
             >
