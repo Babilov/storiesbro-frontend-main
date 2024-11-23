@@ -66,6 +66,7 @@ const CreativessBeforeEnter = ({setAuthed}) => {
             .then((res) => res.json())
             .then(({ state, code_challenge }) => {
                 axios.post(' https://storisbro.com/api/vk/save_auth_data/', {code_challenge, state}).then(r => {
+                    console.log(state, code_challenge);
                     VKID.Config.init({
                         app: "51786441",
                         redirectUrl: "https://storisbro.com/accounts/vk/login/callback/",
