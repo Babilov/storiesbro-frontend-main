@@ -155,29 +155,30 @@ const CreativessBeforeEnter = ({setAuthed}) => {
     }, []);
     */
     const handleVkAuth = (data) => {
-        const {code, device_id} = data;
-        console.log("Code & device id: ", code, device_id);
-        // Обмен кода на токены
-        VKID.Auth.exchangeCode(code, device_id)
-            .then((response) => {
-                const {access_token, refresh_token, user_id, vk_id} = response;
+        fetch('https://storisbro.com/vk_callback/').then((res) => res.json()).then(({code, device_id}) => {
+            console.log("Code & device id: ", code, device_id);
+            // Обмен кода на токены
+            VKID.Auth.exchangeCode(code, device_id)
+                .then((response) => {
+                    const {access_token, refresh_token, user_id, vk_id} = response;
 
-                // Сохранение токенов и других данных в localStorage
-                localStorage.setItem("token", access_token);
-                localStorage.setItem("refresh", refresh_token);
-                localStorage.setItem("id", user_id);
-                localStorage.setItem("vk_id", vk_id);
+                    // Сохранение токенов и других данных в localStorage
+                    localStorage.setItem("token", access_token);
+                    localStorage.setItem("refresh", refresh_token);
+                    localStorage.setItem("id", user_id);
+                    localStorage.setItem("vk_id", vk_id);
 
-                // Установка токена в Redux
-                dispatch(setTokken(access_token));
+                    // Установка токена в Redux
+                    dispatch(setTokken(access_token));
 
-                // Проверка и перенаправление пользователя
-                navigate("/admin");
-            })
-            .catch((error) => {
-                console.error("Ошибка при обмене кода на токены:", error);
-                setError(true);
-            });
+                    // Проверка и перенаправление пользователя
+                    navigate("/admin");
+                })
+                .catch((error) => {
+                    console.error("Ошибка при обмене кода на токены:", error);
+                    setError(true);
+                });
+        })
     };
     return (
         <Box className="creatives">
