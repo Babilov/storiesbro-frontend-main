@@ -36,7 +36,8 @@ const ProfileButton = () => {
             .replace(/\//g, "_")
             .replace(/=+$/, "");
     }
-
+    // Основной
+    /*
     useEffect(() => {
         // Получаем state и code_challenge с бэка
         fetch("https://storisbro.com/prefetch_vk_auth_data/")
@@ -65,7 +66,7 @@ const ProfileButton = () => {
             .catch(console.error);
     }, []);
 
-
+*/
     /*
     useEffect(() => {
         // Генерация codeVerifier
@@ -125,6 +126,7 @@ const ProfileButton = () => {
         });
     }, []);*/
 
+    /*
     const handleVkAuth = (data) => {
         const {code, device_id} = data;
         console.log("Code & device id: ", code, device_id);
@@ -150,6 +152,8 @@ const ProfileButton = () => {
                 setError(true);
             });
     };
+
+     */
 
     const name = "Юрий";
 
@@ -183,13 +187,16 @@ const ProfileButton = () => {
             <Box component="img" alt="avatar" src={avatar} />
           </Box>
         </MyButton>*/}
+                {/*
                 <Box id="VkIdSdkOneTap" sx={{mt: 2}}></Box>
+
                 <Box
                     component="img"
                     alt="cross"
                     src={cross}
                     sx={{ml: 2, cursor: "pointer"}}
                 />
+                */}
             </Box>
         </Box>
     );
