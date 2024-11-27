@@ -155,6 +155,46 @@ const CreativessBeforeEnter = ({setAuthed}) => {
     }, []);
     */
     const handleVkAuth = (data) => {
+
+        const { code, state } = data;
+
+        // Отправка code и state на бэкенд
+        axios.post(`https://storisbro.com/vk_callback/`, { code, state })
+            .then((response) => {
+                console.log(`code: ${code} \n state: ${state}`);
+                const { access_token, refresh_token, user_id } = response.data;
+
+                // Сохранение токенов и других данных в localStorage
+                localStorage.setItem("token", access_token);
+                localStorage.setItem("refresh", refresh_token);
+                localStorage.setItem("id", user_id);
+
+                // Установка токена в Redux
+                dispatch(setTokken(access_token));
+
+                // Перенаправление пользователя
+                navigate("/admin");
+            })
+            .catch((error) => {
+                console.error("Ошибка при обмене кода на токены:", error);
+                setError(true);
+            });
+
+        /*
+        fetch("https://storisbro.com/api/vk/token-exchange/").then(res => res.json()).then(({access_token, refresh_token, user_id}) => {
+            console.log(access_token, refresh_token, user_id    );
+            localStorage.setItem("token", access_token);
+            localStorage.setItem("refresh", refresh_token);
+            localStorage.setItem("id", user_id);
+            dispatch(setTokken(access_token));
+
+            navigate("/admin");
+
+        }).catch((error) => {
+            console.error("Ошибка при обмене кода на токены:", error);
+            setError(true);
+        });
+
         fetch('https://storisbro.com/vk_callback/').then((res) => res.json()).then(({code, device_id}) => {
             console.log("Code & device id: ", code, device_id);
             // Обмен кода на токены
@@ -178,7 +218,7 @@ const CreativessBeforeEnter = ({setAuthed}) => {
                     console.error("Ошибка при обмене кода на токены:", error);
                     setError(true);
                 });
-        })
+        })*/
     };
     return (
         <Box className="creatives">
