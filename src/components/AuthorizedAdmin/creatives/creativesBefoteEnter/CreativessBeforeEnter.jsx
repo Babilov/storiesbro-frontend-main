@@ -68,7 +68,7 @@ const CreativessBeforeEnter = ({ setAuthed }) => {
         if (container) {
           oneTap
             .render({ container })
-            .on(VKID.WidgetEvents.SUCCESS, (data) => {
+            .on(VKID.WidgetEvents.LOAD, (data) => {
               console.log("VK auth success data", data); // Добавьте лог
               handleVkAuth(data);
             })
