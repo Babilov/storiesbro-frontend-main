@@ -26,55 +26,26 @@ const CreativessBeforeEnter = ({ setAuthed }) => {
       });
   };
 
-  /*
-                        useEffect(() => {
-                            // Получаем state и code_challenge с бэка
-                            fetch("https://storisbro.com/prefetch_vk_auth_data/")
-                                .then((res) => res.json())
-                                .then(({ state, code_challenge }) => {
-                                    axios.post(' https://storisbro.com/api/vk/save_auth_data/', {code_challenge, state}).then(r => {
-                                        console.log(state, code_challenge);
-                                        console.log("test");
-                                        VKID.Config.init({
-                                            app: "51786441",
-                                            redirectUrl: "https://storisbro.com/accounts/vk/login/callback/",
-                                            state: state,
-                                            codeChallenge: code_challenge,
-                                            codeChallengeMethod: "S256",
-                                            scope: "email",
-                                        });
-                                    })
-                
-                
-                                    const oneTap = new VKID.OneTap();
-                                    const container = document.getElementById("VkIdSdkOneTap");
-                
-                                    if (container) {
-                                        oneTap
-                                            .render({ container })
-                                            .on(VKID.WidgetEvents.SUCCESS, handleVkAuth)
-                                            .on(VKID.WidgetEvents.ERROR, console.error);
-                                    }
-                                })
-                                .catch(console.error);
-                        }, []);
-                        */
-
   useEffect(() => {
-    logToBackend("test");
-  }, []);
+    // Логируем начало работы useEffect
+    logToBackend("Started fetching VK auth data");
 
-  useEffect(() => {
     // Получаем state и code_challenge с бэка
     fetch("https://storisbro.com/prefetch_vk_auth_data/")
       .then((res) => res.json())
       .then(({ state, code_challenge }) => {
+        logToBackend(
+          `Received state and code_challenge: state=${state}, code_challenge=${code_challenge}`,
+        );
+
         axios
           .post("https://storisbro.com/api/vk/save_auth_data/", {
             code_challenge,
             state,
           })
           .then((r) => {
+            logToBackend("Saved auth data to backend");
+
             console.log(state, code_challenge);
 
             VKID.Config.init({
@@ -85,6 +56,8 @@ const CreativessBeforeEnter = ({ setAuthed }) => {
               codeChallengeMethod: "S256",
               scope: "email",
             });
+
+            logToBackend("VKID SDK initialized");
           });
 
         const oneTap = new VKID.OneTap();
@@ -94,19 +67,31 @@ const CreativessBeforeEnter = ({ setAuthed }) => {
           oneTap
             .render({ container })
             .on(VKID.WidgetEvents.SUCCESS, handleVkAuth)
-            .on(VKID.WidgetEvents.ERROR, console.error);
+            .on(VKID.WidgetEvents.ERROR, (err) => {
+              logToBackend(`VK auth error: ${err}`);
+              console.error(err);
+            });
+
+          logToBackend("VK OneTap rendered");
         }
       })
-      .catch(console.error);
+      .catch((err) => {
+        logToBackend(`Error fetching VK auth data: ${err}`);
+        console.error(err);
+      });
   }, []);
 
   const handleVkAuth = (data) => {
+    logToBackend("Handling VK auth response");
+
     const { code, state } = data;
     if (!code || !state) {
+      logToBackend("Invalid VK auth response: missing code or state");
       console.error("Invalid VK auth response: missing code or state");
       setError(true);
       return;
     }
+
     logToBackend(`VK auth success: code=${code}, state=${state}`);
     sessionStorage.setItem("vk_code_used", "true");
 
@@ -119,41 +104,17 @@ const CreativessBeforeEnter = ({ setAuthed }) => {
         localStorage.setItem("id", user_id);
         dispatch(setTokken(access_token));
         navigate("/admin");
+
+        logToBackend(
+          "Successfully received tokens and redirected to admin page",
+        );
       })
       .catch((error) => {
+        logToBackend(`Error exchanging code for tokens: ${error}`);
         console.error("Error exchanging code for tokens:", error);
         setError(true);
       });
   };
-  /*
-                    const handleVkAuth = (data) => {
-                
-                        const { code, state } = data;
-                
-                        // Отправка code и state на бэкенд
-                        axios.post(`https://storisbro.com/vk_callback/`, { code, state })
-                            .then((response) => {
-                                console.log(`code: ${code} \n state: ${state}`);
-                                const { access_token, refresh_token, user_id } = response.data;
-                
-                                // Сохранение токенов и других данных в localStorage
-                                localStorage.setItem("token", access_token);
-                                localStorage.setItem("refresh", refresh_token);
-                                localStorage.setItem("id", user_id);
-                
-                                // Установка токена в Redux
-                                dispatch(setTokken(access_token));
-                
-                                // Перенаправление пользователя
-                                navigate("/admin");
-                            })
-                            .catch((error) => {
-                                console.error("Ошибка при обмене кода на токены:", error);
-                                setError(true);
-                            });
-                    };
-                
-                    */
   return (
     <Box className="creatives">
       <Typography variant="h4" className="creatives__title">
