@@ -27,38 +27,38 @@ const CreativessBeforeEnter = ({ setAuthed }) => {
   };
 
   /*
-                useEffect(() => {
-                    // Получаем state и code_challenge с бэка
-                    fetch("https://storisbro.com/prefetch_vk_auth_data/")
-                        .then((res) => res.json())
-                        .then(({ state, code_challenge }) => {
-                            axios.post(' https://storisbro.com/api/vk/save_auth_data/', {code_challenge, state}).then(r => {
-                                console.log(state, code_challenge);
-                                console.log("test");
-                                VKID.Config.init({
-                                    app: "51786441",
-                                    redirectUrl: "https://storisbro.com/accounts/vk/login/callback/",
-                                    state: state,
-                                    codeChallenge: code_challenge,
-                                    codeChallengeMethod: "S256",
-                                    scope: "email",
-                                });
+                    useEffect(() => {
+                        // Получаем state и code_challenge с бэка
+                        fetch("https://storisbro.com/prefetch_vk_auth_data/")
+                            .then((res) => res.json())
+                            .then(({ state, code_challenge }) => {
+                                axios.post(' https://storisbro.com/api/vk/save_auth_data/', {code_challenge, state}).then(r => {
+                                    console.log(state, code_challenge);
+                                    console.log("test");
+                                    VKID.Config.init({
+                                        app: "51786441",
+                                        redirectUrl: "https://storisbro.com/accounts/vk/login/callback/",
+                                        state: state,
+                                        codeChallenge: code_challenge,
+                                        codeChallengeMethod: "S256",
+                                        scope: "email",
+                                    });
+                                })
+            
+            
+                                const oneTap = new VKID.OneTap();
+                                const container = document.getElementById("VkIdSdkOneTap");
+            
+                                if (container) {
+                                    oneTap
+                                        .render({ container })
+                                        .on(VKID.WidgetEvents.SUCCESS, handleVkAuth)
+                                        .on(VKID.WidgetEvents.ERROR, console.error);
+                                }
                             })
-        
-        
-                            const oneTap = new VKID.OneTap();
-                            const container = document.getElementById("VkIdSdkOneTap");
-        
-                            if (container) {
-                                oneTap
-                                    .render({ container })
-                                    .on(VKID.WidgetEvents.SUCCESS, handleVkAuth)
-                                    .on(VKID.WidgetEvents.ERROR, console.error);
-                            }
-                        })
-                        .catch(console.error);
-                }, []);
-                */
+                            .catch(console.error);
+                    }, []);
+                    */
 
   useEffect(() => {
     // Получаем state и code_challenge с бэка
@@ -122,34 +122,34 @@ const CreativessBeforeEnter = ({ setAuthed }) => {
       });
   };
   /*
-            const handleVkAuth = (data) => {
-        
-                const { code, state } = data;
-        
-                // Отправка code и state на бэкенд
-                axios.post(`https://storisbro.com/vk_callback/`, { code, state })
-                    .then((response) => {
-                        console.log(`code: ${code} \n state: ${state}`);
-                        const { access_token, refresh_token, user_id } = response.data;
-        
-                        // Сохранение токенов и других данных в localStorage
-                        localStorage.setItem("token", access_token);
-                        localStorage.setItem("refresh", refresh_token);
-                        localStorage.setItem("id", user_id);
-        
-                        // Установка токена в Redux
-                        dispatch(setTokken(access_token));
-        
-                        // Перенаправление пользователя
-                        navigate("/admin");
-                    })
-                    .catch((error) => {
-                        console.error("Ошибка при обмене кода на токены:", error);
-                        setError(true);
-                    });
-            };
-        
-            */
+                const handleVkAuth = (data) => {
+            
+                    const { code, state } = data;
+            
+                    // Отправка code и state на бэкенд
+                    axios.post(`https://storisbro.com/vk_callback/`, { code, state })
+                        .then((response) => {
+                            console.log(`code: ${code} \n state: ${state}`);
+                            const { access_token, refresh_token, user_id } = response.data;
+            
+                            // Сохранение токенов и других данных в localStorage
+                            localStorage.setItem("token", access_token);
+                            localStorage.setItem("refresh", refresh_token);
+                            localStorage.setItem("id", user_id);
+            
+                            // Установка токена в Redux
+                            dispatch(setTokken(access_token));
+            
+                            // Перенаправление пользователя
+                            navigate("/admin");
+                        })
+                        .catch((error) => {
+                            console.error("Ошибка при обмене кода на токены:", error);
+                            setError(true);
+                        });
+                };
+            
+                */
   return (
     <Box className="creatives">
       <Typography variant="h4" className="creatives__title">
