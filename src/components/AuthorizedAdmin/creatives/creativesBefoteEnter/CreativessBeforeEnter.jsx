@@ -44,7 +44,9 @@ const CreativessBeforeEnter = ({ setAuthed }) => {
             state,
           })
           .then((r) => {
-            logToBackend("Saved auth data to backend");
+            logToBackend(
+              `Saved auth data to backend state=${state}, code_challenge=${code_challenge}`,
+            );
 
             console.log(state, code_challenge);
 
