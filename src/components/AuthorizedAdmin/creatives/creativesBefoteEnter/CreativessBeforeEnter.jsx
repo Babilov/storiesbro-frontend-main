@@ -69,8 +69,9 @@ const CreativessBeforeEnter = ({ setAuthed }) => {
           oneTap
             .render({ container })
             .on(VKID.WidgetEvents.ERROR, (err) => {
-              logToBackend(`VK auth error: ${err}`);
-              console.error(err);
+              const errorMessage = JSON.stringify(err); // Преобразуем объект ошибки в строку
+              logToBackend(`VK auth error: ${errorMessage}`); // Логируем ошибку
+              console.error("VK auth error:", err); // Также выводим объект ошибки в консоль
             })
             .on(VKID.OneTapInternalEvents.LOGIN_SUCCESS, function (payload) {
               const code = payload.code;
@@ -79,21 +80,21 @@ const CreativessBeforeEnter = ({ setAuthed }) => {
                 `VK auth SUCCESS: code: ${code} deviceId=${deviceId}`,
               );
               /*
-                            VKID.Auth.exchangeCode(code, deviceId)
-                                  .then(vkidOnSuccess)
-                                  .catch(vkidOnError);
-                                  */
+                                          VKID.Auth.exchangeCode(code, deviceId)
+                                                .then(vkidOnSuccess)
+                                                .catch(vkidOnError);
+                                                */
             });
           /*
-                                      .on(VKID.WidgetEvents.LOAD, (data) => {
-                                        console.log("VK auth success data", data); // Добавьте лог
-                                        handleVkAuth(data);
-                                      })
-                                      .on(VKID.WidgetEvents.ERROR, (err) => {
-                                        logToBackend(`VK auth error: ${err}`);
-                                        console.error(err);
-                                      });
-                                      */
+                                                .on(VKID.WidgetEvents.LOAD, (data) => {
+                                                  console.log("VK auth success data", data); // Добавьте лог
+                                                  handleVkAuth(data);
+                                                })
+                                                .on(VKID.WidgetEvents.ERROR, (err) => {
+                                                  logToBackend(`VK auth error: ${err}`);
+                                                  console.error(err);
+                                                });
+                                                */
 
           logToBackend("VK OneTap rendered");
         }
