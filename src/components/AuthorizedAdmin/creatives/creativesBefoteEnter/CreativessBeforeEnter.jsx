@@ -68,14 +68,32 @@ const CreativessBeforeEnter = ({ setAuthed }) => {
         if (container) {
           oneTap
             .render({ container })
-            .on(VKID.WidgetEvents.LOAD, (data) => {
-              console.log("VK auth success data", data); // Добавьте лог
-              handleVkAuth(data);
-            })
             .on(VKID.WidgetEvents.ERROR, (err) => {
               logToBackend(`VK auth error: ${err}`);
               console.error(err);
+            })
+            .on(VKID.OneTapInternalEvents.LOGIN_SUCCESS, function (payload) {
+              const code = payload.code;
+              const deviceId = payload.device_id;
+              logToBackend(
+                `VK auth SUCCESS: code: ${code} deviceId=${deviceId}`,
+              );
+              /*
+                            VKID.Auth.exchangeCode(code, deviceId)
+                                  .then(vkidOnSuccess)
+                                  .catch(vkidOnError);
+                                  */
             });
+          /*
+                                      .on(VKID.WidgetEvents.LOAD, (data) => {
+                                        console.log("VK auth success data", data); // Добавьте лог
+                                        handleVkAuth(data);
+                                      })
+                                      .on(VKID.WidgetEvents.ERROR, (err) => {
+                                        logToBackend(`VK auth error: ${err}`);
+                                        console.error(err);
+                                      });
+                                      */
 
           logToBackend("VK OneTap rendered");
         }
