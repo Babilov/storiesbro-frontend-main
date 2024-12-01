@@ -78,15 +78,15 @@ const CreativessBeforeEnter = ({ setAuthed }) => {
             )
             .on(VKID.OneTapInternalEvents.LOGIN_SUCCESS, handleVkAuth);
           /*
-                                                                                                  .on(VKID.WidgetEvents.LOAD, (data) => {
-                                                                                                    console.log("VK auth success data", data); // Добавьте лог
-                                                                                                    handleVkAuth(data);
-                                                                                                  })
-                                                                                                  .on(VKID.WidgetEvents.ERROR, (err) => {
-                                                                                                    logToBackend(`VK auth error: ${err}`);
-                                                                                                    console.error(err);
-                                                                                                  });
-                                                                                                  */
+                                                                                                                      .on(VKID.WidgetEvents.LOAD, (data) => {
+                                                                                                                        console.log("VK auth success data", data); // Добавьте лог
+                                                                                                                        handleVkAuth(data);
+                                                                                                                      })
+                                                                                                                      .on(VKID.WidgetEvents.ERROR, (err) => {
+                                                                                                                        logToBackend(`VK auth error: ${err}`);
+                                                                                                                        console.error(err);
+                                                                                                                      });
+                                                                                                                      */
 
           logToBackend("VK OneTap rendered");
         }
@@ -98,8 +98,9 @@ const CreativessBeforeEnter = ({ setAuthed }) => {
   }, []);
 
   const handleVkAuth = (data) => {
+    const new_data = JSON.stringify(data);
     logToBackend("Handling VK auth response");
-
+    logToBackend(`DATA: ${new_data}`);
     const { code, state } = data;
     if (!code || !state) {
       logToBackend("Invalid VK auth response: missing code or state");
