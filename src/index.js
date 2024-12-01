@@ -22,14 +22,14 @@ const THEME = createTheme({
 
 root.render(
   <ThemeProvider theme={THEME}>
-    <React.StrictMode>
-      <BrowserRouter>
-        <Provider store={store}>
-          <App />
-        </Provider>
-      </BrowserRouter>
-    </React.StrictMode>
-  </ThemeProvider>
+    {/*<React.StrictMode> */}
+    <BrowserRouter>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </BrowserRouter>
+    {/* </React.StrictMode> */}
+  </ThemeProvider>,
 );
 
 // If you want to start measuring performance in your app, pass a function

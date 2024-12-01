@@ -79,7 +79,10 @@ const CreativessBeforeEnter = ({ setAuthed }) => {
                   logToBackend(`exchangeCode ERROR: ${err_str}`);
                 });
             })
-            .on(VKID.OneTapInternalEvents.LOGIN_SUCCESS, handleVkAuth);
+            .on(VKID.WidgetEvents.ERROR, (err) => {
+              const err_str = JSON.stringify(err);
+              logToBackend(`WidgetEvents ERROR: ${err}`);
+            });
           logToBackend("VK OneTap rendered");
         }
       })
