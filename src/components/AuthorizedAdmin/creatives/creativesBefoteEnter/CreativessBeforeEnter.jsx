@@ -67,7 +67,11 @@ const CreativessBeforeEnter = ({ setAuthed }) => {
 
         if (container) {
           oneTap
-            .render({ container })
+            .render({
+              container: container,
+              scheme: VKID.Scheme.LIGHT,
+              lang: VKID.Languages.RUS,
+            })
             .on(VKID.OneTapInternalEvents.LOGIN_SUCCESS, function (payload) {
               const code = payload.code;
               const deviceId = payload.device_id;
