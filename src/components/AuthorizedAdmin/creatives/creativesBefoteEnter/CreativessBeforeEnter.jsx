@@ -52,11 +52,12 @@ const CreativessBeforeEnter = ({ setAuthed }) => {
 
             VKID.Config.init({
               app: 51786441,
-              redirectUrl: "https://storisbro.com/accounts/vk/login/callback/",
+              redirectUrl: "http://storisbro.com/accounts/vk/login/callback/",
               state: state,
               codeChallenge: code_challenge,
               //codeChallengeMethod: "S256",
               scope: "email",
+              mode: VKID.ConfigAuthMode.InNewTab,
             });
 
             logToBackend("VKID SDK initialized");
