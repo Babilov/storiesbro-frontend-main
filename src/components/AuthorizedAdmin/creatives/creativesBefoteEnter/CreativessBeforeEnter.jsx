@@ -51,7 +51,7 @@ const CreativessBeforeEnter = ({ setAuthed }) => {
             console.log(state, code_challenge);
 
             VKID.Config.init({
-              app: 52342325,
+              app: 51786441,
               redirectUrl: "https://storisbro.com/accounts/vk/login/callback/",
               state: state,
               codeChallenge: code_challenge,
