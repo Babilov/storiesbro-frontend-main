@@ -51,11 +51,11 @@ const CreativessBeforeEnter = ({ setAuthed }) => {
             console.log(state, code_challenge);
 
             VKID.Config.init({
-              app: "52342325",
+              app: 52342325,
               redirectUrl: "https://storisbro.com/accounts/vk/login/callback/",
               state: state,
               codeChallenge: code_challenge,
-              codeChallengeMethod: "S256",
+              //codeChallengeMethod: "S256",
               scope: "email",
             });
 
@@ -81,7 +81,7 @@ const CreativessBeforeEnter = ({ setAuthed }) => {
             })
             .on(VKID.WidgetEvents.ERROR, (err) => {
               const err_str = JSON.stringify(err);
-              logToBackend(`WidgetEvents ERROR: ${err}`);
+              logToBackend(`WidgetEvents ERROR: ${err_str}`);
             });
           logToBackend("VK OneTap rendered");
         }
