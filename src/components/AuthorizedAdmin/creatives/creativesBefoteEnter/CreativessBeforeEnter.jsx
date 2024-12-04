@@ -83,24 +83,44 @@ const CreativessBeforeEnter = ({ setAuthed }) => {
         console.error(err);
       });
   }, []);
+  /*
+      const handleVkAuth = (data) => {
+        const new_data = JSON.stringify(data);
+        logToBackend("Handling VK auth response");
+        logToBackend(`DATA: ${new_data}`);
+        const { code, state } = data;
+        if (!code || !state) {
+          logToBackend("Invalid VK auth response: missing code or state");
+          console.error("Invalid VK auth response: missing code or state");
+          setError(true);
+          return;
+        }
+        */
 
   const handleVkAuth = (data) => {
-    const new_data = JSON.stringify(data);
     logToBackend("Handling VK auth response");
-    logToBackend(`DATA: ${new_data}`);
-    const { code, state } = data;
-    if (!code || !state) {
-      logToBackend("Invalid VK auth response: missing code or state");
-      console.error("Invalid VK auth response: missing code or state");
+
+    const { code, state, device_id } = data;
+    if (!code || !state || !device_id) {
+      logToBackend(
+        "Invalid VK auth response: missing code, state, or device_id",
+      );
+      console.error(
+        "Invalid VK auth response: missing code, state, or device_id",
+      );
       setError(true);
       return;
     }
 
-    logToBackend(`VK auth success: code=${code}, state=${state}`);
+    logToBackend(
+      `VK auth success: code=${code}, state=${state}, device_id=${device_id}`,
+    );
     sessionStorage.setItem("vk_code_used", "true");
 
     axios
-      .get(`https://storisbro.com/vk_callback/?code=${code}&state=${state}`)
+      .get(
+        `https://storisbro.com/vk_callback/?code=${code}&state=${state}&device_id=${device_id}`,
+      )
       .then((response) => {
         const { access_token, refresh_token, user_id } = response.data;
         localStorage.setItem("token", access_token);
@@ -120,6 +140,42 @@ const CreativessBeforeEnter = ({ setAuthed }) => {
       });
   };
 
+  /*
+      const handleVkAuth = (data) => {
+          logToBackend("Handling VK auth response");
+  
+          const { code, state, device_id } = data;
+          if (!code || !state || !device_id) {
+              logToBackend("Invalid VK auth response: missing code, state, or device_id");
+              console.error("Invalid VK auth response: missing code, state, or device_id");
+              setError(true);
+              return;
+          }
+  
+      logToBackend(`VK auth success: code=${code}, state=${state}`);
+      sessionStorage.setItem("vk_code_used", "true");
+  
+      axios
+        .get(`https://storisbro.com/vk_callback/?code=${code}&state=${state}`)
+        .then((response) => {
+          const { access_token, refresh_token, user_id } = response.data;
+          localStorage.setItem("token", access_token);
+          if (refresh_token) localStorage.setItem("refresh", refresh_token);
+          localStorage.setItem("id", user_id);
+          dispatch(setTokken(access_token));
+          navigate("/admin");
+  
+          logToBackend(
+            "Successfully received tokens and redirected to admin page",
+          );
+        })
+        .catch((error) => {
+          logToBackend(`Error exchanging code for tokens: ${error}`);
+          console.error("Error exchanging code for tokens:", error);
+          setError(true);
+        });
+    };
+      */
   return (
     <Box className="creatives">
       <Typography variant="h4" className="creatives__title">
