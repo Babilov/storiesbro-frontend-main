@@ -10,7 +10,7 @@ const Creatives = () => {
   return (
     <>
       {!authed ? (
-        <CreativessBeforeEnter1 setAuthed={setAuthed} />
+        <CreativessBeforeEnter setAuthed={setAuthed} />
       ) : (
         <CreativesAfterEnter />
       )}
