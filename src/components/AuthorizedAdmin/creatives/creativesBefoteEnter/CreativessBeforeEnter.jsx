@@ -132,6 +132,7 @@ const CreativessBeforeEnter = ({ setAuthed }) => {
       <Box
         sx={{ width: { xs: "50%", sm: "35%", md: "25%" }, m: "0 auto", mt: 2 }}
       >
+        {/*
         <Button
           fullWidth
           sx={{
@@ -154,6 +155,7 @@ const CreativessBeforeEnter = ({ setAuthed }) => {
             Войти с VK ID
           </Link>
         </Button>
+        */}
         <Box id="VkIdSdkOneTap" sx={{ mt: 2 }}></Box>
       </Box>
     </Box>
