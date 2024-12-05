@@ -105,6 +105,10 @@ const CreativessBeforeEnter = ({ setAuthed }) => {
     logToBackend(`VK auth response received: ${JSON.stringify(data)}`, "DEBUG");
 
     const { code, state, device_id } = data;
+    logToBackend(
+      `GET: code: ${code}, state: ${state}, device_id: ${device_id}`,
+      "DEBUG",
+    );
     if (!code || !state || !device_id) {
       logToBackend(
         "Missing code, state, or device_id in VK auth response",
@@ -122,6 +126,10 @@ const CreativessBeforeEnter = ({ setAuthed }) => {
     }
 
     const codeVerifier = sessionStorage.getItem("code_verifier");
+    logToBackend(
+      `POST: code: ${code}, state: ${state}, device_id: ${device_id}, codeVerifier: ${codeVerifier}`,
+      "DEBUG",
+    );
     axios
       .post("https://storisbro.com/vk_callback/", {
         code,
