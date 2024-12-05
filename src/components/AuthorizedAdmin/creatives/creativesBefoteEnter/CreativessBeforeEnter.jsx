@@ -1,6 +1,5 @@
-import { Box, Button, Link, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import vk from "../../../../images/icons/commonIcons/vkWhite.svg";
 
 import "./styles/style.css";
 
@@ -44,10 +43,8 @@ const CreativessBeforeEnter = ({ setAuthed }) => {
             code_challenge,
             state,
           })
-          .then((_) => {
-            logToBackend(
-              `Saved auth data to backend state=${state}, code_challenge=${code_challenge}`,
-            );
+          .then((r) => {
+            logToBackend("Saved auth data to backend");
 
             console.log(state, code_challenge);
 
@@ -58,8 +55,6 @@ const CreativessBeforeEnter = ({ setAuthed }) => {
               codeChallenge: code_challenge,
               codeChallengeMethod: "S256",
               scope: "email",
-              responseMode: VKID.ConfigResponseMode.Callback, // Добавлено из документации
-              // source: VKID.ConfigSource.LOWCODE // Можно задать источник, если это применимо
             });
 
             logToBackend("VKID SDK initialized");
@@ -73,9 +68,10 @@ const CreativessBeforeEnter = ({ setAuthed }) => {
             .render({ container })
             .on(VKID.WidgetEvents.SUCCESS, handleVkAuth)
             .on(VKID.WidgetEvents.ERROR, (err) => {
-              logToBackend(`VK auth error: ${JSON.stringify(err)}`);
-              console.error("VK auth error:", err);
+              logToBackend(`VK auth error: ${err}`);
+              console.error(err);
             });
+
           logToBackend("VK OneTap rendered");
         }
       })
@@ -84,44 +80,23 @@ const CreativessBeforeEnter = ({ setAuthed }) => {
         console.error(err);
       });
   }, []);
-  /*
-                                    const handleVkAuth = (data) => {
-                                      const new_data = JSON.stringify(data);
-                                      logToBackend("Handling VK auth response");
-                                      logToBackend(`DATA: ${new_data}`);
-                                      const { code, state } = data;
-                                      if (!code || !state) {
-                                        logToBackend("Invalid VK auth response: missing code or state");
-                                        console.error("Invalid VK auth response: missing code or state");
-                                        setError(true);
-                                        return;
-                                      }
-                                      */
 
   const handleVkAuth = (data) => {
     logToBackend("Handling VK auth response");
 
-    const { code, state, device_id } = data;
-    if (!code || !state || !device_id) {
-      logToBackend(
-        "Invalid VK auth response: missing code, state, or device_id",
-      );
-      console.error(
-        "Invalid VK auth response: missing code, state, or device_id",
-      );
+    const { code, state } = data;
+    if (!code || !state) {
+      logToBackend("Invalid VK auth response: missing code or state");
+      console.error("Invalid VK auth response: missing code or state");
       setError(true);
       return;
     }
 
-    logToBackend(
-      `VK auth success: code=${code}, state=${state}, device_id=${device_id}`,
-    );
+    logToBackend(`VK auth success: code=${code}, state=${state}`);
     sessionStorage.setItem("vk_code_used", "true");
 
     axios
-      .get(
-        `https://storisbro.com/vk_callback/?code=${code}&state=${state}&device_id=${device_id}`,
-      )
+      .get(`https://storisbro.com/vk_callback/?code=${code}&state=${state}`)
       .then((response) => {
         const { access_token, refresh_token, user_id } = response.data;
         localStorage.setItem("token", access_token);
@@ -140,88 +115,21 @@ const CreativessBeforeEnter = ({ setAuthed }) => {
         setError(true);
       });
   };
-
-  /*
-                                    const handleVkAuth = (data) => {
-                                        logToBackend("Handling VK auth response");
-                                
-                                        const { code, state, device_id } = data;
-                                        if (!code || !state || !device_id) {
-                                            logToBackend("Invalid VK auth response: missing code, state, or device_id");
-                                            console.error("Invalid VK auth response: missing code, state, or device_id");
-                                            setError(true);
-                                            return;
-                                        }
-                                
-                                    logToBackend(`VK auth success: code=${code}, state=${state}`);
-                                    sessionStorage.setItem("vk_code_used", "true");
-                                
-                                    axios
-                                      .get(`https://storisbro.com/vk_callback/?code=${code}&state=${state}`)
-                                      .then((response) => {
-                                        const { access_token, refresh_token, user_id } = response.data;
-                                        localStorage.setItem("token", access_token);
-                                        if (refresh_token) localStorage.setItem("refresh", refresh_token);
-                                        localStorage.setItem("id", user_id);
-                                        dispatch(setTokken(access_token));
-                                        navigate("/admin");
-                                
-                                        logToBackend(
-                                          "Successfully received tokens and redirected to admin page",
-                                        );
-                                      })
-                                      .catch((error) => {
-                                        logToBackend(`Error exchanging code for tokens: ${error}`);
-                                        console.error("Error exchanging code for tokens:", error);
-                                        setError(true);
-                                      });
-                                  };
-                                    */
   return (
-    <>
-      <Box className="creatives">
-        <Typography variant="h4" className="creatives__title">
-          Мои сообщества
-        </Typography>
-        <Typography variant="body2" className="creatives__text">
-          Вы не можете добавить сообщества, так как ваш аккаунт ВКонтакте не
-          подключен
-        </Typography>
-        <Box
-          sx={{
-            width: { xs: "50%", sm: "35%", md: "25%" },
-            m: "0 auto",
-            mt: 2,
-          }}
-        >
-          {/*
-        <Button
-          fullWidth
-          sx={{
-            backgroundColor: "#07f",
-            height: "40px",
-            borderRadius: "10px",
-            ":hover": { background: "#0071f2" },
-          }}
-        >
-          <Link
-            href="https://storisbro.com/accounts/vk/login/?process=login"
-            sx={{
-              color: "white",
-              display: "flex",
-              alignItems: "center",
-              textDecoration: "none",
-            }}
-          >
-            <Box component="img" src={vk} sx={{ mr: 1, height: "23px" }} />
-            Войти с VK ID
-          </Link>
-        </Button>
-        */}
-          <Box id="VkIdSdkOneTap" sx={{ mt: 2 }}></Box>
-        </Box>
+    <Box className="creatives">
+      <Typography variant="h4" className="creatives__title">
+        Мои сообщества
+      </Typography>
+      <Typography variant="body2" className="creatives__text">
+        Вы не можете добавить сообщества, так как ваш аккаунт ВКонтакте не
+        подключен
+      </Typography>
+      <Box
+        sx={{ width: { xs: "50%", sm: "35%", md: "25%" }, m: "0 auto", mt: 2 }}
+      >
+        <Box id="VkIdSdkOneTap" sx={{ mt: 2 }}></Box>
       </Box>
-    </>
+    </Box>
   );
 };
 
