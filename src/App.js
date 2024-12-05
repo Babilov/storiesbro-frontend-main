@@ -491,7 +491,6 @@ function App() {
           />
         </Routes>
       )}
-      <script src="https://unpkg.com/@vkid/sdk@<3.0.0/dist-sdk/umd/index.js"></script>
     </Context.Provider>
   );
 }
