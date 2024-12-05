@@ -21,7 +21,7 @@ const CreativessBeforeEnter = ({ setAuthed }) => {
   };
 
   // Генерация пары PKCE
-  const generatePKCEPair = () => {
+  const generatePKCEPair = async () => {
     const randomString = () => {
       const chars =
         "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~";
@@ -29,17 +29,21 @@ const CreativessBeforeEnter = ({ setAuthed }) => {
         chars.charAt(Math.floor(Math.random() * chars.length)),
       ).join("");
     };
+
     const codeVerifier = randomString();
     const encoder = new TextEncoder();
     const data = encoder.encode(codeVerifier);
-    const codeChallenge = btoa(
-      String.fromCharCode(
-        ...new Uint8Array(crypto.subtle.digestSync("SHA-256", data)),
-      ),
-    )
+
+    // Вычисляем хэш SHA-256 (асинхронно)
+    const hashBuffer = await crypto.subtle.digest("SHA-256", data);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+
+    // Конвертируем байты хэша в Base64 URL-encoded строку
+    const codeChallenge = btoa(String.fromCharCode(...hashArray))
       .replace(/=/g, "")
       .replace(/\+/g, "-")
       .replace(/\//g, "_");
+
     return { codeVerifier, codeChallenge };
   };
 
