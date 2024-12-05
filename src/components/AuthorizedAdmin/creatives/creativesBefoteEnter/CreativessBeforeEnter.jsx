@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 
 import "./styles/style.css";
@@ -29,63 +29,72 @@ const CreativessBeforeEnter = ({ setAuthed }) => {
   };
 
   useEffect(() => {
-    logToBackend("useEffect started", "DEBUG");
-
-    fetch("https://storisbro.com/prefetch_vk_auth_data/")
-      .then((res) => res.json())
-      .then(({ state, code_challenge }) => {
-        logToBackend(
-          `Received state=${state}, code_challenge=${code_challenge}`,
-          "INFO",
-        );
-
-        axios
-          .post("https://storisbro.com/api/vk/save_auth_data/", {
-            code_challenge,
-            state,
-          })
-          .then(() => {
-            logToBackend("Auth data saved successfully", "INFO");
-
-            VKID.Config.init({
-              app: "51786441",
-              redirectUrl: "https://storisbro.com/accounts/vk/login/callback/",
-              state,
-              codeChallenge: code_challenge,
-              codeChallengeMethod: "S256",
-              scope: "email",
-            });
-
-            logToBackend("VKID SDK initialized", "INFO");
-
-            const oneTap = new VKID.OneTap();
-            const container = document.getElementById("VkIdSdkOneTap");
-
-            if (container) {
-              oneTap
-                .render({ container })
-                .on(VKID.WidgetEvents.SUCCESS, (err) => {
-                  logToBackend("SUCCESS", "INFO");
-                })
-                .on(VKID.OneTapInternalEvents.LOGIN_SUCCESS, () => {
-                  logToBackend("Login successfully", "INFO");
-                })
-                .on(VKID.WidgetEvents.ERROR, (err) => {
-                  logToBackend(`OneTap error: ${JSON.stringify(err)}`, "ERROR");
-                });
-
-              logToBackend("OneTap rendered", "INFO");
-            } else {
-              logToBackend("OneTap container not found", "WARNING");
-            }
-          })
-          .catch((err) => {
-            logToBackend(`Error saving auth data: ${err}`, "ERROR");
-          });
-      })
-      .catch((err) => {
-        logToBackend(`Error fetching VK auth data: ${err}`, "ERROR");
-      });
+    /*logToBackend("useEffect started", "DEBUG");
+                
+                    fetch("https://storisbro.com/prefetch_vk_auth_data/")
+                      .then((res) => res.json())
+                      .then(({ state, code_challenge }) => {
+                        logToBackend(
+                          `Received state=${state}, code_challenge=${code_challenge}`,
+                          "INFO",
+                        );
+                
+                        axios
+                          .post("https://storisbro.com/api/vk/save_auth_data/", {
+                            code_challenge,
+                            state,
+                          })
+                          .then(() => {
+                            logToBackend("Auth data saved successfully", "INFO");
+                
+                            VKID.Config.init({
+                              app: "51786441",
+                              redirectUrl: "https://storisbro.com/accounts/vk/login/callback/",
+                              state,
+                              codeChallenge: code_challenge,
+                              codeChallengeMethod: "S256",
+                              scope: "email",
+                            });
+                
+                            logToBackend("VKID SDK initialized", "INFO");
+                
+                            const oneTap = new VKID.OneTap();
+                            const container = document.getElementById("VkIdSdkOneTap");
+                
+                            if (container) {
+                              oneTap
+                                .render({ container })
+                                .on(VKID.WidgetEvents.SUCCESS, (err) => {
+                                  logToBackend("SUCCESS", "INFO");
+                                })
+                                .on(VKID.OneTapInternalEvents.LOGIN_SUCCESS, () => {
+                                  logToBackend("Login successfully", "INFO");
+                                })
+                                .on(VKID.WidgetEvents.ERROR, (err) => {
+                                  logToBackend(`OneTap error: ${JSON.stringify(err)}`, "ERROR");
+                                });
+                
+                              logToBackend("OneTap rendered", "INFO");
+                            } else {
+                              logToBackend("OneTap container not found", "WARNING");
+                            }
+                          })
+                          .catch((err) => {
+                            logToBackend(`Error saving auth data: ${err}`, "ERROR");
+                          });
+                      })
+                      .catch((err) => {
+                        logToBackend(`Error fetching VK auth data: ${err}`, "ERROR");
+                      });
+                  }*/
+    VKID.Config.init({
+      app: "51786441",
+      redirectUrl: "https://storisbro.com/accounts/vk/login/callback/",
+      //state,
+      //codeChallenge: code_challenge,
+      //codeChallengeMethod: "S256",
+      scope: "email",
+    });
   }, []);
 
   const handleVkAuth = (data) => {
@@ -137,6 +146,13 @@ const CreativessBeforeEnter = ({ setAuthed }) => {
       >
         <Box id="VkIdSdkOneTap" sx={{ mt: 2 }}></Box>
       </Box>
+      <Button
+        onClick={() => {
+          VKID.Auth.login().catch(console.error);
+        }}
+      >
+        Войти
+      </Button>
     </Box>
   );
 };
