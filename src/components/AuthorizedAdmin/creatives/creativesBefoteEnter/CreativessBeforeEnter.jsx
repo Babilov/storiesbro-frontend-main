@@ -66,7 +66,7 @@ const CreativessBeforeEnter = ({ setAuthed }) => {
         if (container) {
           oneTap
             .render({ container })
-            .on(VKID.WidgetEvents.SUCCESS, handleVkAuth)
+            .on(VKID.OneTapInternalEvents.LOGIN_SUCCESS, handleVkAuth)
             .on(VKID.WidgetEvents.ERROR, (err) => {
               logToBackend(`VK auth error: ${err}`);
               console.error(err);
