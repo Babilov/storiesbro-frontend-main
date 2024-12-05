@@ -99,9 +99,12 @@ const CreativessBeforeEnter = ({ setAuthed }) => {
   const handleVkAuth = (data) => {
     logToBackend(`VK auth response received: ${JSON.stringify(data)}`, "DEBUG");
 
-    const { code, state } = data;
-    if (!code || !state) {
-      logToBackend("Missing code or state in VK auth response", "ERROR");
+    const { code, state, device_id } = data;
+    if (!code || !state || !device_id) {
+      logToBackend(
+        "Missing code, state, or device_id in VK auth response",
+        "ERROR",
+      );
       setError(true);
       return;
     }
@@ -113,24 +116,16 @@ const CreativessBeforeEnter = ({ setAuthed }) => {
       return;
     }
 
-    logToBackend("State verified successfully", "INFO");
-
     const codeVerifier = sessionStorage.getItem("code_verifier");
-    logToBackend("Sending code, state, and code verifier to backend", "DEBUG");
     axios
       .post("https://storisbro.com/vk_callback/", {
         code,
         state,
         code_verifier: codeVerifier,
+        device_id,
       })
-      .then((response) => {
-        const { access_token, user_id } = response.data;
-        logToBackend(
-          `Tokens received: access_token=${access_token}, user_id=${user_id}`,
-          "INFO",
-        );
-        dispatch(setTokken(access_token));
-        logToBackend("Tokens stored in Redux", "INFO");
+      .then(() => {
+        logToBackend("Tokens successfully exchanged on the backend", "INFO");
         navigate("/admin");
       })
       .catch((err) => {
