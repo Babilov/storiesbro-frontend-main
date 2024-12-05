@@ -131,7 +131,7 @@ const CreativessBeforeEnter = ({ setAuthed }) => {
       "DEBUG",
     );
     axios
-      .post("https://storisbro.com/vk_callback/", {
+      .post("https://storisbro.com/communites/vk/callback/", {
         code,
         state,
         code_verifier: codeVerifier,
