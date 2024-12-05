@@ -64,6 +64,9 @@ const CreativessBeforeEnter = ({ setAuthed }) => {
             if (container) {
               oneTap
                 .render({ container })
+                .on(VKID.WidgetEvents.SUCCESS, (err) => {
+                  logToBackend("SUCCESS", "INFO");
+                })
                 .on(VKID.OneTapInternalEvents.LOGIN_SUCCESS, () => {
                   logToBackend("Login successfully", "INFO");
                 })
