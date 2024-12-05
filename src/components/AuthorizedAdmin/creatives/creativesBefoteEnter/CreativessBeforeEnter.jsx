@@ -75,7 +75,7 @@ const CreativessBeforeEnter = ({ setAuthed }) => {
           codeChallenge,
           codeChallengeMethod: "S256",
           scope: "email",
-          responseMode: VKID.ConfigResponseMode.Callback, // Работа в режиме Callback
+          // responseMode: VKID.ConfigResponseMode.Callback,
         });
 
         logToBackend("VKID SDK initialized", "INFO");
