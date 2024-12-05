@@ -1,13 +1,10 @@
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
-
-import "./styles/style.css";
-
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import * as VKID from "@vkid/sdk";
-import { setTokken } from "../../../../store/userReducer";
 import axios from "axios";
+import { setTokken } from "../../../../store/userReducer";
 
 const CreativessBeforeEnter = ({ setAuthed }) => {
   const [error, setError] = useState(false);
@@ -15,86 +12,71 @@ const CreativessBeforeEnter = ({ setAuthed }) => {
   const navigate = useNavigate();
 
   const logToBackend = (logMessage, logLevel = "INFO") => {
-    // Отправляем лог на сервер
     axios
       .post("https://storisbro.com/api/logs/", {
         message: `[${logLevel}] ${logMessage}`,
       })
-      .then((response) => {
-        console.log("Log sent to server", response.data);
-      })
-      .catch((error) => {
-        console.error("Error sending log to server:", error);
-      });
+      .then(() => console.log("Log sent to server"))
+      .catch((err) => console.error("Error sending log:", err));
+  };
+
+  // Генерация пары PKCE
+  const generatePKCEPair = () => {
+    const randomString = () => {
+      const chars =
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~";
+      return Array.from({ length: 128 }, () =>
+        chars.charAt(Math.floor(Math.random() * chars.length)),
+      ).join("");
+    };
+    const codeVerifier = randomString();
+    const encoder = new TextEncoder();
+    const data = encoder.encode(codeVerifier);
+    const codeChallenge = btoa(
+      String.fromCharCode(
+        ...new Uint8Array(crypto.subtle.digestSync("SHA-256", data)),
+      ),
+    )
+      .replace(/=/g, "")
+      .replace(/\+/g, "-")
+      .replace(/\//g, "_");
+    return { codeVerifier, codeChallenge };
   };
 
   useEffect(() => {
-    /*logToBackend("useEffect started", "DEBUG");
-                
-                    fetch("https://storisbro.com/prefetch_vk_auth_data/")
-                      .then((res) => res.json())
-                      .then(({ state, code_challenge }) => {
-                        logToBackend(
-                          `Received state=${state}, code_challenge=${code_challenge}`,
-                          "INFO",
-                        );
-                
-                        axios
-                          .post("https://storisbro.com/api/vk/save_auth_data/", {
-                            code_challenge,
-                            state,
-                          })
-                          .then(() => {
-                            logToBackend("Auth data saved successfully", "INFO");
-                
-                            VKID.Config.init({
-                              app: "51786441",
-                              redirectUrl: "https://storisbro.com/accounts/vk/login/callback/",
-                              state,
-                              codeChallenge: code_challenge,
-                              codeChallengeMethod: "S256",
-                              scope: "email",
-                            });
-                
-                            logToBackend("VKID SDK initialized", "INFO");
-                
-                            const oneTap = new VKID.OneTap();
-                            const container = document.getElementById("VkIdSdkOneTap");
-                
-                            if (container) {
-                              oneTap
-                                .render({ container })
-                                .on(VKID.WidgetEvents.SUCCESS, (err) => {
-                                  logToBackend("SUCCESS", "INFO");
-                                })
-                                .on(VKID.OneTapInternalEvents.LOGIN_SUCCESS, () => {
-                                  logToBackend("Login successfully", "INFO");
-                                })
-                                .on(VKID.WidgetEvents.ERROR, (err) => {
-                                  logToBackend(`OneTap error: ${JSON.stringify(err)}`, "ERROR");
-                                });
-                
-                              logToBackend("OneTap rendered", "INFO");
-                            } else {
-                              logToBackend("OneTap container not found", "WARNING");
-                            }
-                          })
-                          .catch((err) => {
-                            logToBackend(`Error saving auth data: ${err}`, "ERROR");
-                          });
-                      })
-                      .catch((err) => {
-                        logToBackend(`Error fetching VK auth data: ${err}`, "ERROR");
-                      });
-                  }*/
+    logToBackend("useEffect started", "DEBUG");
+
+    const { codeVerifier, codeChallenge } = generatePKCEPair();
+    sessionStorage.setItem("code_verifier", codeVerifier);
+
+    const state = Math.random().toString(36).substring(2); // Генерация уникального state
+    sessionStorage.setItem("state", state);
+
     VKID.Config.init({
       app: "51786441",
       redirectUrl: "https://storisbro.com/accounts/vk/login/callback/",
-      //state,
-      //codeChallenge: code_challenge,
-      //codeChallengeMethod: "S256",
+      state,
+      codeChallenge,
+      codeChallengeMethod: "S256",
       scope: "email",
     });
+
+    logToBackend("VKID SDK initialized", "INFO");
+
+    const oneTap = new VKID.OneTap();
+    const container = document.getElementById("VkIdSdkOneTap");
+
+    if (container) {
+      oneTap
+        .render({ container })
+        .on(VKID.OneTapInternalEvents.LOGIN_SUCCESS, handleVkAuth)
+        .on(VKID.WidgetEvents.ERROR, (err) =>
+          logToBackend(`OneTap error: ${JSON.stringify(err)}`, "ERROR"),
+        );
+      logToBackend("OneTap rendered", "INFO");
+    } else {
+      logToBackend("OneTap container not found", "WARNING");
+    }
   }, []);
 
   const handleVkAuth = (data) => {
@@ -107,27 +89,28 @@ const CreativessBeforeEnter = ({ setAuthed }) => {
       return;
     }
 
-    sessionStorage.setItem("vk_code_used", "true");
-    logToBackend("VK auth session flag set", "DEBUG");
+    const storedState = sessionStorage.getItem("state");
+    if (state !== storedState) {
+      logToBackend("State mismatch: Possible CSRF attack", "ERROR");
+      setError(true);
+      return;
+    }
 
+    const codeVerifier = sessionStorage.getItem("code_verifier");
     axios
-      .get(`https://storisbro.com/vk_callback/?code=${code}&state=${state}`)
-      .then((response) => {
-        const { access_token, refresh_token, user_id } = response.data;
-        localStorage.setItem("token", access_token);
-        if (refresh_token) localStorage.setItem("refresh", refresh_token);
-        localStorage.setItem("id", user_id);
-        dispatch(setTokken(access_token));
-        logToBackend(
-          `Tokens received and stored: access_token=${access_token}`,
-          "INFO",
-        );
-
-        navigate("/admin");
-        logToBackend("Navigation to admin panel successful", "INFO");
+      .post("https://storisbro.com/vk_callback/", {
+        code,
+        state,
+        code_verifier: codeVerifier,
       })
-      .catch((error) => {
-        logToBackend(`Error exchanging code for tokens: ${error}`, "ERROR");
+      .then((response) => {
+        const { access_token, user_id } = response.data;
+        dispatch(setTokken(access_token));
+        logToBackend("Tokens received and stored", "INFO");
+        navigate("/admin");
+      })
+      .catch((err) => {
+        logToBackend(`Error exchanging code for tokens: ${err}`, "ERROR");
         setError(true);
       });
   };
@@ -146,13 +129,6 @@ const CreativessBeforeEnter = ({ setAuthed }) => {
       >
         <Box id="VkIdSdkOneTap" sx={{ mt: 2 }}></Box>
       </Box>
-      <Button
-        onClick={() => {
-          VKID.Auth.login().catch(console.error);
-        }}
-      >
-        Войти
-      </Button>
     </Box>
   );
 };
