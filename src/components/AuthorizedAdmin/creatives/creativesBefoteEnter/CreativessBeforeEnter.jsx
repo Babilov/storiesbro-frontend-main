@@ -28,7 +28,6 @@ const CreativessBeforeEnter = () => {
     return null;
   };
 
-  // Генерация PKCE-пары
   const generatePKCEPair = async () => {
     const randomString = (length = 128) => {
       const chars =
