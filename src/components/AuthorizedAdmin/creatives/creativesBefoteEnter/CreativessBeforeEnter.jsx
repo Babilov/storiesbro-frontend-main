@@ -20,23 +20,23 @@ const CreativessBeforeEnter = ({ setAuthed }) => {
       .catch((err) => console.error("Error sending log:", err));
   };
 
-  // Генерация пары PKCE
   const generatePKCEPair = async () => {
     logToBackend("Generating PKCE pair", "DEBUG");
-    const randomString = () => {
+
+    const randomString = (length = 128) => {
       const chars =
         "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~";
-      return Array.from({ length: 128 }, () =>
+      return Array.from({ length }, () =>
         chars.charAt(Math.floor(Math.random() * chars.length)),
       ).join("");
     };
 
     const codeVerifier = randomString();
     logToBackend(`Generated code verifier: ${codeVerifier}`, "DEBUG");
+
     const encoder = new TextEncoder();
     const data = encoder.encode(codeVerifier);
 
-    // Вычисляем хэш SHA-256 (асинхронно)
     const hashBuffer = await crypto.subtle.digest("SHA-256", data);
     const hashArray = Array.from(new Uint8Array(hashBuffer));
     const codeChallenge = btoa(String.fromCharCode(...hashArray))
@@ -48,6 +48,14 @@ const CreativessBeforeEnter = ({ setAuthed }) => {
     return { codeVerifier, codeChallenge };
   };
 
+  const generateState = () => {
+    const state = Array(3)
+      .fill(null)
+      .map(() => Math.random().toString(36).substring(2))
+      .join("");
+    return state;
+  };
+
   useEffect(() => {
     (async () => {
       try {
@@ -55,22 +63,19 @@ const CreativessBeforeEnter = ({ setAuthed }) => {
 
         const { codeVerifier, codeChallenge } = await generatePKCEPair();
         sessionStorage.setItem("code_verifier", codeVerifier);
-        logToBackend(
-          `codeVerifier: ${codeVerifier}, codeChallenge: ${codeChallenge}`,
-          "INFO",
-        );
 
-        const state = Math.random().toString(36).substring(2); // Генерация уникального state
+        const state = generateState();
         sessionStorage.setItem("state", state);
-        logToBackend(`Generated and saved state: ${state}`, "INFO");
+        logToBackend(`Generated state: ${state}`, "INFO");
 
         VKID.Config.init({
-          app: "51786441",
-          redirectUrl: "https://storisbro.com/accounts/vk/login/callback/",
+          app: "51786441", // ID вашего приложения
+          redirectUrl: "https://storisbro.com/accounts/vk/login/callback/", // Доверенный Redirect URL
           state,
           codeChallenge,
           codeChallengeMethod: "S256",
           scope: "email",
+          responseMode: VKID.ConfigResponseMode.Callback, // Работа в режиме Callback
         });
 
         logToBackend("VKID SDK initialized", "INFO");
@@ -91,7 +96,7 @@ const CreativessBeforeEnter = ({ setAuthed }) => {
           logToBackend("OneTap container not found", "WARNING");
         }
       } catch (err) {
-        logToBackend(`Error in useEffect: ${err}`, "ERROR");
+        logToBackend(`Error in useEffect: ${err.message}`, "ERROR");
       }
     })();
   }, []);
@@ -129,7 +134,10 @@ const CreativessBeforeEnter = ({ setAuthed }) => {
         navigate("/admin");
       })
       .catch((err) => {
-        logToBackend(`Error exchanging code for tokens: ${err}`, "ERROR");
+        logToBackend(
+          `Error exchanging code for tokens: ${err.message}`,
+          "ERROR",
+        );
         setError(true);
       });
   };
