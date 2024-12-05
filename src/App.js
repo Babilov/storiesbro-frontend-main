@@ -69,39 +69,42 @@ function App() {
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    // Функция для получения сообществ с бэкенда
-    const fetchPublics = async () => {
-      try {
-        const response = await axios.get(
-          `${API_URL}api_communities/communities`,
-        );
-        setAllPublics(response.data);
-      } catch (error) {
-        console.error("Ошибка при загрузке сообществ", error);
-      }
-    };
+  /*useEffect(() => {
+        // Функция для получения сообществ с бэкенда
+        const fetchPublics = async () => {
+          try {
+            const response = await axios.get(
+              `${API_URL}api_communities/communities`,
+            );
+            setAllPublics(response.data);
+          } catch (error) {
+            console.error("Ошибка при загрузке сообществ", error);
+          }
+        };
+    
+        // Вызов функции для загрузки сообществ при монтировании компонента
+        fetchPublics();
+      }, [userId]); // Пустой массив зависимостей означает, что эффект будет выполнен только один раз при монтировании
+    */
 
-    // Вызов функции для загрузки сообществ при монтировании компонента
-    fetchPublics();
-  }, [userId]); // Пустой массив зависимостей означает, что эффект будет выполнен только один раз при монтировании
-
-  useEffect(() => {
-    // Функция для получения сообществ с бэкенда
-    const fetchPublics = async () => {
-      try {
-        const response = await axios.get(
-          `${API_URL}api_communities/own_communities/${userId}`,
-        );
-        setPublics(response.data);
-      } catch (error) {
-        console.error("Ошибка при загрузке сообществ", error);
-      }
-    };
-
-    // Вызов функции для загрузки сообществ при монтировании компонента
-    fetchPublics();
-  }, [userId]); // Пустой массив зависимостей означает, что эффект будет выполнен только один раз при монтировании
+  /*
+    useEffect(() => {
+      // Функция для получения сообществ с бэкенда
+      const fetchPublics = async () => {
+        try {
+          const response = await axios.get(
+            `${API_URL}api_communities/own_communities/${userId}`,
+          );
+          setPublics(response.data);
+        } catch (error) {
+          console.error("Ошибка при загрузке сообществ", error);
+        }
+      };
+  
+      // Вызов функции для загрузки сообществ при монтировании компонента
+      fetchPublics();
+    }, [userId]); // Пустой массив зависимостей означает, что эффект будет выполнен только один раз при монтировании
+  */
 
   useEffect(() => {
     // Функция для получения креативов с бэкенда
