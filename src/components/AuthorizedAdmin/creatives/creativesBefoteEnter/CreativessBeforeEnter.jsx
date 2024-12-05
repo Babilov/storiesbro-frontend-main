@@ -14,10 +14,12 @@ const CreativessBeforeEnter = ({ setAuthed }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const logToBackend = (logMessage) => {
+  const logToBackend = (logMessage, logLevel = "INFO") => {
     // Отправляем лог на сервер
     axios
-      .post("https://storisbro.com/api/logs/", { message: logMessage })
+      .post("https://storisbro.com/api/logs/", {
+        message: `[${logLevel}] ${logMessage}`,
+      })
       .then((response) => {
         console.log("Log sent to server", response.data);
       })
@@ -27,15 +29,14 @@ const CreativessBeforeEnter = ({ setAuthed }) => {
   };
 
   useEffect(() => {
-    // Логируем начало работы useEffect
-    logToBackend("Started fetching VK auth data");
+    logToBackend("useEffect started", "DEBUG");
 
-    // Получаем state и code_challenge с бэка
     fetch("https://storisbro.com/prefetch_vk_auth_data/")
       .then((res) => res.json())
       .then(({ state, code_challenge }) => {
         logToBackend(
-          `Received state and code_challenge: state=${state}, code_challenge=${code_challenge}`,
+          `Received state=${state}, code_challenge=${code_challenge}`,
+          "INFO",
         );
 
         axios
@@ -43,57 +44,57 @@ const CreativessBeforeEnter = ({ setAuthed }) => {
             code_challenge,
             state,
           })
-          .then((r) => {
-            logToBackend("Saved auth data to backend");
-
-            console.log(state, code_challenge);
+          .then(() => {
+            logToBackend("Auth data saved successfully", "INFO");
 
             VKID.Config.init({
               app: "51786441",
               redirectUrl: "https://storisbro.com/accounts/vk/login/callback/",
-              state: state,
+              state,
               codeChallenge: code_challenge,
               codeChallengeMethod: "S256",
               scope: "email",
             });
 
-            logToBackend("VKID SDK initialized");
+            logToBackend("VKID SDK initialized", "INFO");
+
+            const oneTap = new VKID.OneTap();
+            const container = document.getElementById("VkIdSdkOneTap");
+
+            if (container) {
+              oneTap
+                .render({ container })
+                .on(VKID.OneTapInternalEvents.LOGIN_SUCCESS, handleVkAuth)
+                .on(VKID.WidgetEvents.ERROR, (err) => {
+                  logToBackend(`OneTap error: ${JSON.stringify(err)}`, "ERROR");
+                });
+
+              logToBackend("OneTap rendered", "INFO");
+            } else {
+              logToBackend("OneTap container not found", "WARNING");
+            }
+          })
+          .catch((err) => {
+            logToBackend(`Error saving auth data: ${err}`, "ERROR");
           });
-
-        const oneTap = new VKID.OneTap();
-        const container = document.getElementById("VkIdSdkOneTap");
-
-        if (container) {
-          oneTap
-            .render({ container })
-            .on(VKID.OneTapInternalEvents.LOGIN_SUCCESS, handleVkAuth)
-            .on(VKID.WidgetEvents.ERROR, (err) => {
-              logToBackend(`VK auth error: ${err}`);
-              console.error(err);
-            });
-
-          logToBackend("VK OneTap rendered");
-        }
       })
       .catch((err) => {
-        logToBackend(`Error fetching VK auth data: ${err}`);
-        console.error(err);
+        logToBackend(`Error fetching VK auth data: ${err}`, "ERROR");
       });
   }, []);
 
   const handleVkAuth = (data) => {
-    logToBackend("Handling VK auth response");
+    logToBackend(`VK auth response received: ${JSON.stringify(data)}`, "DEBUG");
 
     const { code, state } = data;
     if (!code || !state) {
-      logToBackend("Invalid VK auth response: missing code or state");
-      console.error("Invalid VK auth response: missing code or state");
+      logToBackend("Missing code or state in VK auth response", "ERROR");
       setError(true);
       return;
     }
 
-    logToBackend(`VK auth success: code=${code}, state=${state}`);
     sessionStorage.setItem("vk_code_used", "true");
+    logToBackend("VK auth session flag set", "DEBUG");
 
     axios
       .get(`https://storisbro.com/vk_callback/?code=${code}&state=${state}`)
@@ -103,18 +104,20 @@ const CreativessBeforeEnter = ({ setAuthed }) => {
         if (refresh_token) localStorage.setItem("refresh", refresh_token);
         localStorage.setItem("id", user_id);
         dispatch(setTokken(access_token));
-        navigate("/admin");
-
         logToBackend(
-          "Successfully received tokens and redirected to admin page",
+          `Tokens received and stored: access_token=${access_token}`,
+          "INFO",
         );
+
+        navigate("/admin");
+        logToBackend("Navigation to admin panel successful", "INFO");
       })
       .catch((error) => {
-        logToBackend(`Error exchanging code for tokens: ${error}`);
-        console.error("Error exchanging code for tokens:", error);
+        logToBackend(`Error exchanging code for tokens: ${error}`, "ERROR");
         setError(true);
       });
   };
+
   return (
     <Box className="creatives">
       <Typography variant="h4" className="creatives__title">
