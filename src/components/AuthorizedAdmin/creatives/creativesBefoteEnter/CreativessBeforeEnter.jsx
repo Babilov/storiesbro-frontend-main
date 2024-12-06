@@ -56,11 +56,7 @@ const CreativessBeforeEnter = () => {
     }
 
     axios
-      .get(`/accounts/vk/login/callback/?code=${code}&state=${state}`, {
-        headers: {
-          "X-CSRFToken": document.cookie.match(/csrftoken=([^;]+)/)?.[1],
-        },
-      })
+      .get(`/accounts/vk/login/callback/?code=${code}&state=${state}`)
       .then(() => {
         logToBackend("Tokens successfully exchanged.", "INFO");
         navigate("/admin");
