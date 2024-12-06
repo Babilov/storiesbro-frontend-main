@@ -8,24 +8,10 @@ const CreativessBeforeEnter = () => {
   const [error, setError] = useState(false);
   const navigate = useNavigate();
 
-  // Логирование событий на бэкенд
-  const logToBackend = (logMessage, logLevel = "INFO") => {
+  const logToBackend = (message, level = "INFO") => {
     axios
-      .post("https://storisbro.com/api/logs/", {
-        message: `[${logLevel}] ${logMessage}`,
-      })
-      .then(() => console.log("Log sent to server"))
-      .catch((err) => console.error("Error sending log:", err));
-  };
-
-  // Получение CSRF-токена
-  const getCsrfToken = () => {
-    const cookies = document.cookie.split("; ");
-    for (const cookie of cookies) {
-      const [name, value] = cookie.split("=");
-      if (name === "csrftoken") return value;
-    }
-    return "";
+      .post("/api/logs/", { message: `[${level}] ${message}` })
+      .catch(console.error);
   };
 
   const generatePKCEPair = async () => {
@@ -52,19 +38,14 @@ const CreativessBeforeEnter = () => {
     return { codeVerifier, codeChallenge };
   };
 
-  // Генерация state
-  const generateState = () => {
-    return Math.random().toString(36).substring(2) + Date.now();
-  };
+  const generateState = () =>
+    Math.random().toString(36).substring(2) + Date.now();
 
-  // Обработка входа через VK ID
   const handleVkAuth = (data) => {
     const { code, state, device_id } = data;
     const codeVerifier = sessionStorage.getItem("code_verifier");
     const storedState = sessionStorage.getItem("state");
-    logToBackend(
-      `code: ${code} \n state: ${state} \n device_id: ${device_id} \n code_verifier: ${codeVerifier} \n storedState: ${storedState}`,
-    );
+
     if (state !== storedState) {
       logToBackend("State mismatch: Possible CSRF attack", "ERROR");
       setError(true);
@@ -72,17 +53,13 @@ const CreativessBeforeEnter = () => {
     }
 
     axios
-      .post(
-        "https://storisbro.com/vk_callback/",
-        { code, state, code_verifier: codeVerifier, device_id },
-        {
-          headers: {
-            "X-CSRFToken": getCsrfToken(),
-          },
+      .get(`/accounts/vk/login/callback/?code=${code}&state=${state}`, {
+        headers: {
+          "X-CSRFToken": document.cookie.match(/csrftoken=([^;]+)/)?.[1],
         },
-      )
+      })
       .then(() => {
-        logToBackend("Tokens successfully exchanged on the backend", "INFO");
+        logToBackend("Tokens successfully exchanged.", "INFO");
         navigate("/admin");
       })
       .catch((err) => {
@@ -114,24 +91,23 @@ const CreativessBeforeEnter = () => {
         });
 
         const oneTap = new VKID.OneTap();
-        const container = document.getElementById("VkIdSdkOneTap");
         oneTap
-          .render({ container })
+          .render({ container: document.getElementById("VkIdSdkOneTap") })
           .on(VKID.OneTapInternalEvents.LOGIN_SUCCESS, handleVkAuth)
           .on(VKID.WidgetEvents.ERROR, (err) =>
             logToBackend(`OneTap error: ${JSON.stringify(err)}`, "ERROR"),
           );
       } catch (err) {
-        logToBackend(`Error in useEffect: ${err.message}`, "ERROR");
+        logToBackend(`Error initializing VKID: ${err.message}`, "ERROR");
       }
     })();
   }, []);
 
   return (
     <Box>
-      <Typography variant="h4">Мои сообщества</Typography>
+      <Typography variant="h4">Вход через VK ID</Typography>
       <Typography variant="body2">
-        Войдите через VK ID, чтобы продолжить
+        Войдите через VK ID для продолжения
       </Typography>
       <Box id="VkIdSdkOneTap" />
     </Box>
