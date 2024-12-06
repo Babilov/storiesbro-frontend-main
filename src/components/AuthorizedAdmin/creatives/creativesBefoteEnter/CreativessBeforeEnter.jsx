@@ -63,7 +63,7 @@ const CreativessBeforeEnter = () => {
     const codeVerifier = sessionStorage.getItem("code_verifier");
     const storedState = sessionStorage.getItem("state");
     logToBackend(
-      `state: ${state} \n state: ${state} \n device_id: ${device_id} \n code_verifier: ${codeVerifier} \n storedState: ${storedState}`,
+      `code: ${code} \n state: ${state} \n device_id: ${device_id} \n code_verifier: ${codeVerifier} \n storedState: ${storedState}`,
     );
     if (state !== storedState) {
       logToBackend("State mismatch: Possible CSRF attack", "ERROR");
