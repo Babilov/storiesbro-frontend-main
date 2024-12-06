@@ -108,6 +108,7 @@ const CreativessBeforeEnter = () => {
           codeChallenge,
           codeChallengeMethod: "S256",
           scope: "email",
+          responseMode: VKID.ConfigResponseMode.Callback,
         });
 
         const oneTap = new VKID.OneTap();
