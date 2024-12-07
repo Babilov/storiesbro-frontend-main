@@ -79,6 +79,7 @@ const CreativessBeforeEnter = () => {
     (async () => {
       try {
         const { codeVerifier, codeChallenge } = await generatePKCEPair();
+        logToBackend(`CODE CHALLENGE!!!!!!!!!!! ${codeChallenge}`);
         sessionStorage.setItem("code_verifier", codeChallenge);
 
         const state = generateState();
