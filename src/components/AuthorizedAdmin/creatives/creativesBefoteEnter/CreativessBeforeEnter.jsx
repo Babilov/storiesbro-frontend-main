@@ -7,6 +7,7 @@ import axios from "axios";
 const CreativessBeforeEnter = () => {
   const [error, setError] = useState(false);
   const navigate = useNavigate();
+  const [codeChallenge, setCodeChallenge] = useState("");
 
   const logToBackend = (message, level = "INFO") => {
     axios
@@ -14,30 +15,30 @@ const CreativessBeforeEnter = () => {
       .catch(console.error);
   };
   /*
-        const generatePKCEPair = async () => {
-          const randomString = (length = 128) => {
-            const chars =
-              "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~";
-            return Array.from({ length }, () =>
-              chars.charAt(Math.floor(Math.random() * chars.length)),
-            ).join("");
+          const generatePKCEPair = async () => {
+            const randomString = (length = 128) => {
+              const chars =
+                "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~";
+              return Array.from({ length }, () =>
+                chars.charAt(Math.floor(Math.random() * chars.length)),
+              ).join("");
+            };
+            const codeVerifier = randomString();
+            const encoder = new TextEncoder();
+            const hashBuffer = await crypto.subtle.digest(
+              "SHA-256",
+              encoder.encode(codeVerifier),
+            );
+            const codeChallenge = btoa(
+              String.fromCharCode(...new Uint8Array(hashBuffer)),
+            )
+              .replace(/=/g, "")
+              .replace(/\+/g, "-")
+              .replace(/\//g, "_");
+        
+            return { codeVerifier, codeChallenge };
           };
-          const codeVerifier = randomString();
-          const encoder = new TextEncoder();
-          const hashBuffer = await crypto.subtle.digest(
-            "SHA-256",
-            encoder.encode(codeVerifier),
-          );
-          const codeChallenge = btoa(
-            String.fromCharCode(...new Uint8Array(hashBuffer)),
-          )
-            .replace(/=/g, "")
-            .replace(/\+/g, "-")
-            .replace(/\//g, "_");
-      
-          return { codeVerifier, codeChallenge };
-        };
-      */
+        */
   const generateState = () =>
     Math.random().toString(36).substring(2) + Date.now();
 
@@ -73,7 +74,7 @@ const CreativessBeforeEnter = () => {
     const codeVerifier = sessionStorage.getItem("code_verifier");
     const storedState = sessionStorage.getItem("state");
     logToBackend(
-      `\ncode: ${code} \n state: ${state} \n device_id: ${device_id} \n code_verifier: ${codeVerifier}`,
+      `\ncode: ${code} \n state: ${state} \n device_id: ${device_id} \n code_verifier: ${codeChallenge}`,
     );
     if (state !== storedState) {
       logToBackend("State mismatch: Possible CSRF attack", "ERROR");
@@ -106,6 +107,7 @@ const CreativessBeforeEnter = () => {
       try {
         const { codeVerifier, codeChallenge } = await generatePKCEPair();
         logToBackend(`CODE CHALLENGE!!!!!!!!!!! ${codeChallenge}`);
+        setCodeChallenge(codeChallenge);
         sessionStorage.setItem("code_verifier", codeChallenge);
 
         const state = generateState();
