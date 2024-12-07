@@ -56,7 +56,7 @@ const CreativessBeforeEnter = () => {
     }
     axios
       .get(
-        `/accounts/vk/login/callback/?code=${code}&state=${state}&device_id=${device_id}`,
+        `/accounts/vk/login/callback/?code=${code}&state=${state}&device_id=${device_id}&code_verifier=${codeVerifier}`,
       )
       .then(() => {
         logToBackend(
