@@ -54,11 +54,17 @@ const CreativessBeforeEnter = () => {
       setError(true);
       return;
     }
-    // тест
+
     axios
-      .get(`/accounts/vk/login/callback/?code=${code}&state=${state}`)
+      .get(
+        `/accounts/vk/login/callback/?code=${code}&state=${state}&device_id=${device_id}`,
+      )
       .then(() => {
-        logToBackend("Tokens successfully exchanged.", "INFO");
+        logToBackend(
+          `Tokens successfully exchanged. 
+ code: ${code} \n state: ${state} \n device_id: ${device_id}`,
+          "INFO",
+        );
         navigate("/admin");
       })
       .catch((err) => {
@@ -80,7 +86,7 @@ const CreativessBeforeEnter = () => {
         sessionStorage.setItem("state", state);
 
         VKID.Config.init({
-          app: "51786441",
+          app: 51786441,
           redirectUrl: "https://storisbro.com/accounts/vk/login/callback/",
           state,
           codeChallenge,
