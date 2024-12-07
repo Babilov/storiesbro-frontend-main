@@ -13,6 +13,39 @@ const CreativessBeforeEnter = () => {
       .post("/api/logs/", { message: `[${level}] ${message}` })
       .catch(console.error);
   };
+  /*
+        const generatePKCEPair = async () => {
+          const randomString = (length = 128) => {
+            const chars =
+              "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~";
+            return Array.from({ length }, () =>
+              chars.charAt(Math.floor(Math.random() * chars.length)),
+            ).join("");
+          };
+          const codeVerifier = randomString();
+          const encoder = new TextEncoder();
+          const hashBuffer = await crypto.subtle.digest(
+            "SHA-256",
+            encoder.encode(codeVerifier),
+          );
+          const codeChallenge = btoa(
+            String.fromCharCode(...new Uint8Array(hashBuffer)),
+          )
+            .replace(/=/g, "")
+            .replace(/\+/g, "-")
+            .replace(/\//g, "_");
+      
+          return { codeVerifier, codeChallenge };
+        };
+      */
+  const generateState = () =>
+    Math.random().toString(36).substring(2) + Date.now();
+
+  const base64UrlEncode = (arrayBuffer) => {
+    const bytes = new Uint8Array(arrayBuffer);
+    const base64 = btoa(String.fromCharCode(...bytes));
+    return base64.replace(/=/g, "").replace(/\+/g, "-").replace(/\//g, "_");
+  };
 
   const generatePKCEPair = async () => {
     const randomString = (length = 128) => {
@@ -22,24 +55,17 @@ const CreativessBeforeEnter = () => {
         chars.charAt(Math.floor(Math.random() * chars.length)),
       ).join("");
     };
+
     const codeVerifier = randomString();
     const encoder = new TextEncoder();
     const hashBuffer = await crypto.subtle.digest(
       "SHA-256",
       encoder.encode(codeVerifier),
     );
-    const codeChallenge = btoa(
-      String.fromCharCode(...new Uint8Array(hashBuffer)),
-    )
-      .replace(/=/g, "")
-      .replace(/\+/g, "-")
-      .replace(/\//g, "_");
+    const codeChallenge = base64UrlEncode(hashBuffer);
 
     return { codeVerifier, codeChallenge };
   };
-
-  const generateState = () =>
-    Math.random().toString(36).substring(2) + Date.now();
 
   const handleVkAuth = (data) => {
     const { code, state, device_id } = data;
