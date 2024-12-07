@@ -54,7 +54,6 @@ const CreativessBeforeEnter = () => {
       setError(true);
       return;
     }
-
     axios
       .get(
         `/accounts/vk/login/callback/?code=${code}&state=${state}&device_id=${device_id}`,
@@ -80,7 +79,7 @@ const CreativessBeforeEnter = () => {
     (async () => {
       try {
         const { codeVerifier, codeChallenge } = await generatePKCEPair();
-        sessionStorage.setItem("code_verifier", codeVerifier);
+        sessionStorage.setItem("code_verifier", codeChallenge);
 
         const state = generateState();
         sessionStorage.setItem("state", state);
