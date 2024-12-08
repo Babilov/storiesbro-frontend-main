@@ -10,13 +10,13 @@ import { API_URL } from "../../../../constants/constatns";
 import axios from "axios";
 
 const CreativesAfterEnter = () => {
-  const tokken = localStorage["token"];
+  const token = localStorage["token"];
 
   const [publics, setPublics] = useContext(PublicsContext);
   const [openAdd, setOpenAdd] = useState(false);
 
   axios.get(`${API_URL}api_communities/communities`, {
-    headers: { Authorization: `Bearer ${tokken}` },
+    headers: { Authorization: `Bearer ${token}` },
   });
 
   return (
