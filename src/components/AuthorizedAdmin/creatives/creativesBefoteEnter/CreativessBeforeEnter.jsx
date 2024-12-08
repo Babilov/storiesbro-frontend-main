@@ -14,30 +14,30 @@ const CreativessBeforeEnter = () => {
       .catch(console.error);
   };
   /*
-                    const generatePKCEPair = async () => {
-                      const randomString = (length = 128) => {
-                        const chars =
-                          "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~";
-                        return Array.from({ length }, () =>
-                          chars.charAt(Math.floor(Math.random() * chars.length)),
-                        ).join("");
-                      };
-                      const codeVerifier = randomString();
-                      const encoder = new TextEncoder();
-                      const hashBuffer = await crypto.subtle.digest(
-                        "SHA-256",
-                        encoder.encode(codeVerifier),
-                      );
-                      const codeChallenge = btoa(
-                        String.fromCharCode(...new Uint8Array(hashBuffer)),
-                      )
-                        .replace(/=/g, "")
-                        .replace(/\+/g, "-")
-                        .replace(/\//g, "_");
-    
-                      return { codeVerifier, codeChallenge };
-                    };
-                  */
+                              const generatePKCEPair = async () => {
+                                const randomString = (length = 128) => {
+                                  const chars =
+                                    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~";
+                                  return Array.from({ length }, () =>
+                                    chars.charAt(Math.floor(Math.random() * chars.length)),
+                                  ).join("");
+                                };
+                                const codeVerifier = randomString();
+                                const encoder = new TextEncoder();
+                                const hashBuffer = await crypto.subtle.digest(
+                                  "SHA-256",
+                                  encoder.encode(codeVerifier),
+                                );
+                                const codeChallenge = btoa(
+                                  String.fromCharCode(...new Uint8Array(hashBuffer)),
+                                )
+                                  .replace(/=/g, "")
+                                  .replace(/\+/g, "-")
+                                  .replace(/\//g, "_");
+              
+                                return { codeVerifier, codeChallenge };
+                              };
+                            */
   const generateState = () =>
     Math.random().toString(36).substring(2) + Date.now();
 
@@ -122,7 +122,7 @@ const CreativessBeforeEnter = () => {
           state,
           codeChallenge,
           codeChallengeMethod: "S256",
-          scope: "email",
+          scope: "groups stories stats",
           responseMode: VKID.ConfigResponseMode.Callback,
         });
 
