@@ -14,30 +14,30 @@ const CreativessBeforeEnter = () => {
       .catch(console.error);
   };
   /*
-                  const generatePKCEPair = async () => {
-                    const randomString = (length = 128) => {
-                      const chars =
-                        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~";
-                      return Array.from({ length }, () =>
-                        chars.charAt(Math.floor(Math.random() * chars.length)),
-                      ).join("");
+                    const generatePKCEPair = async () => {
+                      const randomString = (length = 128) => {
+                        const chars =
+                          "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~";
+                        return Array.from({ length }, () =>
+                          chars.charAt(Math.floor(Math.random() * chars.length)),
+                        ).join("");
+                      };
+                      const codeVerifier = randomString();
+                      const encoder = new TextEncoder();
+                      const hashBuffer = await crypto.subtle.digest(
+                        "SHA-256",
+                        encoder.encode(codeVerifier),
+                      );
+                      const codeChallenge = btoa(
+                        String.fromCharCode(...new Uint8Array(hashBuffer)),
+                      )
+                        .replace(/=/g, "")
+                        .replace(/\+/g, "-")
+                        .replace(/\//g, "_");
+    
+                      return { codeVerifier, codeChallenge };
                     };
-                    const codeVerifier = randomString();
-                    const encoder = new TextEncoder();
-                    const hashBuffer = await crypto.subtle.digest(
-                      "SHA-256",
-                      encoder.encode(codeVerifier),
-                    );
-                    const codeChallenge = btoa(
-                      String.fromCharCode(...new Uint8Array(hashBuffer)),
-                    )
-                      .replace(/=/g, "")
-                      .replace(/\+/g, "-")
-                      .replace(/\//g, "_");
-  
-                    return { codeVerifier, codeChallenge };
-                  };
-                */
+                  */
   const generateState = () =>
     Math.random().toString(36).substring(2) + Date.now();
 
@@ -140,12 +140,19 @@ const CreativessBeforeEnter = () => {
   }, []);
 
   return (
-    <Box>
-      <Typography variant="h4">Вход через VK ID</Typography>
-      <Typography variant="body2">
-        Войдите через VK ID для продолжения
+    <Box className="creatives">
+      <Typography variant="h4" className="creatives__title">
+        Мои сообщества
       </Typography>
-      <Box id="VkIdSdkOneTap" />
+      <Typography variant="body2" className="creatives__text">
+        Вы не можете добавить сообщества, так как ваш аккаунт ВКонтакте не
+        подключен
+      </Typography>
+      <Box
+        sx={{ width: { xs: "50%", sm: "35%", md: "25%" }, m: "0 auto", mt: 2 }}
+      >
+        <Box id="VkIdSdkOneTap" sx={{ mt: 2 }}></Box>
+      </Box>
     </Box>
   );
 };
