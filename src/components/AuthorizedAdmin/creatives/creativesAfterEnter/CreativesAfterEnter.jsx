@@ -15,9 +15,9 @@ const CreativesAfterEnter = () => {
   const [publics, setPublics] = useContext(PublicsContext);
   const [openAdd, setOpenAdd] = useState(false);
 
-  axios.get(`${API_URL}api_communities/communities`, {
-    headers: { Authorization: `Bearer ${token}` },
-  });
+  /*axios.get(`${API_URL}api_communities/communities`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });*/
 
   return (
     <Grid item xs={12}>
