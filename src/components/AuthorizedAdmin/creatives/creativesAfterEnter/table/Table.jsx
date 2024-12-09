@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import DeletePublicModal from "./modals/DeletePublicModal";
 import { get_list } from "../../../../../api/publics";
 import { Tooltips } from "../../../../Onboardings/Tooltips";
+import logToBackend from "../../../../../utils/logs";
 
 const Table = ({ publics, setPublics }) => {
   const handleDelete = (id) => {
@@ -76,6 +77,7 @@ const Table = ({ publics, setPublics }) => {
           <Grid item xs={4}></Grid>
         </Grid>
         <Divider />
+        {logToBackend(publics)}
         {publics.map((publicObj) => (
           <Grid
             container
