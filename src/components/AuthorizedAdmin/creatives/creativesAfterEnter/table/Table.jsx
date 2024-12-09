@@ -76,63 +76,64 @@ const Table = ({ publics, setPublics }) => {
           <Grid item xs={4}></Grid>
         </Grid>
         <Divider />
-        {publics.map((publicObj) => (
-          <Grid
-            container
-            key={[publicObj["id"]]}
-            className="adminPublics"
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              borderBottom: "1px solid #CDCDCD",
-              pt: 1,
-              pb: 1,
-            }}
-          >
+        {publics &&
+          publics.map((publicObj) => (
             <Grid
-              item
-              xs={3}
-              sx={{ display: "flex", justifyContent: "center" }}
-            >
-              <Box component="img" alt="img" src={publicObj["image"]} />
-            </Grid>
-
-            <Grid item xs={3}>
-              <Typography>{publicObj["name"]}</Typography>
-            </Grid>
-
-            <Grid item md={2}>
-              <Typography
-                className="mdSizeText"
-                sx={{
-                  color:
-                    publicObj["status_of_check"] === 2
-                      ? "#4CD640"
-                      : publicObj["status_of_check"] === 3
-                      ? "#D25D48"
-                      : "black",
-                }}
-              >
-                {publicObj["status_of_check"] === 1
-                  ? "Ждет проверку"
-                  : publicObj["status_of_check"] === 2
-                  ? "Одобрено"
-                  : publicObj["status_of_check"] === 3
-                  ? "Отклонено"
-                  : publicObj["status_of_check"]}
-              </Typography>
-            </Grid>
-
-            <Grid
-              item
-              xs={4}
+              container
+              key={[publicObj["id"]]}
+              className="adminPublics"
               sx={{
                 display: "flex",
                 alignItems: "center",
-                justifyContent: "center",
+                borderBottom: "1px solid #CDCDCD",
+                pt: 1,
+                pb: 1,
               }}
             >
-              {/* <Link
+              <Grid
+                item
+                xs={3}
+                sx={{ display: "flex", justifyContent: "center" }}
+              >
+                <Box component="img" alt="img" src={publicObj["image"]} />
+              </Grid>
+
+              <Grid item xs={3}>
+                <Typography>{publicObj["name"]}</Typography>
+              </Grid>
+
+              <Grid item md={2}>
+                <Typography
+                  className="mdSizeText"
+                  sx={{
+                    color:
+                      publicObj["status_of_check"] === 2
+                        ? "#4CD640"
+                        : publicObj["status_of_check"] === 3
+                          ? "#D25D48"
+                          : "black",
+                  }}
+                >
+                  {publicObj["status_of_check"] === 1
+                    ? "Ждет проверку"
+                    : publicObj["status_of_check"] === 2
+                      ? "Одобрено"
+                      : publicObj["status_of_check"] === 3
+                        ? "Отклонено"
+                        : publicObj["status_of_check"]}
+                </Typography>
+              </Grid>
+
+              <Grid
+                item
+                xs={4}
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                {/* <Link
                 to={`/publics/setting/${publicObj["id"]}`}
                 sx={{
                   m: 2,
@@ -143,20 +144,20 @@ const Table = ({ publics, setPublics }) => {
                 Настройки
               </Link>
               <Typography>|</Typography> */}
-              <Typography
-                className="delete"
-                sx={{
-                  cursor: "pointer",
+                <Typography
+                  className="delete"
+                  sx={{
+                    cursor: "pointer",
 
-                  ":hover": { color: "#E37E31" },
-                }}
-                onClick={() => handleDelete(publicObj["id"])}
-              >
-                Удалить
-              </Typography>
+                    ":hover": { color: "#E37E31" },
+                  }}
+                  onClick={() => handleDelete(publicObj["id"])}
+                >
+                  Удалить
+                </Typography>
+              </Grid>
             </Grid>
-          </Grid>
-        ))}
+          ))}
       </Box>
 
       <Box sx={{ display: { xs: "block", md: "none" } }}>
@@ -190,8 +191,8 @@ const Table = ({ publics, setPublics }) => {
                     publicObj["status"] === "Активен"
                       ? "green"
                       : publicObj["status"] === "Отклонён"
-                      ? "red"
-                      : "black",
+                        ? "red"
+                        : "black",
                 }}
               >
                 {publicObj["status"]}
