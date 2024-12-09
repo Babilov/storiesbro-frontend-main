@@ -70,22 +70,22 @@ function App() {
   const navigate = useNavigate();
 
   /*useEffect(() => {
-              // Функция для получения сообществ с бэкенда
-              const fetchPublics = async () => {
-                try {
-                  const response = await axios.get(
-                    `${API_URL}api_communities/communities`,
-                  );
-                  setAllPublics(response.data);
-                } catch (error) {
-                  console.error("Ошибка при загрузке сообществ", error);
-                }
-              };
-          
-              // Вызов функции для загрузки сообществ при монтировании компонента
-              fetchPublics();
-            }, [userId]); // Пустой массив зависимостей означает, что эффект будет выполнен только один раз при монтировании
-          */
+                  // Функция для получения сообществ с бэкенда
+                  const fetchPublics = async () => {
+                    try {
+                      const response = await axios.get(
+                        `${API_URL}api_communities/communities`,
+                      );
+                      setAllPublics(response.data);
+                    } catch (error) {
+                      console.error("Ошибка при загрузке сообществ", error);
+                    }
+                  };
+              
+                  // Вызов функции для загрузки сообществ при монтировании компонента
+                  fetchPublics();
+                }, [userId]); // Пустой массив зависимостей означает, что эффект будет выполнен только один раз при монтировании
+              */
 
   useEffect(() => {
     // Функция для получения сообществ с бэкенда
@@ -93,6 +93,11 @@ function App() {
       try {
         const response = await axios.get(
           `https://storisbro.com/communities/vk/groups`,
+          {
+            headers: {
+              Accept: "application/json",
+            },
+          },
         );
         setPublics(response.data);
       } catch (error) {
@@ -105,24 +110,24 @@ function App() {
   }, [userId]); // Пустой массив зависимостей означает, что эффект будет выполнен только один раз при монтировании
 
   /*
-          useEffect(() => {
-            // Функция для получения креативов с бэкенда
-            const fetchCreativesAll = async () => {
-              try {
-                const response = await axios.get(
-                  `${API_URL}api_creatives/own_all_creatives/${userId}`,
-                );
-                setCreatives(response.data.filter((item) => item.archive === false));
-                setArhive(response.data.filter((item) => item.archive === true));
-              } catch (error) {
-                console.error("Ошибка при загрузке креативов", error);
-              }
-            };
-        
-            // Вызов функции для загрузки сообществ при монтировании компонента
-            fetchCreativesAll();
-          }, [userId]); // Пустой массив зависимостей означает, что эффект будет выполнен только один раз при монтировании
-        */
+              useEffect(() => {
+                // Функция для получения креативов с бэкенда
+                const fetchCreativesAll = async () => {
+                  try {
+                    const response = await axios.get(
+                      `${API_URL}api_creatives/own_all_creatives/${userId}`,
+                    );
+                    setCreatives(response.data.filter((item) => item.archive === false));
+                    setArhive(response.data.filter((item) => item.archive === true));
+                  } catch (error) {
+                    console.error("Ошибка при загрузке креативов", error);
+                  }
+                };
+            
+                // Вызов функции для загрузки сообществ при монтировании компонента
+                fetchCreativesAll();
+              }, [userId]); // Пустой массив зависимостей означает, что эффект будет выполнен только один раз при монтировании
+            */
   // автоматическая очистка кэша
 
   if (localStorage.getItem("token")) {
