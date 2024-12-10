@@ -10,6 +10,7 @@ import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { setTokken } from "../../../store/userReducer";
 import ErrorMessage from "../errors/ErrorMessage";
+import logToBackend from "../../../utils/logs";
 
 const REGISTER_LINK = `${API_URL}register/`;
 
@@ -49,10 +50,13 @@ const RegistrationForm = ({
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailPattern.test(email);
   };
-
+  //тест
   const checkIsEmail = async (email) => {
     try {
-      const response = await axios.get(`${API_URL}check_email/${email}/`);
+      const response = await axios.get(
+        `https://storisbro.com/api/check_email/${email}`,
+      );
+      logToBackend(`URL: https://storisbro.com/api/check_email/${email}`);
       if (response.data.email) {
         setError(true);
         setErrorMessage("Пользователь с такой почтой уже зарегестрирован!");
