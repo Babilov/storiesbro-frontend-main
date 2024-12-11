@@ -193,14 +193,14 @@ const Table = ({ publics, setPublics }) => {
                   bottom: 2,
                   fontSize: "12px",
                   /*
-                                                        color:
-                                                          publicObj["status"] === "Активен"
-                                                            ? "green"
-                                                            : publicObj["status"] === "Отклонён"
-                                                              ? "red"
-                                                              : "black",
-                                      
-                                                      */
+                                                                          color:
+                                                                            publicObj["status"] === "Активен"
+                                                                              ? "green"
+                                                                              : publicObj["status"] === "Отклонён"
+                                                                                ? "red"
+                                                                                : "black",
+                                                        
+                                                                        */
                 }}
               >
                 Ждет проверку
@@ -211,6 +211,8 @@ const Table = ({ publics, setPublics }) => {
                 to={`/publics/setting/${publicObj["id"]}`}
                 sx={{
                   fontSize: "12px",
+                  fontWeight: 500,
+                  textDecoration: "none",
                   m: 2,
                   cursor: "pointer",
                 }}
