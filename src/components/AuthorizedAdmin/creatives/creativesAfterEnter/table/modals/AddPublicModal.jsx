@@ -26,26 +26,26 @@ const AddPublicModal = ({ open, setOpen, publics }) => {
 
   useEffect(() => {
     setListAvailablePublics(publics);
-    console.log(publics);
+    // console.log(publics);
   }, [open]);
 
   const user_id = localStorage.getItem("id");
   /*
-                    useEffect(() => {
-                      const AvailablePublicsList = async () => {
-                        try {
-                          const response = await axios.get(
-                            `${API_URL}api_communities/available_publics/${user_id}`
-                          );
-                          SetListAvailablePublics(response.data["list_publics"]);
-                        } catch (error) {
-                          console.error("Ошибка при загрузке креативов", error);
-                        }
-                      };
-                  
-                      AvailablePublicsList();
-                    }, [user_id]);
-                  */
+                      useEffect(() => {
+                        const AvailablePublicsList = async () => {
+                          try {
+                            const response = await axios.get(
+                              `${API_URL}api_communities/available_publics/${user_id}`
+                            );
+                            SetListAvailablePublics(response.data["list_publics"]);
+                          } catch (error) {
+                            console.error("Ошибка при загрузке креативов", error);
+                          }
+                        };
+                    
+                        AvailablePublicsList();
+                      }, [user_id]);
+                    */
   const handleClick = () => {
     if (error) {
       setInputValue("*Походу ошибка в ссылке - такого сообщества нет");
@@ -128,6 +128,7 @@ const AddPublicModal = ({ open, setOpen, publics }) => {
                 marginRight: "10px",
               }}
             >
+              {console.log(item)}
               {item}
               <Checkbox style={{ color: "black" }} />
             </Box>
