@@ -108,20 +108,8 @@ const Table = ({ publics, setPublics }) => {
             </Grid>
 
             <Grid item md={2}>
-              <Typography
-                className="mdSizeText"
-                /*                                                                                                                                                                 */
-              >
-                Ждет проверку
-                {/*
-                {publicObj["status_of_check"] === 1
-                  ? "Ждет проверку"
-                  : publicObj["status_of_check"] === 2
-                    ? "Одобрено"
-                    : publicObj["status_of_check"] === 3
-                      ? "Отклонено"
-                      : publicObj["status_of_check"]}
-                      */}
+              <Typography className="mdSizeText" sx={{ color: "#4CD640" }}>
+                Активен
               </Typography>
             </Grid>
 
@@ -192,18 +180,10 @@ const Table = ({ publics, setPublics }) => {
                   right: 10,
                   bottom: 2,
                   fontSize: "12px",
-                  /*
-                                                                                                              color:
-                                                                                                                publicObj["status"] === "Активен"
-                                                                                                                  ? "green"
-                                                                                                                  : publicObj["status"] === "Отклонён"
-                                                                                                                    ? "red"
-                                                                                                                    : "black",
-                                                                                            
-                                                                                                            */
+                  color: "#4CD640",
                 }}
               >
-                Ждет проверку
+                Активен
               </Typography>
             </Box>
             <Box className="spaceAround">
@@ -211,7 +191,7 @@ const Table = ({ publics, setPublics }) => {
                 to={`/publics/setting/${publicObj["id"]}`}
                 style={{
                   fontSize: "12px",
-                  fontWeight: 500,
+                  fontWeight: 400,
                   textDecoration: "none",
                   margin: 2,
                   cursor: "pointer",
