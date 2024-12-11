@@ -31,21 +31,21 @@ const AddPublicModal = ({ open, setOpen, publics }) => {
 
   const user_id = localStorage.getItem("id");
   /*
-                                              useEffect(() => {
-                                                const AvailablePublicsList = async () => {
-                                                  try {
-                                                    const response = await axios.get(
-                                                      `${API_URL}api_communities/available_publics/${user_id}`
-                                                    );
-                                                    SetListAvailablePublics(response.data["list_publics"]);
-                                                  } catch (error) {
-                                                    console.error("Ошибка при загрузке креативов", error);
-                                                  }
-                                                };
-                                            
-                                                AvailablePublicsList();
-                                              }, [user_id]);
-                                            */
+                                                useEffect(() => {
+                                                  const AvailablePublicsList = async () => {
+                                                    try {
+                                                      const response = await axios.get(
+                                                        `${API_URL}api_communities/available_publics/${user_id}`
+                                                      );
+                                                      SetListAvailablePublics(response.data["list_publics"]);
+                                                    } catch (error) {
+                                                      console.error("Ошибка при загрузке креативов", error);
+                                                    }
+                                                  };
+                                              
+                                                  AvailablePublicsList();
+                                                }, [user_id]);
+                                              */
   const handleClick = () => {
     if (error) {
       setInputValue("*Походу ошибка в ссылке - такого сообщества нет");
@@ -133,7 +133,7 @@ const AddPublicModal = ({ open, setOpen, publics }) => {
                   src={item.image}
                   sx={{ height: "30px", width: "30px" }}
                 />
-                <Typography>{item.name}</Typography>
+                <Typography sx={{ ml: "50px" }}>{item.name}</Typography>
               </Box>
               <Checkbox style={{ color: "black" }} />
             </Box>
