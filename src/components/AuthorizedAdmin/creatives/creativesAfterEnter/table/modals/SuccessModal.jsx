@@ -8,12 +8,13 @@ const SuccessModal = ({ open, setOpen }) => {
   return (
     <>
       <MyModal
-        width="100%"
+        width="50%"
         isFormOpen={open}
         setIsFormOpen={() => setOpen(false)}
       >
         <Typography className="mdSizeText" sx={{ textAlign: "center", mb: 2 }}>
-        Отлично, скоро проверим Ваше сообщество и дадим ответ{")"} Настройте уведомления, чтобы не пропустить ответ и другие важные события
+          Отлично, скоро проверим Ваше сообщество и дадим ответ{")"} Настройте
+          уведомления, чтобы не пропустить ответ и другие важные события
         </Typography>
         <Box sx={{ width: "50%", m: "0 auto" }}>
           <MyButton
