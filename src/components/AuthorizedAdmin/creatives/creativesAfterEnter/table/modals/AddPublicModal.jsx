@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import MyModal from "../../../../../UI/modals/MyModal";
 import MyInput from "../../../../../UI/input/MyInput";
-import { Box, Checkbox, Link } from "@mui/material";
+import { Box, Checkbox, Link, Typography } from "@mui/material";
 import MyButton from "../../../../../UI/buttons/MyButton";
 import SuccessModal from "./SuccessModal";
 import NoPermissionModal from "./NoPermissionModal";
@@ -31,21 +31,21 @@ const AddPublicModal = ({ open, setOpen, publics }) => {
 
   const user_id = localStorage.getItem("id");
   /*
-                      useEffect(() => {
-                        const AvailablePublicsList = async () => {
-                          try {
-                            const response = await axios.get(
-                              `${API_URL}api_communities/available_publics/${user_id}`
-                            );
-                            SetListAvailablePublics(response.data["list_publics"]);
-                          } catch (error) {
-                            console.error("Ошибка при загрузке креативов", error);
-                          }
-                        };
-                    
-                        AvailablePublicsList();
-                      }, [user_id]);
-                    */
+                          useEffect(() => {
+                            const AvailablePublicsList = async () => {
+                              try {
+                                const response = await axios.get(
+                                  `${API_URL}api_communities/available_publics/${user_id}`
+                                );
+                                SetListAvailablePublics(response.data["list_publics"]);
+                              } catch (error) {
+                                console.error("Ошибка при загрузке креативов", error);
+                              }
+                            };
+                        
+                            AvailablePublicsList();
+                          }, [user_id]);
+                        */
   const handleClick = () => {
     if (error) {
       setInputValue("*Походу ошибка в ссылке - такого сообщества нет");
@@ -129,7 +129,7 @@ const AddPublicModal = ({ open, setOpen, publics }) => {
               }}
             >
               {console.log(item)}
-              {item}
+              <Typography>{item.name}</Typography>
               <Checkbox style={{ color: "black" }} />
             </Box>
           ))}
