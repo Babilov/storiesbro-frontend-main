@@ -106,6 +106,7 @@ const Table = ({ publics, setPublics }) => {
             <Grid item md={2}>
               <Typography
                 className="mdSizeText"
+                /*
                 sx={{
                   color:
                     publicObj["status_of_check"] === 2
@@ -114,7 +115,10 @@ const Table = ({ publics, setPublics }) => {
                         ? "#D25D48"
                         : "black",
                 }}
+                */
               >
+                Ждет проверку
+                {/*
                 {publicObj["status_of_check"] === 1
                   ? "Ждет проверку"
                   : publicObj["status_of_check"] === 2
@@ -122,6 +126,7 @@ const Table = ({ publics, setPublics }) => {
                     : publicObj["status_of_check"] === 3
                       ? "Отклонено"
                       : publicObj["status_of_check"]}
+                      */}
               </Typography>
             </Grid>
 
