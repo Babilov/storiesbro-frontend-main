@@ -110,16 +110,7 @@ const Table = ({ publics, setPublics }) => {
             <Grid item md={2}>
               <Typography
                 className="mdSizeText"
-                /*
-                                                                                                                sx={{
-                                                                                                                  color:
-                                                                                                                    publicObj["status_of_check"] === 2
-                                                                                                                      ? "#4CD640"
-                                                                                                                      : publicObj["status_of_check"] === 3
-                                                                                                                        ? "#D25D48"
-                                                                                                                        : "black",
-                                                                                                                }}
-                                                                                                                */
+                /*                                                                                                                                                                 */
               >
                 Ждет проверку
                 {/*
@@ -181,14 +172,18 @@ const Table = ({ publics, setPublics }) => {
               }}
             >
               <Box sx={{ display: "flex" }}>
-                <Box
-                  component="img"
+                <Avatar
                   alt="avatar"
                   src={publicObj["image"]}
-                  sx={{ m: 2 }}
+                  sx={{
+                    m: 2,
+                    borderRadius: "50%",
+                    height: "70px",
+                    width: "70px",
+                  }}
                 />
                 <Typography sx={{ fontSize: "12px", fontWeight: 600, mt: 2 }}>
-                  {publicObj["title"]}
+                  {publicObj["name"]}
                 </Typography>
               </Box>
               <Typography
@@ -197,19 +192,22 @@ const Table = ({ publics, setPublics }) => {
                   right: 10,
                   bottom: 2,
                   fontSize: "12px",
-                  color:
-                    publicObj["status"] === "Активен"
-                      ? "green"
-                      : publicObj["status"] === "Отклонён"
-                        ? "red"
-                        : "black",
+                  /*
+                                      color:
+                                        publicObj["status"] === "Активен"
+                                          ? "green"
+                                          : publicObj["status"] === "Отклонён"
+                                            ? "red"
+                                            : "black",
+                    
+                                    */
                 }}
               >
-                {publicObj["status"]}
+                Ждет проверку
               </Typography>
             </Box>
-            <Box className="spaceAround" sx={{}}>
-              {/* <Link
+            <Box className="spaceAround">
+              <Link
                 to={`/publics/setting/${publicObj["id"]}`}
                 sx={{
                   m: 2,
@@ -218,7 +216,7 @@ const Table = ({ publics, setPublics }) => {
                 className="menuItem"
               >
                 Настройки
-              </Link> */}
+              </Link>
               <Typography sx={{ color: "#CBCBCB", m: 2 }}>|</Typography>
               <Typography
                 sx={{ fontSize: "12px", m: 2, cursor: "pointer" }}
