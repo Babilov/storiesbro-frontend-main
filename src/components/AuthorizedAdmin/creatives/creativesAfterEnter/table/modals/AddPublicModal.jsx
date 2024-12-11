@@ -23,29 +23,29 @@ const AddPublicModal = ({ open, setOpen, publics }) => {
   const [noPermissionOpen, setNoPermissionOpen] = useState(false);
 
   const [listAvailablePublics, setListAvailablePublics] = useState([]);
-  console.log(publics);
+
   useEffect(() => {
     setListAvailablePublics(publics);
     console.log(publics);
-  }, []);
+  }, [open, setOpen]);
 
   const user_id = localStorage.getItem("id");
   /*
-              useEffect(() => {
-                const AvailablePublicsList = async () => {
-                  try {
-                    const response = await axios.get(
-                      `${API_URL}api_communities/available_publics/${user_id}`
-                    );
-                    SetListAvailablePublics(response.data["list_publics"]);
-                  } catch (error) {
-                    console.error("Ошибка при загрузке креативов", error);
-                  }
-                };
-            
-                AvailablePublicsList();
-              }, [user_id]);
-            */
+                  useEffect(() => {
+                    const AvailablePublicsList = async () => {
+                      try {
+                        const response = await axios.get(
+                          `${API_URL}api_communities/available_publics/${user_id}`
+                        );
+                        SetListAvailablePublics(response.data["list_publics"]);
+                      } catch (error) {
+                        console.error("Ошибка при загрузке креативов", error);
+                      }
+                    };
+                
+                    AvailablePublicsList();
+                  }, [user_id]);
+                */
   const handleClick = () => {
     if (error) {
       setInputValue("*Походу ошибка в ссылке - такого сообщества нет");
