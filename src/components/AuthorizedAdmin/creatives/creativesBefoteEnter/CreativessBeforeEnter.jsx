@@ -10,30 +10,30 @@ const CreativessBeforeEnter = () => {
   const navigate = useNavigate();
 
   /*
-                                            const generatePKCEPair = async () => {
-                                              const randomString = (length = 128) => {
-                                                const chars =
-                                                  "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~";
-                                                return Array.from({ length }, () =>
-                                                  chars.charAt(Math.floor(Math.random() * chars.length)),
-                                                ).join("");
-                                              };
-                                              const codeVerifier = randomString();
-                                              const encoder = new TextEncoder();
-                                              const hashBuffer = await crypto.subtle.digest(
-                                                "SHA-256",
-                                                encoder.encode(codeVerifier),
-                                              );
-                                              const codeChallenge = btoa(
-                                                String.fromCharCode(...new Uint8Array(hashBuffer)),
-                                              )
-                                                .replace(/=/g, "")
-                                                .replace(/\+/g, "-")
-                                                .replace(/\//g, "_");
-      
-                                              return { codeVerifier, codeChallenge };
-                                            };
-                                          */
+                                                        const generatePKCEPair = async () => {
+                                                          const randomString = (length = 128) => {
+                                                            const chars =
+                                                              "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~";
+                                                            return Array.from({ length }, () =>
+                                                              chars.charAt(Math.floor(Math.random() * chars.length)),
+                                                            ).join("");
+                                                          };
+                                                          const codeVerifier = randomString();
+                                                          const encoder = new TextEncoder();
+                                                          const hashBuffer = await crypto.subtle.digest(
+                                                            "SHA-256",
+                                                            encoder.encode(codeVerifier),
+                                                          );
+                                                          const codeChallenge = btoa(
+                                                            String.fromCharCode(...new Uint8Array(hashBuffer)),
+                                                          )
+                                                            .replace(/=/g, "")
+                                                            .replace(/\+/g, "-")
+                                                            .replace(/\//g, "_");
+                  
+                                                          return { codeVerifier, codeChallenge };
+                                                        };
+                                                      */
   const generateState = () =>
     Math.random().toString(36).substring(2) + Date.now();
 
@@ -69,9 +69,7 @@ const CreativessBeforeEnter = () => {
     const codeVerifier = sessionStorage.getItem("code_verifier");
     const codeChallenge = sessionStorage.getItem("code_challenge");
     const storedState = sessionStorage.getItem("state");
-    logToBackend(
-      `\ncode: ${code} \n state: ${state} \n device_id: ${device_id} \n code_verifier: ${codeVerifier} \n code_challenge: ${codeChallenge}`,
-    );
+
     if (state !== storedState) {
       logToBackend("State mismatch: Possible CSRF attack", "ERROR");
       setError(true);
@@ -81,12 +79,8 @@ const CreativessBeforeEnter = () => {
       .get(
         `/accounts/vk/login/callback/?code=${code}&state=${state}&device_id=${device_id}&code_verifier=${codeVerifier}`,
       )
-      .then(() => {
-        logToBackend(
-          `Tokens successfully exchanged. 
- code: ${code} \n state: ${state} \n device_id: ${device_id}`,
-          "INFO",
-        );
+      .then((res) => {
+        logToBackend(`Res Data: ${res.data}`);
         localStorage.setItem("is_authed", "true");
         window.location.reload();
       })
@@ -107,10 +101,6 @@ const CreativessBeforeEnter = () => {
         sessionStorage.setItem("code_verifier", codeVerifier);
         const state = generateState();
         sessionStorage.setItem("state", state);
-
-        logToBackend(
-          `NEW LOG! codeVerifier: ${codeVerifier} \n code_challenge: ${codeChallenge}`,
-        );
 
         VKID.Config.init({
           app: 51786441,
