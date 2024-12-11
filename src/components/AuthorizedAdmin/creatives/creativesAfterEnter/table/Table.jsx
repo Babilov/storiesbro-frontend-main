@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Divider, Grid, Typography, Box, Button } from "@mui/material";
+import { Divider, Grid, Typography, Box, Button, Avatar } from "@mui/material";
 import { Link } from "react-router-dom";
 
 import DeletePublicModal from "./modals/DeletePublicModal";
@@ -96,7 +96,11 @@ const Table = ({ publics, setPublics }) => {
               xs={3}
               sx={{ display: "flex", justifyContent: "center" }}
             >
-              <Box component="img" alt="img" src={publicObj["image"]} />
+              <Avatar
+                alt="group avatar"
+                src={publicObj["image"]}
+                sx={{ borderRadius: "50%", height: "90px", width: "90px" }}
+              />
             </Grid>
 
             <Grid item xs={3}>
@@ -107,15 +111,15 @@ const Table = ({ publics, setPublics }) => {
               <Typography
                 className="mdSizeText"
                 /*
-                sx={{
-                  color:
-                    publicObj["status_of_check"] === 2
-                      ? "#4CD640"
-                      : publicObj["status_of_check"] === 3
-                        ? "#D25D48"
-                        : "black",
-                }}
-                */
+                                                                                                                sx={{
+                                                                                                                  color:
+                                                                                                                    publicObj["status_of_check"] === 2
+                                                                                                                      ? "#4CD640"
+                                                                                                                      : publicObj["status_of_check"] === 3
+                                                                                                                        ? "#D25D48"
+                                                                                                                        : "black",
+                                                                                                                }}
+                                                                                                                */
               >
                 Ждет проверку
                 {/*
