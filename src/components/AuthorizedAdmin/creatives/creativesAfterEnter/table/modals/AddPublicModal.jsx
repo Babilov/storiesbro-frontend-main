@@ -27,25 +27,25 @@ const AddPublicModal = ({ open, setOpen, publics }) => {
   useEffect(() => {
     setListAvailablePublics(publics);
     // console.log(publics);
-  }, [open]);
+  }, [open, publics]);
 
   const user_id = localStorage.getItem("id");
   /*
-                                                useEffect(() => {
-                                                  const AvailablePublicsList = async () => {
-                                                    try {
-                                                      const response = await axios.get(
-                                                        `${API_URL}api_communities/available_publics/${user_id}`
-                                                      );
-                                                      SetListAvailablePublics(response.data["list_publics"]);
-                                                    } catch (error) {
-                                                      console.error("Ошибка при загрузке креативов", error);
-                                                    }
-                                                  };
-                                              
-                                                  AvailablePublicsList();
-                                                }, [user_id]);
-                                              */
+                                                        useEffect(() => {
+                                                          const AvailablePublicsList = async () => {
+                                                            try {
+                                                              const response = await axios.get(
+                                                                `${API_URL}api_communities/available_publics/${user_id}`
+                                                              );
+                                                              SetListAvailablePublics(response.data["list_publics"]);
+                                                            } catch (error) {
+                                                              console.error("Ошибка при загрузке креативов", error);
+                                                            }
+                                                          };
+                                                      
+                                                          AvailablePublicsList();
+                                                        }, [user_id]);
+                                                      */
   const handleClick = () => {
     if (error) {
       setInputValue("*Походу ошибка в ссылке - такого сообщества нет");
@@ -74,6 +74,10 @@ const AddPublicModal = ({ open, setOpen, publics }) => {
     setError(false);
     setInputValue("");
   };
+
+  const filteredPublics = listAvailablePublics.filter((item) =>
+    item.name.toLowerCase().includes(inputValue.toLowerCase()),
+  );
 
   return (
     <>
@@ -114,7 +118,7 @@ const AddPublicModal = ({ open, setOpen, publics }) => {
             },
           }}
         >
-          {listAvailablePublics.map((item, index) => (
+          {filteredPublics.map((item, index) => (
             <Box
               key={index}
               sx={{
