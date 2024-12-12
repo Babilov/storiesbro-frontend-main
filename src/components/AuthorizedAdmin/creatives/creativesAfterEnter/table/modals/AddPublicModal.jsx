@@ -10,6 +10,8 @@ import {
   add_public,
   add_public_with_name,
 } from "../../../../../../api/publics";
+import axios from "axios";
+import logToBackend from "../../../../../../utils/logs";
 
 const AddPublicModal = ({ open, setOpen, publics }) => {
   const [error, setError] = useState(false);
@@ -28,7 +30,7 @@ const AddPublicModal = ({ open, setOpen, publics }) => {
 
   const user_id = localStorage.getItem("id");
 
-  const handleClick = () => {
+  const handleClick = async () => {
     if (error) {
       setInputValue("*Походу ошибка в ссылке - такого сообщества нет");
     } else {
@@ -36,16 +38,16 @@ const AddPublicModal = ({ open, setOpen, publics }) => {
         setOpen(false);
         setNoPermissionOpen(true);
       } else {
-        if (inputValue.includes("https://vk.com/")) {
-          setSuccessOpen(true);
-          setOpen(false);
-          const GROUP_ID = inputValue;
-          add_public(GROUP_ID, user_id, setError);
-        } else {
-          setSuccessOpen(true);
-          setOpen(false);
-          const GROUP_NAME = inputValue;
-          add_public_with_name(GROUP_NAME, user_id, setError);
+        setSuccessOpen(true);
+        setOpen(false);
+        try {
+          await axios.post("https://storisbro.com/api/add_user_group/", {
+            selectedPublics,
+          });
+          console.log("Данные успешно отправлены");
+          logToBackend(JSON.stringify(setOpen));
+        } catch (error) {
+          console.error("Ошибка при отправке данных:", error);
         }
       }
     }
