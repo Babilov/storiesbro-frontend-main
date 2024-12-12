@@ -21,6 +21,7 @@ const AddPublicModal = ({ open, setOpen, publics }) => {
   const [inputValue, setInputValue] = useState("");
   const [permission, setPermission] = useState(true);
   const [noPermissionOpen, setNoPermissionOpen] = useState(false);
+  const [selectedPublics, setSelectedPublics] = useState([]);
 
   const [listAvailablePublics, setListAvailablePublics] = useState([]);
 
@@ -30,22 +31,7 @@ const AddPublicModal = ({ open, setOpen, publics }) => {
   }, [open, publics]);
 
   const user_id = localStorage.getItem("id");
-  /*
-                                                                useEffect(() => {
-                                                                  const AvailablePublicsList = async () => {
-                                                                    try {
-                                                                      const response = await axios.get(
-                                                                        `${API_URL}api_communities/available_publics/${user_id}`
-                                                                      );
-                                                                      SetListAvailablePublics(response.data["list_publics"]);
-                                                                    } catch (error) {
-                                                                      console.error("Ошибка при загрузке креативов", error);
-                                                                    }
-                                                                  };
-  
-                                                                  AvailablePublicsList();
-                                                                }, [user_id]);
-                                                              */
+
   const handleClick = () => {
     if (error) {
       setInputValue("*Походу ошибка в ссылке - такого сообщества нет");
@@ -80,6 +66,14 @@ const AddPublicModal = ({ open, setOpen, publics }) => {
       item.name.toLowerCase().includes(inputValue.toLowerCase()) ||
       item.link.toLowerCase().includes(inputValue.toLowerCase()),
   );
+
+  const addOrRemovePublic = (checkbox, item) => {
+    console.log(this);
+    if (checkbox.checked === true) {
+      setSelectedPublics([...selectedPublics, item]);
+    }
+    console.log(selectedPublics);
+  };
 
   return (
     <>
@@ -141,7 +135,10 @@ const AddPublicModal = ({ open, setOpen, publics }) => {
                 />
                 <Typography sx={{ ml: "50px" }}>{item.name}</Typography>
               </Box>
-              <Checkbox style={{ color: "black" }} />
+              <Checkbox
+                style={{ color: "black" }}
+                onChange={() => addOrRemovePublic(this, item)}
+              />
             </Box>
           ))}
         </Box>
