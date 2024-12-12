@@ -11,10 +11,6 @@ import {
   add_public_with_name,
 } from "../../../../../../api/publics";
 
-import axios from "axios";
-import { API_URL } from "../../../../../../constants/constatns";
-import logToBackend from "../../../../../../utils/logs";
-
 const AddPublicModal = ({ open, setOpen, publics }) => {
   const [error, setError] = useState(false);
   const [successOpen, setSuccessOpen] = useState(false);
@@ -67,11 +63,14 @@ const AddPublicModal = ({ open, setOpen, publics }) => {
       item.link.toLowerCase().includes(inputValue.toLowerCase()),
   );
 
-  const addOrRemovePublic = (checkbox, item) => {
-    console.log(checkbox);
-    if (checkbox.checked === true) {
-      setSelectedPublics([...selectedPublics, item]);
-    }
+  const handleCheckboxChange = (item) => {
+    setSelectedPublics((prevSelected) => {
+      if (prevSelected.some((publicItem) => publicItem.id === item.id)) {
+        return prevSelected.filter((publicItem) => publicItem.id !== item.id);
+      } else {
+        return [...prevSelected, item];
+      }
+    });
     console.log(selectedPublics);
   };
 
@@ -137,7 +136,10 @@ const AddPublicModal = ({ open, setOpen, publics }) => {
               </Box>
               <Checkbox
                 style={{ color: "black" }}
-                onChange={() => addOrRemovePublic(this, item)}
+                checked={selectedPublics.some(
+                  (publicItem) => publicItem.id === item.id,
+                )}
+                onChange={() => handleCheckboxChange(item)}
               />
             </Box>
           ))}
