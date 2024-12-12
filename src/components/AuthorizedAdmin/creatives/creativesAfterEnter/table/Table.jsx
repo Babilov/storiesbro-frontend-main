@@ -10,7 +10,7 @@ import logToBackend from "../../../../../utils/logs";
 const Table = ({ publics, setPublics }) => {
   const handleDelete = (id) => {
     setPublicObj(publics.filter((item) => item["id"] === id)[0]);
-    setDeletPublic(true);
+    setDeletePublic(true);
   };
 
   const [count, setCount] = useState(1);
@@ -19,14 +19,14 @@ const Table = ({ publics, setPublics }) => {
     setCount(count + 1);
   };
 
-  const [deletePublic, setDeletPublic] = useState(false);
+  const [deletePublic, setDeletePublic] = useState(false);
   const [publicObj, setPublicObj] = useState(null);
 
   return (
     <Box onClick={handleIncrementCount}>
       <DeletePublicModal
         open={deletePublic}
-        setOpen={setDeletPublic}
+        setOpen={setDeletePublic}
         setPublics={setPublics}
         publics={publics}
         publicObj={publicObj}

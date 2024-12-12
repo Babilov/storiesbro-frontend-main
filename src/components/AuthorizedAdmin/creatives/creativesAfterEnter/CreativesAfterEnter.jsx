@@ -12,18 +12,19 @@ import axios from "axios";
 const CreativesAfterEnter = () => {
   const token = localStorage["token"];
 
-  const [publics, setPublics] = useContext(PublicsContext);
+  const [publics, setPublics, selectedPublics, setSelectedPublics] =
+    useContext(PublicsContext);
   const [openAdd, setOpenAdd] = useState(false);
 
   /*axios.get(`${API_URL}api_communities/communities`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });*/
+            headers: { Authorization: `Bearer ${token}` },
+          });*/
 
   return (
     <Grid item xs={12}>
       <AddPublicModal open={openAdd} setOpen={setOpenAdd} publics={publics} />
       <AddPublicButton setOpen={setOpenAdd} />
-      <Table publics={publics} setPublics={setPublics} />
+      <Table publics={selectedPublics} setPublics={setSelectedPublics} />
     </Grid>
   );
 };

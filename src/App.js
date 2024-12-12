@@ -64,6 +64,7 @@ function App() {
 
   const [allPublics, setAllPublics] = useState([]);
   const [publics, setPublics] = useState([]);
+  const [selectedPublics, setSelectedPublics] = useState([]);
   const [creatives, setCreatives] = useState([]);
   const [arhive, setArhive] = useState([]);
   const userId = localStorage.getItem("id");
@@ -73,7 +74,7 @@ function App() {
   useEffect(() => {
     // Функция для получения сообществ с бэкенда
 
-    const fetchPublics = async () => {
+    const fetchAllPublics = async () => {
       try {
         const accessToken = localStorage.getItem("vk_access_token");
         const response = await axios.get(
@@ -94,28 +95,52 @@ function App() {
       }
     };
 
-    fetchPublics();
+    fetchAllPublics();
+  }, [userId]);
+
+  useEffect(() => {
+    // Функция для получения сообществ с бэкенда
+
+    const fetchSelectedPublics = async () => {
+      try {
+        const response = await axios.get(
+          `https://storisbro.com/api/selected_groups/`,
+          {
+            headers: {
+              Accept: "application/json",
+            },
+          },
+        );
+        setSelectedPublics(response.data.groups);
+        logToBackend(`URL: https://storisbro.com/api/selected_groups/`);
+        logToBackend(`Response DATA: ${JSON.stringify(response.data)}`);
+      } catch (error) {
+        console.error("Ошибка при загрузке сообществ", error);
+      }
+    };
+
+    fetchSelectedPublics();
   }, [userId]);
 
   /*
-                                                      useEffect(() => {
-                                                        // Функция для получения креативов с бэкенда
-                                                        const fetchCreativesAll = async () => {
-                                                          try {
-                                                            const response = await axios.get(
-                                                              `${API_URL}api_creatives/own_all_creatives/${userId}`,
-                                                            );
-                                                            setCreatives(response.data.filter((item) => item.archive === false));
-                                                            setArhive(response.data.filter((item) => item.archive === true));
-                                                          } catch (error) {
-                                                            console.error("Ошибка при загрузке креативов", error);
-                                                          }
-                                                        };
-                          
-                                                        // Вызов функции для загрузки сообществ при монтировании компонента
-                                                        fetchCreativesAll();
-                                                      }, [userId]); // Пустой массив зависимостей означает, что эффект будет выполнен только один раз при монтировании
-                                                    */
+                                                                useEffect(() => {
+                                                                  // Функция для получения креативов с бэкенда
+                                                                  const fetchCreativesAll = async () => {
+                                                                    try {
+                                                                      const response = await axios.get(
+                                                                        `${API_URL}api_creatives/own_all_creatives/${userId}`,
+                                                                      );
+                                                                      setCreatives(response.data.filter((item) => item.archive === false));
+                                                                      setArhive(response.data.filter((item) => item.archive === true));
+                                                                    } catch (error) {
+                                                                      console.error("Ошибка при загрузке креативов", error);
+                                                                    }
+                                                                  };
+                                    
+                                                                  // Вызов функции для загрузки сообществ при монтировании компонента
+                                                                  fetchCreativesAll();
+                                                                }, [userId]); // Пустой массив зависимостей означает, что эффект будет выполнен только один раз при монтировании
+                                                              */
   // автоматическая очистка кэша
 
   if (localStorage.getItem("token")) {
@@ -221,7 +246,14 @@ function App() {
           <Route
             path="/publics"
             element={
-              <PublicsContext.Provider value={[publics, setPublics]}>
+              <PublicsContext.Provider
+                value={[
+                  publics,
+                  setPublics,
+                  selectedPublics,
+                  setSelectedPublics,
+                ]}
+              >
                 <AuthorizedUserPattern>
                   <Grid item xs={12} lg={10}>
                     <Creatives />
