@@ -68,7 +68,7 @@ const AddPublicModal = ({ open, setOpen, publics }) => {
   );
 
   const addOrRemovePublic = (checkbox, item) => {
-    console.log(this);
+    console.log(checkbox);
     if (checkbox.checked === true) {
       setSelectedPublics([...selectedPublics, item]);
     }
