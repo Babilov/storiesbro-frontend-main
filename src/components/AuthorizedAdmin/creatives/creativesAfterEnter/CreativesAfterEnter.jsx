@@ -10,15 +10,9 @@ import { API_URL } from "../../../../constants/constatns";
 import axios from "axios";
 
 const CreativesAfterEnter = () => {
-  const token = localStorage["token"];
-
   const [publics, setPublics, selectedPublics, setSelectedPublics] =
     useContext(PublicsContext);
   const [openAdd, setOpenAdd] = useState(false);
-
-  /*axios.get(`${API_URL}api_communities/communities`, {
-            headers: { Authorization: `Bearer ${token}` },
-          });*/
 
   return (
     <Grid item xs={12}>

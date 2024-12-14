@@ -56,7 +56,7 @@ const MySelect = ({ publics }) => {
                       src={publicObj["image"]}
                       sx={{ mr: 1, width: "7.5%" }}
                     />
-                    <Typography>{publicObj["title"]}</Typography>
+                    <Typography>{publicObj["name"]}</Typography>
                   </Box>
                 </MenuItem>
               ))}
