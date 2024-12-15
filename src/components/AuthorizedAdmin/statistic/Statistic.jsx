@@ -13,6 +13,8 @@ const Statistic = () => {
   const [open, setOpen] = useState(false);
   const [publics, setPublics, selectedPublics, setSelected] =
     useContext(PublicsContext);
+  console.log(JSON.stringify(publics, null, 2));
+  console.log(JSON.stringify(selectedPublics, null, 2));
   const statistic = [
     {
       publicTitle: "Гонки",
