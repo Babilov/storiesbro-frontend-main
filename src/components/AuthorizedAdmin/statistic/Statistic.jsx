@@ -11,7 +11,7 @@ import { get_statistic } from "../../../api/publics";
 
 const Statistic = () => {
   const [open, setOpen] = useState(false);
-  const { selectedPublics } = useContext(PublicsContext);
+  const [, , selectedPublics] = useContext(PublicsContext);
   const statistic = [
     {
       publicTitle: "Гонки",
