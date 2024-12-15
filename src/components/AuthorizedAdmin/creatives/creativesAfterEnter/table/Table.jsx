@@ -109,8 +109,19 @@ const Table = ({ publics, setPublics }) => {
               />
             </Grid>
 
-            <Grid item xs={3}>
-              <Link to={publicObj["link"]}>{publicObj["name"]}</Link>
+            <Grid item xs={3} sx={{ textAlign: "center" }}>
+              <Link
+                to={publicObj["link"]}
+                style={{
+                  textAlign: "center",
+                  color: "black",
+                  textDecoration: "none",
+                  cursor: "pointer",
+                  fontSize: "18px",
+                }}
+              >
+                {publicObj["name"]}
+              </Link>
             </Grid>
 
             <Grid item md={2}>
@@ -126,16 +137,13 @@ const Table = ({ publics, setPublics }) => {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                textAlign: "center",
               }}
             >
               <Link
                 to={`/publics/setting/${publicObj["group_id"]}`}
-                style={{
-                  color: "black",
-                  textDecoration: "none",
+                sx={{
+                  m: 2,
                   cursor: "pointer",
-                  fontSize: "18px",
                 }}
                 className="linkItem"
               >
@@ -158,7 +166,7 @@ const Table = ({ publics, setPublics }) => {
         ))}
       </Box>
 
-      <Box sx={{ display: { xs: "block", md: "none" }, mb: 2 }}>
+      <Box sx={{ display: { xs: "block", md: "none" } }}>
         {publics.map((publicObj) => (
           <Box
             className="grayBorder"
@@ -183,9 +191,19 @@ const Table = ({ publics, setPublics }) => {
                     width: "70px",
                   }}
                 />
-                <Typography sx={{ fontSize: "12px", fontWeight: 600, mt: 2 }}>
+                <Link
+                  style={{
+                    textAlign: "center",
+                    color: "black",
+                    textDecoration: "none",
+                    cursor: "pointer",
+                    fontSize: "12px",
+                    fontWeight: 600,
+                    marginTop: "16px",
+                  }}
+                >
                   {publicObj["name"]}
-                </Typography>
+                </Link>
               </Box>
               <Typography
                 sx={{
