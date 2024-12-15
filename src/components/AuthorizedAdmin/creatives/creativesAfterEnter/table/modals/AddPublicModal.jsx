@@ -153,7 +153,7 @@ const AddPublicModal = ({ open, setOpen, publics }) => {
         </Box>
 
         <Link
-          sx={{ textAlign: "right", mb: 2 }}
+          sx={{ textAlign: "right", mb: 2, cursor: "pointer" }}
           onClick={() => navigate("/admin-help")}
         >
           требования к сообществам

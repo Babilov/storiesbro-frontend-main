@@ -83,7 +83,7 @@ const PublicSettings = () => {
             Контент-видео
           </Typography>
         </Grid>
-        <Grid item md={2.4} xs={12}>
+        <Grid item md={3} xs={12}>
           <Typography
             sx={{
               fontSize: { sm: "18px", xs: "14px" },
@@ -99,7 +99,7 @@ const PublicSettings = () => {
           </Typography>
         </Grid>
 
-        <Grid item md={2.4} xs={12}>
+        <Grid item md={3} xs={12}>
           <Typography
             sx={{
               fontSize: { sm: "18px", xs: "14px" },
@@ -114,7 +114,7 @@ const PublicSettings = () => {
           </Typography>
         </Grid>
 
-        <Grid item md={2.4} xs={12}>
+        <Grid item md={3} xs={12}>
           <Typography
             sx={{
               fontSize: { sm: "18px", xs: "14px" },
@@ -128,7 +128,7 @@ const PublicSettings = () => {
             Стандартные ВЦА
           </Typography>
         </Grid>
-
+        {/*
         <Grid item md={2.4} xs={12}>
           <Typography
             sx={{
@@ -143,8 +143,8 @@ const PublicSettings = () => {
             Свои видео
           </Typography>
         </Grid>
-
-        <Grid item md={2.4} xs={12}>
+*/}
+        <Grid item md={3} xs={12}>
           <Typography
             sx={{
               fontSize: { sm: "18px", xs: "14px" },
