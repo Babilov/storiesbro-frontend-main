@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Divider, Grid, Typography, Box, Button, Avatar } from "@mui/material";
 import { Link } from "react-router-dom";
 
@@ -20,6 +20,14 @@ const Table = ({ publics, setPublics }) => {
 
   const [deletePublic, setDeletePublic] = useState(false);
   const [publicObj, setPublicObj] = useState(null);
+
+  useEffect(() => {
+    document.body.classList.add("no-scrollbar");
+
+    return () => {
+      document.body.classList.remove("no-scrollbar");
+    };
+  }, []);
 
   return (
     <Box onClick={handleIncrementCount}>
@@ -76,7 +84,6 @@ const Table = ({ publics, setPublics }) => {
           <Grid item xs={4}></Grid>
         </Grid>
         <Divider />
-        {logToBackend(`PUBLICS!!!!!!!1: ${JSON.stringify(publics)}`)}
         {publics.map((publicObj) => (
           <Grid
             container
@@ -103,7 +110,7 @@ const Table = ({ publics, setPublics }) => {
             </Grid>
 
             <Grid item xs={3}>
-              <Typography>{publicObj["name"]}</Typography>
+              <Link to={publicObj["link"]}>{publicObj["name"]}</Link>
             </Grid>
 
             <Grid item md={2}>
