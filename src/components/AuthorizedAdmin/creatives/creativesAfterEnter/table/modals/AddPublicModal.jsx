@@ -43,7 +43,7 @@ const AddPublicModal = ({ open, setOpen, publics }) => {
         try {
           const userId = localStorage.getItem("id");
           await axios.post(
-            `https://storisbro.com/api/add_user_group/user_id=${userId}`,
+            `https://storisbro.com/api/add_user_group/?user_id=${userId}`,
             {
               selectedPublics,
             },
