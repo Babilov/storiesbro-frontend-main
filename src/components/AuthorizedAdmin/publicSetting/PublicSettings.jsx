@@ -10,13 +10,14 @@ const userId = localStorage.getItem("id");
 const PublicSettings = () => {
   const { id } = useParams();
   const [data, setData] = useState([]);
+  const [state, setState] = useState(false);
 
   useEffect(() => {
     // Функция для выполнения запроса с использованием Axios
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `${API_URL}api_communities/settings_communities/${userId}/${id}`
+          `${API_URL}api_communities/settings_communities/${userId}/${id}`,
         );
         setData(response.data);
       } catch (error) {
@@ -186,7 +187,9 @@ const PublicSettings = () => {
               textAlign: "center",
               mt: 2,
               cursor: "pointer",
+              color: state ? "#D25D48" : "black",
             }}
+            onClick={() => setState(true)}
           >
             Включить
           </Typography>
@@ -199,8 +202,9 @@ const PublicSettings = () => {
               textAlign: "center",
               mt: 2,
               cursor: "pointer",
-              color: "#D25D48",
+              color: !state ? "#D25D48" : "black",
             }}
+            onClick={() => setState(false)}
           >
             Отключено
           </Typography>
