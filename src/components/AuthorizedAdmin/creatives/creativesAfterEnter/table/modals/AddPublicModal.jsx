@@ -41,9 +41,13 @@ const AddPublicModal = ({ open, setOpen, publics }) => {
         setSuccessOpen(true);
         setOpen(false);
         try {
-          await axios.post("https://storisbro.com/api/add_user_group/", {
-            selectedPublics,
-          });
+          const userId = localStorage.getItem("id");
+          await axios.post(
+            `https://storisbro.com/api/add_user_group/user_id=${userId}`,
+            {
+              selectedPublics,
+            },
+          );
           console.log("Данные успешно отправлены");
           logToBackend(JSON.stringify(setOpen));
         } catch (error) {

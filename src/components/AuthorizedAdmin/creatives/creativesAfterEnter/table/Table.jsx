@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Divider, Grid, Typography, Box, Button, Avatar } from "@mui/material";
 import { Link } from "react-router-dom";
 
 import DeletePublicModal from "./modals/DeletePublicModal";
-import { get_list } from "../../../../../api/publics";
 import { Tooltips } from "../../../../Onboardings/Tooltips";
 import logToBackend from "../../../../../utils/logs";
 
