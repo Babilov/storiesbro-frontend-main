@@ -118,6 +118,7 @@ const Table = ({ publics, setPublics }) => {
                   textDecoration: "none",
                   cursor: "pointer",
                   fontSize: "18px",
+                  target: "_blank",
                 }}
               >
                 {publicObj["name"]}
@@ -192,6 +193,7 @@ const Table = ({ publics, setPublics }) => {
                   }}
                 />
                 <Link
+                  to={publicObj["link"]}
                   style={{
                     textAlign: "center",
                     color: "black",
@@ -200,6 +202,7 @@ const Table = ({ publics, setPublics }) => {
                     fontSize: "12px",
                     fontWeight: 600,
                     marginTop: "16px",
+                    target: "_blank",
                   }}
                 >
                   {publicObj["name"]}

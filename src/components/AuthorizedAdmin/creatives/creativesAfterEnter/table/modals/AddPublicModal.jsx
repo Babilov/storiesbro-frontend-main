@@ -12,6 +12,7 @@ import {
 } from "../../../../../../api/publics";
 import axios from "axios";
 import logToBackend from "../../../../../../utils/logs";
+import { useNavigate } from "react-router-dom";
 
 const AddPublicModal = ({ open, setOpen, publics }) => {
   const [error, setError] = useState(false);
@@ -25,10 +26,9 @@ const AddPublicModal = ({ open, setOpen, publics }) => {
 
   useEffect(() => {
     setListAvailablePublics(publics);
-    // console.log(publics);
   }, [open, publics]);
 
-  const user_id = localStorage.getItem("id");
+  const navigate = useNavigate();
 
   const handleClick = async () => {
     if (error) {
@@ -152,7 +152,12 @@ const AddPublicModal = ({ open, setOpen, publics }) => {
           ))}
         </Box>
 
-        <Link sx={{ textAlign: "right", mb: 2 }}>требования к сообществам</Link>
+        <Link
+          sx={{ textAlign: "right", mb: 2 }}
+          onClick={() => navigate("/admin-help")}
+        >
+          требования к сообществам
+        </Link>
         <Box sx={{ width: "50%", m: "0 auto" }}>
           <MyButton onClick={handleClick} options={{ background: "#4CD640" }}>
             Добавить

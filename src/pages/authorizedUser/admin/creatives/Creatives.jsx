@@ -1,7 +1,6 @@
 import { Box } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import CreativessBeforeEnter from "../../../../components/AuthorizedAdmin/creatives/creativesBefoteEnter/CreativessBeforeEnter";
-import CreativessBeforeEnter1 from "../../../../components/AuthorizedAdmin/creatives/creativesBefoteEnter/CreativessBeforeEnter1";
 import CreativesAfterEnter from "../../../../components/AuthorizedAdmin/creatives/creativesAfterEnter/CreativesAfterEnter";
 
 const Creatives = () => {
@@ -19,7 +18,7 @@ const Creatives = () => {
   return (
     <>
       {!authed ? (
-        <CreativessBeforeEnter setAuthed={setAuthed} />
+        <CreativessBeforeEnter setAthed={setAuthed} />
       ) : (
         <CreativesAfterEnter />
       )}
