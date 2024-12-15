@@ -30,7 +30,7 @@ const Table = ({ publics, setPublics }) => {
   }, []);
 
   return (
-    <Box onClick={handleIncrementCount}>
+    <Box onClick={handleIncrementCount} sx={{ mb: 2 }}>
       <DeletePublicModal
         open={deletePublic}
         setOpen={setDeletePublic}
@@ -126,13 +126,16 @@ const Table = ({ publics, setPublics }) => {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
+                textAlign: "center",
               }}
             >
               <Link
                 to={`/publics/setting/${publicObj["group_id"]}`}
-                sx={{
-                  m: 2,
+                style={{
+                  color: "black",
+                  textDecoration: "none",
                   cursor: "pointer",
+                  fontSize: "18px",
                 }}
                 className="linkItem"
               >
@@ -155,7 +158,7 @@ const Table = ({ publics, setPublics }) => {
         ))}
       </Box>
 
-      <Box sx={{ display: { xs: "block", md: "none" } }}>
+      <Box sx={{ display: { xs: "block", md: "none" }, mb: 2 }}>
         {publics.map((publicObj) => (
           <Box
             className="grayBorder"
