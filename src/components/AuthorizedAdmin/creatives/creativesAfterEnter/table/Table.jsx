@@ -76,7 +76,7 @@ const Table = ({ publics, setPublics }) => {
           <Grid item xs={4}></Grid>
         </Grid>
         <Divider />
-        {logToBackend(`PUBLICS!!!!!!!1: publics`)}
+        {logToBackend(`PUBLICS!!!!!!!1: ${publics}`)}
         {publics.map((publicObj) => (
           <Grid
             container
