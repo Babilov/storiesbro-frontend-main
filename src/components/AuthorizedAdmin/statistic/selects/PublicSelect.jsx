@@ -44,20 +44,24 @@ const MySelect = ({ publics }) => {
             >
               {publics.map((publicObj, index) => (
                 <MenuItem key={index} value={index}>
-                  <Box
+                  <Avatar
                     sx={{
                       display: "flex",
                       alignItems: "center",
                     }}
                   >
-                    <Box
-                      component="img"
+                    <Avatar
                       alt="avatar"
                       src={publicObj["image"]}
-                      sx={{ mr: 1, width: "7.5%" }}
+                      sx={{
+                        mr: 1,
+                        borderRadius: "50%",
+                        xs: { height: "20px", width: "20px" },
+                        md: { height: "35px", width: "35px" },
+                      }}
                     />
                     <Typography>{publicObj["name"]}</Typography>
-                  </Box>
+                  </Avatar>
                 </MenuItem>
               ))}
             </Select>
