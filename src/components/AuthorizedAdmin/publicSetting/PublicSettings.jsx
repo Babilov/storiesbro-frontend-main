@@ -93,6 +93,7 @@ const PublicSettings = () => {
               borderRight: { md: "1px solid black" },
               cursor: "pointer",
               color: "#E37E31",
+              ":hover": { color: "#E37E31" },
             }}
           >
             Стандартные МЦА
@@ -108,6 +109,7 @@ const PublicSettings = () => {
               mt: 2,
               borderRight: { md: "1px solid black" },
               cursor: "pointer",
+              ":hover": { color: "#E37E31" },
             }}
           >
             Стандартные ЖЦА
@@ -123,6 +125,7 @@ const PublicSettings = () => {
               mt: 2,
               borderRight: { md: "1px solid black" },
               cursor: "pointer",
+              ":hover": { color: "#E37E31" },
             }}
           >
             Стандартные ВЦА
@@ -152,6 +155,7 @@ const PublicSettings = () => {
               textAlign: { md: "center", xs: "left" },
               mt: 2,
               cursor: "pointer",
+              ":hover": { color: "#E37E31" },
             }}
           >
             Не постить

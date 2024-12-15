@@ -11,7 +11,7 @@ import { get_statistic } from "../../../api/publics";
 
 const Statistic = () => {
   const [open, setOpen] = useState(false);
-  const [publics] = useContext(PublicsContext);
+  const { selectedPublics } = useContext(PublicsContext);
   const statistic = [
     {
       publicTitle: "Гонки",
@@ -43,7 +43,7 @@ const Statistic = () => {
   return (
     <>
       <Grid item md={6} sm={10} xs={12} sx={{ m: "0 auto" }}>
-        <PublicSelect publics={publics} />
+        <PublicSelect publics={selectedPublics} />
         <DataPickers />
         <PeriodSelect />
 
