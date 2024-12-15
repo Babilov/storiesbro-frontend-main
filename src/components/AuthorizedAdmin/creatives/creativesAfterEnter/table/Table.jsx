@@ -80,7 +80,7 @@ const Table = ({ publics, setPublics }) => {
         {publics.map((publicObj) => (
           <Grid
             container
-            key={publicObj["id"]}
+            key={publicObj["group_id"]}
             className="adminPublics"
             sx={{
               display: "flex",
@@ -97,13 +97,13 @@ const Table = ({ publics, setPublics }) => {
             >
               <Avatar
                 alt="group avatar"
-                src={publicObj.image}
+                src={publicObj["photo"]}
                 sx={{ borderRadius: "50%", height: "90px", width: "90px" }}
               />
             </Grid>
 
             <Grid item xs={3}>
-              <Typography>{publicObj.name}</Typography>
+              <Typography>{publicObj["name"]}</Typography>
             </Grid>
 
             <Grid item md={2}>
@@ -122,7 +122,7 @@ const Table = ({ publics, setPublics }) => {
               }}
             >
               <Link
-                to={`/publics/setting/${publicObj["id"]}`}
+                to={`/publics/setting/${publicObj["group_id"]}`}
                 sx={{
                   m: 2,
                   cursor: "pointer",
@@ -139,7 +139,7 @@ const Table = ({ publics, setPublics }) => {
 
                   ":hover": { color: "#E37E31" },
                 }}
-                onClick={() => handleDelete(publicObj["id"])}
+                onClick={() => handleDelete(publicObj["group_id"])}
               >
                 Удалить
               </Typography>
@@ -150,7 +150,11 @@ const Table = ({ publics, setPublics }) => {
 
       <Box sx={{ display: { xs: "block", md: "none" } }}>
         {publics.map((publicObj) => (
-          <Box className="grayBorder" sx={{ mb: 2 }} key={publicObj["id"]}>
+          <Box
+            className="grayBorder"
+            sx={{ mb: 2 }}
+            key={publicObj["group_id"]}
+          >
             <Box
               sx={{
                 display: "flex",
@@ -161,7 +165,7 @@ const Table = ({ publics, setPublics }) => {
               <Box sx={{ display: "flex" }}>
                 <Avatar
                   alt="avatar"
-                  src={publicObj["image"]}
+                  src={publicObj["photo"]}
                   sx={{
                     m: 2,
                     borderRadius: "50%",
@@ -170,7 +174,7 @@ const Table = ({ publics, setPublics }) => {
                   }}
                 />
                 <Typography sx={{ fontSize: "12px", fontWeight: 600, mt: 2 }}>
-                  {publicObj.name}
+                  {publicObj["name"]}
                 </Typography>
               </Box>
               <Typography
@@ -186,9 +190,8 @@ const Table = ({ publics, setPublics }) => {
               </Typography>
             </Box>
             <Box className="spaceAround">
-              {logToBackend(`ID!!!!!!!! ${publicObj["id"]}`)}
               <Link
-                to={`/publics/setting/${publicObj["id"]}`}
+                to={`/publics/setting/${publicObj["group_id"]}`}
                 style={{
                   fontSize: "12px",
                   fontWeight: 400,
@@ -203,7 +206,7 @@ const Table = ({ publics, setPublics }) => {
               <Typography sx={{ color: "#CBCBCB", m: 2 }}>|</Typography>
               <Typography
                 sx={{ fontSize: "12px", m: 2, cursor: "pointer" }}
-                onClick={() => handleDelete(publicObj["id"])}
+                onClick={() => handleDelete(publicObj["group_id"])}
               >
                 Удалить
               </Typography>
