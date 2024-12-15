@@ -52,7 +52,7 @@ const MySelect = ({ publics }) => {
                   >
                     <Avatar
                       alt="avatar"
-                      src={publicObj["image"]}
+                      src={publicObj["photo"]}
                       sx={{
                         mr: 1,
                         borderRadius: "50%",
