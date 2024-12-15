@@ -44,7 +44,7 @@ const MySelect = ({ publics }) => {
             >
               {publics.map((publicObj, index) => (
                 <MenuItem key={index} value={index}>
-                  <Avatar
+                  <Box
                     sx={{
                       display: "flex",
                       alignItems: "center",
@@ -61,7 +61,7 @@ const MySelect = ({ publics }) => {
                       }}
                     />
                     <Typography>{publicObj["name"]}</Typography>
-                  </Avatar>
+                  </Box>
                 </MenuItem>
               ))}
             </Select>
