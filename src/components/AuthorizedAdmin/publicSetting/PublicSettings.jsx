@@ -210,18 +210,26 @@ const PublicSettings = () => {
           xs={12}
           sx={{ display: "flex", alignItems: "center" }}
         >
-          <Typography
+          <Box
             sx={{
-              fontSize: { sm: "18px", xs: "14px" },
-              fontWeight: { sm: 400, xs: 500 },
-              textAlign: { md: "center", xs: "left" },
-              mt: 2,
-              cursor: "pointer",
-              ":hover": { color: "#E37E31" },
+              display: "flex",
+              justifyContent: "space-around",
+              alignItems: "center",
             }}
           >
-            Не постить
-          </Typography>
+            <Typography
+              sx={{
+                fontSize: { sm: "18px", xs: "14px" },
+                fontWeight: { sm: 400, xs: 500 },
+                textAlign: { md: "center", xs: "left" },
+                mt: 2,
+                cursor: "pointer",
+                ":hover": { color: "#E37E31" },
+              }}
+            >
+              Не постить
+            </Typography>
+          </Box>
         </Grid>
       </Grid>
 
