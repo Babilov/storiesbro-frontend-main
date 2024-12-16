@@ -98,8 +98,8 @@ const PublicSettings = () => {
             }}
           >
             Стандартные МЦА
+            <Box component="img" src={question} alt="question" />
           </Typography>
-          <Box component="img" src={question} alt="question" />
         </Grid>
 
         <Grid item md={3} xs={12}>
@@ -115,8 +115,8 @@ const PublicSettings = () => {
             }}
           >
             Стандартные ЖЦА
+            <Box component="img" src={question} alt="question" />
           </Typography>
-          <Box component="img" src={question} alt="question" />
         </Grid>
 
         <Grid item md={3} xs={12}>
@@ -132,8 +132,8 @@ const PublicSettings = () => {
             }}
           >
             Стандартные ВЦА
+            <Box component="img" src={question} alt="question" />
           </Typography>
-          <Box component="img" src={question} alt="question" />
         </Grid>
         {/*
         <Grid item md={2.4} xs={12}>
