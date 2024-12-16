@@ -114,7 +114,7 @@ const PublicSettings = () => {
               component="img"
               src={question}
               alt="question"
-              sx={{ ml: "20px", mr: "5px" }}
+              sx={{ ml: "5px", mr: "20px" }}
             />
           </Box>
         </Grid>
@@ -149,7 +149,7 @@ const PublicSettings = () => {
               component="img"
               src={question}
               alt="question"
-              sx={{ ml: "20px", mr: "5px" }}
+              sx={{ ml: "5px", mr: "20px" }}
             />
           </Box>
         </Grid>
@@ -184,7 +184,7 @@ const PublicSettings = () => {
               component="img"
               src={question}
               alt="question"
-              sx={{ ml: "20px", mr: "5px" }}
+              sx={{ ml: "5px", mr: "20px" }}
             />
           </Box>
         </Grid>
@@ -204,7 +204,12 @@ const PublicSettings = () => {
           </Typography>
         </Grid>
 */}
-        <Grid item md={3} xs={12}>
+        <Grid
+          item
+          md={3}
+          xs={12}
+          sx={{ display: "flex", alignItems: "center" }}
+        >
           <Typography
             sx={{
               fontSize: { sm: "18px", xs: "14px" },
