@@ -96,6 +96,8 @@ const PublicSettings = () => {
               display: "flex",
               justifyContent: "space-around",
               alignItems: "center",
+              mt: "10px",
+              mb: "10px",
             }}
           >
             <Typography
@@ -131,6 +133,8 @@ const PublicSettings = () => {
               justifyContent: "space-around",
               alignItems: "center",
               borderRight: { md: "1px solid black" },
+              mt: "10px",
+              mb: "10px",
             }}
           >
             <Typography
@@ -166,6 +170,8 @@ const PublicSettings = () => {
               justifyContent: "space-around",
               alignItems: "center",
               borderRight: { md: "1px solid black" },
+              mt: "10px",
+              mb: "10px",
             }}
           >
             <Typography
@@ -215,6 +221,8 @@ const PublicSettings = () => {
               display: "flex",
               justifyContent: "space-around",
               alignItems: "center",
+              mt: "10px",
+              mb: "10px",
             }}
           >
             <Typography
