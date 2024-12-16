@@ -222,7 +222,6 @@ const PublicSettings = () => {
                 fontSize: { sm: "18px", xs: "14px" },
                 fontWeight: { sm: 400, xs: 500 },
                 textAlign: { md: "center", xs: "left" },
-                mt: 2,
                 cursor: "pointer",
                 ":hover": { color: "#E37E31" },
               }}
