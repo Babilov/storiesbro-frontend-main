@@ -84,71 +84,56 @@ const PublicSettings = () => {
             Контент-видео
           </Typography>
         </Grid>
-        <Grid
-          item
-          md={3}
-          xs={12}
-          sx={{ borderRight: { md: "1px solid black" } }}
-        >
+        <Grid item md={3} xs={12}>
           <Typography
             sx={{
               fontSize: { sm: "18px", xs: "14px" },
               fontWeight: 500,
               textAlign: { md: "center", xs: "left" },
               mt: 2,
-
+              borderRight: { md: "1px solid black" },
               cursor: "pointer",
               color: "#E37E31",
               ":hover": { color: "#E37E31" },
             }}
           >
             Стандартные МЦА
+            <Box component="img" src={question} alt="question" />
           </Typography>
-          <Box component="img" src={question} alt="question" />
         </Grid>
 
-        <Grid
-          item
-          md={3}
-          xs={12}
-          sx={{ borderRight: { md: "1px solid black" } }}
-        >
+        <Grid item md={3} xs={12}>
           <Typography
             sx={{
               fontSize: { sm: "18px", xs: "14px" },
               fontWeight: 500,
               textAlign: { md: "center", xs: "left" },
               mt: 2,
-
+              borderRight: { md: "1px solid black" },
               cursor: "pointer",
               ":hover": { color: "#E37E31" },
             }}
           >
             Стандартные ЖЦА
+            <Box component="img" src={question} alt="question" />
           </Typography>
-          <Box component="img" src={question} alt="question" />
         </Grid>
 
-        <Grid
-          item
-          md={3}
-          xs={12}
-          sx={{ borderRight: { md: "1px solid black" } }}
-        >
+        <Grid item md={3} xs={12}>
           <Typography
             sx={{
               fontSize: { sm: "18px", xs: "14px" },
               fontWeight: 500,
               textAlign: { md: "center", xs: "left" },
               mt: 2,
-
+              borderRight: { md: "1px solid black" },
               cursor: "pointer",
               ":hover": { color: "#E37E31" },
             }}
           >
             Стандартные ВЦА
+            <Box component="img" src={question} alt="question" />
           </Typography>
-          <Box component="img" src={question} alt="question" />
         </Grid>
         {/*
         <Grid item md={2.4} xs={12}>
