@@ -110,7 +110,12 @@ const PublicSettings = () => {
             >
               Стандартные МЦА
             </Typography>
-            <Box component="img" src={question} alt="question" />
+            <Box
+              component="img"
+              src={question}
+              alt="question"
+              sx={{ ml: "20px", mr: "5px" }}
+            />
           </Box>
         </Grid>
 
@@ -125,6 +130,7 @@ const PublicSettings = () => {
               display: "flex",
               justifyContent: "space-around",
               alignItems: "center",
+              borderRight: { md: "1px solid black" },
             }}
           >
             <Typography
@@ -132,14 +138,19 @@ const PublicSettings = () => {
                 fontSize: { sm: "18px", xs: "14px" },
                 fontWeight: 500,
                 textAlign: { md: "center", xs: "left" },
-                borderRight: { md: "1px solid black" },
+
                 cursor: "pointer",
                 ":hover": { color: "#E37E31" },
               }}
             >
               Стандартные ЖЦА
             </Typography>
-            <Box component="img" src={question} alt="question" />
+            <Box
+              component="img"
+              src={question}
+              alt="question"
+              sx={{ ml: "20px", mr: "5px" }}
+            />
           </Box>
         </Grid>
 
@@ -154,6 +165,7 @@ const PublicSettings = () => {
               display: "flex",
               justifyContent: "space-around",
               alignItems: "center",
+              borderRight: { md: "1px solid black" },
             }}
           >
             <Typography
@@ -161,14 +173,19 @@ const PublicSettings = () => {
                 fontSize: { sm: "18px", xs: "14px" },
                 fontWeight: 500,
                 textAlign: { md: "center", xs: "left" },
-                borderRight: { md: "1px solid black" },
+
                 cursor: "pointer",
                 ":hover": { color: "#E37E31" },
               }}
             >
               Стандартные ВЦА
             </Typography>
-            <Box component="img" src={question} alt="question" />
+            <Box
+              component="img"
+              src={question}
+              alt="question"
+              sx={{ ml: "20px", mr: "5px" }}
+            />
           </Box>
         </Grid>
         {/*
