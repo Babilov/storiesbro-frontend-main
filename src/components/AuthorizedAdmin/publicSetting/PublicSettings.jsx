@@ -1,6 +1,6 @@
 import { Box, Grid, Tooltip, Typography } from "@mui/material";
 import React, { useContext, useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { PublicsContext } from "../../../context/PublicsContext";
 import { API_URL } from "../../../constants/constatns";
 import axios from "axios";
@@ -186,7 +186,14 @@ const PublicSettings = () => {
             >
               Стандартные ВЦА
             </Typography>
-            <Tooltip title="Взрослая целевая аудитория">
+            <Tooltip
+              title={
+                <>
+                  <Typography>Взрослая целевая аудитория</Typography>
+                  <Link> Подробнее </Link>
+                </>
+              }
+            >
               <Box
                 component="img"
                 src={question}
