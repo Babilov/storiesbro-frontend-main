@@ -69,7 +69,7 @@ const PublicSettings = () => {
         md={9}
         container
         className="grayBorder"
-        sx={{ m: "0 auto", p: 2 }}
+        sx={{ m: "0 auto", p: "16px 16px 0 16px" }}
       >
         <Grid item xs={12} sx={{ borderBottom: "1px solid #CDCDCD" }}>
           <Typography
@@ -84,7 +84,12 @@ const PublicSettings = () => {
             Контент-видео
           </Typography>
         </Grid>
-        <Grid item md={3} xs={12}>
+        <Grid
+          item
+          md={3}
+          xs={12}
+          sx={{ display: "flex", alignItems: "center" }}
+        >
           <Box
             sx={{
               borderRight: { md: "1px solid black" },
@@ -98,8 +103,6 @@ const PublicSettings = () => {
                 fontSize: { sm: "18px", xs: "14px" },
                 fontWeight: 500,
                 textAlign: { md: "center", xs: "left" },
-                mt: 2,
-
                 cursor: "pointer",
                 color: "#E37E31",
                 ":hover": { color: "#E37E31" },
@@ -111,10 +114,14 @@ const PublicSettings = () => {
           </Box>
         </Grid>
 
-        <Grid item md={3} xs={12}>
+        <Grid
+          item
+          md={3}
+          xs={12}
+          sx={{ display: "flex", alignItems: "center" }}
+        >
           <Box
             sx={{
-              borderRight: { md: "1px solid black" },
               display: "flex",
               justifyContent: "space-around",
               alignItems: "center",
@@ -125,7 +132,6 @@ const PublicSettings = () => {
                 fontSize: { sm: "18px", xs: "14px" },
                 fontWeight: 500,
                 textAlign: { md: "center", xs: "left" },
-                mt: 2,
                 borderRight: { md: "1px solid black" },
                 cursor: "pointer",
                 ":hover": { color: "#E37E31" },
@@ -137,10 +143,14 @@ const PublicSettings = () => {
           </Box>
         </Grid>
 
-        <Grid item md={3} xs={12}>
+        <Grid
+          item
+          md={3}
+          xs={12}
+          sx={{ display: "flex", alignItems: "center" }}
+        >
           <Box
             sx={{
-              borderRight: { md: "1px solid black" },
               display: "flex",
               justifyContent: "space-around",
               alignItems: "center",
@@ -151,7 +161,6 @@ const PublicSettings = () => {
                 fontSize: { sm: "18px", xs: "14px" },
                 fontWeight: 500,
                 textAlign: { md: "center", xs: "left" },
-                mt: 2,
                 borderRight: { md: "1px solid black" },
                 cursor: "pointer",
                 ":hover": { color: "#E37E31" },
