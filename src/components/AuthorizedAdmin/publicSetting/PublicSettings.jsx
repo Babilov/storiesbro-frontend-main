@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { PublicsContext } from "../../../context/PublicsContext";
 import { API_URL } from "../../../constants/constatns";
 import axios from "axios";
+import question from "./images/question.svg";
 
 const userId = localStorage.getItem("id");
 
@@ -98,6 +99,7 @@ const PublicSettings = () => {
           >
             Стандартные МЦА
           </Typography>
+          <Box component="img" src={question} alt="question" />
         </Grid>
 
         <Grid item md={3} xs={12}>
@@ -114,6 +116,7 @@ const PublicSettings = () => {
           >
             Стандартные ЖЦА
           </Typography>
+          <Box component="img" src={question} alt="question" />
         </Grid>
 
         <Grid item md={3} xs={12}>
@@ -130,6 +133,7 @@ const PublicSettings = () => {
           >
             Стандартные ВЦА
           </Typography>
+          <Box component="img" src={question} alt="question" />
         </Grid>
         {/*
         <Grid item md={2.4} xs={12}>

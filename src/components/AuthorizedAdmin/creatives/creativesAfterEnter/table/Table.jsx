@@ -160,7 +160,7 @@ const Table = ({ publics, setPublics }) => {
                 }}
                 onClick={() => handleDelete(publicObj["group_id"])}
               >
-                Удалить
+                Отключить
               </Typography>
             </Grid>
           </Grid>
@@ -239,7 +239,7 @@ const Table = ({ publics, setPublics }) => {
                 sx={{ fontSize: "12px", m: 2, cursor: "pointer" }}
                 onClick={() => handleDelete(publicObj["group_id"])}
               >
-                Удалить
+                Отключить
               </Typography>
             </Box>
           </Box>
