@@ -1,4 +1,4 @@
-import { Box, Grid, Typography } from "@mui/material";
+import { Box, Grid, Tooltip, Typography } from "@mui/material";
 import React, { useContext, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { PublicsContext } from "../../../context/PublicsContext";
@@ -116,7 +116,7 @@ const PublicSettings = () => {
               component="img"
               src={question}
               alt="question"
-              sx={{ ml: "5px", mr: "20px" }}
+              sx={{ ml: "5px", mr: "20px", cursor: "pointer" }}
             />
           </Box>
         </Grid>
@@ -153,7 +153,7 @@ const PublicSettings = () => {
               component="img"
               src={question}
               alt="question"
-              sx={{ ml: "5px", mr: "20px" }}
+              sx={{ ml: "5px", mr: "20px", cursor: "pointer" }}
             />
           </Box>
         </Grid>
@@ -186,12 +186,14 @@ const PublicSettings = () => {
             >
               Стандартные ВЦА
             </Typography>
-            <Box
-              component="img"
-              src={question}
-              alt="question"
-              sx={{ ml: "5px", mr: "20px" }}
-            />
+            <Tooltip title="Взрослая целевая аудитория">
+              <Box
+                component="img"
+                src={question}
+                alt="question"
+                sx={{ ml: "5px", mr: "20px", cursor: "pointer" }}
+              />
+            </Tooltip>
           </Box>
         </Grid>
         {/*
