@@ -36,6 +36,7 @@ const PublicSettings = () => {
   ))(({ theme }) => ({
     [`& .${tooltipClasses.arrow}`]: {
       color: "rgba(0, 0, 0, 0.8)",
+      marginBottom: "-4px",
     },
     [`& .${tooltipClasses.tooltip}`]: {
       backgroundColor: "rgba(0, 0, 0, 0.8)",
