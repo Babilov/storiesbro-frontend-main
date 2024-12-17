@@ -9,7 +9,7 @@ import question from "./images/question.svg";
 const PublicSettings = () => {
   const params = useParams();
   const [state, setState] = useState(false);
-  const [publicObj, setPublic] = useState(true);
+  const [publicObj, setPublic] = useState();
 
   useEffect(() => {
     const groupId = params.id;
