@@ -29,7 +29,7 @@ const PublicSettings = () => {
 
     // Вызываем функцию fetchData при монтировании компонента
     fetchData();
-  }, []);
+  }, [groupId]);
 
   return (
     <Grid container className="grid">
