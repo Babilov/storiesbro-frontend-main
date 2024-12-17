@@ -11,7 +11,7 @@ const PublicSettings = () => {
   const [state, setState] = useState(false);
   const [publicObj, setPublic] = useState(true);
   const params = useParams();
-
+  // тест
   useEffect(() => {
     const groupId = params.id;
     console.log(params.id);
