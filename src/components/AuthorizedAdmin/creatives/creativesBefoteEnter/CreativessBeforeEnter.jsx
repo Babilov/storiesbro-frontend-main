@@ -104,10 +104,28 @@ const CreativessBeforeEnter = () => {
 
   return (
     <Box className="creatives">
-      <Typography variant="h4" className="creatives__title">
+      <Typography
+        variant="h4"
+        className="creatives__title"
+        sx={{
+          fontSize: { md: "32px", xs: "16px" },
+          fontWeight: 600,
+          textAlign: "center",
+          mb: "40px",
+        }}
+      >
         Мои сообщества
       </Typography>
-      <Typography variant="body2" className="creatives__text">
+      <Typography
+        variant="body2"
+        className="creatives__text"
+        sx={{
+          fontSize: { md: "24px", xs: "16px" },
+          fontWeight: 400,
+          textAlign: "center",
+          m: "0 auto",
+        }}
+      >
         Вы не можете добавить сообщества, так как ваш аккаунт ВКонтакте не
         подключен
       </Typography>
