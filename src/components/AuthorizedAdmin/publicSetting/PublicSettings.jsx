@@ -35,10 +35,14 @@ const PublicSettings = () => {
     <Tooltip {...props} arrow classes={{ popper: className }} />
   ))(({ theme }) => ({
     [`& .${tooltipClasses.arrow}`]: {
-      color: theme.palette.common.black,
+      color: "rgba(0, 0, 0, 0.8)",
     },
     [`& .${tooltipClasses.tooltip}`]: {
-      backgroundColor: theme.palette.common.black,
+      backgroundColor: "rgba(0, 0, 0, 0.8)",
+      color: "#fff",
+      fontSize: "16px",
+      padding: "12px 16px",
+      borderRadius: "8px",
     },
   }));
   return (
@@ -201,6 +205,7 @@ const PublicSettings = () => {
                 </Typography>
                 <CustomToolTip
                   arrow
+                  sx={{ padding: 3, fontSize: "14px" }}
                   title={
                     <>
                       <Typography>Взрослая целевая аудитория</Typography>
