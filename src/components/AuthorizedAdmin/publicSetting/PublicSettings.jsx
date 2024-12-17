@@ -33,6 +33,7 @@ const PublicSettings = () => {
 
   return (
     <Grid container className="grid">
+      {console.log(publicObj)}
       {console.log(publicObj.group)}
       {console.log(publicObj["group"])}
       <Grid item xs={12}>
