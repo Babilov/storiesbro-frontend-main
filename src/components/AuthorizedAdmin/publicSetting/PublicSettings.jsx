@@ -1,4 +1,5 @@
-import { Avatar, Box, Grid, Tooltip, Typography } from "@mui/material";
+import { Avatar, Box, Grid, styled, Typography } from "@mui/material";
+import Tooltip, { tooltipClasses } from "@mui/material/Tooltip";
 import React, { useContext, useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { PublicsContext } from "../../../context/PublicsContext";
@@ -30,6 +31,16 @@ const PublicSettings = () => {
     fetchData();
   }, [groupId]);
 
+  const CustomToolTip = styled(({ className, ...props }) => (
+    <Tooltip {...props} arrow classes={{ popper: className }} />
+  ))(({ theme }) => ({
+    [`& .${tooltipClasses.arrow}`]: {
+      color: theme.palette.common.black,
+    },
+    [`& .${tooltipClasses.tooltip}`]: {
+      backgroundColor: theme.palette.common.black,
+    },
+  }));
   return (
     <Grid container className="grid">
       {publicObj !== undefined ? (
@@ -188,9 +199,8 @@ const PublicSettings = () => {
                 >
                   Стандартные ВЦА
                 </Typography>
-                <Tooltip
+                <CustomToolTip
                   arrow
-                  sx={{ backgroundColor: "black" }}
                   title={
                     <>
                       <Typography>Взрослая целевая аудитория</Typography>
@@ -204,7 +214,7 @@ const PublicSettings = () => {
                     alt="question"
                     sx={{ ml: "5px", mr: "20px", cursor: "pointer" }}
                   />
-                </Tooltip>
+                </CustomToolTip>
               </Box>
             </Grid>
             {/*
