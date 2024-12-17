@@ -13,9 +13,9 @@ const PublicSettings = () => {
   console.log(params);
   // тест
   useEffect(() => {
-    const groupId = params.id;
-    console.log(params.id);
-    console.log(groupId);
+    const groupId = params["id"];
+    // console.log(params["id"]);
+    // console.log(groupId);
     const fetchData = async () => {
       try {
         const userId = localStorage.getItem("id");
