@@ -9,7 +9,7 @@ import question from "./images/question.svg";
 const PublicSettings = () => {
   const params = useParams();
   const [state, setState] = useState(false);
-  const [publicObj, setPublic] = useState();
+  const [publicObj, setPublic] = useState(undefined);
   const groupId = params.id;
 
   useEffect(() => {
@@ -51,7 +51,7 @@ const PublicSettings = () => {
             <Box
               component="img"
               alt="img"
-              src={publicObj?.group?.image || ""}
+              src={publicObj["group"]["photo"]}
               sx={{ width: "15%" }}
             />
             <Typography
@@ -59,7 +59,7 @@ const PublicSettings = () => {
             >
               {/* {publicObj["name"]} */}
               {/* {publics[0]['name']} */}
-              {publicObj?.group?.name || ""}
+              {publicObj["group"]["name"]}
             </Typography>
           </Grid>
 
