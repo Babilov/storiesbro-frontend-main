@@ -186,6 +186,8 @@ const PublicSettings = () => {
                   Стандартные ВЦА
                 </Typography>
                 <Tooltip
+                  arrow
+                  sx={{ background: "black" }}
                   title={
                     <>
                       <Typography>Взрослая целевая аудитория</Typography>
