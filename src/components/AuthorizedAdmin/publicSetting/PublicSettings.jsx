@@ -190,7 +190,7 @@ const PublicSettings = () => {
                 </Typography>
                 <Tooltip
                   arrow
-                  sx={{ rippleBackgroundColor: "black" }}
+                  sx={{ backgroundColor: "black" }}
                   title={
                     <>
                       <Typography>Взрослая целевая аудитория</Typography>
