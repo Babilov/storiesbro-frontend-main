@@ -136,8 +136,8 @@ const PublicSettings = () => {
                   arrow
                   title={
                     <>
-                      <Typography>Взрослая целевая аудитория</Typography>
-                      <Link> Подробнее </Link>
+                      <Typography>Мужская целевая аудитория</Typography>
+                      <Link to={"/admin-help"}> Подробнее </Link>
                     </>
                   }
                 >
@@ -183,7 +183,7 @@ const PublicSettings = () => {
                   arrow
                   title={
                     <>
-                      <Typography>Взрослая целевая аудитория</Typography>
+                      <Typography>Женская целевая аудитория</Typography>
                       <Link> Подробнее </Link>
                     </>
                   }
