@@ -50,13 +50,13 @@ const PublicSettings = () => {
         <Box
           component="img"
           alt="img"
-          src={publicObj["group"]["image"]}
+          src={publicObj?.group?.image || ""}
           sx={{ width: "15%" }}
         />
         <Typography sx={{ fontSize: "24px", fontWeight: 600, mt: 4, mb: 4 }}>
           {/* {publicObj["name"]} */}
           {/* {publics[0]['name']} */}
-          {publicObj["group"]["name"]}
+          {publicObj?.group?.name || ""}
         </Typography>
       </Grid>
 
