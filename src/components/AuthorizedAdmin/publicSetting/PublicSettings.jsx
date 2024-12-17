@@ -10,9 +10,11 @@ const PublicSettings = () => {
   const params = useParams();
   const [state, setState] = useState(false);
   const [publicObj, setPublic] = useState();
+  const groupId = params.id;
 
+  console.log(`groupId=${groupId}`);
   useEffect(() => {
-    const groupId = params.id;
+    console.log("start");
     const fetchData = async () => {
       try {
         const userId = localStorage.getItem("id");
