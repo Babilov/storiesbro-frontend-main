@@ -137,7 +137,7 @@ const PublicSettings = () => {
                   title={
                     <>
                       <Typography>Мужская целевая аудитория</Typography>
-                      <Link to={"/admin-help"}> Подробнее </Link>
+                      <Link to={"/admin-help#mca"}> Подробнее </Link>
                     </>
                   }
                 >
