@@ -11,17 +11,14 @@ const PublicSettings = () => {
   const [state, setState] = useState(false);
   const [publicObj, setPublic] = useState(true);
   const params = useParams();
-  console.log(params);
+  // console.log(params);
   // тест
   useEffect(() => {
-    const groupId = params.id;
-    console.log(params.id);
-    console.log(groupId);
     const fetchData = async () => {
       try {
         const userId = localStorage.getItem("id");
         const response = await axios.get(
-          `https://storisbro.com/api/group_details/?user_id=${userId}/group_id=${groupId}`,
+          `https://storisbro.com/api/group_details/?user_id=${userId}&group_id=${id}`,
         );
         setPublic(response.data);
       } catch (error) {
@@ -53,13 +50,13 @@ const PublicSettings = () => {
         <Box
           component="img"
           alt="img"
-          // src={publicObj["file"]}
+          src={publicObj["group"]["photo"]}
           sx={{ width: "15%" }}
         />
         <Typography sx={{ fontSize: "24px", fontWeight: 600, mt: 4, mb: 4 }}>
           {/* {publicObj["name"]} */}
           {/* {publics[0]['name']} */}
-          {publicObj["name"]}
+          {publicObj["group"]["name"]}
         </Typography>
       </Grid>
 
