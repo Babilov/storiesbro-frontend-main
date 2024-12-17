@@ -41,7 +41,7 @@ const PublicSettings = () => {
       backgroundColor: "rgba(0, 0, 0, 0.8)",
       color: "#fff",
       fontSize: "16px",
-      padding: "12px 16px",
+      padding: "0 16px 12px 16px",
       borderRadius: "8px",
       marginTop: "-10px",
     },
