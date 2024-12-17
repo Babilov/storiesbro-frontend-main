@@ -5,25 +5,24 @@ import { PublicsContext } from "../../../context/PublicsContext";
 import { API_URL } from "../../../constants/constatns";
 import axios from "axios";
 import question from "./images/question.svg";
-import logToBackend from "../../../utils/logs";
 
 const PublicSettings = () => {
   const { id } = useParams();
   const [state, setState] = useState(false);
   const [publicObj, setPublic] = useState(true);
   const params = useParams();
-  const groupId = params.id;
+
   useEffect(() => {
+    const groupId = params.id;
+    console.log(params.id);
+    console.log(groupId);
     const fetchData = async () => {
       try {
-        console.log("useEffect");
         const userId = localStorage.getItem("id");
         const response = await axios.get(
-          `https://storisbro.com/api/group_details/?user_id=${userId}&group_id=${groupId}`,
+          `https://storisbro.com/api/group_details/?user_id=${userId}/group_id=${groupId}`,
         );
         setPublic(response.data);
-        logToBackend(JSON.stringify(response.data));
-        console.log("zapisal");
       } catch (error) {
         console.error("Ошибка при получении данных:", error);
       }
@@ -53,13 +52,13 @@ const PublicSettings = () => {
         <Box
           component="img"
           alt="img"
-          src={publicObj["group"]["photo"]}
+          // src={publicObj["file"]}
           sx={{ width: "15%" }}
         />
         <Typography sx={{ fontSize: "24px", fontWeight: 600, mt: 4, mb: 4 }}>
           {/* {publicObj["name"]} */}
           {/* {publics[0]['name']} */}
-          {publicObj["group"]["name"]}
+          {publicObj["name"]}
         </Typography>
       </Grid>
 
