@@ -132,12 +132,22 @@ const PublicSettings = () => {
                 >
                   Стандартные МЦА
                 </Typography>
-                <Box
-                  component="img"
-                  src={question}
-                  alt="question"
-                  sx={{ ml: "5px", mr: "20px", cursor: "pointer" }}
-                />
+                <CustomToolTip
+                  arrow
+                  title={
+                    <>
+                      <Typography>Взрослая целевая аудитория</Typography>
+                      <Link> Подробнее </Link>
+                    </>
+                  }
+                >
+                  <Box
+                    component="img"
+                    src={question}
+                    alt="question"
+                    sx={{ ml: "5px", mr: "20px", cursor: "pointer" }}
+                  />
+                </CustomToolTip>
               </Box>
             </Grid>
 
@@ -169,12 +179,22 @@ const PublicSettings = () => {
                 >
                   Стандартные ЖЦА
                 </Typography>
-                <Box
-                  component="img"
-                  src={question}
-                  alt="question"
-                  sx={{ ml: "5px", mr: "20px", cursor: "pointer" }}
-                />
+                <CustomToolTip
+                  arrow
+                  title={
+                    <>
+                      <Typography>Взрослая целевая аудитория</Typography>
+                      <Link> Подробнее </Link>
+                    </>
+                  }
+                >
+                  <Box
+                    component="img"
+                    src={question}
+                    alt="question"
+                    sx={{ ml: "5px", mr: "20px", cursor: "pointer" }}
+                  />
+                </CustomToolTip>
               </Box>
             </Grid>
 
