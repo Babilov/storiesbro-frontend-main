@@ -43,6 +43,7 @@ const PublicSettings = () => {
       fontSize: "16px",
       padding: "12px 16px",
       borderRadius: "8px",
+      marginTop: "-10px",
     },
   }));
   return (
