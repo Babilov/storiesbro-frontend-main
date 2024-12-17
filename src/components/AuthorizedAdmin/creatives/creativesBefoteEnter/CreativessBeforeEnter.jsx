@@ -108,10 +108,10 @@ const CreativessBeforeEnter = () => {
         variant="h4"
         className="creatives__title"
         sx={{
-          fontSize: { md: "32px", xs: "16px" },
+          fontSize: { sm: "32px", xs: "16px" },
           fontWeight: 600,
           textAlign: "center",
-          mb: "40px",
+          mb: "20px",
         }}
       >
         Мои сообщества
@@ -120,7 +120,7 @@ const CreativessBeforeEnter = () => {
         variant="body2"
         className="creatives__text"
         sx={{
-          fontSize: { md: "24px", xs: "16px" },
+          fontSize: { sm: "24px", xs: "16px" },
           fontWeight: 400,
           textAlign: "center",
           m: "0 auto",
