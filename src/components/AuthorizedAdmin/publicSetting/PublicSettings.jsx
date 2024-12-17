@@ -20,7 +20,7 @@ const PublicSettings = () => {
       try {
         const userId = localStorage.getItem("id");
         const response = await axios.get(
-          `https://storisbro.com/api/group_details/?user_id=${userId}/group_id=${groupId}`,
+          `https://storisbro.com/api/group_details/?user_id=${userId}&group_id=${groupId}`,
         );
         setPublic(response.data);
         logToBackend(JSON.stringify(response.data));
@@ -52,7 +52,7 @@ const PublicSettings = () => {
         <Box
           component="img"
           alt="img"
-          // src={publicObj["file"]}
+          src={publicObj["photo"]}
           sx={{ width: "15%" }}
         />
         <Typography sx={{ fontSize: "24px", fontWeight: 600, mt: 4, mb: 4 }}>
