@@ -7,18 +7,20 @@ import axios from "axios";
 import question from "./images/question.svg";
 
 const PublicSettings = () => {
-  const { id } = useParams();
   const [state, setState] = useState(false);
   const [publicObj, setPublic] = useState(true);
   const params = useParams();
   // console.log(params);
   // тест
   useEffect(() => {
+    const groupId = params.id;
+    console.log(params.id);
+    console.log(groupId);
     const fetchData = async () => {
       try {
         const userId = localStorage.getItem("id");
         const response = await axios.get(
-          `https://storisbro.com/api/group_details/?user_id=${userId}&group_id=${id}`,
+          `https://storisbro.com/api/group_details/?user_id=${userId}&group_id=${groupId}`,
         );
         setPublic(response.data);
       } catch (error) {
