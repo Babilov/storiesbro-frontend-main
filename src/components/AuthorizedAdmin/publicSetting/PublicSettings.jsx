@@ -5,22 +5,25 @@ import { PublicsContext } from "../../../context/PublicsContext";
 import { API_URL } from "../../../constants/constatns";
 import axios from "axios";
 import question from "./images/question.svg";
-
-const userId = localStorage.getItem("id");
+import logToBackend from "../../../utils/logs";
 
 const PublicSettings = () => {
   const { id } = useParams();
-  const [data, setData] = useState([]);
   const [state, setState] = useState(false);
-
+  const [publicObj, setPublic] = useState(true);
+  const params = useParams();
+  const groupId = params.id;
+  console.log(params);
+  console.log(groupId);
   useEffect(() => {
-    // Функция для выполнения запроса с использованием Axios
     const fetchData = async () => {
       try {
+        const userId = localStorage.getItem("id");
         const response = await axios.get(
-          `${API_URL}api_communities/settings_communities/${userId}/${id}`,
+          `https://storisbro.com/api/group_details/?user_id=${userId}/group_id=${groupId}`,
         );
-        setData(response.data);
+        setPublic(response.data);
+        logToBackend(JSON.stringify(response.data));
       } catch (error) {
         console.error("Ошибка при получении данных:", error);
       }
@@ -28,11 +31,6 @@ const PublicSettings = () => {
 
     // Вызываем функцию fetchData при монтировании компонента
     fetchData();
-
-    // Возвращаем функцию очистки (cleanup function) для отмены запроса при размонтировании компонента
-    return () => {
-      // Отменить запрос, если компонент размонтирован
-    };
   }, []);
 
   return (
@@ -60,7 +58,7 @@ const PublicSettings = () => {
         <Typography sx={{ fontSize: "24px", fontWeight: 600, mt: 4, mb: 4 }}>
           {/* {publicObj["name"]} */}
           {/* {publics[0]['name']} */}
-          {data["name"]}
+          {publicObj["name"]}
         </Typography>
       </Grid>
 
