@@ -7,15 +7,12 @@ import axios from "axios";
 import question from "./images/question.svg";
 
 const PublicSettings = () => {
+  const params = useParams();
   const [state, setState] = useState(false);
   const [publicObj, setPublic] = useState(true);
-  const params = useParams();
-  console.log(params);
-  // тест
+
   useEffect(() => {
-    const groupId = params["id"];
-    // console.log(params["id"]);
-    // console.log(groupId);
+    const groupId = params.id;
     const fetchData = async () => {
       try {
         const userId = localStorage.getItem("id");
@@ -34,7 +31,6 @@ const PublicSettings = () => {
 
   return (
     <Grid container className="grid">
-      {console.log(publicObj)}
       <Grid item xs={12}>
         <Typography className="title">Настройки сообщества</Typography>
       </Grid>
@@ -52,7 +48,7 @@ const PublicSettings = () => {
         <Box
           component="img"
           alt="img"
-          src={publicObj["group"]["photo"]}
+          src={publicObj["group"]["image"]}
           sx={{ width: "15%" }}
         />
         <Typography sx={{ fontSize: "24px", fontWeight: 600, mt: 4, mb: 4 }}>
