@@ -1,4 +1,4 @@
-import { Box, Grid, Tooltip, Typography } from "@mui/material";
+import { Avatar, Box, Grid, Tooltip, Typography } from "@mui/material";
 import React, { useContext, useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { PublicsContext } from "../../../context/PublicsContext";
@@ -48,11 +48,14 @@ const PublicSettings = () => {
               alignItems: "center",
             }}
           >
-            <Box
-              component="img"
+            <Avatar
               alt="img"
               src={publicObj["group"]["photo"]}
-              sx={{ width: "15%" }}
+              sx={{
+                width: { md: "184px", xs: "160px" },
+                height: { md: "184px", xs: "160px" },
+                borderRadius: "50%",
+              }}
             />
             <Typography
               sx={{ fontSize: "24px", fontWeight: 600, mt: 4, mb: 4 }}
