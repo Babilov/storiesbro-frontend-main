@@ -13,8 +13,6 @@ const PublicSettings = () => {
   const [publicObj, setPublic] = useState(true);
   const params = useParams();
   const groupId = params.id;
-  console.log(params);
-  console.log(groupId);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -35,6 +33,7 @@ const PublicSettings = () => {
 
   return (
     <Grid container className="grid">
+      {console.log(publicObj)}
       <Grid item xs={12}>
         <Typography className="title">Настройки сообщества</Typography>
       </Grid>
