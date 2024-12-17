@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Box, Typography } from "@mui/material";
 
 import mca from "./images/mca.png";
@@ -6,8 +6,20 @@ import firstVideo from "./images/IMG_8419.mp4";
 import secondVideo from "./images/IMG_8420.mp4";
 import thirdVideo from "./images/IMG_8417.mp4";
 import AuthorizedAdminCarusel from "../../UI/myCarousel/AuthorizedAdminCarusel";
+import { useLocation } from "react-router-dom";
 
 const Mca = () => {
+  const { hash } = useLocation();
+
+  useEffect(() => {
+    if (hash) {
+      const element = document.querySelector(hash);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  }, [hash]);
+
   return (
     <Box sx={{ mt: "50px" }} id="mca">
       <Typography className="description" sx={{ fontSize: "16px" }}>
