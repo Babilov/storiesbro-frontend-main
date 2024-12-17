@@ -16,12 +16,14 @@ const PublicSettings = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        console.log("useEffect");
         const userId = localStorage.getItem("id");
         const response = await axios.get(
           `https://storisbro.com/api/group_details/?user_id=${userId}&group_id=${groupId}`,
         );
         setPublic(response.data);
         logToBackend(JSON.stringify(response.data));
+        console.log("zapisal");
       } catch (error) {
         console.error("Ошибка при получении данных:", error);
       }
@@ -34,8 +36,6 @@ const PublicSettings = () => {
   return (
     <Grid container className="grid">
       {console.log(publicObj)}
-      {console.log(publicObj.group)}
-      {console.log(publicObj["group"])}
       <Grid item xs={12}>
         <Typography className="title">Настройки сообщества</Typography>
       </Grid>
