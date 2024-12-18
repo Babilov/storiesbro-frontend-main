@@ -49,7 +49,6 @@ const AddPublicModal = ({ open, setOpen, publics }) => {
             },
           );
           console.log("Данные успешно отправлены");
-          logToBackend(JSON.stringify(setOpen));
           window.location.reload();
         } catch (error) {
           console.error("Ошибка при отправке данных:", error);

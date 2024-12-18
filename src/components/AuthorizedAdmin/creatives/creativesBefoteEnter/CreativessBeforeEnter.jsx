@@ -56,7 +56,6 @@ const CreativessBeforeEnter = () => {
         `/accounts/vk/login/callback/?code=${code}&state=${state}&device_id=${device_id}&code_verifier=${codeVerifier}&user_id=${user_id}`,
       )
       .then((res) => {
-        logToBackend(`RES: ${JSON.stringify(res)}`);
         localStorage.setItem("vk_access_token", res.data.access_token);
         localStorage.setItem("is_authed", "true");
         window.location.reload();

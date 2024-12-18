@@ -6,15 +6,17 @@ import { PublicsContext } from "../../../context/PublicsContext";
 import { API_URL } from "../../../constants/constatns";
 import axios from "axios";
 import question from "./images/question.svg";
+import logToBackend from "../../../utils/logs";
+import CustomToolTip from "../../UI/tooltip/CustomTooltip";
 
 const PublicSettings = () => {
   const params = useParams();
-  const [state, setState] = useState(false);
+  const [caState, setCaState] = useState(0);
+  const [state, setState] = useState(0);
   const [publicObj, setPublic] = useState(undefined);
   const groupId = params.id;
 
   useEffect(() => {
-    console.log("start");
     const fetchData = async () => {
       try {
         const userId = localStorage.getItem("id");
@@ -31,23 +33,49 @@ const PublicSettings = () => {
     fetchData();
   }, [groupId]);
 
-  const CustomToolTip = styled(({ className, ...props }) => (
-    <Tooltip {...props} arrow classes={{ popper: className }} />
-  ))(({ theme }) => ({
-    [`& .${tooltipClasses.arrow}`]: {
-      color: "rgba(0, 0, 0, 0.8)",
-      marginBottom: "-4px",
-    },
-    [`& .${tooltipClasses.tooltip}`]: {
-      backgroundColor: "rgba(0, 0, 0, 0.8)",
-      color: "#fff",
-      fontSize: "16px",
-      padding: "12px 16px",
-      borderRadius: "8px",
-      marginTop: "-10px",
-      transformOrigin: "center top",
-    },
-  }));
+  useEffect(() => {
+    const fetchCaState = async () => {
+      try {
+        const resCa = await axios.get(
+          "https://storisbro.com//api/community_status/",
+        );
+        const resSt = await axios.get(
+          "https://storisbro.com/api/community_switch/",
+        );
+        setCaState(resCa.data);
+        setState(resSt.data);
+
+        logToBackend(`Ca: ${caState}`);
+        logToBackend(`St: ${state}`);
+      } catch (error) {
+        logToBackend(`Error GET: ${error}`);
+      }
+    };
+    fetchCaState();
+  }, []);
+
+  const onCaClick = async (ca) => {
+    try {
+      await axios.post("https://storisbro.com//api/community_status/", {
+        status: ca,
+      });
+      setCaState(ca);
+    } catch (error) {
+      logToBackend(`Error POST: ${error}`);
+    }
+  };
+
+  const onSwitchClick = async (st) => {
+    try {
+      await axios.post("https://storisbro.com/api/community_switch/", {
+        status: st,
+      });
+      setState(st);
+    } catch (error) {
+      logToBackend(`Error POST: ${error}`);
+    }
+  };
+
   return (
     <Grid container className="grid">
       {publicObj !== undefined ? (
@@ -126,9 +154,10 @@ const PublicSettings = () => {
                     fontWeight: 500,
                     textAlign: { md: "center", xs: "left" },
                     cursor: "pointer",
-                    color: "#E37E31",
+                    color: caState === 0 ? "#E37E31" : "black",
                     ":hover": { color: "#E37E31" },
                   }}
+                  onClick={() => onCaClick(0)}
                 >
                   Стандартные МЦА
                 </Typography>
@@ -172,10 +201,11 @@ const PublicSettings = () => {
                     fontSize: { sm: "18px", xs: "14px" },
                     fontWeight: 500,
                     textAlign: { md: "center", xs: "left" },
-
                     cursor: "pointer",
+                    color: caState === 1 ? "#E37E31" : "black",
                     ":hover": { color: "#E37E31" },
                   }}
+                  onClick={() => onCaClick(1)}
                 >
                   Стандартные ЖЦА
                 </Typography>
@@ -219,10 +249,11 @@ const PublicSettings = () => {
                     fontSize: { sm: "18px", xs: "14px" },
                     fontWeight: 500,
                     textAlign: { md: "center", xs: "left" },
-
                     cursor: "pointer",
+                    color: caState === 2 ? "#E37E31" : "black",
                     ":hover": { color: "#E37E31" },
                   }}
+                  onClick={() => onCaClick(2)}
                 >
                   Стандартные ВЦА
                 </Typography>
@@ -318,11 +349,11 @@ const PublicSettings = () => {
                   textAlign: "center",
                   mt: 2,
                   cursor: "pointer",
-                  color: state ? "#D25D48" : "black",
+                  color: state === 0 ? "#D25D48" : "black",
                 }}
-                onClick={() => setState(true)}
+                onClick={() => onSwitchClick(0)}
               >
-                Включить
+                Включено
               </Typography>
             </Grid>
             <Grid item xs={6}>
@@ -333,11 +364,11 @@ const PublicSettings = () => {
                   textAlign: "center",
                   mt: 2,
                   cursor: "pointer",
-                  color: !state ? "#D25D48" : "black",
+                  color: state === 1 ? "#D25D48" : "black",
                 }}
-                onClick={() => setState(false)}
+                onClick={() => onSwitchClick(1)}
               >
-                Отключено
+                Отключить
               </Typography>
             </Grid>
           </Grid>

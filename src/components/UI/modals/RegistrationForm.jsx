@@ -56,7 +56,6 @@ const RegistrationForm = ({
       const response = await axios.get(
         `https://storisbro.com/api/check_email/${email}`,
       );
-      logToBackend(`URL: https://storisbro.com/api/check_email/${email}`);
       if (response.data.email) {
         setError(true);
         setErrorMessage("Пользователь с такой почтой уже зарегестрирован!");
