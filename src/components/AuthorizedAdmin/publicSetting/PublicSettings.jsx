@@ -1,13 +1,11 @@
 import { Avatar, Box, Grid, styled, Typography } from "@mui/material";
-import Tooltip, { tooltipClasses } from "@mui/material/Tooltip";
 import React, { useContext, useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
-import { PublicsContext } from "../../../context/PublicsContext";
-import { API_URL } from "../../../constants/constatns";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import question from "./images/question.svg";
 import logToBackend from "../../../utils/logs";
 import CustomToolTip from "../../UI/tooltip/CustomTooltip";
+import arrowSvg from "./images/arrowSvg.svg";
 
 const PublicSettings = () => {
   const params = useParams();
@@ -76,11 +74,18 @@ const PublicSettings = () => {
     }
   };
 
+  const navigate = useNavigate();
+
   return (
     <Grid container className="grid">
       {publicObj !== undefined ? (
         <>
           <Grid item xs={12}>
+            <Box
+              component="img"
+              src={arrowSvg}
+              onClick={() => navigate("/publics")}
+            />
             <Typography className="title">Настройки сообщества</Typography>
           </Grid>
 
