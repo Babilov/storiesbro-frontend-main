@@ -140,7 +140,7 @@ const PublicSettings = () => {
                 Контент-видео
               </Typography>
             </Grid>
-            <Grid container>
+            <Grid container sx={{ p: "10px 0" }}>
               <Grid
                 item
                 md={3}
@@ -148,7 +148,11 @@ const PublicSettings = () => {
                 sx={{
                   display: "flex",
                   alignItems: "center",
-                  borderRight: { md: "1px solid black" },
+                  borderRight: {
+                    md: "1px solid black",
+                    height: "25px",
+                    m: "auto",
+                  },
                 }}
               >
                 <Box
@@ -204,7 +208,11 @@ const PublicSettings = () => {
                 sx={{
                   display: "flex",
                   alignItems: "center",
-                  borderRight: { md: "1px solid black" },
+                  borderRight: {
+                    md: "1px solid black",
+                    height: "25px",
+                    m: "auto",
+                  },
                 }}
               >
                 <Box
@@ -260,7 +268,11 @@ const PublicSettings = () => {
                 sx={{
                   display: "flex",
                   alignItems: "center",
-                  borderRight: { md: "1px solid black" },
+                  borderRight: {
+                    md: "1px solid black",
+                    height: "25px",
+                    m: "auto",
+                  },
                 }}
               >
                 <Box
@@ -312,7 +324,12 @@ const PublicSettings = () => {
                 item
                 md={3}
                 xs={12}
-                sx={{ display: "flex", alignItems: "center" }}
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  height: "25px",
+                  m: "auto",
+                }}
               >
                 <Box
                   sx={{
