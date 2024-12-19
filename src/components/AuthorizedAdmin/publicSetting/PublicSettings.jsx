@@ -140,242 +140,253 @@ const PublicSettings = () => {
                 Контент-видео
               </Typography>
             </Grid>
-            <Grid
-              item
-              md={3}
-              xs={12}
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                borderRight: { md: "1px solid black" },
-              }}
-            >
-              <Box
+            <Grid container>
+              <Grid
+                item
+                md={3}
+                xs={12}
                 sx={{
                   display: "flex",
-                  justifyContent: "space-around",
                   alignItems: "center",
-                  m: "10px auto",
+                  borderRight: { md: "1px solid black" },
                 }}
               >
-                <Typography
+                <Box
                   sx={{
-                    fontSize: { sm: "18px", xs: "14px" },
-                    fontWeight: 500,
-                    textAlign: { md: "center", xs: "left" },
-                    cursor: "pointer",
-                    color: caState === 0 ? "#E37E31" : "black",
-                    ":hover": { color: "#E37E31" },
+                    display: "flex",
+                    justifyContent: "space-around",
+                    alignItems: "center",
+                    m: "10px auto",
                   }}
-                  onClick={() => onCaClick(0)}
                 >
-                  Стандартные МЦА
-                </Typography>
-                <CustomToolTip
-                  arrow
-                  title={
-                    <>
-                      <Typography>Мужская целевая аудитория</Typography>
-                      <Link to="/admin-help#mca" style={{ color: "lightblue" }}>
-                        {" "}
-                        Подробнее{" "}
-                      </Link>
-                    </>
-                  }
+                  <Typography
+                    sx={{
+                      fontSize: { sm: "18px", xs: "14px" },
+                      fontWeight: 500,
+                      textAlign: { md: "center", xs: "left" },
+                      cursor: "pointer",
+                      color: caState === 0 ? "#E37E31" : "black",
+                      ":hover": { color: "#E37E31" },
+                    }}
+                    onClick={() => onCaClick(0)}
+                  >
+                    Стандартные МЦА
+                  </Typography>
+                  <CustomToolTip
+                    arrow
+                    title={
+                      <>
+                        <Typography>Мужская целевая аудитория</Typography>
+                        <Link
+                          to="/admin-help#mca"
+                          style={{ color: "lightblue" }}
+                        >
+                          {" "}
+                          Подробнее{" "}
+                        </Link>
+                      </>
+                    }
+                  >
+                    <Box
+                      component="img"
+                      src={question}
+                      alt="question"
+                      sx={{ ml: "5px", cursor: "pointer" }}
+                    />
+                  </CustomToolTip>
+                </Box>
+              </Grid>
+
+              <Grid
+                item
+                md={3}
+                xs={12}
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  borderRight: { md: "1px solid black" },
+                }}
+              >
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "space-around",
+                    alignItems: "center",
+                    m: "10px auto",
+                  }}
                 >
-                  <Box
-                    component="img"
-                    src={question}
-                    alt="question"
-                    sx={{ ml: "5px", cursor: "pointer" }}
-                  />
-                </CustomToolTip>
-              </Box>
+                  <Typography
+                    sx={{
+                      fontSize: { sm: "18px", xs: "14px" },
+                      fontWeight: 500,
+                      textAlign: { md: "center", xs: "left" },
+                      cursor: "pointer",
+                      color: caState === 1 ? "#E37E31" : "black",
+                      ":hover": { color: "#E37E31" },
+                    }}
+                    onClick={() => onCaClick(1)}
+                  >
+                    Стандартные ЖЦА
+                  </Typography>
+                  <CustomToolTip
+                    arrow
+                    title={
+                      <>
+                        <Typography>Женская целевая аудитория</Typography>
+                        <Link
+                          to="/admin-help#jca"
+                          style={{ color: "lightblue" }}
+                        >
+                          {" "}
+                          Подробнее{" "}
+                        </Link>
+                      </>
+                    }
+                  >
+                    <Box
+                      component="img"
+                      src={question}
+                      alt="question"
+                      sx={{ ml: "5px", cursor: "pointer" }}
+                    />
+                  </CustomToolTip>
+                </Box>
+              </Grid>
+
+              <Grid
+                item
+                md={3}
+                xs={12}
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  borderRight: { md: "1px solid black" },
+                }}
+              >
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "space-around",
+                    alignItems: "center",
+                    m: "10px auto",
+                  }}
+                >
+                  <Typography
+                    sx={{
+                      fontSize: { sm: "18px", xs: "14px" },
+                      fontWeight: 500,
+                      textAlign: { md: "center", xs: "left" },
+                      cursor: "pointer",
+                      color: caState === 2 ? "#E37E31" : "black",
+                      ":hover": { color: "#E37E31" },
+                    }}
+                    onClick={() => onCaClick(2)}
+                  >
+                    Взрослые СЦА
+                  </Typography>
+                  <CustomToolTip
+                    arrow
+                    title={
+                      <>
+                        <Typography>Взрослая целевая аудитория</Typography>
+                        <Link
+                          to="/admin-help#vca"
+                          style={{ color: "lightblue" }}
+                        >
+                          {" "}
+                          Подробнее{" "}
+                        </Link>
+                      </>
+                    }
+                  >
+                    <Box
+                      component="img"
+                      src={question}
+                      alt="question"
+                      sx={{ ml: "5px", cursor: "pointer" }}
+                    />
+                  </CustomToolTip>
+                </Box>
+              </Grid>
+              <Grid
+                item
+                md={3}
+                xs={12}
+                sx={{ display: "flex", alignItems: "center" }}
+              >
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "space-around",
+                    alignItems: "center",
+                    m: "10px auto",
+                  }}
+                >
+                  <Typography
+                    sx={{
+                      fontSize: { sm: "18px", xs: "14px" },
+                      fontWeight: { sm: 400, xs: 500 },
+                      textAlign: { md: "center", xs: "left" },
+                      cursor: "pointer",
+                      ":hover": { color: "#E37E31" },
+                    }}
+                  >
+                    Не постить
+                  </Typography>
+                </Box>
+              </Grid>
             </Grid>
 
             <Grid
               item
-              md={3}
-              xs={12}
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                borderRight: { md: "1px solid black" },
-              }}
+              md={4}
+              container
+              className="grayBorder"
+              sx={{ m: "40px auto", p: 2 }}
             >
-              <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: "space-around",
-                  alignItems: "center",
-                  m: "10px auto",
-                }}
-              >
+              <Grid item xs={12} sx={{ borderBottom: "1px solid #CDCDCD" }}>
+                <Typography
+                  sx={{
+                    fontSize: { sm: "18px", xs: "12px" },
+                    fontWeight: 600,
+                    textAlign: "center",
+                    mb: 2,
+                  }}
+                >
+                  Состояние
+                </Typography>
+              </Grid>
+              <Grid item xs={6}>
+                <Typography
+                  sx={{
+                    borderRight: "1px solid black",
+                    fontSize: { sm: "18px", xs: "14px" },
+                    fontWeight: 500,
+                    textAlign: "center",
+                    mt: 2,
+                    cursor: "pointer",
+                    color: state === 0 ? "#D25D48" : "black",
+                  }}
+                  onClick={() => onSwitchClick(0)}
+                >
+                  Включено
+                </Typography>
+              </Grid>
+              <Grid item xs={6}>
                 <Typography
                   sx={{
                     fontSize: { sm: "18px", xs: "14px" },
                     fontWeight: 500,
-                    textAlign: { md: "center", xs: "left" },
+                    textAlign: "center",
+                    mt: 2,
                     cursor: "pointer",
-                    color: caState === 1 ? "#E37E31" : "black",
-                    ":hover": { color: "#E37E31" },
+                    color: state === 1 ? "#D25D48" : "black",
                   }}
-                  onClick={() => onCaClick(1)}
+                  onClick={() => onSwitchClick(1)}
                 >
-                  Стандартные ЖЦА
+                  Отключить
                 </Typography>
-                <CustomToolTip
-                  arrow
-                  title={
-                    <>
-                      <Typography>Женская целевая аудитория</Typography>
-                      <Link to="/admin-help#jca" style={{ color: "lightblue" }}>
-                        {" "}
-                        Подробнее{" "}
-                      </Link>
-                    </>
-                  }
-                >
-                  <Box
-                    component="img"
-                    src={question}
-                    alt="question"
-                    sx={{ ml: "5px", cursor: "pointer" }}
-                  />
-                </CustomToolTip>
-              </Box>
-            </Grid>
-
-            <Grid
-              item
-              md={3}
-              xs={12}
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                borderRight: { md: "1px solid black" },
-              }}
-            >
-              <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: "space-around",
-                  alignItems: "center",
-                  m: "10px auto",
-                }}
-              >
-                <Typography
-                  sx={{
-                    fontSize: { sm: "18px", xs: "14px" },
-                    fontWeight: 500,
-                    textAlign: { md: "center", xs: "left" },
-                    cursor: "pointer",
-                    color: caState === 2 ? "#E37E31" : "black",
-                    ":hover": { color: "#E37E31" },
-                  }}
-                  onClick={() => onCaClick(2)}
-                >
-                  Взрослые СЦА
-                </Typography>
-                <CustomToolTip
-                  arrow
-                  title={
-                    <>
-                      <Typography>Взрослая целевая аудитория</Typography>
-                      <Link to="/admin-help#vca" style={{ color: "lightblue" }}>
-                        {" "}
-                        Подробнее{" "}
-                      </Link>
-                    </>
-                  }
-                >
-                  <Box
-                    component="img"
-                    src={question}
-                    alt="question"
-                    sx={{ ml: "5px", cursor: "pointer" }}
-                  />
-                </CustomToolTip>
-              </Box>
-            </Grid>
-            <Grid
-              item
-              md={3}
-              xs={12}
-              sx={{ display: "flex", alignItems: "center" }}
-            >
-              <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: "space-around",
-                  alignItems: "center",
-                  m: "10px auto",
-                }}
-              >
-                <Typography
-                  sx={{
-                    fontSize: { sm: "18px", xs: "14px" },
-                    fontWeight: { sm: 400, xs: 500 },
-                    textAlign: { md: "center", xs: "left" },
-                    cursor: "pointer",
-                    ":hover": { color: "#E37E31" },
-                  }}
-                >
-                  Не постить
-                </Typography>
-              </Box>
-            </Grid>
-          </Grid>
-
-          <Grid
-            item
-            md={4}
-            container
-            className="grayBorder"
-            sx={{ m: "40px auto", p: 2 }}
-          >
-            <Grid item xs={12} sx={{ borderBottom: "1px solid #CDCDCD" }}>
-              <Typography
-                sx={{
-                  fontSize: { sm: "18px", xs: "12px" },
-                  fontWeight: 600,
-                  textAlign: "center",
-                  mb: 2,
-                }}
-              >
-                Состояние
-              </Typography>
-            </Grid>
-            <Grid item xs={6}>
-              <Typography
-                sx={{
-                  borderRight: "1px solid black",
-                  fontSize: { sm: "18px", xs: "14px" },
-                  fontWeight: 500,
-                  textAlign: "center",
-                  mt: 2,
-                  cursor: "pointer",
-                  color: state === 0 ? "#D25D48" : "black",
-                }}
-                onClick={() => onSwitchClick(0)}
-              >
-                Включено
-              </Typography>
-            </Grid>
-            <Grid item xs={6}>
-              <Typography
-                sx={{
-                  fontSize: { sm: "18px", xs: "14px" },
-                  fontWeight: 500,
-                  textAlign: "center",
-                  mt: 2,
-                  cursor: "pointer",
-                  color: state === 1 ? "#D25D48" : "black",
-                }}
-                onClick={() => onSwitchClick(1)}
-              >
-                Отключить
-              </Typography>
+              </Grid>
             </Grid>
           </Grid>
         </>
