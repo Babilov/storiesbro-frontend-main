@@ -103,13 +103,21 @@ const PublicSettings = () => {
                 borderRadius: "50%",
               }}
             />
-            <Typography
-              sx={{ fontSize: "24px", fontWeight: 600, mt: 4, mb: 4 }}
+            <Link
+              to={publicObj["group"]["link"]}
+              style={{
+                fontSize: "24px",
+                fontWeight: 600,
+                marginTop: 32,
+                marginBottom: 32,
+                color: "black",
+                textDecoration: "none",
+                cursor: "pointer",
+                target: "_blank",
+              }}
             >
-              {/* {publicObj["name"]} */}
-              {/* {publics[0]['name']} */}
               {publicObj["group"]["name"]}
-            </Typography>
+            </Link>
           </Grid>
 
           <Grid
@@ -166,7 +174,10 @@ const PublicSettings = () => {
                   title={
                     <>
                       <Typography>Мужская целевая аудитория</Typography>
-                      <Link to="/admin-help#mca"> Подробнее </Link>
+                      <Link to="/admin-help#mca" style={{ color: "lightblue" }}>
+                        {" "}
+                        Подробнее{" "}
+                      </Link>
                     </>
                   }
                 >
@@ -214,7 +225,10 @@ const PublicSettings = () => {
                   title={
                     <>
                       <Typography>Женская целевая аудитория</Typography>
-                      <Link to="/admin-help#jca"> Подробнее </Link>
+                      <Link to="/admin-help#jca" style={{ color: "lightblue" }}>
+                        {" "}
+                        Подробнее{" "}
+                      </Link>
                     </>
                   }
                 >
@@ -255,14 +269,17 @@ const PublicSettings = () => {
                   }}
                   onClick={() => onCaClick(2)}
                 >
-                  Стандартные ВЦА
+                  Взрослые СЦА
                 </Typography>
                 <CustomToolTip
                   arrow
                   title={
                     <>
                       <Typography>Взрослая целевая аудитория</Typography>
-                      <Link to="/admin-help#vca"> Подробнее </Link>
+                      <Link to="/admin-help#vca" style={{ color: "lightblue" }}>
+                        {" "}
+                        Подробнее{" "}
+                      </Link>
                     </>
                   }
                 >
