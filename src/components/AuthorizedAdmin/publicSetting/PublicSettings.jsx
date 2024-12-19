@@ -309,8 +309,7 @@ const PublicSettings = () => {
                   display: "flex",
                   justifyContent: "space-around",
                   alignItems: "center",
-                  mt: "10px",
-                  mb: "10px",
+                  m: "10px auto",
                 }}
               >
                 <Typography
