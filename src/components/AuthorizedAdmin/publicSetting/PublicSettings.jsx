@@ -144,11 +144,14 @@ const PublicSettings = () => {
               item
               md={3}
               xs={12}
-              sx={{ display: "flex", alignItems: "center" }}
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                borderRight: { md: "1px solid black" },
+              }}
             >
               <Box
                 sx={{
-                  borderRight: { md: "1px solid black" },
                   display: "flex",
                   justifyContent: "space-around",
                   alignItems: "center",
@@ -195,14 +198,17 @@ const PublicSettings = () => {
               item
               md={3}
               xs={12}
-              sx={{ display: "flex", alignItems: "center" }}
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                borderRight: { md: "1px solid black" },
+              }}
             >
               <Box
                 sx={{
                   display: "flex",
                   justifyContent: "space-around",
                   alignItems: "center",
-                  borderRight: { md: "1px solid black" },
                   mt: "10px",
                   mb: "10px",
                 }}
@@ -246,14 +252,17 @@ const PublicSettings = () => {
               item
               md={3}
               xs={12}
-              sx={{ display: "flex", alignItems: "center" }}
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                borderRight: { md: "1px solid black" },
+              }}
             >
               <Box
                 sx={{
                   display: "flex",
                   justifyContent: "space-around",
                   alignItems: "center",
-                  borderRight: { md: "1px solid black" },
                   mt: "10px",
                   mb: "10px",
                 }}
@@ -292,22 +301,6 @@ const PublicSettings = () => {
                 </CustomToolTip>
               </Box>
             </Grid>
-            {/*
-        <Grid item md={2.4} xs={12}>
-          <Typography
-            sx={{
-              fontSize: { sm: "18px", xs: "14px" },
-              fontWeight: 500,
-              textAlign: { md: "center", xs: "left" },
-              mt: 2,
-              borderRight: { md: "1px solid black" },
-              cursor: "pointer",
-            }}
-          >
-            Свои видео
-          </Typography>
-        </Grid>
-*/}
             <Grid
               item
               md={3}
