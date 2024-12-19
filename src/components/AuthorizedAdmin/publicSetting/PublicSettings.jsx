@@ -336,57 +336,57 @@ const PublicSettings = () => {
                 </Box>
               </Grid>
             </Grid>
+          </Grid>
 
-            <Grid
-              item
-              md={4}
-              container
-              className="grayBorder"
-              sx={{ m: "40px auto", p: 2 }}
-            >
-              <Grid item xs={12} sx={{ borderBottom: "1px solid #CDCDCD" }}>
-                <Typography
-                  sx={{
-                    fontSize: { sm: "18px", xs: "12px" },
-                    fontWeight: 600,
-                    textAlign: "center",
-                    mb: 2,
-                  }}
-                >
-                  Состояние
-                </Typography>
-              </Grid>
-              <Grid item xs={6}>
-                <Typography
-                  sx={{
-                    borderRight: "1px solid black",
-                    fontSize: { sm: "18px", xs: "14px" },
-                    fontWeight: 500,
-                    textAlign: "center",
-                    mt: 2,
-                    cursor: "pointer",
-                    color: state === 0 ? "#D25D48" : "black",
-                  }}
-                  onClick={() => onSwitchClick(0)}
-                >
-                  Включено
-                </Typography>
-              </Grid>
-              <Grid item xs={6}>
-                <Typography
-                  sx={{
-                    fontSize: { sm: "18px", xs: "14px" },
-                    fontWeight: 500,
-                    textAlign: "center",
-                    mt: 2,
-                    cursor: "pointer",
-                    color: state === 1 ? "#D25D48" : "black",
-                  }}
-                  onClick={() => onSwitchClick(1)}
-                >
-                  Отключить
-                </Typography>
-              </Grid>
+          <Grid
+            item
+            md={4}
+            container
+            className="grayBorder"
+            sx={{ m: "40px auto", p: 2 }}
+          >
+            <Grid item xs={12} sx={{ borderBottom: "1px solid #CDCDCD" }}>
+              <Typography
+                sx={{
+                  fontSize: { sm: "18px", xs: "12px" },
+                  fontWeight: 600,
+                  textAlign: "center",
+                  mb: 2,
+                }}
+              >
+                Состояние
+              </Typography>
+            </Grid>
+            <Grid item xs={6}>
+              <Typography
+                sx={{
+                  borderRight: "1px solid black",
+                  fontSize: { sm: "18px", xs: "14px" },
+                  fontWeight: 500,
+                  textAlign: "center",
+                  mt: 2,
+                  cursor: "pointer",
+                  color: state === 0 ? "#D25D48" : "black",
+                }}
+                onClick={() => onSwitchClick(0)}
+              >
+                Включено
+              </Typography>
+            </Grid>
+            <Grid item xs={6}>
+              <Typography
+                sx={{
+                  fontSize: { sm: "18px", xs: "14px" },
+                  fontWeight: 500,
+                  textAlign: "center",
+                  mt: 2,
+                  cursor: "pointer",
+                  color: state === 1 ? "#D25D48" : "black",
+                }}
+                onClick={() => onSwitchClick(1)}
+              >
+                Отключить
+              </Typography>
             </Grid>
           </Grid>
         </>
