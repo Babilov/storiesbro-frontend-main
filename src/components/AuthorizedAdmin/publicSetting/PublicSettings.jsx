@@ -85,6 +85,7 @@ const PublicSettings = () => {
               component="img"
               src={arrowSvg}
               onClick={() => navigate("/publics")}
+              sx={{ cursor: "pointer" }}
             />
             <Typography className="title">Настройки сообщества</Typography>
           </Grid>
@@ -165,7 +166,7 @@ const PublicSettings = () => {
                     display: "flex",
                     justifyContent: "space-around",
                     alignItems: "center",
-                    m: "10px auto",
+                    m: { md: "10px auto", xs: "10px 0" },
                   }}
                 >
                   <Typography
@@ -225,7 +226,7 @@ const PublicSettings = () => {
                     display: "flex",
                     justifyContent: "space-around",
                     alignItems: "center",
-                    m: "10px auto",
+                    m: { md: "10px auto", xs: "10px 0" },
                   }}
                 >
                   <Typography
@@ -285,7 +286,7 @@ const PublicSettings = () => {
                     display: "flex",
                     justifyContent: "space-around",
                     alignItems: "center",
-                    m: "10px auto",
+                    m: { md: "10px auto", xs: "10px 0" },
                   }}
                 >
                   <Typography
@@ -341,7 +342,7 @@ const PublicSettings = () => {
                     display: "flex",
                     justifyContent: "space-around",
                     alignItems: "center",
-                    m: "10px auto",
+                    m: { md: "10px auto", xs: "10px 0" },
                   }}
                 >
                   <Typography
