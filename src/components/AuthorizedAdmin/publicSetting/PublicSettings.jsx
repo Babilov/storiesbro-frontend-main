@@ -155,8 +155,7 @@ const PublicSettings = () => {
                   display: "flex",
                   justifyContent: "space-around",
                   alignItems: "center",
-                  mt: "10px",
-                  mb: "10px",
+                  m: "10px auto",
                 }}
               >
                 <Typography
@@ -188,7 +187,7 @@ const PublicSettings = () => {
                     component="img"
                     src={question}
                     alt="question"
-                    sx={{ ml: "5px", mr: "20px", cursor: "pointer" }}
+                    sx={{ ml: "5px", cursor: "pointer" }}
                   />
                 </CustomToolTip>
               </Box>
@@ -209,8 +208,7 @@ const PublicSettings = () => {
                   display: "flex",
                   justifyContent: "space-around",
                   alignItems: "center",
-                  mt: "10px",
-                  mb: "10px",
+                  m: "10px auto",
                 }}
               >
                 <Typography
@@ -242,7 +240,7 @@ const PublicSettings = () => {
                     component="img"
                     src={question}
                     alt="question"
-                    sx={{ ml: "5px", mr: "20px", cursor: "pointer" }}
+                    sx={{ ml: "5px", cursor: "pointer" }}
                   />
                 </CustomToolTip>
               </Box>
@@ -263,8 +261,7 @@ const PublicSettings = () => {
                   display: "flex",
                   justifyContent: "space-around",
                   alignItems: "center",
-                  mt: "10px",
-                  mb: "10px",
+                  m: "10px auto",
                 }}
               >
                 <Typography
@@ -296,7 +293,7 @@ const PublicSettings = () => {
                     component="img"
                     src={question}
                     alt="question"
-                    sx={{ ml: "5px", mr: "20px", cursor: "pointer" }}
+                    sx={{ ml: "5px", cursor: "pointer" }}
                   />
                 </CustomToolTip>
               </Box>
