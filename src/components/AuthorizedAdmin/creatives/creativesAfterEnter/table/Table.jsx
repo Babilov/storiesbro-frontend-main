@@ -150,7 +150,7 @@ const Table = ({ publics, setPublics }) => {
               >
                 Настройки
               </Link>
-              <Typography>|</Typography>
+              {/*<Typography>|</Typography>
               <Typography
                 className="delete"
                 sx={{
@@ -162,6 +162,7 @@ const Table = ({ publics, setPublics }) => {
               >
                 Отключить
               </Typography>
+              */}
             </Grid>
           </Grid>
         ))}

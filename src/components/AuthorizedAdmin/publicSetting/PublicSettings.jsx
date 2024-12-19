@@ -140,7 +140,7 @@ const PublicSettings = () => {
                 Контент-видео
               </Typography>
             </Grid>
-            <Grid container sx={{ p: "10px 0" }}>
+            <Grid container sx={{ p: "20px 0" }}>
               <Grid
                 item
                 md={3}
