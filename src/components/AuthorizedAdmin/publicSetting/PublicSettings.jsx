@@ -75,7 +75,7 @@ const PublicSettings = () => {
   };
 
   const navigate = useNavigate();
-
+  // тест
   return (
     <Grid container className="grid">
       {publicObj !== undefined ? (
