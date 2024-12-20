@@ -80,14 +80,20 @@ const PublicSettings = () => {
     <Grid container className="grid">
       {publicObj !== undefined ? (
         <>
-          <Grid item xs={12}>
+          <Grid
+            item
+            xs={12}
+            sx={{ display: "flex", alignItems: "center", width: "100%" }}
+          >
             <Box
               component="img"
               src={arrowSvg}
               onClick={() => navigate("/publics")}
               sx={{ cursor: "pointer" }}
             />
-            <Typography className="title">Настройки сообщества</Typography>
+            <Typography className="title" sx={{ m: "0 auto" }}>
+              Настройки сообщества
+            </Typography>
           </Grid>
 
           <Grid
