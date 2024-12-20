@@ -91,7 +91,7 @@ const PublicSettings = () => {
               onClick={() => navigate("/publics")}
               sx={{ cursor: "pointer" }}
             />
-            <Typography className="title" sx={{ m: "0 auto" }}>
+            <Typography className="title" sx={{ m: "0 auto 0 !important" }}>
               Настройки сообщества
             </Typography>
           </Grid>

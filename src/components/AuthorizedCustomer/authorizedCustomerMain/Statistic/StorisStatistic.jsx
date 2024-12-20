@@ -200,8 +200,8 @@ const StorisStatistic = () => {
                   creative["status"] === "Активен"
                     ? "#4CD640"
                     : creative["status"] === "Не прошел проверку"
-                    ? "#D25D48"
-                    : "black",
+                      ? "#D25D48"
+                      : "black",
                 textAlign: "right",
               }}
             >
