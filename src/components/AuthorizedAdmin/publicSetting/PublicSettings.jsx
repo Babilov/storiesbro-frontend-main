@@ -83,7 +83,12 @@ const PublicSettings = () => {
           <Grid
             item
             xs={12}
-            sx={{ display: "flex", alignItems: "center", width: "100%" }}
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              width: "100%",
+              m: "10px 0 40px",
+            }}
           >
             <Box
               component="img"
