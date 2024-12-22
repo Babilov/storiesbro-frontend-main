@@ -14,6 +14,15 @@ const CreativesAfterEnter = () => {
     useContext(PublicsContext);
   const [openAdd, setOpenAdd] = useState(false);
 
+  useEffect(() => {
+    const postId = async () => {
+      const userId = localStorage.getItem("id");
+      await axios.post(`${API_URL}refresh_token/?user_id=${userId}`);
+      await axios.post(`${API_URL}valid_token/?user_id=${userId}`);
+    };
+    postId();
+  }, []);
+
   return (
     <Grid item xs={12}>
       <AddPublicModal open={openAdd} setOpen={setOpenAdd} publics={publics} />
