@@ -37,7 +37,7 @@ const EmailConfirmationForm = ({
     try {
       try {
         const response = await axios.post(
-          `${API_URL}activate/${userId}/${code}/`
+          `${API_URL}activate/${userId}/${code}/`,
         );
         localStorage.setItem("statusActivate", true);
         const email_lower = emailLogin.toLowerCase();
@@ -54,7 +54,7 @@ const EmailConfirmationForm = ({
               headers: {
                 Authorization: "Bearer " + localStorage.getItem("token"),
               },
-            }
+            },
           )
           .then(function (response) {
             setUserId(response.data.id);
@@ -62,14 +62,14 @@ const EmailConfirmationForm = ({
             // setIsConfirmPageOpen(true);
             // setIsLoginFormOpen(false);
             axios.defaults.headers.common["Authorization"] =
-              "Bearer " + response.data["access"];
+              "Bearer " + response.data["UID"];
 
             localStorage.setItem("token", response.data["access"]);
             localStorage.setItem("refresh", response.data["refresh"]);
             localStorage.setItem("id", response.data["id"]);
             localStorage.setItem(
               "count_of_visit",
-              response.data["count_of_visit"] + 1
+              response.data["count_of_visit"] + 1,
             );
             localStorage.setItem("UID", response.data["UID"]);
             localStorage.setItem("is_active", response.data["is_active"]);
@@ -84,6 +84,18 @@ const EmailConfirmationForm = ({
             if (checkStatus == "customer") {
               navigate("/customer");
             }
+          })
+          .then(() => {
+            axios.post(
+              "/api/some-endpoint/",
+              {},
+              {
+                headers: {
+                  Authorization: `Bearer ${localStorage.getItem("UID")}`,
+                  "Content-Type": "application/json",
+                },
+              },
+            );
           })
           .catch(function (error) {
             setError(true); // Устанавливаем флаг ошибки в true при ошибке запроса
