@@ -20,7 +20,7 @@ const Creatives = () => {
 
   useEffect(() => {
     const fetchAuthed = async () => {
-      const userId = sessionStorage.getItem("id");
+      const userId = localStorage.getItem("id");
       const isAuthed = await axios.get(
         `https://storisbro.com/api/auth-status/?user_id=${userId}`,
       );
