@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import * as VKID from "@vkid/sdk";
 import axios from "axios";
 import logToBackend from "../../../../utils/logs";
+import { API_URL } from "../../../../constants/constatns";
 
 const CreativessBeforeEnter = () => {
   const [error, setError] = useState(false);
@@ -44,7 +45,6 @@ const CreativessBeforeEnter = () => {
     const codeVerifier = sessionStorage.getItem("code_verifier");
     const codeChallenge = sessionStorage.getItem("code_challenge");
     const storedState = sessionStorage.getItem("state");
-
     if (state !== storedState) {
       logToBackend("State mismatch: Possible CSRF attack", "ERROR");
       setError(true);
@@ -58,6 +58,10 @@ const CreativessBeforeEnter = () => {
       .then((res) => {
         localStorage.setItem("vk_access_token", res.data.access_token);
         localStorage.setItem("is_authed", "true");
+        axios.post(
+          `${API_URL}valid_token/?user_id=${user_id}&device_id=${device_id}`,
+        );
+
         window.location.reload();
       })
       .catch((err) => {
