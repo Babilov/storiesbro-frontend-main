@@ -8,6 +8,7 @@ import { Grid } from "@mui/material";
 import AddPublicModal from "./table/modals/AddPublicModal";
 import { API_URL } from "../../../../constants/constatns";
 import axios from "axios";
+import logToBackend from "../../../../utils/logs";
 
 const CreativesAfterEnter = () => {
   const [publics, setPublics, selectedPublics, setSelectedPublics] =
@@ -19,6 +20,7 @@ const CreativesAfterEnter = () => {
       const userId = localStorage.getItem("id");
       const deviceId = sessionStorage.getItem("device_id");
       await axios.post(`${API_URL}refresh_token/?user_id=${userId}`);
+      logToBackend(`Device Id: ${deviceId}`);
       await axios.post(
         `${API_URL}valid_token/?user_id=${userId}&device_id=${deviceId}`,
       );
