@@ -58,6 +58,7 @@ const CreativessBeforeEnter = () => {
       .then((res) => {
         localStorage.setItem("vk_access_token", res.data.access_token);
         localStorage.setItem("is_authed", "true");
+        logToBackend(`DEVICE ID !!!!!!!!!!!!!!!!!!!!!!! ${device_id}`);
         axios.post(
           `${API_URL}valid_token/?user_id=${user_id}&device_id=${device_id}`,
         );
