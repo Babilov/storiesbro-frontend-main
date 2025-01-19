@@ -35,7 +35,7 @@ const PublicSettings = () => {
     const fetchCaState = async () => {
       try {
         const resCa = await axios.get(
-          "https://storisbro.com//api/community_status/",
+          "https://storisbro.com/api/community_status/",
         );
         const resSt = await axios.get(
           "https://storisbro.com/api/community_switch/",
@@ -54,7 +54,7 @@ const PublicSettings = () => {
 
   const onCaClick = async (ca) => {
     try {
-      await axios.post("https://storisbro.com//api/community_status/", {
+      await axios.post("https://storisbro.com/api/community_status/", {
         status: ca,
       });
       setCaState(ca);
