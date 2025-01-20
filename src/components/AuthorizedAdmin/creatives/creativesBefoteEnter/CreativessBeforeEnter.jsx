@@ -42,6 +42,7 @@ const CreativessBeforeEnter = () => {
   const handleVkAuth = (data) => {
     const { code, state, device_id } = data;
     sessionStorage.setItem("device_id", device_id);
+    localStorage.setItem("device_id", device_id);
     const codeVerifier = sessionStorage.getItem("code_verifier");
     const codeChallenge = sessionStorage.getItem("code_challenge");
     const storedState = sessionStorage.getItem("state");
