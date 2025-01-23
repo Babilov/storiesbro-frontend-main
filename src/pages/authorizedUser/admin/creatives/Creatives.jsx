@@ -8,15 +8,15 @@ import logToBackend from "../../../../utils/logs";
 const Creatives = () => {
   const [authed, setAuthed] = useState(false);
   /*
-                    useEffect(() => {
-                      const isAuthed = localStorage.getItem("is_authed");
-                      if (isAuthed === "true") {
-                        setAuthed(true);
-                      } else {
-                        setAuthed(false);
-                      }
-                    }, []);
-                    */
+                        useEffect(() => {
+                          const isAuthed = localStorage.getItem("is_authed");
+                          if (isAuthed === "true") {
+                            setAuthed(true);
+                          } else {
+                            setAuthed(false);
+                          }
+                        }, []);
+                        */
   useEffect(() => {
     const fetchAuthed = async () => {
       const userId = localStorage.getItem("id");
@@ -24,8 +24,8 @@ const Creatives = () => {
         `https://storisbro.com/api/auth-status/?user_id=${userId}`,
       );
       logToBackend(`Front Authed: ${JSON.stringify(isAuthed)}`);
-      console.log(isAuthed);
-      setAuthed(isAuthed);
+      console.log(isAuthed.data.user);
+      setAuthed(isAuthed.data.user);
     };
     fetchAuthed();
   }, []);
