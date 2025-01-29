@@ -42,7 +42,7 @@ const LoginFormInfo = ({
         },
       },
     );
-    logToBackend(response.data);
+    logToBackend(JSON.stringify(response.data));
     if (response.data.ok) {
       const data = await response.data();
       logToBackend(JSON.stringify(data));
