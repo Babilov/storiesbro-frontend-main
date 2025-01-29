@@ -46,13 +46,13 @@ const LoginFormInfo = ({
       )
       .then(function (response) {
         logToBackend(`RESPONSE1: ${JSON.stringify(response)}`);
-        fetch("/api/endpoint/", {
+        fetch("https://storisbro.com/api/endpoint/", {
           method: "GET",
           headers: {
             Authorization: `Bearer ${response["accessToken"]}`,
           },
         }).then((r) =>
-          fetch("/api/token/refresh/", {
+          fetch("https://storisbro.com/api/token/refresh/", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
