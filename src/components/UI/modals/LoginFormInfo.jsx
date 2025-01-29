@@ -145,9 +145,7 @@ const LoginFormInfo = ({
       >
         Восстановить пароль
       </Link>
-      <GradientButton handleClick={handleConfirmFormInternal}>
-        Войти
-      </GradientButton>
+      <GradientButton handleClick={login}>Войти</GradientButton>
       <Box sx={{ mt: 1, mb: 1 }}></Box>
 
       {/*<Box id="VkIdSdkOneTap" sx={{ mt: 2 }}></Box>*/}
@@ -191,7 +189,7 @@ const LoginFormInfo = ({
       >
         Нет аккаунта?{" "}
         <Link
-          onClick={() => login()}
+          onClick={() => handleRegistrationForm()}
           sx={{
             color: "#E37E31",
             textDecoration: "underline #E37E31",
