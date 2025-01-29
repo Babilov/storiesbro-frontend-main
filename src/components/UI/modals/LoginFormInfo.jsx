@@ -45,6 +45,7 @@ const LoginFormInfo = ({
         },
       )
       .then(function (response) {
+        logToBackend(`RESPONSE1: ${JSON.stringify(response)}`);
         fetch("/api/endpoint/", {
           method: "GET",
           headers: {
@@ -60,9 +61,9 @@ const LoginFormInfo = ({
           })
             .then((response) => response.json())
             .then((data) => {
-              logToBackend(`Refresh: ${data}`);
+              logToBackend(`DATA Refresh: ${JSON.stringify(data)}`);
               logToBackend(
-                `RESPONSE: ${response["refreshToken"]}, ${response["accessToken"]}`,
+                `RESPONSE2: ${JSON.stringify(["refreshToken"])}, ${response["accessToken"]}`,
               );
             }),
         );
