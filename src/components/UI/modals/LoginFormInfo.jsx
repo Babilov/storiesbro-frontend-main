@@ -29,14 +29,21 @@ const LoginFormInfo = ({
   const navigate = useNavigate();
 
   async function login() {
-    const email = email.toLowerCase();
-    const response = await fetch(`${API_URL}login/`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
-    });
-    if (response.ok) {
-      const data = await response.json();
+    const email_lower = email.toLowerCase();
+    const response = await axios.post(
+      `${API_URL}login/`,
+      {
+        email: email_lower,
+        password: password,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+    );
+    if (response.data.ok) {
+      const data = await response.data();
       logToBackend(JSON.stringify(data));
       localStorage.setItem("access_token", data.access);
       localStorage.setItem("refresh_token", data.refresh);
