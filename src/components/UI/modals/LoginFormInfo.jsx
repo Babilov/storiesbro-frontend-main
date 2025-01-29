@@ -28,6 +28,24 @@ const LoginFormInfo = ({
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  async function login() {
+    const email = email.toLowerCase();
+    const response = await fetch(`${API_URL}login/`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }),
+    });
+    if (response.ok) {
+      const data = await response.json();
+      logToBackend(JSON.stringify(data));
+      localStorage.setItem("access_token", data.access);
+      localStorage.setItem("refresh_token", data.refresh);
+      return data;
+    } else {
+      throw new Error("Ошибка авторизации");
+    }
+  }
+
   const handleConfirmFormInternal = () => {
     const email_lower = email.toLowerCase();
     axios
@@ -173,7 +191,7 @@ const LoginFormInfo = ({
       >
         Нет аккаунта?{" "}
         <Link
-          onClick={() => handleRegistrationForm()}
+          onClick={() => login()}
           sx={{
             color: "#E37E31",
             textDecoration: "underline #E37E31",
