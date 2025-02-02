@@ -48,6 +48,7 @@ const LoginFormInfo = ({
       logToBackend(JSON.stringify(data));
       localStorage.setItem("access_token", data.access);
       localStorage.setItem("refresh_token", data.refresh);
+      navigate("/admin");
       return data;
     } else {
       throw new Error("Ошибка авторизации");
