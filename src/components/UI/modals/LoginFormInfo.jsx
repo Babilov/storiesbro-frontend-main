@@ -42,16 +42,41 @@ const LoginFormInfo = ({
         },
       },
     );
-    logToBackend(JSON.stringify(response.data));
-    if (response.data.ok) {
+    // logToBackend(JSON.stringify(response.data));
+    if (response.status === 200) {
       const data = await response.data();
       logToBackend(JSON.stringify(data));
       localStorage.setItem("access_token", data.access);
       localStorage.setItem("refresh_token", data.refresh);
-      navigate("/admin");
+      setUserId(response.data.id);
+      handleConfirmForm(response.data.id);
+      setIsConfirmPageOpen(true);
+      setIsLoginFormOpen(false);
+      axios.defaults.headers.common["Authorization"] =
+        "Bearer " + response.data["access"];
+
+      localStorage.setItem("token", response.data["access"]);
+      localStorage.setItem("refresh", response.data["refresh"]);
+      localStorage.setItem("id", response.data["id"]);
+      localStorage.setItem(
+        "count_of_visit",
+        response.data["count_of_visit"] + 1,
+      );
+      localStorage.setItem("UID", response.data["UID"]);
+      localStorage.setItem("is_active", response.data["is_active"]);
+      localStorage.setItem("statusAccount", "admin");
+      dispatch(setTokken(response.data["access"]));
+
+      const checkStatus = localStorage.getItem("statusAccount");
+
+      if (checkStatus === "admin") {
+        navigate("/admin");
+      } else if (checkStatus === "customer") {
+        navigate("/customer");
+      }
       return data;
     } else {
-      throw new Error("Ошибка авторизации");
+      setError(true);
     }
   }
 
