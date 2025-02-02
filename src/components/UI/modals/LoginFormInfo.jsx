@@ -77,81 +77,83 @@ const LoginFormInfo = ({
       return data;
     } else {
       setError(true);
+      console.log("error!!!");
     }
   }
 
-  const handleConfirmFormInternal = () => {
-    const email_lower = email.toLowerCase();
-    axios
-      .post(
-        `${API_URL}login/`,
-        {
-          email: email_lower,
-          password: password,
-        },
-        {
-          withCredentials: true,
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("token"),
-          },
-        },
-      )
-      .then(function (response) {
-        logToBackend(`RESPONSE1: ${JSON.stringify(response)}`);
-        fetch("https://storisbro.com/api/endpoint/", {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${response["accessToken"]}`,
-          },
-        }).then((r) =>
-          fetch("https://storisbro.com/api/token/refresh/", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
+  /*
+      const handleConfirmFormInternal = () => {
+        const email_lower = email.toLowerCase();
+        axios
+          .post(
+            `${API_URL}login/`,
+            {
+              email: email_lower,
+              password: password,
             },
-            body: JSON.stringify({ refresh: response["refreshToken"] }),
+            {
+              withCredentials: true,
+              headers: {
+                Authorization: "Bearer " + localStorage.getItem("token"),
+              },
+            },
+          )
+          .then(function (response) {
+            logToBackend(`RESPONSE1: ${JSON.stringify(response)}`);
+            fetch("https://storisbro.com/api/endpoint/", {
+              method: "GET",
+              headers: {
+                Authorization: `Bearer ${response["accessToken"]}`,
+              },
+            }).then((r) =>
+              fetch("https://storisbro.com/api/token/refresh/", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ refresh: response["refreshToken"] }),
+              })
+                .then((response) => response.json())
+                .then((data) => {
+                  logToBackend(`DATA Refresh: ${JSON.stringify(data)}`);
+                  logToBackend(
+                    `RESPONSE2: ${JSON.stringify(["refreshToken"])}, ${response["accessToken"]}`,
+                  );
+                }),
+            );
+            setUserId(response.data.id);
+            handleConfirmForm(response.data.id);
+            setIsConfirmPageOpen(true);
+            setIsLoginFormOpen(false);
+            axios.defaults.headers.common["Authorization"] =
+              "Bearer " + response.data["access"];
+    
+            localStorage.setItem("token", response.data["access"]);
+            localStorage.setItem("refresh", response.data["refresh"]);
+            localStorage.setItem("id", response.data["id"]);
+            localStorage.setItem(
+              "count_of_visit",
+              response.data["count_of_visit"] + 1,
+            );
+            localStorage.setItem("UID", response.data["UID"]);
+            localStorage.setItem("vk_id", response.data["vk_id"]);
+            localStorage.setItem("is_active", response.data["is_active"]);
+            localStorage.setItem("statusAccount", "admin");
+            dispatch(setTokken(response.data["access"]));
+    
+            const checkStatus = localStorage.getItem("statusAccount");
+    
+            if (checkStatus === "admin") {
+              navigate("/admin");
+            } else if (checkStatus === "customer") {
+              navigate("/customer");
+            }
           })
-            .then((response) => response.json())
-            .then((data) => {
-              logToBackend(`DATA Refresh: ${JSON.stringify(data)}`);
-              logToBackend(
-                `RESPONSE2: ${JSON.stringify(["refreshToken"])}, ${response["accessToken"]}`,
-              );
-            }),
-        );
-        setUserId(response.data.id);
-        handleConfirmForm(response.data.id);
-        setIsConfirmPageOpen(true);
-        setIsLoginFormOpen(false);
-        axios.defaults.headers.common["Authorization"] =
-          "Bearer " + response.data["access"];
-
-        localStorage.setItem("token", response.data["access"]);
-        localStorage.setItem("refresh", response.data["refresh"]);
-        localStorage.setItem("id", response.data["id"]);
-        localStorage.setItem(
-          "count_of_visit",
-          response.data["count_of_visit"] + 1,
-        );
-        localStorage.setItem("UID", response.data["UID"]);
-        localStorage.setItem("vk_id", response.data["vk_id"]);
-        localStorage.setItem("is_active", response.data["is_active"]);
-        localStorage.setItem("statusAccount", "admin");
-        dispatch(setTokken(response.data["access"]));
-
-        const checkStatus = localStorage.getItem("statusAccount");
-
-        if (checkStatus === "admin") {
-          navigate("/admin");
-        } else if (checkStatus === "customer") {
-          navigate("/customer");
-        }
-      })
-      .catch(function (error) {
-        setError(true); // Устанавливаем флаг ошибки в true при ошибке запроса
-      });
-  };
-
+          .catch(function (error) {
+            setError(true); // Устанавливаем флаг ошибки в true при ошибке запроса
+          });
+      };
+    */
   return (
     <>
       <MyInput label="Введите почту" value={email} setValue={setEmail} />
