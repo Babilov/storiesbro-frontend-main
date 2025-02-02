@@ -44,7 +44,7 @@ const LoginFormInfo = ({
     );
     // logToBackend(JSON.stringify(response.data));
     if (response.status === 200) {
-      const data = await response.data();
+      const data = await response.data;
       logToBackend(JSON.stringify(data));
       localStorage.setItem("access_token", data.access);
       localStorage.setItem("refresh_token", data.refresh);
