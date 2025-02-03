@@ -12,6 +12,7 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setTokken } from "../../../store/userReducer";
+import { localStorageSet } from "../../../api/login";
 
 // const CONFIRM_LINK = `${API_URL}activate/`;
 
@@ -61,19 +62,7 @@ const EmailConfirmationForm = ({
             handleConfirmForm(response.data.id);
             // setIsConfirmPageOpen(true);
             // setIsLoginFormOpen(false);
-            axios.defaults.headers.common["Authorization"] =
-              "Bearer " + response.data["UID"];
-
-            localStorage.setItem("token", response.data["access"]);
-            localStorage.setItem("refresh", response.data["refresh"]);
-            localStorage.setItem("id", response.data["id"]);
-            localStorage.setItem(
-              "count_of_visit",
-              response.data["count_of_visit"] + 1,
-            );
-            localStorage.setItem("UID", response.data["UID"]);
-            localStorage.setItem("is_active", response.data["is_active"]);
-            localStorage.setItem("statusAccount", "admin");
+            localStorageSet(response.data);
             dispatch(setTokken(response.data["access"]));
 
             localStorage.removeItem("statusActivate");
