@@ -42,10 +42,16 @@ const AddPublicModal = ({ open, setOpen, publics }) => {
         setOpen(false);
         try {
           const userId = localStorage.getItem("id");
+          const token = localStorage.getItem("access_token");
           await axios.post(
-            `https://storisbro.com/api/add_user_group/?user_id=${userId}`,
+            `https://storisbro.com/api/add_user_group/`,
             {
               selectedPublics,
+            },
+            {
+              headers: {
+                Authorization: `Bearer ${token}`, // Токен в заголовке
+              },
             },
           );
           console.log("Данные успешно отправлены");

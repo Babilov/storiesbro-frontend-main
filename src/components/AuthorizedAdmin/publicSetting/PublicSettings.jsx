@@ -18,8 +18,14 @@ const PublicSettings = () => {
     const fetchData = async () => {
       try {
         const userId = localStorage.getItem("id");
+        const token = localStorage.getItem("access_token");
         const response = await axios.get(
-          `https://storisbro.com/api/group_details/?user_id=${userId}&group_id=${groupId}`,
+          `https://storisbro.com/api/group_details/?group_id=${groupId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`, // Токен в заголовке
+            },
+          },
         );
         setPublic(response.data);
       } catch (error) {

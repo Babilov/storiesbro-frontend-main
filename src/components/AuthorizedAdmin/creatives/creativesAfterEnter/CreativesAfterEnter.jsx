@@ -19,11 +19,13 @@ const CreativesAfterEnter = () => {
     const postId = async () => {
       const userId = localStorage.getItem("id");
       const deviceId = localStorage.getItem("device_id");
-      // await axios.post(`${API_URL}refresh_token/?user_id=${userId}`);
       logToBackend(`Device Id: ${deviceId}`);
-      await axios.post(
-        `${API_URL}valid_token/?user_id=${userId}&device_id=${deviceId}`,
-      );
+      const token = localStorage.getItem("access_token");
+      await axios.post(`${API_URL}valid_token/?device_id=${deviceId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`, // Токен в заголовке
+        },
+      });
     };
     postId();
   }, []);

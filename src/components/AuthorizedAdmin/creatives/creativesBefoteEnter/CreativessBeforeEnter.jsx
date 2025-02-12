@@ -52,17 +52,26 @@ const CreativessBeforeEnter = () => {
       return;
     }
     const user_id = localStorage.getItem("id");
+    const token = localStorage.getItem("access_token");
     axios
       .get(
-        `/accounts/vk/login/callback/?code=${code}&state=${state}&device_id=${device_id}&code_verifier=${codeVerifier}&user_id=${user_id}`,
+        `/accounts/vk/login/callback/?code=${code}&state=${state}&device_id=${device_id}&code_verifier=${codeVerifier}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`, // Токен в заголовке
+          },
+        },
       )
       .then((res) => {
         localStorage.setItem("vk_access_token", res.data.access_token);
         localStorage.setItem("is_authed", "true");
         logToBackend(`DEVICE ID !!!!!!!!!!!!!!!!!!!!!!! ${device_id}`);
-        axios.get(
-          `${API_URL}valid_token/?user_id=${user_id}&device_id=${device_id}`,
-        );
+        const token = localStorage.getItem("access_token");
+        axios.get(`${API_URL}valid_token/?device_id=${device_id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`, // Токен в заголовке
+          },
+        });
 
         window.location.reload();
       })
