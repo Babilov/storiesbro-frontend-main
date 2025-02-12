@@ -8,15 +8,15 @@ import logToBackend from "../../../../utils/logs";
 const Creatives = () => {
   const [authed, setAuthed] = useState(false);
   /*
-                            useEffect(() => {
-                              const isAuthed = localStorage.getItem("is_authed");
-                              if (isAuthed === "true") {
-                                setAuthed(true);
-                              } else {
-                                setAuthed(false);
-                              }
-                            }, []);
-                            */
+                              useEffect(() => {
+                                const isAuthed = localStorage.getItem("is_authed");
+                                if (isAuthed === "true") {
+                                  setAuthed(true);
+                                } else {
+                                  setAuthed(false);
+                                }
+                              }, []);
+                              */
   useEffect(() => {
     const fetchAuthed = async () => {
       const userId = localStorage.getItem("id");
@@ -30,8 +30,8 @@ const Creatives = () => {
         },
       );
       logToBackend(`Front Authed: ${JSON.stringify(isAuthed)}`);
-      console.log(isAuthed.data.user);
-      setAuthed(isAuthed.data.user);
+      console.log(isAuthed.data.authenticated);
+      setAuthed(isAuthed.data.authenticated);
     };
     fetchAuthed();
   }, []);
