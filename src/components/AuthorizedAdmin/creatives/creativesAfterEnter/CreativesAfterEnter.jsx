@@ -18,7 +18,7 @@ const CreativesAfterEnter = () => {
   useEffect(() => {
     const postId = async () => {
       const userId = localStorage.getItem("id");
-      const deviceId = localStorage.getItem("device_id");
+      const deviceId = sessionStorage.getItem("device_id");
       logToBackend(`Device Id: ${deviceId}`);
       const token = localStorage.getItem("access_token");
       await axios.post(`${API_URL}valid_token/?device_id=${deviceId}`, {
