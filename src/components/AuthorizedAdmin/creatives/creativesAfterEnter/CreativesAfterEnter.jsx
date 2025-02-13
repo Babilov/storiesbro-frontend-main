@@ -21,15 +21,11 @@ const CreativesAfterEnter = () => {
       const deviceId = sessionStorage.getItem("device_id");
       logToBackend(`Device Id: ${deviceId}`);
       const token = localStorage.getItem("access_token");
-      await axios.post(
-        `${API_URL}valid_token/?device_id=${deviceId}`,
-        {},
-        {
-          headers: {
-            Authorization: `Bearer ${token}`, // Токен в заголовке
-          },
+      await axios.get(`${API_URL}valid_token/?device_id=${deviceId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`, // Токен в заголовке
         },
-      );
+      });
     };
     postId();
   }, []);
