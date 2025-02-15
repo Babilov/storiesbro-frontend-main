@@ -27,7 +27,7 @@ const Table = ({ publics, setPublics }) => {
     return () => {
       document.body.classList.remove("no-scrollbar");
     };
-  }, [publics]);
+  }, []);
 
   return (
     <Box onClick={handleIncrementCount} sx={{ mb: 2 }}>
