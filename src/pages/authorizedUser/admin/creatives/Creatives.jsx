@@ -25,7 +25,7 @@ const Creatives = () => {
             },
           );
 
-          const authenticated = response.data.authenticated;
+          const authenticated = response["data"]["authenticated"];
           setAuthed(authenticated);
           localStorage.setItem("is_vk_authed", JSON.stringify(authenticated));
 
