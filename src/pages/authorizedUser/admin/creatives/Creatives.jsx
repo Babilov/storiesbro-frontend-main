@@ -6,20 +6,18 @@ import axios from "axios";
 import logToBackend from "../../../../utils/logs";
 
 const Creatives = () => {
-  logToBackend("МЫ В CREATIVES");
   const [authed, setAuthed] = useState(false);
   const is_vk_authed = localStorage.getItem("is_vk_authed");
-  logToBackend(`LOCALSTORAGE IS_VK_AUTH: ${is_vk_authed}`);
 
   useEffect(() => {
     const fetchVkAuth = async () => {
       const token = localStorage.getItem("access_token");
-      logToBackend("МЫ В ЮЗ ЭФФЕКТЕ");
-      logToBackend("AAAAAAAAAAAAAAAAAAAAAAAAA");
-      logToBackend(`ИЗ ВК АУФ В ЮЗ ЭФФЕКТЕ ${is_vk_authed}`);
-      logToBackend(`ТИП ${typeof is_vk_authed}`);
+      await logToBackend("МЫ В ЮЗ ЭФФЕКТЕ");
+      await logToBackend("AAAAAAAAAAAAAAAAAAAAAAAAA");
+      await logToBackend(`ИЗ ВК АУФ В ЮЗ ЭФФЕКТЕ ${is_vk_authed}`);
+      await logToBackend(`ТИП ${typeof is_vk_authed}`);
       if (is_vk_authed === null || is_vk_authed === "null") {
-        logToBackend("ОТРАБОТАЛО НУЛЛ");
+        await logToBackend("ОТРАБОТАЛО НУЛЛ");
         const new_vk_auth = await axios.get(
           `https://storisbro.com/api/auth-status/`,
           {
@@ -29,17 +27,17 @@ const Creatives = () => {
           },
         );
         setAuthed(new_vk_auth["data"]["authenticated"]);
-        logToBackend(`НЬЮ ВК АУФТ: ${new_vk_auth}`);
-        logToBackend(`АУФТ: ${authed}`);
+        await logToBackend(`НЬЮ ВК АУФТ: ${new_vk_auth}`);
+        await logToBackend(`АУФТ: ${authed}`);
       }
       if (is_vk_authed === "true") {
-        logToBackend("ОТРАБОТАЛО TRUE");
+        await logToBackend("ОТРАБОТАЛО TRUE");
         setAuthed(true);
       } else {
-        logToBackend("ОТРАБОТАЛО FALSE");
+        await logToBackend("ОТРАБОТАЛО FALSE");
         setAuthed(false);
       }
-      logToBackend(`AUTHED ===== ${authed}`);
+      await logToBackend(`AUTHED ===== ${authed}`);
     };
     fetchVkAuth();
   }, [is_vk_authed]);
