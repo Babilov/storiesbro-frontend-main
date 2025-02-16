@@ -96,26 +96,6 @@ function App() {
   }, [userId]);
 
   useEffect(() => {
-    const fetchIsAuthed = async () => {
-      const token = localStorage.getItem("access_token");
-      const isAuthed = await axios.get(
-        `https://storisbro.com/api/auth-status/`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`, // Токен в заголовке
-          },
-        },
-      );
-      logToBackend(`Front Authed: ${JSON.stringify(isAuthed)}`);
-      localStorage.setItem("is_vk_authed", isAuthed["data"]["authenticated"]);
-
-      // console.log(isAuthed.data.authenticated);
-      // setAuthed(isAuthed.data.authenticated);
-    };
-    fetchIsAuthed();
-  }, []);
-
-  useEffect(() => {
     // Функция для получения сообществ с бэкенда
 
     const fetchSelectedPublics = async () => {
@@ -140,24 +120,24 @@ function App() {
   }, [userId]);
 
   /*
-                                                                                                                          useEffect(() => {
-                                                                                                                            // Функция для получения креативов с бэкенда
-                                                                                                                            const fetchCreativesAll = async () => {
-                                                                                                                              try {
-                                                                                                                                const response = await axios.get(
-                                                                                                                                  `${API_URL}api_creatives/own_all_creatives/${userId}`,
-                                                                                                                                );
-                                                                                                                                setCreatives(response.data.filter((item) => item.archive === false));
-                                                                                                                                setArhive(response.data.filter((item) => item.archive === true));
-                                                                                                                              } catch (error) {
-                                                                                                                                console.error("Ошибка при загрузке креативов", error);
-                                                                                                                              }
-                                                                                                                            };
-  
-                                                                                                                            // Вызов функции для загрузки сообществ при монтировании компонента
-                                                                                                                            fetchCreativesAll();
-                                                                                                                          }, [userId]); // Пустой массив зависимостей означает, что эффект будет выполнен только один раз при монтировании
-                                                                                                                        */
+                                                                                                                            useEffect(() => {
+                                                                                                                              // Функция для получения креативов с бэкенда
+                                                                                                                              const fetchCreativesAll = async () => {
+                                                                                                                                try {
+                                                                                                                                  const response = await axios.get(
+                                                                                                                                    `${API_URL}api_creatives/own_all_creatives/${userId}`,
+                                                                                                                                  );
+                                                                                                                                  setCreatives(response.data.filter((item) => item.archive === false));
+                                                                                                                                  setArhive(response.data.filter((item) => item.archive === true));
+                                                                                                                                } catch (error) {
+                                                                                                                                  console.error("Ошибка при загрузке креативов", error);
+                                                                                                                                }
+                                                                                                                              };
+    
+                                                                                                                              // Вызов функции для загрузки сообществ при монтировании компонента
+                                                                                                                              fetchCreativesAll();
+                                                                                                                            }, [userId]); // Пустой массив зависимостей означает, что эффект будет выполнен только один раз при монтировании
+                                                                                                                          */
   // автоматическая очистка кэша
 
   if (localStorage.getItem("token")) {
