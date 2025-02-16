@@ -15,7 +15,10 @@ const Creatives = () => {
     const fetchVkAuth = async () => {
       const token = localStorage.getItem("access_token");
       logToBackend("МЫ В ЮЗ ЭФФЕКТЕ");
-      if (is_vk_authed === null) {
+      logToBackend(
+        `ИЗ ВК АУФ В ЮЗ ЭФФЕКТЕ ${is_vk_authed} ТИП: ${typeof is_vk_authed}`,
+      );
+      if (is_vk_authed === null || is_vk_authed === "null") {
         logToBackend("ОТРАБОТАЛО НУЛЛ");
         const new_vk_auth = await axios.get(
           `https://storisbro.com/api/auth-status/`,
