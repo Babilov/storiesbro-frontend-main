@@ -45,7 +45,11 @@ const Creatives = () => {
     fetchVkAuth();
   }, [authed]);
 
-  return <>{!authed ? <CreativessBeforeEnter /> : <CreativesAfterEnter />}</>;
+  return (
+    <>
+      {authed === "false" ? <CreativessBeforeEnter /> : <CreativesAfterEnter />}
+    </>
+  );
 };
 
 export default Creatives;
