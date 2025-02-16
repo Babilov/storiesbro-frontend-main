@@ -27,8 +27,9 @@ const Creatives = () => {
           },
         );
         setAuthed(new_vk_auth["data"]["authenticated"]);
-        await logToBackend(`НЬЮ ВК АУФТ: ${new_vk_auth}`);
-        await logToBackend(`АУФТ: ${authed}`);
+        localStorage.setItem("is_vk_authed", JSON.stringify(authed));
+        await logToBackend(`НЬЮ ВК АУФТ: ${JSON.stringify(new_vk_auth)}`);
+        await logToBackend(`АУФТ: ${authed} ТИП ${typeof authed}`);
       }
       if (is_vk_authed === "true") {
         await logToBackend("ОТРАБОТАЛО TRUE");
