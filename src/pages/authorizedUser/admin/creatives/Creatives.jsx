@@ -6,19 +6,21 @@ import axios from "axios";
 import logToBackend from "../../../../utils/logs";
 
 const Creatives = () => {
+  logToBackend("МЫ В CREATIVES");
   const [authed, setAuthed] = useState(false);
   const is_vk_authed = localStorage.getItem("is_vk_authed");
+  logToBackend(`LOCALSTORAGE IS_VK_AUTH: ${is_vk_authed}`);
 
   useEffect(() => {
+    logToBackend("МЫ В ЮЗ ЭФФЕКТЕ");
     if (is_vk_authed === "true") {
+      logToBackend("ОТРАБОТАЛО TRUE");
       setAuthed(true);
     } else {
+      logToBackend("ОТРАБОТАЛО FALSE");
       setAuthed(false);
     }
-    logToBackend(`ABOBA!!!!!!!!!!!!!!!!!!!!!!!!: ${authed}`);
-    logToBackend(
-      `ABOBA????????????????????????: ${localStorage.getItem("is_vk_authed")}`,
-    );
+    logToBackend(`AUTHED ===== ${authed}`);
   }, [is_vk_authed]);
 
   return (
