@@ -12,7 +12,7 @@ const Creatives = () => {
     const fetchVkAuth = async () => {
       const token = localStorage.getItem("access_token");
       let is_vk_authed = localStorage.getItem("is_vk_authed");
-
+      await logToBackend(`АУФТ: ${authed}`);
       await logToBackend(`VK Auth статус из localStorage: ${is_vk_authed}`);
 
       if (is_vk_authed === null || is_vk_authed === "null") {
@@ -50,19 +50,7 @@ const Creatives = () => {
     fetchVkAuth();
   }, []);
 
-  useEffect(() => {
-    logToBackend(`AUTHED изменился: ${authed}`);
-  }, [authed]);
-
-  return (
-    <>
-      {!authed ? (
-        <CreativessBeforeEnter setAthed={setAuthed} />
-      ) : (
-        <CreativesAfterEnter />
-      )}
-    </>
-  );
+  return <>{!authed ? <CreativessBeforeEnter /> : <CreativesAfterEnter />}</>;
 };
 
 export default Creatives;
