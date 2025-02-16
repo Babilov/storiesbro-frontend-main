@@ -6,16 +6,13 @@ import axios from "axios";
 import logToBackend from "../../../../utils/logs";
 
 const Creatives = () => {
-  const [authed, setAuthed] = useState(false);
-
+  let authed = localStorage.getItem("is_vk_authed");
   useEffect(() => {
     const fetchVkAuth = async () => {
       const token = localStorage.getItem("access_token");
-      let is_vk_authed = localStorage.getItem("is_vk_authed");
-      await logToBackend(`АУФТ: ${authed}`);
-      await logToBackend(`VK Auth статус из localStorage: ${is_vk_authed}`);
+      await logToBackend(`VK Auth статус из localStorage: ${authed}`);
 
-      if (is_vk_authed === null || is_vk_authed === "null") {
+      if (authed === null || authed === "null") {
         try {
           await logToBackend("Запрос на проверку авторизации...");
           const response = await axios.get(
@@ -26,7 +23,7 @@ const Creatives = () => {
           );
 
           const authenticated = response["data"]["authenticated"];
-          setAuthed(authenticated);
+
           localStorage.setItem("is_vk_authed", JSON.stringify(authenticated));
 
           await logToBackend(
@@ -39,16 +36,14 @@ const Creatives = () => {
           );
         }
       } else {
-        is_vk_authed = JSON.parse(is_vk_authed);
-        setAuthed(is_vk_authed);
         await logToBackend(
-          `Авторизация установлена из localStorage: ${is_vk_authed}`,
+          `Авторизация установлена из localStorage: ${authed}`,
         );
       }
     };
 
     fetchVkAuth();
-  }, []);
+  }, [authed]);
 
   return <>{!authed ? <CreativessBeforeEnter /> : <CreativesAfterEnter />}</>;
 };
