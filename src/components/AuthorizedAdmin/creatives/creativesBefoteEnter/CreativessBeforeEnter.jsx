@@ -47,7 +47,6 @@ const CreativessBeforeEnter = () => {
     const codeChallenge = sessionStorage.getItem("code_challenge");
     const storedState = sessionStorage.getItem("state");
     if (state !== storedState) {
-      logToBackend("State mismatch: Possible CSRF attack", "ERROR");
       setError(true);
       return;
     }
@@ -65,7 +64,6 @@ const CreativessBeforeEnter = () => {
       .then((res) => {
         localStorage.setItem("vk_access_token", res.data.access_token);
         localStorage.setItem("is_authed", "true");
-        logToBackend(`DEVICE ID !!!!!!!!!!!!!!!!!!!!!!! ${device_id}`);
         const token = localStorage.getItem("access_token");
         axios.get(`${API_URL}valid_token/?device_id=${device_id}`, {
           headers: {
@@ -76,10 +74,6 @@ const CreativessBeforeEnter = () => {
         window.location.reload();
       })
       .catch((err) => {
-        logToBackend(
-          `Error exchanging code for tokens: ${err.message}`,
-          "ERROR",
-        );
         setError(true);
       });
   };
@@ -107,11 +101,9 @@ const CreativessBeforeEnter = () => {
         oneTap
           .render({ container: document.getElementById("VkIdSdkOneTap") })
           .on(VKID.OneTapInternalEvents.LOGIN_SUCCESS, handleVkAuth)
-          .on(VKID.WidgetEvents.ERROR, (err) =>
-            logToBackend(`OneTap error: ${JSON.stringify(err)}`, "ERROR"),
-          );
+          .on(VKID.WidgetEvents.ERROR, (err) => console.log(err));
       } catch (err) {
-        logToBackend(`Error initializing VKID: ${err.message}`, "ERROR");
+        console.log(err);
       }
     })();
   }, []);
