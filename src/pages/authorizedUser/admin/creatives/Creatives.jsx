@@ -27,9 +27,10 @@ const Creatives = () => {
           },
         );
         setAuthed(new_vk_auth["data"]["authenticated"]);
-        localStorage.setItem("is_vk_authed", JSON.stringify(authed));
+        localStorage.setItem("is_vk_authed", authed);
         await logToBackend(`НЬЮ ВК АУФТ: ${JSON.stringify(new_vk_auth)}`);
         await logToBackend(`АУФТ: ${authed} ТИП ${typeof authed}`);
+        await logToBackend(`СУКААААА: ${new_vk_auth["data"]["authenticated"]}`);
       }
       if (is_vk_authed === "true") {
         await logToBackend("ОТРАБОТАЛО TRUE");
@@ -41,7 +42,7 @@ const Creatives = () => {
       await logToBackend(`AUTHED ===== ${authed}`);
     };
     fetchVkAuth();
-  }, [is_vk_authed]);
+  }, []);
 
   return (
     <>
