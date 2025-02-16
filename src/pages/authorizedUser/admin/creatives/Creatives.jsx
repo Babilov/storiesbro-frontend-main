@@ -15,9 +15,9 @@ const Creatives = () => {
     const fetchVkAuth = async () => {
       const token = localStorage.getItem("access_token");
       logToBackend("МЫ В ЮЗ ЭФФЕКТЕ");
-      logToBackend(
-        `ИЗ ВК АУФ В ЮЗ ЭФФЕКТЕ ${is_vk_authed} ТИП: ${typeof is_vk_authed}`,
-      );
+      logToBackend("AAAAAAAAAAAAAAAAAAAAAAAAA");
+      logToBackend(`ИЗ ВК АУФ В ЮЗ ЭФФЕКТЕ ${is_vk_authed}`);
+      logToBackend(`ТИП ${typeof is_vk_authed}`);
       if (is_vk_authed === null || is_vk_authed === "null") {
         logToBackend("ОТРАБОТАЛО НУЛЛ");
         const new_vk_auth = await axios.get(
