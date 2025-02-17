@@ -10,11 +10,11 @@ const Creatives = () => {
   useEffect(() => {
     const fetchVkAuth = async () => {
       const token = localStorage.getItem("access_token");
-      await logToBackend(`VK Auth статус из localStorage: ${authed}`);
+      // await logToBackend(`VK Auth статус из localStorage: ${authed}`);
 
       if (authed === null || authed === "null") {
         try {
-          await logToBackend("Запрос на проверку авторизации...");
+          // await logToBackend("Запрос на проверку авторизации...");
           const response = await axios.get(
             "https://storisbro.com/api/auth-status/",
             {
@@ -25,20 +25,21 @@ const Creatives = () => {
           const authenticated = response["data"]["authenticated"];
 
           localStorage.setItem("is_vk_authed", JSON.stringify(authenticated));
-
-          await logToBackend(
-            `Результат запроса: ${JSON.stringify(response.data)}`,
-          );
+          /*
+                              await logToBackend(
+                                `Результат запроса: ${JSON.stringify(response.data)}`,
+                              );
+                    
+                     */
         } catch (error) {
-          await logToBackend(
-            `Ошибка при проверке авторизации: ${error.message}`,
-            "ERROR",
-          );
+          /*
+                    await logToBackend(
+                      `Ошибка при проверке авторизации: ${error.message}`,
+                      "ERROR",
+                    );
+                     */
+          console.log(error);
         }
-      } else {
-        await logToBackend(
-          `Авторизация установлена из localStorage: ${authed}`,
-        );
       }
     };
 

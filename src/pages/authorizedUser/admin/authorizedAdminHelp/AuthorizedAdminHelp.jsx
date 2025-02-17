@@ -34,15 +34,19 @@ const AuthorizedAdminHelp = () => {
         const authenticated = response["data"]["authenticated"];
 
         localStorage.setItem("is_vk_authed", JSON.stringify(authenticated));
-
-        await logToBackend(
-          `Результат запроса (ADMINHELP): ${JSON.stringify(response.data)}`,
-        );
+        /*
+                        await logToBackend(
+                          `Результат запроса (ADMINHELP): ${JSON.stringify(response.data)}`,
+                        );
+                        */
       } catch (error) {
-        await logToBackend(
-          `Ошибка при проверке авторизации (ADMINHELP): ${error.message}`,
-          "ERROR",
-        );
+        /*
+                await logToBackend(
+                  `Ошибка при проверке авторизации (ADMINHELP): ${error.message}`,
+                  "ERROR",
+                );
+                */
+        console.log(error);
       }
     };
     fetchVkAuth();
