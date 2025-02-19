@@ -25,16 +25,13 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
   const [listAvailablePublics, setListAvailablePublics] = useState([]);
 
   useEffect(() => {
-    const selectedIds = new Set(selectedPublics.map((pub) => pub.group_id));
-    if (selectedIds.size !== 0) {
-      console.log(selectedIds[0]["group_id"]);
-    }
-    const filteredPublics = publics.filter(
-      (pub) => !selectedIds.has(pub.group_id),
+    setListAvailablePublics(
+      publics.filter((publicItem) => !addedPublics.includes(publicItem)),
     );
-
-    setListAvailablePublics(filteredPublics);
-  }, [open, publics]);
+    console.log(`SELECTED: ${JSON.stringify(selectedPublics)}`);
+    console.log(`ALL: ${JSON.stringify(publics)}`);
+    console.log(`YBRALI: ${JSON.stringify(listAvailablePublics)}`);
+  }, [open, publics, selectedPublics]);
 
   const navigate = useNavigate();
 
