@@ -29,8 +29,9 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
       (pub) => !addedPublics.includes(pub),
     );
 
-    console.log(addedPublics);
+    console.log(filteredPublics);
     setListAvailablePublics(filteredPublics);
+    console.log(listAvailablePublics);
   }, [open, publics]);
 
   const navigate = useNavigate();
