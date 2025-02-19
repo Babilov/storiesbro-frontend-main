@@ -28,7 +28,7 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
     setListAvailablePublics(
       publics.filter((publicItem) => !addedPublics.includes(publicItem)),
     );
-    console.log(`SELECTED: ${JSON.stringify(selectedPublics)}`);
+    console.log(`ADDED: ${JSON.stringify(addedPublics)}`);
     console.log(`ALL: ${JSON.stringify(publics)}`);
     console.log(`YBRALI: ${JSON.stringify(listAvailablePublics)}`);
   }, [open, publics, selectedPublics]);
