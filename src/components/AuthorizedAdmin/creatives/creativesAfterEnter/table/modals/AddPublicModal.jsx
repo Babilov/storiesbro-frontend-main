@@ -14,7 +14,7 @@ import axios from "axios";
 import logToBackend from "../../../../../../utils/logs";
 import { useNavigate } from "react-router-dom";
 
-const AddPublicModal = ({ open, setOpen, publics }) => {
+const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
   const [error, setError] = useState(false);
   const [successOpen, setSuccessOpen] = useState(false);
   const [inputValue, setInputValue] = useState("");
@@ -25,7 +25,10 @@ const AddPublicModal = ({ open, setOpen, publics }) => {
   const [listAvailablePublics, setListAvailablePublics] = useState([]);
 
   useEffect(() => {
-    setListAvailablePublics(publics);
+    const filteredPublics = publics.filter(
+      (pub) => !addedPublics.includes(pub),
+    );
+    setListAvailablePublics(filteredPublics);
   }, [open, publics]);
 
   const navigate = useNavigate();

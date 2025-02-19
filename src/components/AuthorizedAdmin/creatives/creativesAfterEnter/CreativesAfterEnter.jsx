@@ -32,7 +32,12 @@ const CreativesAfterEnter = () => {
 
   return (
     <Grid item xs={12}>
-      <AddPublicModal open={openAdd} setOpen={setOpenAdd} publics={publics} />
+      <AddPublicModal
+        open={openAdd}
+        setOpen={setOpenAdd}
+        publics={publics}
+        selectedPublics={selectedPublics}
+      />
       <AddPublicButton setOpen={setOpenAdd} />
       <Table publics={selectedPublics} setPublics={setSelectedPublics} />
     </Grid>
