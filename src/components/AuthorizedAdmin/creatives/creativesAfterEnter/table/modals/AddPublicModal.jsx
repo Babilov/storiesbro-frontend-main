@@ -25,9 +25,9 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
   const [listAvailablePublics, setListAvailablePublics] = useState([]);
 
   useEffect(() => {
-    const filteredPublics = publics.filter(
-      (pub) => !addedPublics.includes(pub),
-    );
+    const selectedIds = new Set(selectedPublics.map((pub) => pub.link));
+    console.log(selectedIds[0].link);
+    const filteredPublics = publics.filter((pub) => !selectedIds.has(pub.link));
     console.log(`ADDEDPUBLICS: ${addedPublics}`);
     console.log(`FILTEREDPUBLICS: ${filteredPublics}`);
     setListAvailablePublics(filteredPublics);
