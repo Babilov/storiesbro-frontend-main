@@ -66,8 +66,11 @@ function App() {
   const userId = localStorage.getItem("id");
 
   const navigate = useNavigate();
+  const token = localStorage.getItem("access_token");
 
-  const ws = new WebSocket("wss://storisbro.com/ws/auth_status/");
+  const ws = new WebSocket("wss://storisbro.com/ws/auth_status/", [
+    `Bearer ${token}`,
+  ]);
 
   ws.onmessage = (event) => {
     const data = JSON.parse(event.data);

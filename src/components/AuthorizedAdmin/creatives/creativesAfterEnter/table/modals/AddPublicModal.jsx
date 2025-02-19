@@ -26,14 +26,10 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
 
   useEffect(() => {
     if (!publics || !addedPublics) return;
-    console.log("Publics:", publics);
-    console.log("Selected publics:", addedPublics);
     const filteredPublics = publics.filter(
       (publicItem) =>
         !addedPublics.some((selected) => selected.group_id === publicItem.id),
     );
-
-    console.log("Filtered publics:", filteredPublics);
 
     setListAvailablePublics(filteredPublics);
   }, [open, publics, selectedPublics]);
