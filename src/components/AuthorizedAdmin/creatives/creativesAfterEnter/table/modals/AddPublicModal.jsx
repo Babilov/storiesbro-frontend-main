@@ -26,7 +26,12 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
 
   useEffect(() => {
     setListAvailablePublics(
-      publics.filter((publicItem) => !addedPublics.includes(publicItem)),
+      publics.filter(
+        (publicItem) =>
+          !selectedPublics.some(
+            (selected) => selected.group_id === publicItem.id,
+          ),
+      ),
     );
     console.log(`ADDED: ${JSON.stringify(addedPublics)}`);
     console.log(`ALL: ${JSON.stringify(publics)}`);
