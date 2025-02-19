@@ -26,7 +26,7 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
 
   useEffect(() => {
     const selectedIds = new Set(selectedPublics.map((pub) => pub.link));
-    console.log(selectedIds[0].link);
+    console.log(`items: ${JSON.stringify(addedPublics)}`);
     const filteredPublics = publics.filter((pub) => !selectedIds.has(pub.link));
     console.log(`ADDEDPUBLICS: ${addedPublics}`);
     console.log(`FILTEREDPUBLICS: ${filteredPublics}`);
