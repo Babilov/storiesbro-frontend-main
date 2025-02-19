@@ -36,7 +36,7 @@ const CreativesAfterEnter = () => {
         open={openAdd}
         setOpen={setOpenAdd}
         publics={publics}
-        selectedPublics={selectedPublics}
+        addedPublics={selectedPublics}
       />
       <AddPublicButton setOpen={setOpenAdd} />
       <Table publics={selectedPublics} setPublics={setSelectedPublics} />
