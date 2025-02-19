@@ -26,14 +26,14 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
 
   useEffect(() => {
     const selectedIds = new Set(selectedPublics.map((pub) => pub.group_id));
-    console.log(`items: ${JSON.stringify(addedPublics)}`);
+    if (selectedIds.size !== 0) {
+      console.log(selectedIds[0]["group_id"]);
+    }
     const filteredPublics = publics.filter(
       (pub) => !selectedIds.has(pub.group_id),
     );
-    console.log(`ADDEDPUBLICS: ${addedPublics}`);
-    console.log(`FILTEREDPUBLICS: ${filteredPublics}`);
+
     setListAvailablePublics(filteredPublics);
-    console.log(`LISTAVALIABLEPUBLICS ${listAvailablePublics}`);
   }, [open, publics]);
 
   const navigate = useNavigate();
