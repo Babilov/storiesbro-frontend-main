@@ -26,10 +26,11 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
 
   useEffect(() => {
     /*
-        const filteredPublics = publics.filter(
-          (pub) => !addedPublics.includes(pub),
-        );
-         */
+                const filteredPublics = publics.filter(
+                  (pub) => !addedPublics.includes(pub),
+                );
+                 */
+    console.log(addedPublics);
     setListAvailablePublics(publics);
   }, [open, publics]);
 
