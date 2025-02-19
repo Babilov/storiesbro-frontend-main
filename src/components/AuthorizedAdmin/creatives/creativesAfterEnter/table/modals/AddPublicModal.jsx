@@ -28,10 +28,10 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
     const filteredPublics = publics.filter(
       (pub) => !addedPublics.includes(pub),
     );
-
-    console.log(filteredPublics);
+    console.log(`ADDEDPUBLICS: ${addedPublics}`);
+    console.log(`FILTEREDPUBLICS: ${filteredPublics}`);
     setListAvailablePublics(filteredPublics);
-    console.log(listAvailablePublics);
+    console.log(`LISTAVALIABLEPUBLICS ${listAvailablePublics}`);
   }, [open, publics]);
 
   const navigate = useNavigate();
