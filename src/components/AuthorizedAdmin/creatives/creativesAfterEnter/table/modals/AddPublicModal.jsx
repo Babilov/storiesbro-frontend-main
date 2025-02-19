@@ -25,10 +25,12 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
   const [listAvailablePublics, setListAvailablePublics] = useState([]);
 
   useEffect(() => {
-    const filteredPublics = publics.filter(
-      (pub) => !addedPublics.includes(pub),
-    );
-    setListAvailablePublics(filteredPublics);
+    /*
+        const filteredPublics = publics.filter(
+          (pub) => !addedPublics.includes(pub),
+        );
+         */
+    setListAvailablePublics(publics);
   }, [open, publics]);
 
   const navigate = useNavigate();
