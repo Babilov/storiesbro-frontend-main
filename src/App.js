@@ -68,16 +68,6 @@ function App() {
   const navigate = useNavigate();
   const token = localStorage.getItem("access_token");
 
-  const ws = new WebSocket(
-    `wss://storisbro.com/ws/auth_status/?token=${token}`,
-  );
-
-  ws.onmessage = (event) => {
-    const data = JSON.parse(event.data);
-    console.log("Auth status changed:", data["authenticated"]);
-    logToBackend(`Auth status changed: ${data["authenticated"]}`);
-  };
-
   useEffect(() => {
     // Функция для получения сообществ с бэкенда
 

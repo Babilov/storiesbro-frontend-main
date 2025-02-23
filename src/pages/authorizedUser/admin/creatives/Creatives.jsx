@@ -6,10 +6,23 @@ import axios from "axios";
 import logToBackend from "../../../../utils/logs";
 
 const Creatives = () => {
+  const token = localStorage.getItem("access_token");
+  const [authedVk, setAuthedVk] = useState(false);
+
+  const ws = new WebSocket(
+    `wss://storisbro.com/ws/auth_status/?token=${token}`,
+  );
+
+  ws.onmessage = (event) => {
+    const data = JSON.parse(event.data);
+    console.log("Auth status changed:", data["authenticated"]);
+    setAuthedVk(data["authenticated"]);
+    logToBackend(`Auth status changed: ${data["authenticated"]}`);
+  };
+
   let authed = localStorage.getItem("is_vk_authed");
   useEffect(() => {
     const fetchVkAuth = async () => {
-      const token = localStorage.getItem("access_token");
       // await logToBackend(`VK Auth статус из localStorage: ${authed}`);
 
       if (authed === null || authed === "null") {
@@ -26,18 +39,18 @@ const Creatives = () => {
 
           localStorage.setItem("is_vk_authed", JSON.stringify(authenticated));
           /*
-                              await logToBackend(
-                                `Результат запроса: ${JSON.stringify(response.data)}`,
-                              );
-                    
-                     */
+                                                  await logToBackend(
+                                                    `Результат запроса: ${JSON.stringify(response.data)}`,
+                                                  );
+                                        
+                                         */
         } catch (error) {
           /*
-                    await logToBackend(
-                      `Ошибка при проверке авторизации: ${error.message}`,
-                      "ERROR",
-                    );
-                     */
+                                        await logToBackend(
+                                          `Ошибка при проверке авторизации: ${error.message}`,
+                                          "ERROR",
+                                        );
+                                         */
           console.log(error);
         }
       }
@@ -46,11 +59,7 @@ const Creatives = () => {
     fetchVkAuth();
   }, [authed]);
 
-  return (
-    <>
-      {authed === "false" ? <CreativessBeforeEnter /> : <CreativesAfterEnter />}
-    </>
-  );
+  return <>{!authedVk ? <CreativessBeforeEnter /> : <CreativesAfterEnter />}</>;
 };
 
 export default Creatives;
