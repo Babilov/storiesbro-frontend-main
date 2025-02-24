@@ -53,6 +53,7 @@ import Publics from "./components/AuthorizedCustomer/publics/Publics";
 import AuthQRCode from "./components/QR/qrCode";
 import { useNavigate } from "react-router-dom";
 import logToBackend from "./utils/logs";
+import { refreshToken } from "./api/token";
 
 function App() {
   const [isLoginFormOpen, setIsLoginFormOpen] = useState(false);
@@ -126,6 +127,18 @@ function App() {
       navigate("/");
     }, 3600000);
   }
+
+  function startTokenRefresh() {
+    setInterval(async () => {
+      try {
+        await refreshToken();
+      } catch (error) {
+        console.error("Ошибка обновления токена:", error);
+      }
+    }, 10 * 1000); // Обновление за 14 минут до истечения (если токен живет 15 минут)
+  }
+
+  startTokenRefresh();
 
   return (
     <Context.Provider value={[isCustomer, setIsCustomer]}>

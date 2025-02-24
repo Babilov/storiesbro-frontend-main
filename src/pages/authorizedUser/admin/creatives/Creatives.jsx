@@ -39,18 +39,18 @@ const Creatives = () => {
 
           localStorage.setItem("is_vk_authed", JSON.stringify(authenticated));
           /*
-                                                  await logToBackend(
-                                                    `Результат запроса: ${JSON.stringify(response.data)}`,
-                                                  );
-                                        
-                                         */
+                                                            await logToBackend(
+                                                              `Результат запроса: ${JSON.stringify(response.data)}`,
+                                                            );
+                                                  
+                                                   */
         } catch (error) {
           /*
-                                        await logToBackend(
-                                          `Ошибка при проверке авторизации: ${error.message}`,
-                                          "ERROR",
-                                        );
-                                         */
+                                                  await logToBackend(
+                                                    `Ошибка при проверке авторизации: ${error.message}`,
+                                                    "ERROR",
+                                                  );
+                                                   */
           console.log(error);
         }
       }
@@ -61,5 +61,4 @@ const Creatives = () => {
 
   return <>{!authedVk ? <CreativessBeforeEnter /> : <CreativesAfterEnter />}</>;
 };
-
 export default Creatives;
