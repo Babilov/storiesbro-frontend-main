@@ -121,7 +121,7 @@ function App() {
     fetchSelectedPublics();
   }, [userId]);
 
-  if (localStorage.getItem("token")) {
+  if (localStorage.getItem("access_token")) {
     setTimeout(() => {
       localStorage.clear();
       navigate("/");
@@ -142,7 +142,7 @@ function App() {
 
   return (
     <Context.Provider value={[isCustomer, setIsCustomer]}>
-      {localStorage.getItem("token") && (
+      {localStorage.getItem("access_token") && (
         <Routes>
           <Route
             path="/"
@@ -486,7 +486,7 @@ function App() {
           <Route path="/qr" element={<AuthQRCode />} />
         </Routes>
       )}
-      {!localStorage.getItem("token") && (
+      {!localStorage.getItem("access_token") && (
         <Routes>
           <Route
             path="/"

@@ -19,7 +19,6 @@ export async function refreshToken() {
   }
 
   const data = await response.json();
-  logToBackend(`DATA ()!()!(($)($!)( ${data}`);
   localStorage.setItem("access_token", data.access);
   logToBackend(`ACCESS_TOKEN CHANGED new token: ${data.access}`);
 }
