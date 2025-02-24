@@ -129,16 +129,13 @@ function App() {
   }
 
   function startTokenRefresh() {
-    setInterval(
-      async () => {
-        try {
-          await refreshToken();
-        } catch (error) {
-          console.error("Ошибка обновления токена:", error);
-        }
-      },
-      59 * 60 * 1000,
-    );
+    setInterval(async () => {
+      try {
+        await refreshToken();
+      } catch (error) {
+        console.error("Ошибка обновления токена:", error);
+      }
+    }, 10 * 1000);
   }
 
   startTokenRefresh();
