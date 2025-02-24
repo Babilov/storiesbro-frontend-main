@@ -6,16 +6,13 @@ export async function refreshToken() {
     throw new Error("Нет refresh-токена");
   }
 
-  const response = await fetch(
-    "https://storisbro.com/api/authentication/token/refresh/",
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ refresh }),
+  const response = await fetch("https://storisbro.com/api/token/refresh/", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
     },
-  );
+    body: JSON.stringify({ refresh }),
+  });
 
   if (!response.ok) {
     throw new Error("Ошибка обновления токена");
