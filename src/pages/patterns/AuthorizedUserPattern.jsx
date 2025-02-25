@@ -7,6 +7,7 @@ import { PublicsContext } from "../../context/PublicsContext";
 import AuthorizedCustomerMenu from "../../components/AuthorizedCustomer/menu/AuthorizedCustomerMenu";
 import axios from "axios";
 import logToBackend from "../../utils/logs";
+import { refreshToken } from "../../api/token";
 
 const AuthorizedUserPattern = ({
   children,
@@ -16,6 +17,7 @@ const AuthorizedUserPattern = ({
 }) => {
   useEffect(() => {
     const fetchIsAuthed = async () => {
+      await refreshToken();
       const token = localStorage.getItem("access_token");
       const isAuthed = await axios.get(
         `https://storisbro.com/api/auth-status/`,
