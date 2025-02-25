@@ -24,3 +24,25 @@ export async function refreshToken() {
   logToBackend(`ACCESS_TOKEN CHANGED new token: ${data.access}`);
   logToBackend(`ACCESS_TOKEN CHANGED new refresh token: ${data.refresh}`);
 }
+
+export async function fetchWithAuth(url, options = {}) {
+  const token = localStorage.getItem("access_token");
+
+  if (!token) {
+    throw new Error("Пользователь не авторизован");
+  }
+
+  const headers = {
+    ...options.headers,
+    Authorization: `Bearer ${token}`,
+  };
+
+  const response = await fetch(url, { ...options, headers });
+
+  if (response.status === 401) {
+    await refreshToken();
+    return fetchWithAuth(url, options); // Повторяем запрос после обновления токена
+  }
+
+  return response.json();
+}

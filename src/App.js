@@ -74,6 +74,7 @@ function App() {
 
     const fetchAllPublics = async () => {
       try {
+        await refreshToken();
         const accessToken = localStorage.getItem("vk_access_token");
         const token = localStorage.getItem("access_token");
         const userId = localStorage.getItem("id");
