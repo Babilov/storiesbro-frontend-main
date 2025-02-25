@@ -37,7 +37,6 @@ const Creatives = () => {
           await refreshToken();
           const new_token = localStorage.getItem("access_token");
 
-          // await logToBackend("Запрос на проверку авторизации...");
           const response = await axios.get(
             "https://storisbro.com/api/auth-status/",
             {
@@ -49,18 +48,18 @@ const Creatives = () => {
 
           localStorage.setItem("is_vk_authed", JSON.stringify(authenticated));
           /*
-                                                                                                    await logToBackend(
-                                                                                                      `Результат запроса: ${JSON.stringify(response.data)}`,
-                                                                                                    );
-          
-                                                                                           */
+                                                                                                                        await logToBackend(
+                                                                                                                          `Результат запроса: ${JSON.stringify(response.data)}`,
+                                                                                                                        );
+                              
+                                                                                                               */
         } catch (error) {
           /*
-                                                                                          await logToBackend(
-                                                                                            `Ошибка при проверке авторизации: ${error.message}`,
-                                                                                            "ERROR",
-                                                                                          );
-                                                                                           */
+                                                                                                              await logToBackend(
+                                                                                                                `Ошибка при проверке авторизации: ${error.message}`,
+                                                                                                                "ERROR",
+                                                                                                              );
+                                                                                                               */
           console.log(error);
         }
       }
