@@ -4,6 +4,7 @@ import CreativessBeforeEnter from "../../../../components/AuthorizedAdmin/creati
 import CreativesAfterEnter from "../../../../components/AuthorizedAdmin/creatives/creativesAfterEnter/CreativesAfterEnter";
 import axios from "axios";
 import logToBackend from "../../../../utils/logs";
+import { refreshToken } from "../../../../api/token";
 
 const Creatives = () => {
   const token = localStorage.getItem("access_token");
@@ -27,11 +28,14 @@ const Creatives = () => {
 
       if (authed === null || authed === "null") {
         try {
+          await refreshToken();
+          const new_token = localStorage.getItem("access_token");
+
           // await logToBackend("Запрос на проверку авторизации...");
           const response = await axios.get(
             "https://storisbro.com/api/auth-status/",
             {
-              headers: { Authorization: `Bearer ${token}` },
+              headers: { Authorization: `Bearer ${new_token}` },
             },
           );
 
@@ -39,18 +43,18 @@ const Creatives = () => {
 
           localStorage.setItem("is_vk_authed", JSON.stringify(authenticated));
           /*
-                                                            await logToBackend(
-                                                              `Результат запроса: ${JSON.stringify(response.data)}`,
-                                                            );
-                                                  
-                                                   */
+                                                                      await logToBackend(
+                                                                        `Результат запроса: ${JSON.stringify(response.data)}`,
+                                                                      );
+                                                            
+                                                             */
         } catch (error) {
           /*
-                                                  await logToBackend(
-                                                    `Ошибка при проверке авторизации: ${error.message}`,
-                                                    "ERROR",
-                                                  );
-                                                   */
+                                                            await logToBackend(
+                                                              `Ошибка при проверке авторизации: ${error.message}`,
+                                                              "ERROR",
+                                                            );
+                                                             */
           console.log(error);
         }
       }
