@@ -53,7 +53,7 @@ import Publics from "./components/AuthorizedCustomer/publics/Publics";
 import AuthQRCode from "./components/QR/qrCode";
 import { useNavigate } from "react-router-dom";
 import logToBackend from "./utils/logs";
-import { refreshToken } from "./api/token";
+import { fetchWithAuth, refreshToken } from "./api/token";
 
 function App() {
   const [isLoginFormOpen, setIsLoginFormOpen] = useState(false);
@@ -74,7 +74,6 @@ function App() {
 
     const fetchAllPublics = async () => {
       try {
-        await refreshToken();
         const accessToken = localStorage.getItem("vk_access_token");
         const token = localStorage.getItem("access_token");
         const userId = localStorage.getItem("id");
@@ -103,13 +102,11 @@ function App() {
 
     const fetchSelectedPublics = async () => {
       try {
-        const token = localStorage.getItem("access_token");
-        const response = await axios.get(
+        const response = await fetchWithAuth(
           `https://storisbro.com/api/selected_groups/`,
           {
             headers: {
               Accept: "application/json",
-              Authorization: `Bearer ${token}`, // Токен в заголовке
             },
           },
         );
