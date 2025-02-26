@@ -70,6 +70,13 @@ function App() {
   const token = localStorage.getItem("access_token");
 
   useEffect(() => {
+    const refresh = async () => {
+      await refreshToken();
+    };
+    refresh();
+  }, []);
+
+  useEffect(() => {
     // Функция для получения сообществ с бэкенда
 
     const fetchAllPublics = async () => {

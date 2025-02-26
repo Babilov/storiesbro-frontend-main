@@ -10,7 +10,7 @@ import AuthorizedAdminMenu from "../../../../components/AuthorizedAdmin/menu/Aut
 import AuthorizedUserHeader from "../../../../components/authorizedUser/authorizedUserHeader/AuthorizedUserHeader";
 import logToBackend from "../../../../utils/logs";
 import axios from "axios";
-import { refreshToken } from "../../../../api/token";
+import { fetchWithAuth, refreshToken } from "../../../../api/token";
 
 const AuthorizedAdminHelp = () => {
   useEffect(() => {
@@ -24,30 +24,25 @@ const AuthorizedAdminHelp = () => {
   useEffect(() => {
     const fetchVkAuth = async () => {
       try {
-        await refreshToken();
-        const token = localStorage.getItem("access_token");
-        const response = await axios.get(
+        const response = await fetchWithAuth(
           "https://storisbro.com/api/auth-status/",
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          },
         );
 
-        const authenticated = response["data"]["authenticated"];
+        const authenticated = response["authenticated"];
 
         localStorage.setItem("is_vk_authed", JSON.stringify(authenticated));
         /*
-                                await logToBackend(
-                                  `Результат запроса (ADMINHELP): ${JSON.stringify(response.data)}`,
-                                );
-                                */
+                                        await logToBackend(
+                                          `Результат запроса (ADMINHELP): ${JSON.stringify(response.data)}`,
+                                        );
+                                        */
       } catch (error) {
         /*
-                        await logToBackend(
-                          `Ошибка при проверке авторизации (ADMINHELP): ${error.message}`,
-                          "ERROR",
-                        );
-                        */
+                                await logToBackend(
+                                  `Ошибка при проверке авторизации (ADMINHELP): ${error.message}`,
+                                  "ERROR",
+                                );
+                                */
         console.log(error);
       }
     };
