@@ -75,20 +75,16 @@ function App() {
     const fetchAllPublics = async () => {
       try {
         const accessToken = localStorage.getItem("vk_access_token");
-        const token = localStorage.getItem("access_token");
-        const userId = localStorage.getItem("id");
         const deviceId = localStorage.getItem("device_id");
-        logToBackend(`APP device_id )))))))))))))): ${deviceId}`);
-        const response = await axios.get(
+        const response = await fetchWithAuth(
           `https://storisbro.com/api/vk/groups/?access_token=${accessToken}&device_id=${deviceId}`,
           {
             headers: {
-              Authorization: `Bearer ${token}`, // Токен в заголовке
               Accept: "application/json",
             },
           },
         );
-        setPublics(response.data.groups);
+        setPublics(response.groups);
       } catch (error) {
         console.error("Ошибка при загрузке сообществ", error);
       }
