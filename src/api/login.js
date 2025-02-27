@@ -3,7 +3,6 @@ import axios from "axios";
 import { API_URL } from "../constants/constatns";
 
 export const localStorageSet = (data) => {
-  logToBackend(JSON.stringify(data));
   localStorage.setItem("access_token", data.access);
   localStorage.setItem("refresh_token", data.refresh);
   axios.defaults.headers.common["Authorization"] = "Bearer " + data["access"];

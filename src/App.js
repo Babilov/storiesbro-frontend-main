@@ -69,58 +69,57 @@ function App() {
   const navigate = useNavigate();
   const token = localStorage.getItem("access_token");
 
+  /*
+    useEffect(() => {
+      const refresh = async () => {
+        await refreshToken();
+      };
+      refresh();
+    }, []);
+     */
+
+  const fetchAllPublics = async () => {
+    try {
+      const accessToken = localStorage.getItem("vk_access_token");
+      const deviceId = localStorage.getItem("device_id");
+      const response = await fetchWithAuth(
+        `https://storisbro.com/api/vk/groups/?access_token=${accessToken}&device_id=${deviceId}`,
+        {
+          headers: {
+            Accept: "application/json",
+          },
+        },
+      );
+      setPublics(response.groups);
+    } catch (error) {
+      console.error("Ошибка при загрузке сообществ", error);
+    }
+  };
+
+  const fetchSelectedPublics = async () => {
+    try {
+      const response = await fetchWithAuth(
+        `https://storisbro.com/api/selected_groups/`,
+        {
+          headers: {
+            Accept: "application/json",
+          },
+        },
+      );
+      logToBackend(`GET SELECTED:::: ${JSON.stringify(response)}`);
+      setSelectedPublics(response.groups);
+    } catch (error) {
+      console.error("Ошибка при загрузке сообществ", error);
+    }
+  };
+
   useEffect(() => {
     const refresh = async () => {
       await refreshToken();
+      await fetchAllPublics();
+      await fetchSelectedPublics();
     };
     refresh();
-  }, []);
-
-  useEffect(() => {
-    // Функция для получения сообществ с бэкенда
-
-    const fetchAllPublics = async () => {
-      try {
-        const accessToken = localStorage.getItem("vk_access_token");
-        const deviceId = localStorage.getItem("device_id");
-        const response = await fetchWithAuth(
-          `https://storisbro.com/api/vk/groups/?access_token=${accessToken}&device_id=${deviceId}`,
-          {
-            headers: {
-              Accept: "application/json",
-            },
-          },
-        );
-        setPublics(response.groups);
-      } catch (error) {
-        console.error("Ошибка при загрузке сообществ", error);
-      }
-    };
-
-    fetchAllPublics();
-  }, []);
-
-  useEffect(() => {
-    // Функция для получения сообществ с бэкенда
-
-    const fetchSelectedPublics = async () => {
-      try {
-        const response = await fetchWithAuth(
-          `https://storisbro.com/api/selected_groups/`,
-          {
-            headers: {
-              Accept: "application/json",
-            },
-          },
-        );
-        logToBackend(`GET SELECTED:::: ${JSON.stringify(response)}`);
-        setSelectedPublics(response.groups);
-      } catch (error) {
-        console.error("Ошибка при загрузке сообществ", error);
-      }
-    };
-
-    fetchSelectedPublics();
   }, []);
 
   if (localStorage.getItem("access_token")) {
