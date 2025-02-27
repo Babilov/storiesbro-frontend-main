@@ -1,4 +1,5 @@
 import logToBackend from "../utils/logs";
+import axios from "axios";
 
 export async function refreshToken() {
   const refresh = localStorage.getItem("refresh_token");
@@ -34,6 +35,18 @@ export async function fetchWithAuth(url, options = {}) {
     ...options.headers,
     Authorization: `Bearer ${token}`,
   };
+
+  await axios.post(
+    "https://storisbro.com/api/token-check/",
+    {},
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ access_token: token }),
+    },
+  );
 
   const response = await fetch(url, { ...options, headers });
 

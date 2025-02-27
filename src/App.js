@@ -70,20 +70,18 @@ function App() {
   const token = localStorage.getItem("access_token");
 
   /*
-        useEffect(() => {
-          const refresh = async () => {
-            await refreshToken();
-          };
-          refresh();
-        }, []);
-         */
+          useEffect(() => {
+            const refresh = async () => {
+              await refreshToken();
+            };
+            refresh();
+          }, []);
+           */
 
   const fetchAllPublics = async () => {
     try {
-      const accessToken = localStorage.getItem("vk_access_token");
-      const deviceId = localStorage.getItem("device_id");
       const response = await fetchWithAuth(
-        `https://storisbro.com/api/vk/groups/?access_token=${accessToken}&device_id=${deviceId}`,
+        `https://storisbro.com/api/vk/groups/`,
         {
           headers: {
             Accept: "application/json",
