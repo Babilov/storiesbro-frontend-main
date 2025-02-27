@@ -98,7 +98,7 @@ function App() {
     };
 
     fetchAllPublics();
-  }, [userId]);
+  }, []);
 
   useEffect(() => {
     // Функция для получения сообществ с бэкенда
@@ -113,7 +113,7 @@ function App() {
             },
           },
         );
-        logToBackend(`ABOBA:::: ${JSON.stringify(response)}`);
+        logToBackend(`GET SELECTED:::: ${JSON.stringify(response)}`);
         setSelectedPublics(response.groups);
       } catch (error) {
         console.error("Ошибка при загрузке сообществ", error);
@@ -121,7 +121,7 @@ function App() {
     };
 
     fetchSelectedPublics();
-  }, [userId]);
+  }, []);
 
   if (localStorage.getItem("access_token")) {
     setTimeout(() => {
