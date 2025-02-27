@@ -9,11 +9,54 @@ import AddPublicModal from "./table/modals/AddPublicModal";
 import { API_URL } from "../../../../constants/constatns";
 import axios from "axios";
 import logToBackend from "../../../../utils/logs";
+import { fetchWithAuth, refreshToken } from "../../../../api/token";
 
 const CreativesAfterEnter = () => {
   const [publics, setPublics, selectedPublics, setSelectedPublics] =
     useContext(PublicsContext);
   const [openAdd, setOpenAdd] = useState(false);
+
+  const fetchAllPublics = async () => {
+    try {
+      const response = await fetchWithAuth(
+        `https://storisbro.com/api/vk/groups/`,
+        {
+          headers: {
+            Accept: "application/json",
+          },
+        },
+      );
+      setPublics(response.groups);
+    } catch (error) {
+      console.error("Ошибка при загрузке сообществ", error);
+    }
+  };
+
+  const fetchSelectedPublics = async () => {
+    try {
+      const response = await fetchWithAuth(
+        `https://storisbro.com/api/selected_groups/`,
+        {
+          headers: {
+            Accept: "application/json",
+          },
+        },
+      );
+      logToBackend(`GET SELECTED:::: ${JSON.stringify(response)}`);
+      setSelectedPublics(response.groups);
+    } catch (error) {
+      console.error("Ошибка при загрузке сообществ", error);
+    }
+  };
+
+  useEffect(() => {
+    const refresh = async () => {
+      await refreshToken();
+      await fetchAllPublics();
+      await fetchSelectedPublics();
+    };
+    refresh();
+  }, []);
 
   useEffect(() => {
     const postId = async () => {
