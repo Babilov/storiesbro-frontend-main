@@ -19,7 +19,6 @@ const CreativesAfterEnter = () => {
     const postId = async () => {
       const userId = localStorage.getItem("id");
       const deviceId = sessionStorage.getItem("device_id");
-      logToBackend(`Device Id: ${deviceId}`);
       const token = localStorage.getItem("access_token");
       await axios.get(`${API_URL}valid_token/?device_id=${deviceId}`, {
         headers: {

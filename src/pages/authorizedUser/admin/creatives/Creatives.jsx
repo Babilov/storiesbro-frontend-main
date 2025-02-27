@@ -26,38 +26,37 @@ const Creatives = () => {
     const data = JSON.parse(event.data);
     console.log("Auth status changed:", data["authenticated"]);
     setAuthedVk(data["authenticated"]);
-    logToBackend(`Auth status changed: ${data["authenticated"]}`);
   };
 
   // let authed = localStorage.getItem("is_vk_authed");
   /*useEffect(() => {
-          const fetchVkAuth = async () => {
-            // await logToBackend(`VK Auth статус из localStorage: ${authed}`);
-      
-            if (authed === null || authed === "null") {
-              try {
-                await refreshToken();
-                const new_token = localStorage.getItem("access_token");
-      
-                const response = await axios.get(
-                  "https://storisbro.com/api/auth-status/",
-                  {
-                    headers: { Authorization: `Bearer ${new_token}` },
-                  },
-                );
-      
-                const authenticated = response["data"]["authenticated"];
-      
-                localStorage.setItem("is_vk_authed", JSON.stringify(authenticated));
-              } catch (error) {
-                console.log(error);
+            const fetchVkAuth = async () => {
+              // await logToBackend(`VK Auth статус из localStorage: ${authed}`);
+        
+              if (authed === null || authed === "null") {
+                try {
+                  await refreshToken();
+                  const new_token = localStorage.getItem("access_token");
+        
+                  const response = await axios.get(
+                    "https://storisbro.com/api/auth-status/",
+                    {
+                      headers: { Authorization: `Bearer ${new_token}` },
+                    },
+                  );
+        
+                  const authenticated = response["data"]["authenticated"];
+        
+                  localStorage.setItem("is_vk_authed", JSON.stringify(authenticated));
+                } catch (error) {
+                  console.log(error);
+                }
               }
-            }
-          };
-      
-          fetchVkAuth();
-        }, [authed]);
-        */
+            };
+        
+            fetchVkAuth();
+          }, [authed]);
+          */
 
   return <>{!authedVk ? <CreativessBeforeEnter /> : <CreativesAfterEnter />}</>;
 };

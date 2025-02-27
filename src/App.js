@@ -113,7 +113,7 @@ function App() {
             },
           },
         );
-        logToBackend(`ABOBA:::: JSON.stringify(response)`);
+        logToBackend(`ABOBA:::: ${JSON.stringify(response)}`);
         setSelectedPublics(response.groups);
       } catch (error) {
         console.error("Ошибка при загрузке сообществ", error);

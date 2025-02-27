@@ -48,9 +48,6 @@ const PublicSettings = () => {
         );
         setCaState(resCa.data);
         setState(resSt.data);
-
-        logToBackend(`Ca: ${caState}`);
-        logToBackend(`St: ${state}`);
       } catch (error) {
         logToBackend(`Error GET: ${error}`);
       }

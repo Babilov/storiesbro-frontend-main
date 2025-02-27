@@ -27,7 +27,6 @@ const AuthorizedUserPattern = ({
           },
         },
       );
-      logToBackend(`Front Authed: ${JSON.stringify(isAuthed)}`);
       localStorage.setItem("is_vk_authed", isAuthed["data"]["authenticated"]);
 
       // console.log(isAuthed.data.authenticated);
