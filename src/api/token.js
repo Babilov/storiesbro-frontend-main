@@ -39,7 +39,6 @@ export async function fetchWithAuth(url, options = {}) {
 
   if (response.status === 401) {
     await refreshToken();
-    await new Promise((res) => setTimeout(res, 100));
     return fetchWithAuth(url, options); // Повторяем запрос после обновления токена
   }
 
