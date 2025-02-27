@@ -70,13 +70,13 @@ function App() {
   const token = localStorage.getItem("access_token");
 
   /*
-    useEffect(() => {
-      const refresh = async () => {
-        await refreshToken();
-      };
-      refresh();
-    }, []);
-     */
+      useEffect(() => {
+        const refresh = async () => {
+          await refreshToken();
+        };
+        refresh();
+      }, []);
+       */
 
   const fetchAllPublics = async () => {
     try {
@@ -115,6 +115,7 @@ function App() {
 
   useEffect(() => {
     const refresh = async () => {
+      await new Promise((res) => setTimeout(res, 100));
       await refreshToken();
       await fetchAllPublics();
       await fetchSelectedPublics();
