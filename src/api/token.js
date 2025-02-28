@@ -21,7 +21,7 @@ export async function refreshToken() {
 
   const data = await response.json();
   localStorage.setItem("access_token", data.access);
-  localStorage.setItem("refresh_token", data.refresh);
+  // localStorage.setItem("refresh_token", data.refresh);
 }
 
 export async function fetchWithAuth(url, options = {}) {
