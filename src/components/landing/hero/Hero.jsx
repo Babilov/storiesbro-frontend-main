@@ -37,7 +37,11 @@ const Hero = ({ title, content, buttonText, image, setIsLoginFormOpen }) => {
         >
           {content}
         </Typography>
-        <GradientButton width="68%" height="20%" handleClick={() => setIsLoginFormOpen(true)}>
+        <GradientButton
+          width="68%"
+          height="20%"
+          handleClick={() => setIsLoginFormOpen(true)}
+        >
           {buttonText}
         </GradientButton>
       </Box>

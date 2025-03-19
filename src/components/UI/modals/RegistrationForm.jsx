@@ -6,11 +6,8 @@ import GradientButton from "../buttons/GradientButton";
 import EmailConfirmationForm from "./EmailConfiramtionForm";
 import axios from "axios";
 import { API_URL } from "../../../constants/constatns";
-import { useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
-import { setTokken } from "../../../store/userReducer";
+import { Link } from "react-router-dom";
 import ErrorMessage from "../errors/ErrorMessage";
-import logToBackend from "../../../utils/logs";
 
 const REGISTER_LINK = `${API_URL}register/`;
 
@@ -38,9 +35,6 @@ const RegistrationForm = ({
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
   const checkSymbolsPassword = (passwordCheck) => {
     const pattern = /^[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/;
     return pattern.test(passwordCheck);
@@ -54,7 +48,7 @@ const RegistrationForm = ({
   const checkIsEmail = async (email) => {
     try {
       const response = await axios.get(
-        `https://storisbro.com/api/check_email/${email}`,
+        `https://storisbro.com/api/check_email/${email}`
       );
       if (response.data.email) {
         setError(true);
@@ -104,7 +98,7 @@ const RegistrationForm = ({
 
     if (!checkSymbolsPassword(password)) {
       setErrorMessage(
-        "*В пароле должны быть только латинские и специальные символы",
+        "*В пароле должны быть только латинские и специальные символы"
       );
       setError(true);
       setIsEmailConfirm(false);
@@ -137,7 +131,6 @@ const RegistrationForm = ({
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const [isConfirmFormOpen, setIsConfirmPageOpen] = useState(false);
   return (
     <>
       <EmailConfirmationForm
@@ -145,7 +138,6 @@ const RegistrationForm = ({
         setIsEmailConfirm={setIsEmailConfirm}
         userId={userId} // Передайте userId в компонент EmailConfirmationForm
         handleConfirmForm={(userId) => {
-          setIsConfirmPageOpen(true);
           setUserId(userId);
         }}
         emailLogin={email}

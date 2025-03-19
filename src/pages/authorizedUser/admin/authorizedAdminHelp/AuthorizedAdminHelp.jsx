@@ -8,9 +8,7 @@ import OwnVideosInstruction from "../../../../components/AuthorizedAdmin/ownVide
 import HowToIncrease from "../../../../components/AuthorizedAdmin/howToIncrease/HowToIncrease";
 import AuthorizedAdminMenu from "../../../../components/AuthorizedAdmin/menu/AuthorizedAdminMenu";
 import AuthorizedUserHeader from "../../../../components/authorizedUser/authorizedUserHeader/AuthorizedUserHeader";
-import logToBackend from "../../../../utils/logs";
-import axios from "axios";
-import { fetchWithAuth, refreshToken } from "../../../../api/token";
+import { fetchWithAuth } from "../../../../api/token";
 
 const AuthorizedAdminHelp = () => {
   useEffect(() => {
@@ -25,7 +23,7 @@ const AuthorizedAdminHelp = () => {
     const fetchVkAuth = async () => {
       try {
         const response = await fetchWithAuth(
-          "https://storisbro.com/api/auth-status/",
+          "https://storisbro.com/api/auth-status/"
         );
 
         const authenticated = response["authenticated"];

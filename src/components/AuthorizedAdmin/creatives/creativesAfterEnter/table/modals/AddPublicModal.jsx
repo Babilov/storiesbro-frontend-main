@@ -1,17 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import MyModal from "../../../../../UI/modals/MyModal";
 import MyInput from "../../../../../UI/input/MyInput";
 import { Avatar, Box, Checkbox, Link, Typography } from "@mui/material";
 import MyButton from "../../../../../UI/buttons/MyButton";
 import SuccessModal from "./SuccessModal";
 import NoPermissionModal from "./NoPermissionModal";
-import {
-  add_public,
-  add_public_with_name,
-} from "../../../../../../api/publics";
 import axios from "axios";
-import logToBackend from "../../../../../../utils/logs";
 import { useNavigate } from "react-router-dom";
 
 const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
@@ -28,7 +22,7 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
     if (!publics || !addedPublics) return;
     const filteredPublics = publics.filter(
       (publicItem) =>
-        !addedPublics.some((selected) => selected.group_id === publicItem.id),
+        !addedPublics.some((selected) => selected.group_id === publicItem.id)
     );
 
     setListAvailablePublics(filteredPublics);
@@ -58,7 +52,7 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
               headers: {
                 Authorization: `Bearer ${token}`, // Токен в заголовке
               },
-            },
+            }
           );
           console.log("Данные успешно отправлены");
           window.location.reload();
@@ -78,7 +72,7 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
   const filteredPublics = listAvailablePublics.filter(
     (item) =>
       item.name.toLowerCase().includes(inputValue.toLowerCase()) ||
-      item.link.toLowerCase().includes(inputValue.toLowerCase()),
+      item.link.toLowerCase().includes(inputValue.toLowerCase())
   );
 
   const handleCheckboxChange = (item) => {
@@ -155,7 +149,7 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
               <Checkbox
                 style={{ color: "black" }}
                 checked={selectedPublics.some(
-                  (publicItem) => publicItem.id === item.id,
+                  (publicItem) => publicItem.id === item.id
                 )}
                 onChange={() => handleCheckboxChange(item)}
               />

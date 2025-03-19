@@ -2,7 +2,6 @@ import { Divider, Grid, Typography } from "@mui/material";
 import React from "react";
 
 import "./deposit.css";
-import MobileTable from "./MobileTable";
 
 const DepositeTable = ({ operations }) => {
   return (

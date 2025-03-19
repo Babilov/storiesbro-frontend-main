@@ -3,10 +3,8 @@ import { Box, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { Tooltips } from "../../Onboardings/Tooltips";
 import redirectPng from "./images/redirect.png";
-import { Link } from "react-router-dom";
 
 const AddCreative = () => {
-  const count_of_visit = localStorage.getItem["count_of_visit"];
   const navigate = useNavigate();
   const [count, setCount] = useState(1);
 

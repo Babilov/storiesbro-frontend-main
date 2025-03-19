@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import * as VKID from "@vkid/sdk";
 import axios from "axios";
-import logToBackend from "../../../../utils/logs";
 import { API_URL } from "../../../../constants/constatns";
 
 const CreativessBeforeEnter = () => {
@@ -24,7 +23,7 @@ const CreativessBeforeEnter = () => {
       const chars =
         "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~";
       return Array.from({ length }, () =>
-        chars.charAt(Math.floor(Math.random() * chars.length)),
+        chars.charAt(Math.floor(Math.random() * chars.length))
       ).join("");
     };
 
@@ -32,7 +31,7 @@ const CreativessBeforeEnter = () => {
     const encoder = new TextEncoder();
     const hashBuffer = await crypto.subtle.digest(
       "SHA-256",
-      encoder.encode(codeVerifier),
+      encoder.encode(codeVerifier)
     );
     const codeChallenge = base64UrlEncode(hashBuffer);
 
@@ -59,7 +58,7 @@ const CreativessBeforeEnter = () => {
           headers: {
             Authorization: `Bearer ${token}`, // Токен в заголовке
           },
-        },
+        }
       )
       .then((res) => {
         localStorage.setItem("vk_access_token", res.data.access_token);

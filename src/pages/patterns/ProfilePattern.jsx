@@ -1,11 +1,9 @@
-import { Box, Container, Grid, Typography } from "@mui/material";
+import { Container, Grid, Typography } from "@mui/material";
 import React, { useEffect } from "react";
 import ProfileHeader from "../../components/Profile/profileHeader/ProfileHeader";
 import ProfileMenu from "../../components/Profile/profileMenu/ProfileMenu";
-import { useSelector } from "react-redux";
 import axios from "axios";
 import { API_URL } from "../../constants/constatns";
-import { get_list } from "../../api/publics";
 
 const Profile = ({ children, title }) => {
   //const tokken = useSelector((store) => store.user);

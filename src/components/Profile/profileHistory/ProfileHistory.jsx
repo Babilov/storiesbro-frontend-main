@@ -3,8 +3,6 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { API_URL } from "../../../constants/constatns";
 
-import check from "../../../images/profileImages/alertsHistoryIcons/check.svg";
-import cross from "../../../images/profileImages/alertsHistoryIcons/cross.svg";
 import MyButton from "../../UI/buttons/MyButton";
 import Comment from "./Comment";
 

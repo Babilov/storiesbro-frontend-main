@@ -1,7 +1,5 @@
 import React, { useEffect } from "react";
 import { Box, Typography } from "@mui/material";
-
-import mca from "./images/mca.png";
 import firstVideo from "./images/IMG_8419.mp4";
 import secondVideo from "./images/IMG_8420.mp4";
 import thirdVideo from "./images/IMG_8417.mp4";

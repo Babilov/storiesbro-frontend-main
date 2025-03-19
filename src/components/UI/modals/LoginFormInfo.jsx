@@ -1,21 +1,15 @@
-import { Box, Button, Link, Typography } from "@mui/material";
-import React, { useState, useEffect } from "react";
+import { Box, Link, Typography } from "@mui/material";
+import React, { useState } from "react";
 import ErrorMessage from "../errors/ErrorMessage";
 import GradientButton from "../buttons/GradientButton";
 import MyInput from "../input/MyInput";
-import axios from "axios";
 import { setTokken } from "../../../store/userReducer";
 import { useDispatch } from "react-redux";
-import { API_URL } from "../../../constants/constatns";
 import { useNavigate } from "react-router-dom";
-import * as VKID from "@vkid/sdk"; // Импорт VKID SDK
-import vk from "../../../images/icons/commonIcons/vkWhite.svg";
-import logToBackend from "../../../utils/logs";
 import { localStorageSet, loginFunc } from "../../../api/login";
 
 const LoginFormInfo = ({
   handleChangeConfirm,
-  handleChangePassword,
   handleRegistrationForm,
   setIsLoginFormOpen,
   setIsConfirmPageOpen,
@@ -24,7 +18,6 @@ const LoginFormInfo = ({
   const [error, setError] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [userId, setUserId] = useState(null);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -37,7 +30,6 @@ const LoginFormInfo = ({
       if (response.status === 200) {
         const data = await response.data;
 
-        setUserId(response.data.id);
         handleConfirmForm(response.data.id);
         setIsConfirmPageOpen(true);
         setIsLoginFormOpen(false);

@@ -6,7 +6,6 @@ import clipboardText from "./images/clipboardText.svg";
 import flashCircle from "./images/flashCircle.svg";
 import lock from "./images/lock.svg";
 import messageQuestion from "./images/messageQuestion.svg";
-import moneys from "./images/moneys.svg";
 import tagUser from "./images/tagUser.svg";
 import logo from "./images/logo.svg";
 import cross from "./images/cross.svg";

@@ -1,4 +1,3 @@
-import logToBackend from "../utils/logs";
 import axios from "axios";
 import { API_URL } from "../constants/constatns";
 
@@ -27,6 +26,6 @@ export const loginFunc = async (email, password) => {
       headers: {
         "Content-Type": "application/json",
       },
-    },
+    }
   );
 };

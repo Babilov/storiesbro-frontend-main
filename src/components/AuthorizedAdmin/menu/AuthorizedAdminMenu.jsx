@@ -3,8 +3,6 @@ import { Box } from "@mui/material";
 
 import up from "./images/up.svg";
 import list from "./images/list.svg";
-import lock from "./images/lock.svg";
-import moneys from "./images/moneys.svg";
 import question from "./images/question.svg";
 import tagUser from "./images/tagUser.svg";
 import MyMenu from "../../UI/menu/MyMenu";

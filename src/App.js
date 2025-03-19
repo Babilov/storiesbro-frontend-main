@@ -64,7 +64,6 @@ function App() {
   const [selectedPublics, setSelectedPublics] = useState([]);
   const [creatives, setCreatives] = useState([]);
   const [arhive, setArhive] = useState([]);
-  const userId = localStorage.getItem("id");
 
   const navigate = useNavigate();
   const token = localStorage.getItem("access_token");
@@ -86,7 +85,7 @@ function App() {
           headers: {
             Accept: "application/json",
           },
-        },
+        }
       );
       setPublics(response.groups);
     } catch (error) {
@@ -102,7 +101,7 @@ function App() {
           headers: {
             Accept: "application/json",
           },
-        },
+        }
       );
       logToBackend(`GET SELECTED:::: ${JSON.stringify(response)}`);
       setSelectedPublics(response.groups);

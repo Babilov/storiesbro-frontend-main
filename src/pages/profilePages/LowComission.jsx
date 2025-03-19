@@ -1,8 +1,7 @@
-import { Box, Container, Grid, Typography } from "@mui/material";
+import { Box, Container, Typography } from "@mui/material";
 import React from "react";
 import ProfileHeader from "../../components/Profile/profileHeader/ProfileHeader";
 import ProfileLowComission from "../../components/Profile/profileLowComission/ProfileLowComission";
-import MyInput from "../../components/UI/input/MyInput";
 
 const LowComission = () => {
   return (

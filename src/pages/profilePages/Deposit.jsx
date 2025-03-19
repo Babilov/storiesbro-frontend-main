@@ -4,7 +4,6 @@ import ComissionModal from "../../components/Profile/profileCash/CashModals/Comi
 import CashError from "../../components/Profile/profileCash/CashModals/CashError";
 import DepositTable from "../../components/Profile/profileCash/deposit/DepositTable";
 import MobileTable from "../../components/Profile/profileCash/deposit/MobileTable";
-import CashConfirmationModal from "../../components/Profile/profileCash/CashModals/CashConfirmationModal";
 
 const Deposit = () => {
   const operations = [

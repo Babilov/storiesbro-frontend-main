@@ -6,16 +6,12 @@ import { useSelector } from "react-redux";
 
 import exit from "../images/exit.svg";
 import settings from "../images/settings.svg";
-import axios from "axios";
-import { API_URL } from "../../../../constants/constatns";
-
 
 const handleExit = () => {
   localStorage.clear();
 };
 
 const ExitMenu = ({ open, setOpen }) => {
-  const id = useSelector((store) => store.user)["id"];
   return (
     <>
       <ClickAwayListener onClickAway={() => setOpen(false)}>

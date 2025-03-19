@@ -1,7 +1,5 @@
 import React, { useEffect } from "react";
 import { Box, Typography } from "@mui/material";
-
-import vca from "./images/vca.png";
 import AuthorizedAdminCarusel from "../../UI/myCarousel/AuthorizedAdminCarusel";
 import firstVideo from "./images/IMG_8429.mp4";
 import secondVideo from "./images/IMG_8428.mp4";

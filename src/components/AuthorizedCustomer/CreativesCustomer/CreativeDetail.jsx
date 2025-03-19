@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Box, Paper, Typography } from "@mui/material";
 import { useParams, Link } from "react-router-dom";
 
@@ -20,7 +20,7 @@ const CreativeDetail = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `${API_URL}api_creatives/detail_user_creative/${userId}/${creative_type}/${id}`,
+          `${API_URL}api_creatives/detail_user_creative/${userId}/${creative_type}/${id}`
         );
         setData(response.data);
         setTimeout(() => {

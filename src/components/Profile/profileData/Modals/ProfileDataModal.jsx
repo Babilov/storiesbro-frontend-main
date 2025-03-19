@@ -1,16 +1,12 @@
 import React, { useState } from "react";
-import axios from "axios";
-import { useSelector } from "react-redux";
-
 import MyModal from "../../../UI/modals/MyModal";
 import { Box, Typography } from "@mui/material";
 import MyButton from "../../../UI/buttons/MyButton";
 import MyInput from "../../../UI/input/MyInput";
 import ErrorMessage from "../../../UI/errors/ErrorMessage";
 import RightCodeModal from "./RightCodeModal";
-import { API_URL } from "../../../../constants/constatns";
 
-const ProfileDataModal = ({ modalOpen, setModalOpen, setEmail, newEmail }) => {
+const ProfileDataModal = ({ modalOpen, setModalOpen, newEmail }) => {
   const [code, setCode] = useState("");
   const [error, setError] = useState(false);
 
@@ -18,11 +14,6 @@ const ProfileDataModal = ({ modalOpen, setModalOpen, setEmail, newEmail }) => {
 
   const handleClick = async () => {
     try {
-      const response = await axios.post(
-        `${API_URL}change_email/${localStorage.getItem(
-          "email"
-        )}/${newEmail}/${code}/`
-      );
       localStorage.setItem("email", newEmail);
       setModalOpen(false);
     } catch (error) {

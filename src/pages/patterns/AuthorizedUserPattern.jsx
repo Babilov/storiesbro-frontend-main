@@ -3,10 +3,8 @@ import React, { useEffect, useState } from "react";
 
 import AuthorizedUserHeader from "../../components/authorizedUser/authorizedUserHeader/AuthorizedUserHeader";
 import AuthorizedAdminMenu from "../../components/AuthorizedAdmin/menu/AuthorizedAdminMenu";
-import { PublicsContext } from "../../context/PublicsContext";
 import AuthorizedCustomerMenu from "../../components/AuthorizedCustomer/menu/AuthorizedCustomerMenu";
 import axios from "axios";
-import logToBackend from "../../utils/logs";
 import { refreshToken } from "../../api/token";
 
 const AuthorizedUserPattern = ({
@@ -25,7 +23,7 @@ const AuthorizedUserPattern = ({
           headers: {
             Authorization: `Bearer ${token}`, // Токен в заголовке
           },
-        },
+        }
       );
       localStorage.setItem("is_vk_authed", isAuthed["data"]["authenticated"]);
 

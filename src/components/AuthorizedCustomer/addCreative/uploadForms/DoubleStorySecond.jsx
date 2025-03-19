@@ -12,32 +12,10 @@ import MyDropZone from "../../../UI/myDropZone/MyDropZone";
 import MyInput from "../../../UI/input/MyInput";
 import MyButton from "../../../UI/buttons/MyButton";
 
-import redirectPng from "../images/redirect.png"
-import { Link } from "react-router-dom";
-
-import { addDoubleCreative } from "../../../../api/creatives";
+import redirectPng from "../images/redirect.png";
 
 const DoubleStoriSecond = ({ onValuesChange }) => {
   const navigate = useNavigate();
-
-  const [secondLinkValue, setLinkValue] = React.useState("");
-  const [secondNameValue, setNameValue] = React.useState("");
-  const [secondUploadedFile, setUploadedFile] = React.useState(null); // Новое состояние
-  const user_id = localStorage.getItem("id");
-
-  const handleFileChange = (filePath) => {
-    // Обработка пути к файлу из MyDropZone
-    setUploadedFile(filePath);
-  };
-
-  const handleClickCreative = () => {
-    onValuesChange({
-        secondUploadedFile,
-        secondLinkValue,
-        secondNameValue,
-      });
-  };
- 
 
   return (
     <Box>
@@ -45,7 +23,13 @@ const DoubleStoriSecond = ({ onValuesChange }) => {
         component="img"
         alt="back"
         src={redirectPng}
-        sx={{position: "absolute", float: "left", width: "45px", height: "38", cursor: "pointer"}}
+        sx={{
+          position: "absolute",
+          float: "left",
+          width: "45px",
+          height: "38",
+          cursor: "pointer",
+        }}
         onClick={() => navigate("/creatives/add-creative")}
       />
       <Box

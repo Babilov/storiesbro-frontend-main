@@ -1,43 +1,12 @@
-import {Box, Typography} from "@mui/material";
-import React, {useEffect, useState} from "react";
-import {useDispatch} from "react-redux";
-import * as VKID from "@vkid/sdk"; // Импорт VKID SDK
-import {useNavigate} from "react-router-dom";
-import {setTokken} from "../../../store/userReducer";
-
-import whiteVk from "../../../images/profileImages/dataIcons/whiteVk.svg";
-import avatar from "../../../images/profileImages/dataIcons/avatar.svg";
-import cross from "../../../images/profileImages/dataIcons/cross.svg";
-import MyButton from "../../UI/buttons/MyButton";
-import {API_URL} from "../../../constants/constatns";
+import { Box, Typography } from "@mui/material";
+import React from "react";
 
 const ProfileButton = () => {
-    const [error, setError] = useState(false);
+  // Функция для генерации случайного codeVerifier
 
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-
-    // Функция для генерации случайного codeVerifier
-    function generateCodeVerifier() {
-        const array = new Uint32Array(56 / 2);
-        window.crypto.getRandomValues(array);
-        return Array.from(array, (dec) => ("0" + dec.toString(16)).substr(-2)).join(
-            ""
-        );
-    }
-
-    // Функция для генерации codeChallenge из codeVerifier
-    async function generateCodeChallenge(codeVerifier) {
-        const encoder = new TextEncoder();
-        const data = encoder.encode(codeVerifier);
-        const digest = await window.crypto.subtle.digest("SHA-256", data);
-        return btoa(String.fromCharCode.apply(null, new Uint8Array(digest)))
-            .replace(/\+/g, "-")
-            .replace(/\//g, "_")
-            .replace(/=+$/, "");
-    }
-    // Основной
-    /*
+  // Функция для генерации codeChallenge из codeVerifier
+  // Основной
+  /*
     useEffect(() => {
         // Получаем state и code_challenge с бэка
         fetch("https://storisbro.com/prefetch_vk_auth_data/")
@@ -67,7 +36,7 @@ const ProfileButton = () => {
     }, []);
 
 */
-    /*
+  /*
     useEffect(() => {
         // Генерация codeVerifier
         const codeVerifier = generateCodeVerifier();
@@ -100,7 +69,7 @@ const ProfileButton = () => {
     }, []);
     */
 
-    /*useEffect(() => {
+  /*useEffect(() => {
         // Генерация codeVerifier и codeChallenge
         const state = generateCodeVerifier();
         const codeVerifier = generateCodeVerifier();
@@ -126,7 +95,7 @@ const ProfileButton = () => {
         });
     }, []);*/
 
-    /*
+  /*
     const handleVkAuth = (data) => {
         const {code, device_id} = data;
         console.log("Code & device id: ", code, device_id);
@@ -155,21 +124,21 @@ const ProfileButton = () => {
 
      */
 
-    const name = "Юрий";
+  const name = "Юрий";
 
-    return (
-        <Box
-            sx={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
-            }}
-        >
-            <Typography sx={{width: "30%", fontSize: "18px", fontWeight: 400}}>
-                Аккаунт в Вконтакте
-            </Typography>
-            <Box sx={{width: "65%", display: "flex", alignItems: "center"}}>
-                {/*<MyButton options={{ background: "#2A5885", color: "white" }}>
+  return (
+    <Box
+      sx={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+      }}
+    >
+      <Typography sx={{ width: "30%", fontSize: "18px", fontWeight: 400 }}>
+        Аккаунт в Вконтакте
+      </Typography>
+      <Box sx={{ width: "65%", display: "flex", alignItems: "center" }}>
+        {/*<MyButton options={{ background: "#2A5885", color: "white" }}>
           <Box
             sx={{
               display: "flex",
@@ -187,7 +156,7 @@ const ProfileButton = () => {
             <Box component="img" alt="avatar" src={avatar} />
           </Box>
         </MyButton>*/}
-                {/*
+        {/*
                 <Box id="VkIdSdkOneTap" sx={{mt: 2}}></Box>
 
                 <Box
@@ -197,9 +166,9 @@ const ProfileButton = () => {
                     sx={{ml: 2, cursor: "pointer"}}
                 />
                 */}
-            </Box>
-        </Box>
-    );
+      </Box>
+    </Box>
+  );
 };
 
 export default ProfileButton;

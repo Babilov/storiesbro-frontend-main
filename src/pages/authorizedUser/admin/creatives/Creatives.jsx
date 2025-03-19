@@ -1,9 +1,6 @@
-import { Box } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import CreativessBeforeEnter from "../../../../components/AuthorizedAdmin/creatives/creativesBefoteEnter/CreativessBeforeEnter";
 import CreativesAfterEnter from "../../../../components/AuthorizedAdmin/creatives/creativesAfterEnter/CreativesAfterEnter";
-import axios from "axios";
-import logToBackend from "../../../../utils/logs";
 import { refreshToken } from "../../../../api/token";
 
 const Creatives = () => {
@@ -20,7 +17,7 @@ const Creatives = () => {
   const token = localStorage.getItem("access_token");
 
   const ws = new WebSocket(
-    `wss://storisbro.com/ws/auth_status/?token=${token}`,
+    `wss://storisbro.com/ws/auth_status/?token=${token}`
   );
   ws.onmessage = (event) => {
     const data = JSON.parse(event.data);

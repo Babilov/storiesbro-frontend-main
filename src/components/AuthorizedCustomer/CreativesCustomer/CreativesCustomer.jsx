@@ -1,6 +1,6 @@
 import { Box, Grid, Tab, Tabs, Typography } from "@mui/material";
-import React, { useContext, useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import plus from "./images/plus.svg";
 import RemoveModal from "./modals/RemoveModal";
@@ -10,9 +10,6 @@ import MainTable from "./MainTable";
 import ArhiveTable from "./ArhiveTable";
 import MobileTable from "./MobileTable";
 import ArhiveMobileTable from "./ArhiveMobileTable";
-import axios from "axios";
-import { API_URL } from "../../../constants/constatns";
-import { useSelector } from "react-redux";
 import { Tooltips } from "../../Onboardings/Tooltips";
 
 const CreativesCustomer = () => {

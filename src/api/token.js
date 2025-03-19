@@ -1,4 +1,3 @@
-import logToBackend from "../utils/logs";
 import axios from "axios";
 
 export async function refreshToken() {
@@ -45,7 +44,7 @@ export async function fetchWithAuth(url, options = {}) {
         Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({ access_token: token }),
-    },
+    }
   );
 
   const response = await fetch(url, { ...options, headers });

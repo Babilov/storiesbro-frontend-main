@@ -2,7 +2,6 @@ import { Box, Typography } from "@mui/material";
 import React, { useState } from "react";
 import MyInput from "../../../UI/input/MyInput";
 import MyButton from "../../../UI/buttons/MyButton";
-import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { addRepost } from "../../../../api/creatives";
 

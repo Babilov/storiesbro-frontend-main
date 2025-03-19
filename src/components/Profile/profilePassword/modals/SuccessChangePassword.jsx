@@ -1,21 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 import MyModal from "../../../UI/modals/MyModal";
 import { Box, Typography } from "@mui/material";
-import MyInput from "../../../UI/input/MyInput";
 import MyButton from "../../../UI/buttons/MyButton";
-import ErrorMessage from "../../../UI/errors/ErrorMessage";
-import { Link, useNavigate } from "react-router-dom";
-
-import axios from "axios";
-import { API_URL } from "../../../../constants/constatns";
-
+import { useNavigate } from "react-router-dom";
 
 const SuccessChangePassword = ({ open, setOpen }) => {
-
   const navigate = useNavigate();
-  const handleClick = async() => {
+  const handleClick = async () => {
     setOpen(false);
-    navigate("/password")
+    navigate("/password");
   };
 
   return (

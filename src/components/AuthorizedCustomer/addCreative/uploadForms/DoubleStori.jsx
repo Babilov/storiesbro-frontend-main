@@ -12,9 +12,8 @@ import MyDropZone from "../../../UI/myDropZone/MyDropZone";
 import MyInput from "../../../UI/input/MyInput";
 import MyButton from "../../../UI/buttons/MyButton";
 
-import { Link } from "react-router-dom";
 import { addDoubleCreative } from "../../../../api/creatives";
-import redirectPng from "../images/redirect.png"
+import redirectPng from "../images/redirect.png";
 
 const DoubleStori = () => {
   const navigate = useNavigate();
@@ -41,15 +40,14 @@ const DoubleStori = () => {
 
   const handleClickCreative = () => {
     addDoubleCreative(
-      user_id, 
-      firstUploadedFile, 
-      firstLinkValue, 
+      user_id,
+      firstUploadedFile,
+      firstLinkValue,
       firstNameValue,
       secondValues.secondUploadedFile,
       secondValues.secondLinkValue,
       secondValues.secondNameValue
-
-      );
+    );
   };
 
   return (
@@ -58,7 +56,13 @@ const DoubleStori = () => {
         component="img"
         alt="back"
         src={redirectPng}
-        sx={{position: "absolute", float: "left", width: "45px", height: "38", cursor: "pointer"}}
+        sx={{
+          position: "absolute",
+          float: "left",
+          width: "45px",
+          height: "38",
+          cursor: "pointer",
+        }}
         onClick={() => navigate("/creatives/add-creative")}
       />
       <Box
@@ -83,12 +87,16 @@ const DoubleStori = () => {
             </InputLabel>
             <Select sx={{ borderRadius: "10px" }} />
           </FormControl>
-          <MyInput label="Введите ссылку" 
-          value={firstLinkValue}
-          setValue={setLinkValue} />
-          <MyInput label="Введите название" 
-          value={firstNameValue}
-          setValue={setNameValue} />
+          <MyInput
+            label="Введите ссылку"
+            value={firstLinkValue}
+            setValue={setLinkValue}
+          />
+          <MyInput
+            label="Введите название"
+            value={firstNameValue}
+            setValue={setNameValue}
+          />
         </Box>
       </Box>
       <Box

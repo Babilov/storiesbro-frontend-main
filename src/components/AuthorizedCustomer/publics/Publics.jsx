@@ -2,14 +2,11 @@ import React, { useContext, useState } from "react";
 import { Box, Grid, Typography } from "@mui/material";
 
 import arrow from "./images/arrow.svg";
-import arrowDown from "./images/arrowDown.svg";
 import { PublicsContext } from "../../../context/PublicsContext";
 import MyInput from "../../UI/input/MyInput";
 import Link from "@mui/material/Link";
-import { Tooltips } from "../../Onboardings/Tooltips";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
-import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 
 const Publics = () => {
@@ -17,10 +14,6 @@ const Publics = () => {
   const [search, setSearch] = useState("");
 
   const [count, setCount] = useState(1);
-
-  const handleIncrementCount = () => {
-    setCount(count + 1);
-  };
 
   return (
     <Grid container className="grid">

@@ -6,17 +6,9 @@ import MyButton from "../../../UI/buttons/MyButton";
 import ErrorMessage from "../../../UI/errors/ErrorMessage";
 import SuccessChangePassword from "./SuccessChangePassword";
 
-import axios from "axios";
-import { API_URL } from "../../../../constants/constatns";
-
 const EmailConfiramtionFormModal = ({ open, setOpen, password }) => {
   const handleClick = async () => {
     try {
-      const response = await axios.post(
-        `${API_URL}password_code_confirm/${localStorage.getItem(
-          "email"
-        )}/${password}/${code}/`
-      );
       setOpen(false);
       setOpenSuccess(true);
     } catch (error) {
@@ -32,7 +24,6 @@ const EmailConfiramtionFormModal = ({ open, setOpen, password }) => {
 
   const [code, setCode] = useState("");
   const [error, setError] = useState(false);
-  const [confirmationCode, setConfirmationCode] = useState("");
 
   const [openSuccess, setOpenSuccess] = useState(false);
 
