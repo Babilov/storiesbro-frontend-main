@@ -1,5 +1,5 @@
-import { Avatar, Box, Grid, styled, Typography } from "@mui/material";
-import React, { useContext, useState, useEffect } from "react";
+import { Avatar, Box, Grid, Typography } from "@mui/material";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import question from "./images/question.svg";
@@ -17,7 +17,6 @@ const PublicSettings = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const userId = localStorage.getItem("id");
         const token = localStorage.getItem("access_token");
         const response = await axios.get(
           `https://storisbro.com/api/group_details/?group_id=${groupId}`,
@@ -25,7 +24,7 @@ const PublicSettings = () => {
             headers: {
               Authorization: `Bearer ${token}`, // Токен в заголовке
             },
-          },
+          }
         );
         setPublic(response.data);
       } catch (error) {
@@ -41,10 +40,10 @@ const PublicSettings = () => {
     const fetchCaState = async () => {
       try {
         const resCa = await axios.get(
-          "https://storisbro.com/api/community_status/",
+          "https://storisbro.com/api/community_status/"
         );
         const resSt = await axios.get(
-          "https://storisbro.com/api/community_switch/",
+          "https://storisbro.com/api/community_switch/"
         );
         setCaState(resCa.data);
         setState(resSt.data);

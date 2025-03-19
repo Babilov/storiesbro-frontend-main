@@ -31,9 +31,7 @@ const ConfirmationChangePassword = ({
   };
   const [yourEmail, setYourEmail] = useState("");
   const [error, setError] = useState(false);
-  const [errorMessage, setErrorMessage] = useState(
-    "*Данная почта не привязана к аккаунту сервиса"
-  );
+  const errorMessage = "*Данная почта не привязана к аккаунту сервиса";
 
   return (
     <MyModal

@@ -124,8 +124,6 @@ const ProfileButton = () => {
 
      */
 
-  const name = "Юрий";
-
   return (
     <Box
       sx={{

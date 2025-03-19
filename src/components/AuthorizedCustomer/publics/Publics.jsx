@@ -13,8 +13,6 @@ const Publics = () => {
   const [publics] = useContext(PublicsContext);
   const [search, setSearch] = useState("");
 
-  const [count, setCount] = useState(1);
-
   return (
     <Grid container className="grid">
       <Grid item xs={12}>

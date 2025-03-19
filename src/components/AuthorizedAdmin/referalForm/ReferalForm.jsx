@@ -9,7 +9,7 @@ import check from "./images/check.svg";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 
 const ReferalForm = () => {
-  const [link, setLink] = useState("Storisbro.com/?_ref=2Rh46f3L");
+  const link = "Storisbro.com/?_ref=2Rh46f3L";
   const [icon, setIcon] = useState(copy);
 
   const handleChangeIcon = () => {

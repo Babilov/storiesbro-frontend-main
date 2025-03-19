@@ -14,7 +14,7 @@ const ChangePassword = () => {
       setError(true);
     } else {
       try {
-        const response = await axios.post(
+        await axios.post(
           `${API_URL}password_change/${localStorage.getItem("email")}/`
         );
       } catch (error) {

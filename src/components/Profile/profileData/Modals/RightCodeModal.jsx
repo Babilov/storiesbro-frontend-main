@@ -8,7 +8,7 @@ import MyButton from "../../../UI/buttons/MyButton";
 const RightCodeModal = ({ newEmail, modalOpen, setModalOpen }) => {
   return (
     <MyModal
-      title={<img src={smile} />}
+      title={<img src={smile} alt="img" />}
       width={{ xs: "90%", md: "50%", lg: "30%" }}
       isFormOpen={modalOpen}
       setIsFormOpen={setModalOpen}

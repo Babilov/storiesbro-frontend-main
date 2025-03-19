@@ -1,5 +1,5 @@
 import { Container, Grid } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 
 import AuthorizedUserHeader from "../../components/authorizedUser/authorizedUserHeader/AuthorizedUserHeader";
 import AuthorizedAdminMenu from "../../components/AuthorizedAdmin/menu/AuthorizedAdminMenu";

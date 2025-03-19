@@ -30,8 +30,6 @@ const ProfileDataModal = ({ modalOpen, setModalOpen, newEmail }) => {
 
   const [rightCodeModalOpen, setRightCodeModalOpen] = useState(false);
 
-  const confirmCode = "1111";
-
   return (
     <>
       <RightCodeModal

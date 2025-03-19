@@ -7,11 +7,10 @@ import logo from "../../../images/icons/commonIcons/logo.png";
 import blackLogo from "../../../images/icons/commonIcons/blackLogo.svg";
 import enter from "../../../images/icons/landingIcons/enter.svg";
 import { Context } from "../../../context/Context";
-import { useNavigate } from "react-router-dom";
 
-const Header = ({ setIsLoginFormOpen, ismainpage }) => {
+const Header = ({ setIsLoginFormOpen }) => {
   const [isCustomer, _] = useContext(Context);
-  const navigate = useNavigate();
+
   return (
     <Grid
       container

@@ -7,7 +7,6 @@ import "./style.css";
 import "swiper/css/navigation";
 
 // Пути к изображениям и видео
-import storisImage1 from "./images/storis.svg";
 import storisImage2 from "./images/mediatmpIMG_6316.jpg";
 import video1 from "./images/IMG_6315.mp4";
 import video2 from "./images/IMG_6313.mp4";

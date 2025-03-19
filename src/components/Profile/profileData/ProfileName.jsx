@@ -5,7 +5,6 @@ import axios from "axios";
 import pencil from "../../../images/profileImages/dataIcons/pencil.svg";
 import MyInput from "../../UI/input/MyInput";
 
-
 import { API_URL } from "../../../constants/constatns";
 
 const ProfileName = () => {
@@ -14,24 +13,23 @@ const ProfileName = () => {
   // const [editedName, setEditedName] = useState("");
   // const [isDirty, setIsDirty] = useState(false); // Новое состояние для отслеживания изменений в инпуте
   const tokken = localStorage["token"];
-  const userId = localStorage["id"];
 
   useEffect(() => {
     const fetchProfile = async () => {
       try {
         const response = await axios.get(`${API_URL}profile/`, {
           withCredentials: true,
-          headers: { Authorization: `Bearer ${tokken}` }
+          headers: { Authorization: `Bearer ${tokken}` },
         });
         setName(response.data);
       } catch (error) {
-        console.error('Ошибка при загрузке сообществ', error);
+        console.error("Ошибка при загрузке сообществ", error);
       }
     };
     fetchProfile();
   }, [tokken]);
 
-  localStorage.setItem("new_name", name)
+  localStorage.setItem("new_name", name);
 
   return (
     <Box
@@ -48,11 +46,7 @@ const ProfileName = () => {
           setIsEdit(false);
         }}
       >
-        <MyInput
-          value={name.name}
-          setValue={setName}
-          disabled={!isEdit}
-        />
+        <MyInput value={name.name} setValue={setName} disabled={!isEdit} />
         <Box
           component="img"
           alt="pencil"

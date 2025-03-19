@@ -18,7 +18,7 @@ const ChangePassword = ({
     if (password === passwordConfirm) {
       setIsChangePasswordOpen(false);
     }
-    if (password != passwordConfirm) {
+    if (password !== passwordConfirm) {
       setError(true);
       setErrorMessage("*Пароли не совпадают");
     } else {

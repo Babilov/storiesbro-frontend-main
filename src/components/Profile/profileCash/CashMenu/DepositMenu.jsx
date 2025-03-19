@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Box, Grid, Typography } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 
 import DepositSelect from "./DepositSelect";
 import MyInput from "../../../UI/input/MyInput";

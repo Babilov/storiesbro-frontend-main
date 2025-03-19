@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Divider, Grid, Typography, Box, Button, Avatar } from "@mui/material";
+import { Divider, Grid, Typography, Box, Avatar } from "@mui/material";
 import { Link } from "react-router-dom";
 
 import DeletePublicModal from "./modals/DeletePublicModal";
 import { Tooltips } from "../../../../Onboardings/Tooltips";
-import logToBackend from "../../../../../utils/logs";
 
 const Table = ({ publics, setPublics }) => {
   const handleDelete = (id) => {

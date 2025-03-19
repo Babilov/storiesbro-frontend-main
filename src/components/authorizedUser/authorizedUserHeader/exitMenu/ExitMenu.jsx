@@ -2,7 +2,6 @@ import React from "react";
 import PersonIcon from "@mui/icons-material/Person";
 import { Box, ClickAwayListener, Divider } from "@mui/material";
 import { NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
 
 import exit from "../images/exit.svg";
 import settings from "../images/settings.svg";

@@ -2,15 +2,11 @@ import React from "react";
 import { Box, Grid, Typography } from "@mui/material";
 
 import comissionLogo from "./images/comissionLogo.svg";
-import comissionNoAvatar from "./images/comissionNoAvatar.svg";
 import comissionCheck from "./images/comissionCheck.svg";
 import comissionCross from "./images/comissionCross.svg";
 import GradientButton from "../../UI/buttons/GradientButton";
 
-import complete from "./images/comissionCross.svg";
-import cross from "./images/comissionCross.svg";
 import vk from "./images/comissionCross.svg";
-
 
 const ProfileLinksAdmin = () => {
   return (
@@ -70,8 +66,7 @@ const ProfileLinksAdmin = () => {
             justifyContent: "center",
             mt: 2,
           }}
-        >
-        </Box>
+        ></Box>
         <Typography
           sx={{
             display: { xs: "block", md: "none" },
@@ -107,12 +102,8 @@ const ProfileLinksAdmin = () => {
             justifyContent: "center",
             mt: 2,
           }}
-        >
-        </Box>
+        ></Box>
       </Grid>
-
-
-
 
       <Grid item xs={12} md={6}>
         <Box
@@ -138,8 +129,7 @@ const ProfileLinksAdmin = () => {
                 fontSize: { xs: "14px", md: "18px" },
                 color: "#878787",
               }}
-            >
-            </Typography>
+            ></Typography>
           </Typography>
           <Box sx={{ display: "flex", alignItems: "center" }}>
             <Box component="img" alt="logo" src={vk} />
@@ -155,8 +145,7 @@ const ProfileLinksAdmin = () => {
                   fontWeight: 500,
                   color: "#878787",
                 }}
-              >
-              </Typography>
+              ></Typography>
             </Box>
           </Box>
         </Box>
@@ -168,7 +157,7 @@ const ProfileLinksAdmin = () => {
             mt: 2,
           }}
         >
-        <Box component="img" alt="check" src={comissionCheck} />
+          <Box component="img" alt="check" src={comissionCheck} />
           <Typography
             sx={{
               fontSize: { md: "24px", xs: "16px" },
@@ -180,7 +169,6 @@ const ProfileLinksAdmin = () => {
             Комиссия 5% + доход с рефералки
           </Typography>
         </Box>
-
       </Grid>
       <Grid item xs={12} md={6}>
         <Box

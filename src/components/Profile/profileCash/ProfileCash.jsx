@@ -1,10 +1,10 @@
 import { Box, Typography } from "@mui/material";
-import React, { useState } from "react";
+import React from "react";
 import MyInput from "../../UI/input/MyInput";
 import ProfileCashButton from "./ProfileCashButton";
 
 const ProfileCash = () => {
-  const [cash, setCash] = useState(0);
+  const cash = 0;
 
   return (
     <Box

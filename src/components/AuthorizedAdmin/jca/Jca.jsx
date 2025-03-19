@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import AuthorizedAdminCarusel from "../../UI/myCarousel/AuthorizedAdminCarusel";
 
-import jca from "./images/jca.png";
 import { Box, Typography } from "@mui/material";
 import firstVideo from "./images/IMG_8426.mp4";
 import secondVideo from "./images/IMG_8425.mp4";

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Box,
   FormControl,
@@ -11,8 +11,6 @@ import { useNavigate } from "react-router-dom";
 import MyDropZone from "../../../UI/myDropZone/MyDropZone";
 import MyInput from "../../../UI/input/MyInput";
 import MyButton from "../../../UI/buttons/MyButton";
-
-import { addDoubleCreative } from "../../../../api/creatives";
 import redirectPng from "../images/redirect.png";
 
 const DoubleStori = () => {
@@ -20,35 +18,6 @@ const DoubleStori = () => {
 
   const [firstLinkValue, setLinkValue] = React.useState("");
   const [firstNameValue, setNameValue] = React.useState("");
-  const [firstUploadedFile, setUploadedFile] = React.useState(null); // Новое состояние
-  const user_id = localStorage.getItem("id");
-
-  const handleFileChange = (filePath) => {
-    // Обработка пути к файлу из MyDropZone
-    setUploadedFile(filePath);
-  };
-
-  const [secondValues, setSecondValues] = useState({
-    secondUploadedFile: null,
-    secondLinkValue: "",
-    secondNameValue: "",
-  });
-
-  const handleSecondValuesChange = (values) => {
-    setSecondValues(values);
-  };
-
-  const handleClickCreative = () => {
-    addDoubleCreative(
-      user_id,
-      firstUploadedFile,
-      firstLinkValue,
-      firstNameValue,
-      secondValues.secondUploadedFile,
-      secondValues.secondLinkValue,
-      secondValues.secondNameValue
-    );
-  };
 
   return (
     <Box>

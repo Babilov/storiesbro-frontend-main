@@ -12,7 +12,7 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
   const [error, setError] = useState(false);
   const [successOpen, setSuccessOpen] = useState(false);
   const [inputValue, setInputValue] = useState("");
-  const [permission, setPermission] = useState(true);
+  const permission = true;
   const [noPermissionOpen, setNoPermissionOpen] = useState(false);
   const [selectedPublics, setSelectedPublics] = useState([]);
 
@@ -41,7 +41,6 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
         setSuccessOpen(true);
         setOpen(false);
         try {
-          const userId = localStorage.getItem("id");
           const token = localStorage.getItem("access_token");
           await axios.post(
             `https://storisbro.com/api/add_user_group/`,

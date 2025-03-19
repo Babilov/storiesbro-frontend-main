@@ -24,7 +24,7 @@ const CreativesAfterEnter = () => {
           headers: {
             Accept: "application/json",
           },
-        },
+        }
       );
       setPublics(response.groups);
     } catch (error) {
@@ -40,7 +40,7 @@ const CreativesAfterEnter = () => {
           headers: {
             Accept: "application/json",
           },
-        },
+        }
       );
       logToBackend(`GET SELECTED:::: ${JSON.stringify(response)}`);
       setSelectedPublics(response.groups);
@@ -60,7 +60,6 @@ const CreativesAfterEnter = () => {
 
   useEffect(() => {
     const postId = async () => {
-      const userId = localStorage.getItem("id");
       const deviceId = sessionStorage.getItem("device_id");
       const token = localStorage.getItem("access_token");
       await axios.get(`${API_URL}valid_token/?device_id=${deviceId}`, {

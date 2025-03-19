@@ -1,14 +1,10 @@
 import { Box, Typography } from "@mui/material";
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect } from "react";
 import * as VKID from "@vkid/sdk";
 import axios from "axios";
 import { API_URL } from "../../../../constants/constatns";
 
 const CreativessBeforeEnter = () => {
-  const [error, setError] = useState(false);
-  const navigate = useNavigate();
-
   const generateState = () =>
     Math.random().toString(36).substring(2) + Date.now();
 
@@ -43,13 +39,10 @@ const CreativessBeforeEnter = () => {
     sessionStorage.setItem("device_id", device_id);
     localStorage.setItem("device_id", device_id);
     const codeVerifier = sessionStorage.getItem("code_verifier");
-    const codeChallenge = sessionStorage.getItem("code_challenge");
     const storedState = sessionStorage.getItem("state");
     if (state !== storedState) {
-      setError(true);
       return;
     }
-    const user_id = localStorage.getItem("id");
     const token = localStorage.getItem("access_token");
     axios
       .get(
@@ -73,7 +66,7 @@ const CreativessBeforeEnter = () => {
         window.location.reload();
       })
       .catch((err) => {
-        setError(true);
+        console.log(err);
       });
   };
 

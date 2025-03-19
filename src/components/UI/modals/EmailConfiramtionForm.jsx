@@ -26,7 +26,6 @@ const EmailConfirmationForm = ({
 }) => {
   const [error, setError] = useState(false);
   const [code, setCode] = useState("");
-  const [userSpecId, setUserId] = useState(null);
   // const [email, setEmail] = useState("");
   // const [password, setPassword] = useState("");
 
@@ -38,7 +37,7 @@ const EmailConfirmationForm = ({
     try {
       try {
         const response = await axios.post(
-          `${API_URL}activate/${userId}/${code}/`,
+          `${API_URL}activate/${userId}/${code}/`
         );
         localStorage.setItem("statusActivate", true);
         const email_lower = emailLogin.toLowerCase();
@@ -55,10 +54,9 @@ const EmailConfirmationForm = ({
               headers: {
                 Authorization: "Bearer " + localStorage.getItem("access_token"),
               },
-            },
+            }
           )
           .then(function (response) {
-            setUserId(response.data.id);
             handleConfirmForm(response.data.id);
             // setIsConfirmPageOpen(true);
             // setIsLoginFormOpen(false);
@@ -67,10 +65,10 @@ const EmailConfirmationForm = ({
 
             localStorage.removeItem("statusActivate");
             const checkStatus = localStorage.getItem("statusAccount");
-            if (checkStatus == "admin") {
+            if (checkStatus === "admin") {
               navigate("/admin");
             }
-            if (checkStatus == "customer") {
+            if (checkStatus === "customer") {
               navigate("/customer");
             }
           })
@@ -83,7 +81,7 @@ const EmailConfirmationForm = ({
                   Authorization: `Bearer ${localStorage.getItem("UID")}`,
                   "Content-Type": "application/json",
                 },
-              },
+              }
             );
           })
           .catch(function (error) {

@@ -3,11 +3,11 @@ import { Box, Button } from "@mui/material";
 
 import { Context } from "../../../context/Context";
 import vk from "../../../images/icons/commonIcons/vk.svg";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const VkEnter = ({ children }) => {
   const [isCustomer, _] = useContext(Context);
-  const navigate = useNavigate();
+
   return (
     <Link to="https://vk.com/storisbro_help" target="_blank">
       <Button

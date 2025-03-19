@@ -10,7 +10,6 @@ import { API_URL } from "../../../constants/constatns";
 import axios from "axios";
 
 const ProfileSteps = () => {
-  const error = true;
   const [errorModalOpen, setErrorModalOpen] = useState(false);
   const [susccesModalOpen, setSusccesModalOpen] = useState(false);
   const user_id = localStorage.getItem("id");

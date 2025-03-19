@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Box, Paper, Typography } from "@mui/material";
 import { useParams, Link } from "react-router-dom";
-
-import { CreativesContext } from "../../../context/CreativesContext";
 import MyButton from "../../UI/buttons/MyButton";
 
 import { API_URL } from "../../../constants/constatns";

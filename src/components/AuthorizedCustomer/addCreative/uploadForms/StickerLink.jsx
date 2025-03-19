@@ -4,7 +4,6 @@ import { Box, Typography } from "@mui/material";
 import MyInput from "../../../UI/input/MyInput";
 import MyButton from "../../../UI/buttons/MyButton";
 import { addSticker } from "../../../../api/creatives";
-import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 import redirectPng from "../images/redirect.png";
