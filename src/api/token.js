@@ -1,4 +1,5 @@
 import axios from "axios";
+import { API_URL } from "../constants/constatns";
 
 export async function refreshToken() {
   const refresh = localStorage.getItem("refresh_token");
@@ -6,7 +7,7 @@ export async function refreshToken() {
     throw new Error("Нет refresh-токена");
   }
 
-  const response = await fetch("https://storisbro.com/api/token/refresh/", {
+  const response = await fetch(`${API_URL}token/refresh/`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -36,7 +37,7 @@ export async function fetchWithAuth(url, options = {}) {
   };
 
   await axios.post(
-    "https://storisbro.com/api/token-check/",
+    `${API_URL}token-check/`,
     {},
     {
       headers: {

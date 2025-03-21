@@ -9,6 +9,7 @@ import HowToIncrease from "../../../../components/AuthorizedAdmin/howToIncrease/
 import AuthorizedAdminMenu from "../../../../components/AuthorizedAdmin/menu/AuthorizedAdminMenu";
 import AuthorizedUserHeader from "../../../../components/authorizedUser/authorizedUserHeader/AuthorizedUserHeader";
 import { fetchWithAuth } from "../../../../api/token";
+import { API_URL } from "../../../../constants/constatns";
 
 const AuthorizedAdminHelp = () => {
   useEffect(() => {
@@ -22,9 +23,7 @@ const AuthorizedAdminHelp = () => {
   useEffect(() => {
     const fetchVkAuth = async () => {
       try {
-        const response = await fetchWithAuth(
-          "https://storisbro.com/api/auth-status/"
-        );
+        const response = await fetchWithAuth(`${API_URL}auth-status/`);
 
         const authenticated = response["authenticated"];
 

@@ -18,14 +18,11 @@ const CreativesAfterEnter = () => {
 
   const fetchAllPublics = async () => {
     try {
-      const response = await fetchWithAuth(
-        `https://storisbro.com/api/vk/groups/`,
-        {
-          headers: {
-            Accept: "application/json",
-          },
-        }
-      );
+      const response = await fetchWithAuth(`${API_URL}vk/groups/`, {
+        headers: {
+          Accept: "application/json",
+        },
+      });
       setPublics(response.groups);
     } catch (error) {
       console.error("Ошибка при загрузке сообществ", error);
@@ -34,14 +31,11 @@ const CreativesAfterEnter = () => {
 
   const fetchSelectedPublics = async () => {
     try {
-      const response = await fetchWithAuth(
-        `https://storisbro.com/api/selected_groups/`,
-        {
-          headers: {
-            Accept: "application/json",
-          },
-        }
-      );
+      const response = await fetchWithAuth(`${API_URL}selected_groups/`, {
+        headers: {
+          Accept: "application/json",
+        },
+      });
       logToBackend(`GET SELECTED:::: ${JSON.stringify(response)}`);
       setSelectedPublics(response.groups);
     } catch (error) {

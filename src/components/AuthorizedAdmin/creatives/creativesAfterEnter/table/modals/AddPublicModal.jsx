@@ -7,6 +7,7 @@ import SuccessModal from "./SuccessModal";
 import NoPermissionModal from "./NoPermissionModal";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { API_URL } from "../../../../../../constants/constatns";
 
 const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
   const [error, setError] = useState(false);
@@ -43,7 +44,7 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
         try {
           const token = localStorage.getItem("access_token");
           await axios.post(
-            `https://storisbro.com/api/add_user_group/`,
+            `${API_URL}add_user_group/`,
             {
               selectedPublics,
             },

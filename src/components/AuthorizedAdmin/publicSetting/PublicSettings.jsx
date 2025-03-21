@@ -6,6 +6,7 @@ import question from "./images/question.svg";
 import logToBackend from "../../../utils/logs";
 import CustomToolTip from "../../UI/tooltip/CustomTooltip";
 import arrowSvg from "./images/arrowSvg.svg";
+import { API_URL } from "../../../constants/constatns";
 
 const PublicSettings = () => {
   const params = useParams();
@@ -19,7 +20,7 @@ const PublicSettings = () => {
       try {
         const token = localStorage.getItem("access_token");
         const response = await axios.get(
-          `https://storisbro.com/api/group_details/?group_id=${groupId}`,
+          `${API_URL}group_details/?group_id=${groupId}`,
           {
             headers: {
               Authorization: `Bearer ${token}`, // Токен в заголовке
@@ -39,12 +40,8 @@ const PublicSettings = () => {
   useEffect(() => {
     const fetchCaState = async () => {
       try {
-        const resCa = await axios.get(
-          "https://storisbro.com/api/community_status/"
-        );
-        const resSt = await axios.get(
-          "https://storisbro.com/api/community_switch/"
-        );
+        const resCa = await axios.get(`${API_URL}community_status/`);
+        const resSt = await axios.get(`${API_URL}community_switch/`);
         setCaState(resCa.data);
         setState(resSt.data);
       } catch (error) {
@@ -56,7 +53,7 @@ const PublicSettings = () => {
 
   const onCaClick = async (ca) => {
     try {
-      await axios.post("https://storisbro.com/api/community_status/", {
+      await axios.post(`${API_URL}community_status/`, {
         status: ca,
       });
       setCaState(ca);
@@ -67,7 +64,7 @@ const PublicSettings = () => {
 
   const onSwitchClick = async (st) => {
     try {
-      await axios.post("https://storisbro.com/api/community_switch/", {
+      await axios.post(`${API_URL}community_switch/`, {
         status: st,
       });
       setState(st);

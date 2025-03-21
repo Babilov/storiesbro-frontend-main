@@ -2,7 +2,7 @@ import { Box, Typography } from "@mui/material";
 import React, { useEffect } from "react";
 import * as VKID from "@vkid/sdk";
 import axios from "axios";
-import { API_URL } from "../../../../constants/constatns";
+import { API_URL, MY_URL } from "../../../../constants/constatns";
 
 const CreativessBeforeEnter = () => {
   const generateState = () =>
@@ -81,7 +81,7 @@ const CreativessBeforeEnter = () => {
 
         VKID.Config.init({
           app: 51786441,
-          redirectUrl: "https://storisbro.com/accounts/vk/login/callback/",
+          redirectUrl: `${MY_URL}accounts/vk/login/callback/`,
           state,
           codeChallenge,
           codeChallengeMethod: "S256",

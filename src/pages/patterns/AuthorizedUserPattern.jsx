@@ -6,6 +6,7 @@ import AuthorizedAdminMenu from "../../components/AuthorizedAdmin/menu/Authorize
 import AuthorizedCustomerMenu from "../../components/AuthorizedCustomer/menu/AuthorizedCustomerMenu";
 import axios from "axios";
 import { refreshToken } from "../../api/token";
+import { API_URL } from "../../constants/constatns";
 
 const AuthorizedUserPattern = ({
   children,
@@ -17,14 +18,11 @@ const AuthorizedUserPattern = ({
     const fetchIsAuthed = async () => {
       await refreshToken();
       const token = localStorage.getItem("access_token");
-      const isAuthed = await axios.get(
-        `https://storisbro.com/api/auth-status/`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`, // Токен в заголовке
-          },
-        }
-      );
+      const isAuthed = await axios.get(`${API_URL}auth-status/`, {
+        headers: {
+          Authorization: `Bearer ${token}`, // Токен в заголовке
+        },
+      });
       localStorage.setItem("is_vk_authed", isAuthed["data"]["authenticated"]);
 
       // console.log(isAuthed.data.authenticated);
