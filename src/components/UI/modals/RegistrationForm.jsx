@@ -15,7 +15,6 @@ const RegistrationForm = ({
   isRegistrationForm,
   setIsRegistrationForm,
   handleLoginForm,
-  handleConfirmForm,
 }) => {
   const handleConfirmEmail = () => {
     setIsEmailConfirm(true);
@@ -54,7 +53,6 @@ const RegistrationForm = ({
         return true;
       } else {
         setError(false);
-        console.error("Пользователя нет");
         return false;
       }
     } catch (error) {
@@ -63,6 +61,10 @@ const RegistrationForm = ({
   };
 
   const handleRegister = async () => {
+    if (countClick === 0) {
+      setCountClick(1);
+      return;
+    }
     handleConfirmEmail();
     if (!isValidEmail(email)) {
       setErrorMessage("*Некорректный формат email");
@@ -70,6 +72,7 @@ const RegistrationForm = ({
       setIsEmailConfirm(false);
       setIsRegistrationForm(true);
       // changeChecked();
+
       return;
     }
 
@@ -126,6 +129,7 @@ const RegistrationForm = ({
 
   const [isChecked, setIsChecked] = useState(false);
   const [isEmailConfirm, setIsEmailConfirm] = useState(false);
+  const [countClick, setCountClick] = useState(0);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -147,12 +151,15 @@ const RegistrationForm = ({
         setIsFormOpen={handleCloseRegistration}
       >
         <MyInput label="Введите почту" value={email} setValue={setEmail} />
-        <MyInput
-          label="Придумайте пароль"
-          isPassword={true}
-          value={password}
-          setValue={setPassword}
-        />
+        {countClick > 0 && (
+          <MyInput
+            label="Придумайте пароль"
+            isPassword={true}
+            value={password}
+            setValue={setPassword}
+          />
+        )}
+
         <ErrorMessage error={error} errorMessage={errorMessage} />
         <Box sx={{ display: "flex", alignItems: "center" }}>
           <FormControlLabel
