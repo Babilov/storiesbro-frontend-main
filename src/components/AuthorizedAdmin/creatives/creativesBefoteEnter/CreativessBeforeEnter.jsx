@@ -85,7 +85,7 @@ const CreativessBeforeEnter = () => {
           state,
           codeChallenge,
           codeChallengeMethod: "S256",
-          scope: "groups stories stats",
+          scope: "groups stories stats video",
           responseMode: VKID.ConfigResponseMode.Callback,
         });
 
