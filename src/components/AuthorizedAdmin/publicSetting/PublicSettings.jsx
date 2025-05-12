@@ -10,7 +10,7 @@ import { API_URL } from "../../../constants/constatns";
 
 const PublicSettings = () => {
   const params = useParams();
-  const [caState, setCaState] = useState(0);
+  const [caState, setCaState] = useState("МЦА");
   const [state, setState] = useState(0);
   const [publicObj, setPublic] = useState(undefined);
   const groupId = params.id;
@@ -190,7 +190,7 @@ const PublicSettings = () => {
                       fontWeight: 500,
                       textAlign: { md: "center", xs: "left" },
                       cursor: "pointer",
-                      color: caState === 0 ? "#E37E31" : "black",
+                      color: caState === "МЦА" ? "#E37E31" : "black",
                       ":hover": { color: "#E37E31" },
                     }}
                     onClick={() => onCaClick("МЦА")}
@@ -250,7 +250,7 @@ const PublicSettings = () => {
                       fontWeight: 500,
                       textAlign: { md: "center", xs: "left" },
                       cursor: "pointer",
-                      color: caState === 1 ? "#E37E31" : "black",
+                      color: caState === "ЖЦА" ? "#E37E31" : "black",
                       ":hover": { color: "#E37E31" },
                     }}
                     onClick={() => onCaClick("ЖЦА")}
@@ -310,7 +310,7 @@ const PublicSettings = () => {
                       fontWeight: 500,
                       textAlign: { md: "center", xs: "left" },
                       cursor: "pointer",
-                      color: caState === 2 ? "#E37E31" : "black",
+                      color: caState === "СЦА" ? "#E37E31" : "black",
                       ":hover": { color: "#E37E31" },
                     }}
                     onClick={() => onCaClick("СЦА")}
@@ -404,7 +404,7 @@ const PublicSettings = () => {
                   textAlign: "center",
                   mt: 2,
                   cursor: "pointer",
-                  color: state === 0 ? "#D25D48" : "black",
+                  color: state === 1 ? "#D25D48" : "black",
                 }}
                 onClick={() => onSwitchClick(1)}
               >
@@ -419,7 +419,7 @@ const PublicSettings = () => {
                   textAlign: "center",
                   mt: 2,
                   cursor: "pointer",
-                  color: state === 1 ? "#D25D48" : "black",
+                  color: state === 0 ? "#D25D48" : "black",
                 }}
                 onClick={() => onSwitchClick(0)}
               >
