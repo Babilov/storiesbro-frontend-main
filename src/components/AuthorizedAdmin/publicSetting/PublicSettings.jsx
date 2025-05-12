@@ -41,10 +41,10 @@ const PublicSettings = () => {
     const fetchCaState = async () => {
       try {
         const resCa = await axios.get(
-          `${API_URL}community_status/community_id=${groupId}`
+          `${API_URL}community_status/?community_id=${groupId}`
         );
         const resSt = await axios.get(
-          `${API_URL}community_switch/community_id=${groupId}`
+          `${API_URL}community_switch/?community_id=${groupId}`
         );
         setCaState(resCa.data);
         setState(resSt.data);
@@ -57,7 +57,7 @@ const PublicSettings = () => {
 
   const onCaClick = async (ca) => {
     try {
-      await axios.post(`${API_URL}community_status/community_id=${groupId}`, {
+      await axios.post(`${API_URL}community_status/?community_id=${groupId}`, {
         status: ca,
       });
       setCaState(ca);
@@ -68,7 +68,7 @@ const PublicSettings = () => {
 
   const onSwitchClick = async (st) => {
     try {
-      await axios.post(`${API_URL}community_switch/community_id=${groupId}`, {
+      await axios.post(`${API_URL}community_switch/?community_id=${groupId}`, {
         status: st,
       });
       setState(st);
