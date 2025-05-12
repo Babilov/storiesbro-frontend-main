@@ -40,8 +40,12 @@ const PublicSettings = () => {
   useEffect(() => {
     const fetchCaState = async () => {
       try {
-        const resCa = await axios.get(`${API_URL}community_status/`);
-        const resSt = await axios.get(`${API_URL}community_switch/`);
+        const resCa = await axios.get(
+          `${API_URL}community_status/community_id=${groupId}`
+        );
+        const resSt = await axios.get(
+          `${API_URL}community_switch/community_id=${groupId}`
+        );
         setCaState(resCa.data);
         setState(resSt.data);
       } catch (error) {
@@ -53,7 +57,7 @@ const PublicSettings = () => {
 
   const onCaClick = async (ca) => {
     try {
-      await axios.post(`${API_URL}community_status/`, {
+      await axios.post(`${API_URL}community_status/community_id=${groupId}`, {
         status: ca,
       });
       setCaState(ca);
@@ -64,7 +68,7 @@ const PublicSettings = () => {
 
   const onSwitchClick = async (st) => {
     try {
-      await axios.post(`${API_URL}community_switch/`, {
+      await axios.post(`${API_URL}community_switch/community_id=${groupId}`, {
         status: st,
       });
       setState(st);
