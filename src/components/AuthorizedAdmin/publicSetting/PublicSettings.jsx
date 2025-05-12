@@ -40,8 +40,10 @@ const PublicSettings = () => {
   useEffect(() => {
     const fetchCaState = async () => {
       try {
-        const resCa = await axios.get(`${API_URL}community_status/${groupId}`);
-        const resSt = await axios.get(`${API_URL}community_switch/?${groupId}`);
+        const resCa = await axios.get(`${API_URL}community_status/${groupId}/`);
+        const resSt = await axios.get(
+          `${API_URL}community_switch/?${groupId}/`
+        );
         setCaState(resCa.data);
         setState(resSt.data);
         console.log(groupId);
@@ -54,7 +56,7 @@ const PublicSettings = () => {
 
   const onCaClick = async (ca) => {
     try {
-      await axios.post(`${API_URL}community_status/${groupId}`, {
+      await axios.post(`${API_URL}community_status/${groupId}/`, {
         status: ca,
       });
       setCaState(ca);
@@ -66,7 +68,7 @@ const PublicSettings = () => {
 
   const onSwitchClick = async (st) => {
     try {
-      await axios.post(`${API_URL}community_switch/${groupId}`, {
+      await axios.post(`${API_URL}community_switch/${groupId}/`, {
         status: st,
       });
       setState(st);
