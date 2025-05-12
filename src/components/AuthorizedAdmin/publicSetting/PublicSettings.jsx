@@ -40,14 +40,11 @@ const PublicSettings = () => {
   useEffect(() => {
     const fetchCaState = async () => {
       try {
-        const resCa = await axios.get(
-          `${API_URL}community_status/?community_id=${groupId}`
-        );
-        const resSt = await axios.get(
-          `${API_URL}community_switch/?community_id=${groupId}`
-        );
+        const resCa = await axios.get(`${API_URL}community_status/${groupId}`);
+        const resSt = await axios.get(`${API_URL}community_switch/?${groupId}`);
         setCaState(resCa.data);
         setState(resSt.data);
+        console.log(groupId);
       } catch (error) {
         logToBackend(`Error GET: ${error}`);
       }
@@ -57,10 +54,11 @@ const PublicSettings = () => {
 
   const onCaClick = async (ca) => {
     try {
-      await axios.post(`${API_URL}community_status/?community_id=${groupId}`, {
+      await axios.post(`${API_URL}community_status/${groupId}`, {
         status: ca,
       });
       setCaState(ca);
+      console.log(groupId);
     } catch (error) {
       logToBackend(`Error POST: ${error}`);
     }
@@ -68,10 +66,11 @@ const PublicSettings = () => {
 
   const onSwitchClick = async (st) => {
     try {
-      await axios.post(`${API_URL}community_switch/?community_id=${groupId}`, {
+      await axios.post(`${API_URL}community_switch/${groupId}`, {
         status: st,
       });
       setState(st);
+      console.log(groupId);
     } catch (error) {
       logToBackend(`Error POST: ${error}`);
     }
@@ -192,7 +191,7 @@ const PublicSettings = () => {
                       color: caState === 0 ? "#E37E31" : "black",
                       ":hover": { color: "#E37E31" },
                     }}
-                    onClick={() => onCaClick(0)}
+                    onClick={() => onCaClick("МЦА")}
                   >
                     Стандартные МЦА
                   </Typography>
@@ -252,7 +251,7 @@ const PublicSettings = () => {
                       color: caState === 1 ? "#E37E31" : "black",
                       ":hover": { color: "#E37E31" },
                     }}
-                    onClick={() => onCaClick(1)}
+                    onClick={() => onCaClick("ЖЦА")}
                   >
                     Стандартные ЖЦА
                   </Typography>
@@ -312,7 +311,7 @@ const PublicSettings = () => {
                       color: caState === 2 ? "#E37E31" : "black",
                       ":hover": { color: "#E37E31" },
                     }}
-                    onClick={() => onCaClick(2)}
+                    onClick={() => onCaClick("СЦА")}
                   >
                     Взрослые СЦА
                   </Typography>
@@ -405,7 +404,7 @@ const PublicSettings = () => {
                   cursor: "pointer",
                   color: state === 0 ? "#D25D48" : "black",
                 }}
-                onClick={() => onSwitchClick(0)}
+                onClick={() => onSwitchClick(1)}
               >
                 Включено
               </Typography>
@@ -420,7 +419,7 @@ const PublicSettings = () => {
                   cursor: "pointer",
                   color: state === 1 ? "#D25D48" : "black",
                 }}
-                onClick={() => onSwitchClick(1)}
+                onClick={() => onSwitchClick(0)}
               >
                 Отключить
               </Typography>
