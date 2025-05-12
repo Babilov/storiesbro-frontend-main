@@ -45,8 +45,8 @@ const PublicSettings = () => {
         const resSt = await axios.get(`${API_URL}community_switch/${groupId}/`);
         console.log(resCa);
         console.log(resSt);
-        setCaState(resCa.data);
-        setState(resSt.data);
+        setCaState(resCa.data.status);
+        setState(resSt.data.status);
         console.log(groupId);
       } catch (error) {
         logToBackend(`Error GET: ${error}`);
