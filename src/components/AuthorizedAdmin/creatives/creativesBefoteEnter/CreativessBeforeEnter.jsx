@@ -56,6 +56,7 @@ const CreativessBeforeEnter = () => {
       .then((res) => {
         localStorage.setItem("vk_access_token", res.data.access_token);
         localStorage.setItem("is_authed", "true");
+        console.log("ABOBA", res.data.groups_auth_url);
         const token = localStorage.getItem("access_token");
         axios.get(`${API_URL}valid_token/?device_id=${device_id}`, {
           headers: {
@@ -91,7 +92,7 @@ const CreativessBeforeEnter = () => {
 
         const oneTap = new VKID.OneTap();
         oneTap
-          .render({ container: document.getElementById("VkIdSdkOneTap") })
+          .render({ container: document.getElementById("VkISddkOneTap") })
           .on(VKID.OneTapInternalEvents.LOGIN_SUCCESS, handleVkAuth)
           .on(VKID.WidgetEvents.ERROR, (err) => console.log(err));
       } catch (err) {
