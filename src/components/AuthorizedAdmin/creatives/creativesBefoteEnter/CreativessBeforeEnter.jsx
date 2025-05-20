@@ -65,7 +65,7 @@ const CreativessBeforeEnter = () => {
               Authorization: `Bearer ${token}`, // Токен в заголовке
             },
           })
-          .then((group_redirect) => redirect(group_redirect));
+          .then(() => redirect(group_redirect));
 
         // window.location.reload();
       })
