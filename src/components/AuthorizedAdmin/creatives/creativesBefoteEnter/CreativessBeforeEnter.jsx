@@ -94,7 +94,7 @@ const CreativessBeforeEnter = () => {
 
         const oneTap = new VKID.OneTap();
         oneTap
-          .render({ container: document.getElementById("VkISddkOneTap") })
+          .render({ container: document.getElementById("VkIdsdkOneTap") })
           .on(VKID.OneTapInternalEvents.LOGIN_SUCCESS, handleVkAuth)
           .on(VKID.WidgetEvents.ERROR, (err) => console.log(err));
       } catch (err) {
