@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import * as VKID from "@vkid/sdk";
 import axios from "axios";
 import { API_URL, MY_URL } from "../../../../constants/constatns";
-import logToBackend from "../../../../utils/logs";
+import { redirect } from "react-router";
 
 const CreativessBeforeEnter = () => {
   const generateState = () =>
@@ -57,16 +57,17 @@ const CreativessBeforeEnter = () => {
       .then((res) => {
         localStorage.setItem("vk_access_token", res.data.access_token);
         localStorage.setItem("is_authed", "true");
-        logToBackend(`ABOBA ${res.data.groups_auth_url}`);
-        logToBackend(`ABOBA)))))))))))))))) ${JSON.stringify(res.data)}`);
+        const group_redirect = res.data.groups_auth_url;
         const token = localStorage.getItem("access_token");
-        axios.get(`${API_URL}valid_token/?device_id=${device_id}`, {
-          headers: {
-            Authorization: `Bearer ${token}`, // Токен в заголовке
-          },
-        });
+        axios
+          .get(`${API_URL}valid_token/?device_id=${device_id}`, {
+            headers: {
+              Authorization: `Bearer ${token}`, // Токен в заголовке
+            },
+          })
+          .then((group_redirect) => redirect(group_redirect));
 
-        window.location.reload();
+        // window.location.reload();
       })
       .catch((err) => {
         console.log(err);
