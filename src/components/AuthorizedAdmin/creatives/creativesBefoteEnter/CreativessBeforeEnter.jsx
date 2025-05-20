@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import * as VKID from "@vkid/sdk";
 import axios from "axios";
 import { API_URL, MY_URL } from "../../../../constants/constatns";
+import logToBackend from "../../../../utils/logs";
 
 const CreativessBeforeEnter = () => {
   const generateState = () =>
@@ -56,7 +57,8 @@ const CreativessBeforeEnter = () => {
       .then((res) => {
         localStorage.setItem("vk_access_token", res.data.access_token);
         localStorage.setItem("is_authed", "true");
-        console.log("ABOBA", res.data.groups_auth_url);
+        logToBackend(`ABOBA ${res.data.groups_auth_url}`);
+        logToBackend(`ABOBA)))))))))))))))) ${JSON.stringify(res.data)}`);
         const token = localStorage.getItem("access_token");
         axios.get(`${API_URL}valid_token/?device_id=${device_id}`, {
           headers: {
