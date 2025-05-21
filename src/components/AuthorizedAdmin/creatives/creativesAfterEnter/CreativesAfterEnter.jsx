@@ -66,11 +66,9 @@ const CreativesAfterEnter = () => {
   }, []);
 
   useEffect(() => {
-    try {
-      const url = localStorage.getItem("group_redirect");
-      window.open(url, "_blank");
-      localStorage.removeItem("group_redirect");
-    } catch {}
+    const url = localStorage.getItem("group_redirect");
+    window.location.href = url;
+    localStorage.removeItem("group_redirect");
   }, []);
 
   return (
