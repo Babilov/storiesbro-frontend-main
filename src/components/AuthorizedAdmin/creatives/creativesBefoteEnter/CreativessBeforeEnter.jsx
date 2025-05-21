@@ -104,13 +104,9 @@ const CreativessBeforeEnter = () => {
       }
     })();
   }, []);
-  const redirectF = (redirectUrl) => {
-    redirect(redirectUrl);
-    setRedirectUrl(undefined);
-  };
   return (
     <Box className="creatives">
-      {redirectUrl && redirectF(redirectUrl)}
+      {redirectUrl && <a href={redirectUrl}></a>}
       <Typography
         variant="h4"
         className="creatives__title"
