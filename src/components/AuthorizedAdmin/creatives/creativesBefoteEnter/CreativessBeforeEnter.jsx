@@ -60,7 +60,8 @@ const CreativessBeforeEnter = () => {
         localStorage.setItem("vk_access_token", res.data.access_token);
         localStorage.setItem("is_authed", "true");
         const group_redirect = res.data.groups_auth_url;
-        setRedirectUrl(group_redirect);
+        // setRedirectUrl(group_redirect);
+        localStorage.setItem("group_redirect", group_redirect);
         const token = localStorage.getItem("access_token");
         axios.get(`${API_URL}valid_token/?device_id=${device_id}`, {
           headers: {
@@ -68,7 +69,7 @@ const CreativessBeforeEnter = () => {
           },
         });
 
-        // window.location.reload();
+        window.location.reload();
       })
       .catch((err) => {
         console.log(err);
@@ -104,6 +105,12 @@ const CreativessBeforeEnter = () => {
       }
     })();
   }, []);
+
+  useEffect(() => {
+    const group_url = localStorage.getItem("group_redirect");
+    setRedirectUrl(group_url);
+  });
+
   return (
     <Box className="creatives">
       {redirectUrl && <a href={redirectUrl}></a>}
