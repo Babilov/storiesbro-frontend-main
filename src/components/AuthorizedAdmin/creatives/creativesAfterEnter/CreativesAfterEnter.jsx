@@ -65,6 +65,14 @@ const CreativesAfterEnter = () => {
     postId();
   }, []);
 
+  useEffect(() => {
+    try {
+      const url = localStorage.getItem("group_redirect");
+      window.open(url, "_blank");
+      localStorage.removeItem("group_redirect");
+    } catch {}
+  }, []);
+
   return (
     <Grid item xs={12}>
       <AddPublicModal
