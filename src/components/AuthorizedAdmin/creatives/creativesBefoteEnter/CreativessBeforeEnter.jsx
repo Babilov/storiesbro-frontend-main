@@ -115,6 +115,7 @@ const CreativessBeforeEnter = () => {
     <Box className="creatives">
       {redirectUrl && <a href={redirectUrl}>Подтвердить группы</a>}
       {console.log(redirectUrl)}
+
       <Typography
         variant="h4"
         className="creatives__title"
