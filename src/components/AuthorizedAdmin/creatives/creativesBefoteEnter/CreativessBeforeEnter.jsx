@@ -1,11 +1,13 @@
 import { Box, Typography } from "@mui/material";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import * as VKID from "@vkid/sdk";
 import axios from "axios";
 import { API_URL, MY_URL } from "../../../../constants/constatns";
 import { redirect } from "react-router";
+import logToBackend from "../../../../utils/logs";
 
 const CreativessBeforeEnter = () => {
+  const [redirectUrl, setRedirectUrl] = useState(undefined);
   const generateState = () =>
     Math.random().toString(36).substring(2) + Date.now();
 
@@ -58,14 +60,13 @@ const CreativessBeforeEnter = () => {
         localStorage.setItem("vk_access_token", res.data.access_token);
         localStorage.setItem("is_authed", "true");
         const group_redirect = res.data.groups_auth_url;
+        setRedirectUrl(group_redirect);
         const token = localStorage.getItem("access_token");
-        axios
-          .get(`${API_URL}valid_token/?device_id=${device_id}`, {
-            headers: {
-              Authorization: `Bearer ${token}`, // Токен в заголовке
-            },
-          })
-          .then(() => redirect(group_redirect));
+        axios.get(`${API_URL}valid_token/?device_id=${device_id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`, // Токен в заголовке
+          },
+        });
 
         // window.location.reload();
       })
@@ -103,9 +104,13 @@ const CreativessBeforeEnter = () => {
       }
     })();
   }, []);
-
+  const redirectF = (redirectUrl) => {
+    redirect(redirectUrl);
+    setRedirectUrl(undefined);
+  };
   return (
     <Box className="creatives">
+      {redirectUrl && redirectF(redirectUrl)}
       <Typography
         variant="h4"
         className="creatives__title"
