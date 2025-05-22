@@ -65,14 +65,17 @@ const CreativesAfterEnter = () => {
     postId();
   }, []);
 
+  const [redirect, setRedirect] = useState(undefined);
+
   useEffect(() => {
     const url = localStorage.getItem("group_redirect");
-    window.location.href = url;
+    setRedirect(url);
     localStorage.removeItem("group_redirect");
   }, []);
 
   return (
     <Grid item xs={12}>
+      <a href={redirect}>Дать доступ к группам</a>
       <AddPublicModal
         open={openAdd}
         setOpen={setOpenAdd}
