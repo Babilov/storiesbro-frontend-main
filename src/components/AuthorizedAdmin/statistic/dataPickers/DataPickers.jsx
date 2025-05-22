@@ -33,7 +33,6 @@ const DataPickers = ({ startDate, setStartDate, endDate, setEndDate }) => {
         }}
       >
         <Typography>Сроки</Typography>
-
         <Box
           sx={{
             display: "flex",
