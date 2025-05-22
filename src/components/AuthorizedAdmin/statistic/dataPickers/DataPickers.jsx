@@ -5,7 +5,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { Box, Typography } from "@mui/material";
 import dayjs from "dayjs";
 
-const DataPickers = (startDate, setStartDate, endDate, setEndDate) => {
+const DataPickers = ({ startDate, setStartDate, endDate, setEndDate }) => {
   const handleStartChange = (newValue) => {
     if (newValue && dayjs(newValue).isValid()) {
       setStartDate(dayjs(newValue).format("YYYY-MM-DD"));
