@@ -55,12 +55,6 @@ const DataPickers = ({ startDate, setStartDate, endDate, setEndDate }) => {
           />
         </Box>
       </Box>
-
-      {/* Для отладки */}
-      <Box>
-        <Typography>Начало: {startDate}</Typography>
-        <Typography>Конец: {endDate}</Typography>
-      </Box>
     </LocalizationProvider>
   );
 };

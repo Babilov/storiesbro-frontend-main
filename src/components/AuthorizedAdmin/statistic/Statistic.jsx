@@ -38,7 +38,9 @@ const Statistic = () => {
 
   const handleClick = () => {
     setOpen(true);
-    console.log(`SELECTED: ${publicObj}, START: ${startDate}, END: ${endDate}`);
+    console.log(
+      `SELECTED: ${selectedPublics[publicObj]}, START: ${startDate}, END: ${endDate}`
+    );
     // get_statistic(223631865, 268278813);
   };
 
