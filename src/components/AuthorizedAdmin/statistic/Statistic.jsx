@@ -50,7 +50,7 @@ const Statistic = () => {
         <PublicSelect
           publics={selectedPublics}
           publicObj={publicObj}
-          selectedPublics={selectedPublics}
+          setPublicObj={setPublicObj}
         />
         <DataPickers
           startDate={startDate}
