@@ -70,12 +70,19 @@ const CreativesAfterEnter = () => {
   useEffect(() => {
     const url = localStorage.getItem("group_redirect");
     setRedirect(url);
-    localStorage.removeItem("group_redirect");
   }, []);
+
+  const removeRedirect = () => {
+    localStorage.removeItem("group_redirect");
+  };
 
   return (
     <Grid item xs={12}>
-      <a href={redirect}>Дать доступ к группам</a>
+      {redirect && (
+        <a href={redirect} onClick={removeRedirect}>
+          Дать доступ к группам
+        </a>
+      )}
       <AddPublicModal
         open={openAdd}
         setOpen={setOpenAdd}
