@@ -12,6 +12,9 @@ import { get_statistic } from "../../../api/publics";
 const Statistic = () => {
   const [open, setOpen] = useState(false);
   const [selectedPublics] = useContext(PublicsContext);
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
+  const [publicObj, setPublicObj] = useState("");
   const statistic = [
     {
       publicTitle: "Гонки",
@@ -35,6 +38,7 @@ const Statistic = () => {
 
   const handleClick = () => {
     setOpen(true);
+    console.log(`SELECTED: ${publicObj}, START: ${startDate}, END: ${endDate}`);
     get_statistic(223631865, 268278813);
   };
 
@@ -43,8 +47,17 @@ const Statistic = () => {
   return (
     <>
       <Grid item md={6} sm={10} xs={12} sx={{ m: "0 auto" }}>
-        <PublicSelect publics={selectedPublics} />
-        <DataPickers />
+        <PublicSelect
+          publics={selectedPublics}
+          publicObj={publicObj}
+          selectedPublics={selectedPublics}
+        />
+        <DataPickers
+          startDate={startDate}
+          setStartDate={setStartDate}
+          endDate={endDate}
+          setEndDate={setEndDate}
+        />
         <PeriodSelect />
 
         <Box sx={{ width: "40%", m: "20px auto" }}>

@@ -6,9 +6,7 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { Avatar, Typography } from "@mui/material";
 
-const MySelect = ({ publics }) => {
-  const [publicObj, setPublicObj] = useState("");
-
+const MySelect = ({ publics, publicObj, setPublicObj }) => {
   const handleChange = (event) => {
     setPublicObj(event.target.value);
   };
