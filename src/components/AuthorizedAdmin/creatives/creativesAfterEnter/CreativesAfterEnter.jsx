@@ -4,7 +4,7 @@ import "./styles/style.css";
 import Table from "./table/Table";
 import AddPublicButton from "./buttons/AddPublicButton";
 import { PublicsContext } from "../../../../context/PublicsContext";
-import { Grid } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import AddPublicModal from "./table/modals/AddPublicModal";
 import { API_URL } from "../../../../constants/constatns";
 import axios from "axios";
@@ -79,28 +79,37 @@ const CreativesAfterEnter = () => {
 
   return (
     <Grid item xs={12}>
-      {redirect && (
-        <a href={redirect}>
-          <MyButton
-            onClick={removeRedirect}
-            options={{
-              background: "white",
-              color: "black",
-              border: "2px solid #0077FF",
-              borderRadius: "90px",
-            }}
-          >
-            Дать доступ к группам
-          </MyButton>
-        </a>
-      )}
+      <Box
+        sx={{
+          width: "100%",
+          display: "flex",
+          justifyContent: { md: "flex-between", xs: "flex-start" },
+        }}
+      >
+        {redirect && (
+          <a href={redirect}>
+            <MyButton
+              onClick={removeRedirect}
+              options={{
+                background: "white",
+                color: "black",
+                border: "2px solid #0077FF",
+                borderRadius: "90px",
+              }}
+            >
+              Дать доступ к группам
+            </MyButton>
+          </a>
+        )}
+
+        <AddPublicButton setOpen={setOpenAdd} />
+      </Box>
       <AddPublicModal
         open={openAdd}
         setOpen={setOpenAdd}
         publics={publics}
         addedPublics={selectedPublics}
       />
-      <AddPublicButton setOpen={setOpenAdd} />
       <Table publics={selectedPublics} setPublics={setSelectedPublics} />
     </Grid>
   );
