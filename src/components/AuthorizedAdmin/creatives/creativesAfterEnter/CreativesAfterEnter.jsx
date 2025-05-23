@@ -84,14 +84,14 @@ const CreativesAfterEnter = () => {
           width: "100%",
           display: "flex",
           justifyContent: {
-            md: "flex-end",
+            md: "space-between",
             xs: "flex-start",
             alignItems: "center",
           },
         }}
       >
         {redirect && (
-          <a href={redirect}>
+          <a href={redirect} style={{ textDecoration: "none" }}>
             <MyButton
               onClick={removeRedirect}
               options={{
@@ -99,6 +99,7 @@ const CreativesAfterEnter = () => {
                 color: "black",
                 border: "2px solid #0077FF",
                 borderRadius: "90px",
+                mb: 2,
               }}
             >
               Дать доступ к группам
