@@ -85,11 +85,11 @@ const CreativesAfterEnter = () => {
         sx={{
           width: "100%",
           display: "flex",
+          mb: 2,
           justifyContent: {
             md: "space-between",
             xs: "flex-start",
             alignItems: "center",
-            mb: 2,
           },
         }}
       >
@@ -112,10 +112,10 @@ const CreativesAfterEnter = () => {
                 <Box sx={{ display: "flex", justifyContent: "space-around" }}>
                   <Typography>Дать доступ к группам</Typography>
                   <Box
-                    sx={{ width: "5px" }}
+                    sx={{ width: "23px" }}
                     component="img"
                     alt="группа"
-                    src={var1}
+                    src={var2}
                   />
                 </Box>
               </MyButton>
