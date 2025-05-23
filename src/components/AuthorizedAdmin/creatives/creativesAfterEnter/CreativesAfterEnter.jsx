@@ -111,7 +111,12 @@ const CreativesAfterEnter = () => {
               >
                 <Box sx={{ display: "flex", justifyContent: "space-around" }}>
                   <Typography>Дать доступ к группам</Typography>
-                  <Box component="img" alt="группа" src={var1} />
+                  <Box
+                    sx={{ width: "5px" }}
+                    component="img"
+                    alt="группа"
+                    src={var1}
+                  />
                 </Box>
               </MyButton>
             </a>
