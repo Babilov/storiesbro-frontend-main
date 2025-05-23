@@ -18,7 +18,6 @@ const AddPublicButton = ({ setOpen }) => {
           color: "black",
           border: "2px solid #0077FF",
           borderRadius: "90px",
-          mb: 2,
         }}
       >
         <Box sx={{ display: "flex", justifyContent: "space-around" }}>

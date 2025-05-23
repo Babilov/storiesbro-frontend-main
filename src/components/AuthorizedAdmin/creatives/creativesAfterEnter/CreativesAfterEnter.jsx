@@ -4,13 +4,15 @@ import "./styles/style.css";
 import Table from "./table/Table";
 import AddPublicButton from "./buttons/AddPublicButton";
 import { PublicsContext } from "../../../../context/PublicsContext";
-import { Box, Grid } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 import AddPublicModal from "./table/modals/AddPublicModal";
 import { API_URL } from "../../../../constants/constatns";
 import axios from "axios";
 import logToBackend from "../../../../utils/logs";
 import { fetchWithAuth, refreshToken } from "../../../../api/token";
 import MyButton from "../../../UI/buttons/MyButton";
+import var1 from "./images/var1.svg";
+import var2 from "./images/var2.svg";
 
 const CreativesAfterEnter = () => {
   const [publics, setPublics, selectedPublics, setSelectedPublics] =
@@ -87,26 +89,34 @@ const CreativesAfterEnter = () => {
             md: "space-between",
             xs: "flex-start",
             alignItems: "center",
+            mb: 2,
           },
         }}
       >
-        {redirect && (
-          <a href={redirect} style={{ textDecoration: "none" }}>
-            <MyButton
-              onClick={removeRedirect}
-              options={{
-                background: "white",
-                color: "black",
-                border: "2px solid #0077FF",
-                borderRadius: "90px",
-                mb: 2,
-              }}
-            >
-              Дать доступ к группам
-            </MyButton>
-          </a>
-        )}
-
+        <Box
+          sx={{
+            width: { md: "35%", sm: "50", xs: "75" },
+          }}
+        >
+          {redirect && (
+            <a href={redirect} style={{ textDecoration: "none" }}>
+              <MyButton
+                onClick={removeRedirect}
+                options={{
+                  background: "white",
+                  color: "black",
+                  border: "2px solid #0077FF",
+                  borderRadius: "90px",
+                }}
+              >
+                <Box sx={{ display: "flex", justifyContent: "space-around" }}>
+                  <Typography>Дать доступ к группам</Typography>
+                  <Box component="img" alt="группа" src={var1} />
+                </Box>
+              </MyButton>
+            </a>
+          )}
+        </Box>
         <AddPublicButton setOpen={setOpenAdd} />
       </Box>
       <AddPublicModal
