@@ -10,6 +10,7 @@ import { API_URL } from "../../../../constants/constatns";
 import axios from "axios";
 import logToBackend from "../../../../utils/logs";
 import { fetchWithAuth, refreshToken } from "../../../../api/token";
+import MyButton from "../../../UI/buttons/MyButton";
 
 const CreativesAfterEnter = () => {
   const [publics, setPublics, selectedPublics, setSelectedPublics] =
@@ -79,8 +80,18 @@ const CreativesAfterEnter = () => {
   return (
     <Grid item xs={12}>
       {redirect && (
-        <a href={redirect} onClick={removeRedirect}>
-          Дать доступ к группам
+        <a href={redirect}>
+          <MyButton
+            onClick={removeRedirect}
+            options={{
+              background: "white",
+              color: "black",
+              border: "2px solid #0077FF",
+              borderRadius: "90px",
+            }}
+          >
+            Дать доступ к группам
+          </MyButton>
         </a>
       )}
       <AddPublicModal
