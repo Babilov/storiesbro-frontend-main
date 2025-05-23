@@ -84,7 +84,7 @@ const CreativesAfterEnter = () => {
           width: "100%",
           display: "flex",
           justifyContent: {
-            md: "flex-between",
+            md: "flex-end",
             xs: "flex-start",
             alignItems: "center",
           },

@@ -9,8 +9,6 @@ const AddPublicButton = ({ setOpen }) => {
     <Box
       sx={{
         width: { md: "35%", sm: "50", xs: "75" },
-        mb: 2,
-        mt: 1,
       }}
     >
       <MyButton
