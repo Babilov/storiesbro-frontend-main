@@ -83,7 +83,11 @@ const CreativesAfterEnter = () => {
         sx={{
           width: "100%",
           display: "flex",
-          justifyContent: { md: "flex-between", xs: "flex-start" },
+          justifyContent: {
+            md: "flex-between",
+            xs: "flex-start",
+            alignItems: "center",
+          },
         }}
       >
         {redirect && (
