@@ -46,7 +46,7 @@ const Statistic = () => {
     );
     const group = selectedPublics[publicObj];
     const res = await axios.post(
-      `${API_URL}group_stats/?group_id=${group["id"]}&date_from=${startDate}&date_to=${endDate}&interval=day`
+      `${API_URL}group_stats/?group_id=${group["group_id"]}&date_from=${startDate}&date_to=${endDate}&interval=day`
     );
     logToBackend(
       `ЧТО ПОСЛАЛ: ${API_URL}group_stats/?group_id=${group["group_id"]}&date_from=${startDate}&date_to=${endDate}&interval=day`
