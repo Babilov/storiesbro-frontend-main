@@ -1,5 +1,6 @@
 import { Grid, Typography } from "@mui/material";
 import React from "react";
+import dayjs from "dayjs";
 
 const Table = ({ statistic, open, groupInfo }) => {
   return (
@@ -87,7 +88,7 @@ const Table = ({ statistic, open, groupInfo }) => {
                   fontWeight: 400,
                 }}
               >
-                {statisticItem["period_from"]}
+                {dayjs.unix(statisticItem["period_from"]).format("DD.MM.YYYY")}
               </Typography>
             </Grid>
             <Grid
