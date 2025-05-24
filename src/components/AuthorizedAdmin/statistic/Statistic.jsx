@@ -41,18 +41,25 @@ const Statistic = () => {
 
   const handleClick = async () => {
     setOpen(true);
-    console.log(
-      `SELECTED: ${JSON.stringify(selectedPublics[publicObj])}, START: ${startDate}, END: ${endDate}`
-    );
-    const group = selectedPublics[publicObj];
-    const res = await axios.post(
-      `${API_URL}group_stats/?group_id=${group["group_id"]}&date_from=${startDate}&date_to=${endDate}&interval=day`
-    );
-    logToBackend(
-      `ЧТО ПОСЛАЛ: ${API_URL}group_stats/?group_id=${group["group_id"]}&date_from=${startDate}&date_to=${endDate}&interval=day`
-    );
-    logToBackend(`ТО ЧТО ПОЛУЧИЛИ: ${res.data}`);
-    console.log(res.data);
+    try {
+      const token = localStorage.getItem("access_token");
+      const group = selectedPublics[publicObj];
+      const res = await axios.get(
+        `${API_URL}group_stats/?group_id=${group["group_id"]}&date_from=${startDate}&date_to=${endDate}&interval=day`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`, // Токен в заголовке
+          },
+        }
+      );
+      logToBackend(
+        `ЧТО ПОСЛАЛ: ${API_URL}group_stats/?group_id=${group["group_id"]}&date_from=${startDate}&date_to=${endDate}&interval=day`
+      );
+      logToBackend(`ТО ЧТО ПОЛУЧИЛИ: ${res.data}`);
+      console.log(res.data);
+    } catch (e) {
+      logToBackend(`ERROR статистика: ${e}`);
+    }
     // get_statistic(223631865, 268278813);
   };
 
