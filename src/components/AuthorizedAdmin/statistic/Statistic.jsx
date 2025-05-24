@@ -18,32 +18,15 @@ const Statistic = () => {
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [publicObj, setPublicObj] = useState("");
-  const statistic = [
-    {
-      publicTitle: "Гонки",
-      date: "04.07.2023",
-      views: "259.000",
-      money: 5180,
-    },
-    {
-      publicTitle: "Гонки",
-      date: "03.07.2023",
-      views: "271.000",
-      money: 5420,
-    },
-    {
-      publicTitle: "Гонки",
-      date: "02.07.2023",
-      views: "223.000",
-      money: 4460,
-    },
-  ];
+  const [statistic, setStatistic] = useState([]);
+  const [groupInfo, setGroupInfo] = useState(null);
 
   const handleClick = async () => {
     setOpen(true);
     try {
       const token = localStorage.getItem("access_token");
       const group = selectedPublics[publicObj];
+      setGroupInfo(group);
       const res = await axios.get(
         `${API_URL}group_stats/?group_id=${group["group_id"]}&date_from=${startDate}&date_to=${endDate}&interval=day`,
         {
@@ -56,14 +39,11 @@ const Statistic = () => {
         `ЧТО ПОСЛАЛ: ${API_URL}group_stats/?group_id=${group["group_id"]}&date_from=${startDate}&date_to=${endDate}&interval=day`
       );
       logToBackend(`ТО ЧТО ПОЛУЧИЛИ: ${res.data}`);
-      console.log(res.data);
+      setStatistic(res.data);
     } catch (e) {
       logToBackend(`ERROR статистика: ${e}`);
     }
-    // get_statistic(223631865, 268278813);
   };
-
-  // useEffect(() => {get_statistic()}, [])
 
   return (
     <>
@@ -91,7 +71,11 @@ const Statistic = () => {
         </Box>
       </Grid>
       <Grid item md={8} xs={12} sx={{ m: "50px auto" }}>
-        <Table statistic={statistic} open={open} />
+        <Table
+          statistic={statistic}
+          open={open}
+          groupName={groupInfo["name"]}
+        />
       </Grid>
     </>
   );
