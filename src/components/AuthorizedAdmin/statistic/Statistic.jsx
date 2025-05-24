@@ -8,6 +8,9 @@ import MyButton from "../../UI/buttons/MyButton";
 import { PublicsContext } from "../../../context/PublicsContext";
 import Table from "./table/Table";
 import { get_statistic } from "../../../api/publics";
+import axios from "axios";
+import { API_URL } from "../../../constants/constatns";
+import logToBackend from "../../../utils/logs";
 
 const Statistic = () => {
   const [open, setOpen] = useState(false);
@@ -36,11 +39,20 @@ const Statistic = () => {
     },
   ];
 
-  const handleClick = () => {
+  const handleClick = async () => {
     setOpen(true);
     console.log(
-      `SELECTED: ${selectedPublics[publicObj]}, START: ${startDate}, END: ${endDate}`
+      `SELECTED: ${JSON.stringify(selectedPublics[publicObj])}, START: ${startDate}, END: ${endDate}`
     );
+    const group = selectedPublics[publicObj];
+    const res = await axios.post(
+      `${API_URL}group_stats/?group_id=${group["id"]}&date_from=${startDate}&date_to=${endDate}&interval=day`
+    );
+    logToBackend(
+      `ЧТО ПОСЛАЛ: ${API_URL}group_stats/?group_id=${group["id"]}&date_from=${startDate}&date_to=${endDate}&interval=day`
+    );
+    logToBackend(`ТО ЧТО ПОЛУЧИЛИ: ${res.data}`);
+    console.log(res.data);
     // get_statistic(223631865, 268278813);
   };
 
@@ -64,7 +76,7 @@ const Statistic = () => {
 
         <Box sx={{ width: "40%", m: "20px auto" }}>
           <MyButton
-            onClick={() => handleClick()}
+            onClick={handleClick}
             options={{ background: "#E37E31", color: "white" }}
           >
             <Typography>Показать</Typography>
