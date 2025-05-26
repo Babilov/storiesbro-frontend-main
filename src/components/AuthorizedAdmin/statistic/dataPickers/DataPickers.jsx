@@ -8,7 +8,9 @@ import dayjs from "dayjs";
 const DataPickers = ({ startDate, setStartDate, endDate, setEndDate }) => {
   const handleStartChange = (newValue) => {
     if (newValue && dayjs(newValue).isValid()) {
-      setStartDate(dayjs(newValue).format("YYYY-MM-DD"));
+      const date = dayjs(newValue).format("YYYY-MM-DD");
+      const timestamp = Math.floor(new Date(date).getTime() / 1000);
+      setStartDate(timestamp);
     } else {
       setStartDate(null);
     }
@@ -16,7 +18,9 @@ const DataPickers = ({ startDate, setStartDate, endDate, setEndDate }) => {
 
   const handleEndChange = (newValue) => {
     if (newValue && dayjs(newValue).isValid()) {
-      setEndDate(dayjs(newValue).format("YYYY-MM-DD"));
+      const date = dayjs(newValue).format("YYYY-MM-DD");
+      const timestamp = Math.floor(new Date(date).getTime() / 1000);
+      setEndDate(timestamp);
     } else {
       setEndDate(null);
     }

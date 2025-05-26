@@ -7,7 +7,6 @@ import DataPickers from "./dataPickers/DataPickers";
 import MyButton from "../../UI/buttons/MyButton";
 import { PublicsContext } from "../../../context/PublicsContext";
 import Table from "./table/Table";
-import { get_statistic } from "../../../api/publics";
 import axios from "axios";
 import { API_URL } from "../../../constants/constatns";
 import logToBackend from "../../../utils/logs";
