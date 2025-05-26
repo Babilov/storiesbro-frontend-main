@@ -6,9 +6,7 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { Typography } from "@mui/material";
 
-const PeriodSelect = () => {
-  const [period, setPeriod] = useState("");
-
+const PeriodSelect = ({ period, setPeriod }) => {
   const handleChange = (event) => {
     setPeriod(event.target.value);
   };

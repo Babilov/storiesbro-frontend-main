@@ -20,6 +20,8 @@ const Statistic = () => {
   const [publicObj, setPublicObj] = useState("");
   const [statistic, setStatistic] = useState([]);
   const [groupInfo, setGroupInfo] = useState(null);
+  const [period, setPeriod] = useState("");
+  console.log(period);
 
   const handleClick = async () => {
     setOpen(true);
@@ -28,7 +30,7 @@ const Statistic = () => {
       const group = selectedPublics[publicObj];
       setGroupInfo(group);
       const res = await axios.get(
-        `${API_URL}group_stats/?group_id=${group["group_id"]}&date_from=${startDate}&date_to=${endDate}&interval=day`,
+        `${API_URL}group_stats/?group_id=${group["group_id"]}&date_from=${startDate}&date_to=${endDate}&interval=month`,
         {
           headers: {
             Authorization: `Bearer ${token}`, // Токен в заголовке
@@ -36,7 +38,7 @@ const Statistic = () => {
         }
       );
       logToBackend(
-        `ЧТО ПОСЛАЛ: ${API_URL}group_stats/?group_id=${group["group_id"]}&date_from=${startDate}&date_to=${endDate}&interval=day`
+        `ЧТО ПОСЛАЛ: ${API_URL}group_stats/?group_id=${group["group_id"]}&date_from=${startDate}&date_to=${endDate}&interval=${period}`
       );
       logToBackend(`ТО ЧТО ПОЛУЧИЛИ: ${res.data}`);
       setStatistic(res.data);
@@ -59,7 +61,7 @@ const Statistic = () => {
           endDate={endDate}
           setEndDate={setEndDate}
         />
-        <PeriodSelect />
+        <PeriodSelect period={period} setPeriod={setPeriod} />
 
         <Box sx={{ width: "40%", m: "20px auto" }}>
           <MyButton
