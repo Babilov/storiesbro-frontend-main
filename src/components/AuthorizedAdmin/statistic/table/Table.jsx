@@ -1,6 +1,7 @@
 import { Grid, Typography } from "@mui/material";
 import React from "react";
 import dayjs from "dayjs";
+import logToBackend from "../../../../utils/logs";
 
 const Table = ({ statistic, open, groupInfo, startDate, endDate }) => {
   return (
@@ -60,6 +61,13 @@ const Table = ({ statistic, open, groupInfo, startDate, endDate }) => {
           </Typography>
         </Grid>
         {statistic.map((statisticItem, index) => {
+          logToBackend(
+            `startDate: ${startDate}, period_from: ${statisticItem["period_from"]} endDate: ${endDate}, period_to: ${statisticItem["period_to"]}
+            ВЫРАЖЕНИЕ ${startDate <= statisticItem["period_from"]} ВЫРАЖЕНИЕ 2 ${endDate >= statisticItem["period_to"]} ВЫРАЖЕНИЕ 3 ${
+              startDate <= statisticItem["period_from"] &&
+              endDate >= statisticItem["period_to"]
+            }`
+          );
           startDate <= statisticItem["period_from"] &&
             endDate >= statisticItem["period_to"] && (
               <Grid container key={index}>
