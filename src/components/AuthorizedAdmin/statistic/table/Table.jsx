@@ -26,7 +26,7 @@ const Table = ({ statistic, open, groupInfo, startDate, endDate }) => {
             Сообщество
           </Typography>
         </Grid>
-        <Grid item xs={3} sx={{ pb: 1 }}>
+        <Grid item xs={4} sx={{ pb: 1 }}>
           <Typography
             sx={{
               textAlign: "center",
@@ -48,7 +48,7 @@ const Table = ({ statistic, open, groupInfo, startDate, endDate }) => {
             Просмотры
           </Typography>
         </Grid>
-        <Grid item xs={3} sx={{ pb: 1 }}>
+        <Grid item xs={2} sx={{ pb: 1 }}>
           <Typography
             sx={{
               textAlign: "right",
