@@ -29,7 +29,7 @@ const Statistic = () => {
       const group = selectedPublics[publicObj];
       setGroupInfo(group);
       const res = await axios.get(
-        `${API_URL}group_stats/?group_id=${group["group_id"]}&date_from=${startDate}&date_to=${endDate}&interval=month`,
+        `${API_URL}group_stats/?group_id=${group["group_id"]}&date_from=${startDate}&date_to=${endDate}&interval=${period}`,
         {
           headers: {
             Authorization: `Bearer ${token}`, // Токен в заголовке
@@ -71,8 +71,14 @@ const Statistic = () => {
           </MyButton>
         </Box>
       </Grid>
-      <Grid item md={8} xs={12} sx={{ m: "50px auto" }}>
-        <Table statistic={statistic} open={open} groupInfo={groupInfo} />
+      <Grid item md={12} xs={12} sx={{ m: "50px auto" }}>
+        <Table
+          statistic={statistic}
+          open={open}
+          groupInfo={groupInfo}
+          startDate={startDate}
+          endDate={endDate}
+        />
       </Grid>
     </>
   );
