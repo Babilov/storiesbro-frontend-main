@@ -92,7 +92,7 @@ const Table = ({ statistic, open, groupInfo, startDate, endDate }) => {
                 </Grid>
                 <Grid
                   item
-                  xs={3}
+                  xs={4}
                   sx={{ borderTop: "1px solid #CDCDCD", pt: 1, pb: 1 }}
                 >
                   <Typography
@@ -128,7 +128,7 @@ const Table = ({ statistic, open, groupInfo, startDate, endDate }) => {
                 </Grid>
                 <Grid
                   item
-                  xs={3}
+                  xs={2}
                   sx={{ borderTop: "1px solid #CDCDCD", pt: 1, pb: 1 }}
                 >
                   <Typography
@@ -139,7 +139,7 @@ const Table = ({ statistic, open, groupInfo, startDate, endDate }) => {
                       fontWeight: 400,
                     }}
                   >
-                    {0}
+                    {(parseInt(statisticItem["visitors"]["views"]) / 1000) * 30}
                   </Typography>
                 </Grid>
               </Grid>
