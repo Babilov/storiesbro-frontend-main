@@ -6,6 +6,7 @@ import { Box, Typography } from "@mui/material";
 import dayjs from "dayjs";
 
 const DataPickers = ({ startDate, setStartDate, endDate, setEndDate }) => {
+  /*
   const handleStartChange = (newValue) => {
     if (newValue && dayjs(newValue).isValid()) {
       const date = dayjs(newValue).format("YYYY-MM-DD");
@@ -15,7 +16,11 @@ const DataPickers = ({ startDate, setStartDate, endDate, setEndDate }) => {
       setStartDate(null);
     }
   };
-
+*/
+  const handleStartChange = (newValue) => {
+    setStartDate(newValue);
+  };
+  /*
   const handleEndChange = (newValue) => {
     if (newValue && dayjs(newValue).isValid()) {
       const date = dayjs(newValue).format("YYYY-MM-DD");
@@ -25,7 +30,10 @@ const DataPickers = ({ startDate, setStartDate, endDate, setEndDate }) => {
       setEndDate(null);
     }
   };
-
+*/
+  const handleEndChange = (newValue) => {
+    setEndDate(newValue);
+  };
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <Box
@@ -47,14 +55,14 @@ const DataPickers = ({ startDate, setStartDate, endDate, setEndDate }) => {
           <DatePicker
             format="DD-MM-YYYY" // отображение
             label="Дата"
-            value={startDate ? dayjs(startDate, "YYYY-MM-DD") : null}
+            value={startDate}
             onChange={handleStartChange}
           />
           <Typography sx={{ m: "5px" }}>до</Typography>
           <DatePicker
             format="DD-MM-YYYY" // отображение
             label="Дата"
-            value={endDate ? dayjs(endDate, "YYYY-MM-DD") : null}
+            value={endDate}
             onChange={handleEndChange}
           />
         </Box>
