@@ -42,7 +42,8 @@ const Statistic = () => {
       logToBackend(`ТО ЧТО ПОЛУЧИЛИ: ${JSON.stringify(res.data.results)}`);
       // console.log(res.data.results);
       // console.log(res.data);
-      setStatistic(res.data);
+      setStatistic(res.data.results);
+      console.log(statistic);
     } catch (e) {
       logToBackend(`ERROR статистика: ${e}`);
     }
