@@ -10,6 +10,7 @@ import Table from "./table/Table";
 import axios from "axios";
 import { API_URL } from "../../../constants/constatns";
 import logToBackend from "../../../utils/logs";
+import dayjs from "dayjs";
 
 const Statistic = () => {
   const [open, setOpen] = useState(false);
@@ -28,8 +29,13 @@ const Statistic = () => {
       const token = localStorage.getItem("access_token");
       const group = selectedPublics[publicObj];
       setGroupInfo(group);
+      const dateFrom = dayjs(startDate).format("YYYY-MM-DD");
+      const timestampFrom = Math.floor(new Date(dateFrom).getTime() / 1000);
+
+      const dateTo = dayjs(startDate).format("YYYY-MM-DD");
+      const timestampTo = Math.floor(new Date(dateTo).getTime() / 1000);
       const res = await axios.get(
-        `${API_URL}group_stats/?group_id=${group["group_id"]}&date_from=${startDate}&date_to=${endDate}&interval=${period}`,
+        `${API_URL}group_stats/?group_id=${group["group_id"]}&date_from=${timestampFrom}&date_to=${timestampTo}&interval=${period}`,
         {
           headers: {
             Authorization: `Bearer ${token}`, // Токен в заголовке

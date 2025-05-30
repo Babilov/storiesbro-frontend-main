@@ -1,7 +1,5 @@
 import { Grid, Typography } from "@mui/material";
 import React from "react";
-import dayjs from "dayjs";
-import logToBackend from "../../../../utils/logs";
 
 const Table = ({ statistic, open, groupInfo, startDate, endDate }) => {
   return (
