@@ -32,7 +32,7 @@ const Statistic = () => {
       const dateFrom = dayjs(startDate).format("YYYY-MM-DD");
       const timestampFrom = Math.floor(new Date(dateFrom).getTime() / 1000);
 
-      const dateTo = dayjs(startDate).format("YYYY-MM-DD");
+      const dateTo = dayjs(endDate).format("YYYY-MM-DD");
       const timestampTo = Math.floor(new Date(dateTo).getTime() / 1000);
       const res = await axios.get(
         `${API_URL}group_stats/?group_id=${group["group_id"]}&date_from=${timestampFrom}&date_to=${timestampTo}&interval=${period}`,
