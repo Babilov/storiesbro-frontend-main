@@ -39,7 +39,8 @@ const Statistic = () => {
       logToBackend(
         `ЧТО ПОСЛАЛ: ${API_URL}group_stats/?group_id=${group["group_id"]}&date_from=${startDate}&date_to=${endDate}&interval=${period}`
       );
-      logToBackend(`ТО ЧТО ПОЛУЧИЛИ: ${JSON.stringify(res.data)}`);
+      logToBackend(`ТО ЧТО ПОЛУЧИЛИ: ${JSON.stringify(res.data.results)}`);
+      console.log(res.data.results);
       console.log(res.data);
       setStatistic(res.data);
     } catch (e) {
