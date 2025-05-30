@@ -60,73 +60,74 @@ const Table = ({ statistic, open, groupInfo, startDate, endDate }) => {
             Заработано
           </Typography>
         </Grid>
-        {Object.entries(statistic).map(([date, views]) => {
-          return (
-            <Grid container key={date}>
-              <Grid
-                item
-                xs={3}
-                sx={{ borderTop: "1px solid #CDCDCD", pt: 1, pb: 1 }}
-              >
-                <Typography
-                  sx={{
-                    textAlign: "left",
-                    fontSize: { md: "18px", xs: "12px" },
-                    fontWeight: 400,
-                  }}
+        {statistic &&
+          Object.entries(statistic).map(([date, views]) => {
+            return (
+              <Grid container key={date}>
+                <Grid
+                  item
+                  xs={3}
+                  sx={{ borderTop: "1px solid #CDCDCD", pt: 1, pb: 1 }}
                 >
-                  {groupInfo["name"]}
-                </Typography>
-              </Grid>
-              <Grid
-                item
-                xs={4}
-                sx={{ borderTop: "1px solid #CDCDCD", pt: 1, pb: 1 }}
-              >
-                <Typography
-                  sx={{
-                    textAlign: "center",
-                    fontSize: { md: "18px", xs: "12px" },
-                    fontWeight: 400,
-                  }}
+                  <Typography
+                    sx={{
+                      textAlign: "left",
+                      fontSize: { md: "18px", xs: "12px" },
+                      fontWeight: 400,
+                    }}
+                  >
+                    {groupInfo["name"]}
+                  </Typography>
+                </Grid>
+                <Grid
+                  item
+                  xs={4}
+                  sx={{ borderTop: "1px solid #CDCDCD", pt: 1, pb: 1 }}
                 >
-                  {date}
-                </Typography>
-              </Grid>
-              <Grid
-                item
-                xs={3}
-                sx={{ borderTop: "1px solid #CDCDCD", pt: 1, pb: 1 }}
-              >
-                <Typography
-                  sx={{
-                    textAlign: "center",
-                    fontSize: { md: "18px", xs: "12px" },
-                    fontWeight: 400,
-                  }}
+                  <Typography
+                    sx={{
+                      textAlign: "center",
+                      fontSize: { md: "18px", xs: "12px" },
+                      fontWeight: 400,
+                    }}
+                  >
+                    {date}
+                  </Typography>
+                </Grid>
+                <Grid
+                  item
+                  xs={3}
+                  sx={{ borderTop: "1px solid #CDCDCD", pt: 1, pb: 1 }}
                 >
-                  {views}
-                </Typography>
-              </Grid>
-              <Grid
-                item
-                xs={2}
-                sx={{ borderTop: "1px solid #CDCDCD", pt: 1, pb: 1 }}
-              >
-                <Typography
-                  sx={{
-                    textAlign: "right",
-                    fontSize: { md: "18px", xs: "12px" },
-                    ml: 1,
-                    fontWeight: 400,
-                  }}
+                  <Typography
+                    sx={{
+                      textAlign: "center",
+                      fontSize: { md: "18px", xs: "12px" },
+                      fontWeight: 400,
+                    }}
+                  >
+                    {views}
+                  </Typography>
+                </Grid>
+                <Grid
+                  item
+                  xs={2}
+                  sx={{ borderTop: "1px solid #CDCDCD", pt: 1, pb: 1 }}
                 >
-                  {(parseInt(views) / 1000) * 30}
-                </Typography>
+                  <Typography
+                    sx={{
+                      textAlign: "right",
+                      fontSize: { md: "18px", xs: "12px" },
+                      ml: 1,
+                      fontWeight: 400,
+                    }}
+                  >
+                    {(parseInt(views) / 1000) * 30}
+                  </Typography>
+                </Grid>
               </Grid>
-            </Grid>
-          );
-        })}
+            );
+          })}
       </Grid>
     )
   );

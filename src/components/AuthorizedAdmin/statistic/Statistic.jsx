@@ -39,7 +39,8 @@ const Statistic = () => {
       logToBackend(
         `ЧТО ПОСЛАЛ: ${API_URL}group_stats/?group_id=${group["group_id"]}&date_from=${startDate}&date_to=${endDate}&interval=${period}`
       );
-      logToBackend(`ТО ЧТО ПОЛУЧИЛИ: ${res.data}`);
+      logToBackend(`ТО ЧТО ПОЛУЧИЛИ: ${JSON.stringify(res.data)}`);
+      console.log(res.data);
       setStatistic(res.data);
     } catch (e) {
       logToBackend(`ERROR статистика: ${e}`);
@@ -72,13 +73,7 @@ const Statistic = () => {
         </Box>
       </Grid>
       <Grid item md={12} xs={12} sx={{ m: "50px auto" }}>
-        <Table
-          statistic={statistic}
-          open={open}
-          groupInfo={groupInfo}
-          startDate={startDate}
-          endDate={endDate}
-        />
+        <Table statistic={statistic} open={open} groupInfo={groupInfo} />
       </Grid>
     </>
   );
