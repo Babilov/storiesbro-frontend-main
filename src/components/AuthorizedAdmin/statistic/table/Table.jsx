@@ -60,8 +60,10 @@ const Table = ({ statistic, open, groupInfo, startDate, endDate }) => {
             Заработано
           </Typography>
         </Grid>
+        {console.log(statistic)}
+        {console.log(statistic.results)}
         {statistic &&
-          Object.entries(statistic["results"]).map(([date, views]) => {
+          Object.entries(statistic.results).map(([date, views]) => {
             return (
               <Grid container key={date}>
                 <Grid
