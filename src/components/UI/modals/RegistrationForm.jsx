@@ -49,7 +49,7 @@ const RegistrationForm = ({
       const response = await axios.get(`${API_URL}check_email/${email}`);
       if (response.data.email) {
         setError(true);
-        setErrorMessage("Пользователь с такой почтой уже зарегестрирован!");
+        setErrorMessage("Пользователь с такой почтой уже зарегистрирован!");
         return true;
       } else {
         setError(false);
