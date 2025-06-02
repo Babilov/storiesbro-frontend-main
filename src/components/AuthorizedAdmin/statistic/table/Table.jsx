@@ -24,7 +24,7 @@ const Table = ({ statistic, open, groupInfo, startDate, endDate }) => {
             Сообщество
           </Typography>
         </Grid>
-        <Grid item xs={4} sx={{ pb: 1 }}>
+        <Grid item xs={3} sx={{ pb: 1 }}>
           <Typography
             sx={{
               textAlign: "center",
@@ -43,10 +43,10 @@ const Table = ({ statistic, open, groupInfo, startDate, endDate }) => {
               fontWeight: 600,
             }}
           >
-            Просмотры
+            Рейтинг
           </Typography>
         </Grid>
-        <Grid item xs={2} sx={{ pb: 1 }}>
+        <Grid item xs={3} sx={{ pb: 1 }}>
           <Typography
             sx={{
               textAlign: "right",
@@ -80,7 +80,7 @@ const Table = ({ statistic, open, groupInfo, startDate, endDate }) => {
                 </Grid>
                 <Grid
                   item
-                  xs={4}
+                  xs={3}
                   sx={{ borderTop: "1px solid #CDCDCD", pt: 1, pb: 1 }}
                 >
                   <Typography
@@ -105,12 +105,12 @@ const Table = ({ statistic, open, groupInfo, startDate, endDate }) => {
                       fontWeight: 400,
                     }}
                   >
-                    {views}
+                    {}
                   </Typography>
                 </Grid>
                 <Grid
                   item
-                  xs={2}
+                  xs={3}
                   sx={{ borderTop: "1px solid #CDCDCD", pt: 1, pb: 1 }}
                 >
                   <Typography
