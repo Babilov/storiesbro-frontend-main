@@ -37,7 +37,7 @@ const Footer = () => {
             textAlign: "center",
           }}
         >
-          ©2024 Storisbro. Все права защищены
+          ©2024-2025 Storisbro. Все права защищены
         </Typography>
       </Grid>
       <Grid

@@ -55,6 +55,7 @@ const Table = ({ publics, setPublics }) => {
           }}
           className="adminTitles"
         >
+          {/* 
           {count === 1 && (
             <>
               <div
@@ -71,6 +72,8 @@ const Table = ({ publics, setPublics }) => {
               <Tooltips text="Здесь вы можете посмотреть и добавить ваши сообщества по названию (id группы) или по ссылке."></Tooltips>
             </>
           )}
+          */}
+
           <Grid item xs={3}>
             <Typography variant="h4">Сообщество</Typography>
           </Grid>
