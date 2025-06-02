@@ -3,7 +3,6 @@ import { Divider, Grid, Typography, Box, Avatar } from "@mui/material";
 import { Link } from "react-router-dom";
 
 import DeletePublicModal from "./modals/DeletePublicModal";
-import { Tooltips } from "../../../../Onboardings/Tooltips";
 
 const Table = ({ publics, setPublics }) => {
   const handleDelete = (id) => {
