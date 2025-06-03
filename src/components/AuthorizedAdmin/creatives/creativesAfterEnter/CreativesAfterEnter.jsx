@@ -74,9 +74,9 @@ const CreativesAfterEnter = () => {
     setRedirect(url);
   }, []);
 
-  const removeRedirect = () => {
+  /*const removeRedirect = () => {
     localStorage.removeItem("group_redirect");
-  };
+  };*/
 
   return (
     <Grid item xs={12}>
@@ -99,7 +99,7 @@ const CreativesAfterEnter = () => {
         >
           <a href={redirect} style={{ textDecoration: "none" }}>
             <MyButton
-              onClick={removeRedirect}
+              // onClick={removeRedirect}
               options={{
                 background: "white",
                 color: "black",

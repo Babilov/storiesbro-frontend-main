@@ -3,8 +3,6 @@ import React, { useEffect, useState } from "react";
 import * as VKID from "@vkid/sdk";
 import axios from "axios";
 import { API_URL, MY_URL } from "../../../../constants/constatns";
-import { redirect } from "react-router";
-import logToBackend from "../../../../utils/logs";
 
 const CreativessBeforeEnter = () => {
   const generateState = () =>
