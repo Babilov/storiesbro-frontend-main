@@ -97,29 +97,27 @@ const CreativesAfterEnter = () => {
             width: { md: "35%", sm: "50", xs: "75" },
           }}
         >
-          {redirect && (
-            <a href={redirect} style={{ textDecoration: "none" }}>
-              <MyButton
-                onClick={removeRedirect}
-                options={{
-                  background: "white",
-                  color: "black",
-                  border: "2px solid #0077FF",
-                  borderRadius: "90px",
-                }}
-              >
-                <Box sx={{ display: "flex", justifyContent: "space-around" }}>
-                  <Typography>Дать доступ к группам</Typography>
-                  <Box
-                    sx={{ width: "23px" }}
-                    component="img"
-                    alt="группа"
-                    src={var2}
-                  />
-                </Box>
-              </MyButton>
-            </a>
-          )}
+          <a href={redirect} style={{ textDecoration: "none" }}>
+            <MyButton
+              onClick={removeRedirect}
+              options={{
+                background: "white",
+                color: "black",
+                border: "2px solid #0077FF",
+                borderRadius: "90px",
+              }}
+            >
+              <Box sx={{ display: "flex", justifyContent: "space-around" }}>
+                <Typography>Дать доступ к группам</Typography>
+                <Box
+                  sx={{ width: "23px" }}
+                  component="img"
+                  alt="группа"
+                  src={var2}
+                />
+              </Box>
+            </MyButton>
+          </a>
         </Box>
         <AddPublicButton setOpen={setOpenAdd} />
       </Box>
