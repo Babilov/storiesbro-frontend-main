@@ -55,6 +55,7 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
             }
           );
           console.log(res.data);
+          localStorage.setItem("test", JSON.stringify(res.data));
           console.log("Данные успешно отправлены");
           window.location.reload();
         } catch (error) {
