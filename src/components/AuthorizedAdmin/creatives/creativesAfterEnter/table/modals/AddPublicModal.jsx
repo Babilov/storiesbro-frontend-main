@@ -55,16 +55,29 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
             }
           );
           console.log(res.data);
-          localStorage.setItem("test", JSON.stringify(res.data));
+          localStorage.setItem("auth_url", res.data.auth_url);
           console.log("Данные успешно отправлены");
-          window.location.reload();
+          waitForAuth(res.data.auth_url);
+          // window.location.reload();
         } catch (error) {
           console.error("Ошибка при отправке данных:", error);
         }
       }
     }
   };
+  const waitForAuth = (authUrl) => {
+    return new Promise((resolve) => {
+      const popup = window.open(authUrl, "_blank");
 
+      // Периодически проверяем, закрыл ли пользователь вкладку
+      const timer = setInterval(() => {
+        if (popup.closed) {
+          clearInterval(timer);
+          resolve(); // Авторизация завершена
+        }
+      }, 1000);
+    });
+  };
   const handleClose = () => {
     setOpen(false);
     setError(false);
