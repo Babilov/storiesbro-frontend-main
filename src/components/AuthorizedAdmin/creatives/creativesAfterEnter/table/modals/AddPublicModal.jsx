@@ -67,7 +67,7 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
   };
   const waitForAuth = (authUrl) => {
     return new Promise((resolve) => {
-      const popup = window.open(authUrl, "_blank");
+      const popup = window.open(authUrl);
 
       // Периодически проверяем, закрыл ли пользователь вкладку
       const timer = setInterval(() => {
