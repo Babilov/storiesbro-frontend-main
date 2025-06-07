@@ -60,7 +60,7 @@ const Table = ({ statistic, open, groupInfo, startDate, endDate }) => {
         </Grid>
         {console.log(statistic)}
         {statistic &&
-          Object.entries(statistic).map(([date, views]) => {
+          Object.entries(statistic).map(([date, info]) => {
             return (
               <Grid container key={date}>
                 <Grid
@@ -105,7 +105,7 @@ const Table = ({ statistic, open, groupInfo, startDate, endDate }) => {
                       fontWeight: 400,
                     }}
                   >
-                    {}
+                    {info.rank}
                   </Typography>
                 </Grid>
                 <Grid
@@ -121,7 +121,7 @@ const Table = ({ statistic, open, groupInfo, startDate, endDate }) => {
                       fontWeight: 400,
                     }}
                   >
-                    {(parseInt(views) / 1000) * 30}
+                    {(parseInt(info.views) / 1000) * 30}
                   </Typography>
                 </Grid>
               </Grid>
