@@ -43,7 +43,7 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
         setOpen(false);
         try {
           const token = localStorage.getItem("access_token");
-          await axios.post(
+          const res = await axios.post(
             `${API_URL}add_user_group/`,
             {
               selectedPublics,
@@ -54,6 +54,7 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
               },
             }
           );
+          console.log(res.data);
           console.log("Данные успешно отправлены");
           window.location.reload();
         } catch (error) {
