@@ -65,6 +65,7 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
           console.log(isOAuthPath);
           console.log(urlObj);
           console.log(res.data.auth_url);
+          /*
           if (isOAuthPath) {
             setAuthError(false);
             waitForAuth(res.data.auth_url);
@@ -72,6 +73,8 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
             setAuthError(true);
             alert("Ошибка! Попробуйте добавить другую группу");
           }
+            */
+          waitForAuth(res.data.auth_url);
           // window.location.reload();
         } catch (error) {
           console.error("Ошибка при отправке данных:", error);
