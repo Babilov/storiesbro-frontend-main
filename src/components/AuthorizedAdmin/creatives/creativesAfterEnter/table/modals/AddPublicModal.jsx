@@ -58,7 +58,15 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
           );
           console.log(res.data);
           console.log("Данные успешно отправлены");
-          waitForAuth(res.data.auth_url);
+          const urlObj = new URL(res.data.auth_url);
+
+          // Проверяем путь /oauth/
+          const isOAuthPath = urlObj.pathname.includes("/oauth/");
+          if (isOAuthPath) {
+            waitForAuth(res.data.auth_url);
+          } else {
+            alert("Ошибка! Попробуйте добавить другую группу");
+          }
           // window.location.reload();
         } catch (error) {
           console.error("Ошибка при отправке данных:", error);
