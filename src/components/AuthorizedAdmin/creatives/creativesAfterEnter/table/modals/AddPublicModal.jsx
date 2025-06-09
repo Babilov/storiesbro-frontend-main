@@ -31,24 +31,6 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
     setListAvailablePublics(filteredPublics);
   }, [open, publics, selectedPublics]);
 
-  useEffect(() => {
-    const handleMessage = (event) => {
-      // Проверяем origin сообщения для безопасности
-      if (event.origin !== window.location.origin) return;
-
-      if (event.data.type === "vk_auth_error") {
-        setAuthError(event.data.description);
-        console.error("VK Auth Error:", event.data.error);
-        logToBackend(
-          `VK Auth Error: ${event.data.error}, ${event.data.description}`
-        );
-      }
-    };
-
-    window.addEventListener("message", handleMessage);
-    return () => window.removeEventListener("message", handleMessage);
-  }, []);
-
   const navigate = useNavigate();
 
   const handleClick = async () => {
@@ -84,21 +66,32 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
       }
     }
   };
+
   const waitForAuth = (authUrl) => {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
       const popup = window.open(authUrl, "_blank", "width=600,height=700");
 
-      // Периодически проверяем, закрыл ли пользователь окно
       const timer = setInterval(() => {
+        try {
+          // Пытаемся прочитать URL попапа (работает только если попап на том же домене)
+          if (popup.location.href.includes("error=")) {
+            const url = new URL(popup.location.href);
+            const error = url.searchParams.get("error");
+            const errorDesc = url.searchParams.get("error_description");
+            logToBackend(`ОШИБКА ЙОУУУУ: ${errorDesc}`);
+            clearInterval(timer);
+            popup.close();
+            reject(new Error(errorDesc || error));
+          }
+        } catch (e) {
+          // Блокируется политика CORS - это нормально
+        }
+
         if (popup.closed) {
           clearInterval(timer);
-          if (!authError) {
-            // Если не было ошибки, считаем успешным
-            window.location.reload();
-          }
           resolve();
         }
-      }, 1000);
+      }, 500);
     });
   };
 
