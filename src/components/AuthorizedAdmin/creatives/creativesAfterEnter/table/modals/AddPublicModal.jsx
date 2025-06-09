@@ -66,8 +66,8 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
             setAuthError(false);
             waitForAuth(res.data.auth_url);
           } else {
-            alert("Ошибка! Попробуйте добавить другую группу");
             setAuthError(true);
+            alert("Ошибка! Попробуйте добавить другую группу");
           }
           // window.location.reload();
         } catch (error) {

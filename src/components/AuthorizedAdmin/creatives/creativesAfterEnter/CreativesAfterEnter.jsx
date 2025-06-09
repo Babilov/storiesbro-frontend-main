@@ -86,17 +86,19 @@ const CreativesAfterEnter = () => {
           display: "flex",
           mb: 2,
           justifyContent: {
-            md: "space-between",
+            md: "flex-end",
             xs: "flex-start",
             alignItems: "center",
           },
         }}
       >
-        <Box
+        {/*
+          <Box
           sx={{
             width: { md: "35%", sm: "50", xs: "75" },
           }}
         >
+          
           <a href={redirect} style={{ textDecoration: "none" }}>
             <MyButton
               // onClick={removeRedirect}
@@ -119,6 +121,9 @@ const CreativesAfterEnter = () => {
             </MyButton>
           </a>
         </Box>
+          
+          */}
+
         <AddPublicButton setOpen={setOpenAdd} />
       </Box>
       <AddPublicModal
