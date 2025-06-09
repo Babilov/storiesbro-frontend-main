@@ -17,7 +17,7 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
   const permission = true;
   const [noPermissionOpen, setNoPermissionOpen] = useState(false);
   const [selectedPublics, setSelectedPublics] = useState([]);
-  const [authError, setAuthError] = useState(null);
+  const [authError, setAuthError] = useState(false);
 
   const [listAvailablePublics, setListAvailablePublics] = useState([]);
 
@@ -63,9 +63,11 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
           // Проверяем путь /oauth/
           const isOAuthPath = urlObj.pathname.includes("/oauth/");
           if (isOAuthPath) {
+            setAuthError(false);
             waitForAuth(res.data.auth_url);
           } else {
             alert("Ошибка! Попробуйте добавить другую группу");
+            setAuthError(true);
           }
           // window.location.reload();
         } catch (error) {
@@ -128,7 +130,10 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
 
   return (
     <>
-      <SuccessModal open={successOpen} setOpen={setSuccessOpen} />
+      {!authError && (
+        <SuccessModal open={successOpen} setOpen={setSuccessOpen} />
+      )}
+
       <NoPermissionModal
         open={noPermissionOpen}
         setOpen={setNoPermissionOpen}
