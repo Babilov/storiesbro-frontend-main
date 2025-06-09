@@ -85,7 +85,7 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
 
   const waitForAuth = (authUrl) => {
     return new Promise((resolve, reject) => {
-      const popup = window.open(authUrl, "_blank", "width=600,height=700");
+      const popup = window.open(authUrl, "_blank");
 
       const timer = setInterval(() => {
         try {
