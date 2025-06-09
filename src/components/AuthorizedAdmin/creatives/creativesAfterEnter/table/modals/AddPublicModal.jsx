@@ -17,6 +17,7 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
   const permission = true;
   const [noPermissionOpen, setNoPermissionOpen] = useState(false);
   const [selectedPublics, setSelectedPublics] = useState([]);
+  const [authError, setAuthError] = useState(null);
 
   const [listAvailablePublics, setListAvailablePublics] = useState([]);
 
@@ -29,6 +30,24 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
 
     setListAvailablePublics(filteredPublics);
   }, [open, publics, selectedPublics]);
+
+  useEffect(() => {
+    const handleMessage = (event) => {
+      // Проверяем origin сообщения для безопасности
+      if (event.origin !== window.location.origin) return;
+
+      if (event.data.type === "vk_auth_error") {
+        setAuthError(event.data.description);
+        console.error("VK Auth Error:", event.data.error);
+        logToBackend(
+          `VK Auth Error: ${event.data.error}, ${event.data.description}`
+        );
+      }
+    };
+
+    window.addEventListener("message", handleMessage);
+    return () => window.removeEventListener("message", handleMessage);
+  }, []);
 
   const navigate = useNavigate();
 
@@ -67,29 +86,22 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
   };
   const waitForAuth = (authUrl) => {
     return new Promise((resolve) => {
-      const popup = window.open(authUrl);
+      const popup = window.open(authUrl, "_blank", "width=600,height=700");
 
-      // Периодически проверяем, закрыл ли пользователь вкладку
+      // Периодически проверяем, закрыл ли пользователь окно
       const timer = setInterval(() => {
         if (popup.closed) {
           clearInterval(timer);
-          resolve(); // Авторизация завершена
-        }
-
-        if (popup.location.href.includes("error=")) {
-          const params = new URLSearchParams(popup.location.search);
-          const error = params.get("error");
-          const errorDescription = params.get("error_description");
-          logToBackend(
-            `ВК СКИБИДИ ОШИБКА: ${error}, ДОП ДОП ДОП ЕС ЕС ${errorDescription}`
-          );
-          console.error("Ошибка авторизации:", errorDescription);
-          popup.close();
-          clearInterval(timer);
+          if (!authError) {
+            // Если не было ошибки, считаем успешным
+            window.location.reload();
+          }
+          resolve();
         }
       }, 1000);
     });
   };
+
   const handleClose = () => {
     setOpen(false);
     setError(false);
