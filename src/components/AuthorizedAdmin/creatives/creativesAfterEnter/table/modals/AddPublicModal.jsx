@@ -8,6 +8,7 @@ import NoPermissionModal from "./NoPermissionModal";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { API_URL } from "../../../../../../constants/constatns";
+import logToBackend from "../../../../../../utils/logs";
 
 const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
   const [error, setError] = useState(false);
@@ -56,9 +57,6 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
           );
           console.log(res.data);
           console.log("Данные успешно отправлены");
-          const res1 = await axios.get(res.data.auth_url);
-          console.log(res1);
-          console.log(res1.data);
           waitForAuth(res.data.auth_url);
           // window.location.reload();
         } catch (error) {
@@ -76,6 +74,18 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
         if (popup.closed) {
           clearInterval(timer);
           resolve(); // Авторизация завершена
+        }
+
+        if (popup.location.href.includes("error=")) {
+          const params = new URLSearchParams(popup.location.search);
+          const error = params.get("error");
+          const errorDescription = params.get("error_description");
+          logToBackend(
+            `ВК СКИБИДИ ОШИБКА: ${error}, ДОП ДОП ДОП ЕС ЕС ${errorDescription}`
+          );
+          console.error("Ошибка авторизации:", errorDescription);
+          popup.close();
+          clearInterval(timer);
         }
       }, 1000);
     });
