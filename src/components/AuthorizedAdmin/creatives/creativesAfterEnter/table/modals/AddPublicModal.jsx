@@ -55,8 +55,16 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
             }
           );
           console.log(res.data);
-          localStorage.setItem("auth_url", res.data.auth_url);
           console.log("Данные успешно отправлены");
+          try {
+            const response = await fetch(res.data.auth_url, {
+              method: "HEAD",
+              mode: "no-cors", // Важно для обхода CORS
+            });
+            console.log("ОШИБКИ НЕ БЫЛО");
+          } catch (error) {
+            console.error("URL check failed:", error);
+          }
           waitForAuth(res.data.auth_url);
           // window.location.reload();
         } catch (error) {
