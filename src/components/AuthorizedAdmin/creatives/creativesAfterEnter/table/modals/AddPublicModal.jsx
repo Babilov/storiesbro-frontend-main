@@ -62,6 +62,9 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
 
           // Проверяем путь /oauth/
           const isOAuthPath = urlObj.pathname.includes("/oauth/");
+          console.log(isOAuthPath);
+          console.log(urlObj);
+          console.log(res.data.auth_url);
           if (isOAuthPath) {
             setAuthError(false);
             waitForAuth(res.data.auth_url);
@@ -130,9 +133,9 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
 
   return (
     <>
-      {!authError && (
+      {/*{!authError && (
         <SuccessModal open={successOpen} setOpen={setSuccessOpen} />
-      )}
+      )} */}
 
       <NoPermissionModal
         open={noPermissionOpen}
