@@ -104,6 +104,7 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
         }
 
         if (popup.closed) {
+          logToBackend("ЗАКРЫТО ВРУЧНУЮ");
           clearInterval(timer);
           resolve();
         }
