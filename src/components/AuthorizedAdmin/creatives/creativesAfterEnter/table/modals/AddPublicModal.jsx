@@ -56,15 +56,9 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
           );
           console.log(res.data);
           console.log("Данные успешно отправлены");
-          try {
-            const response = await fetch(res.data.auth_url, {
-              method: "HEAD",
-              mode: "no-cors", // Важно для обхода CORS
-            });
-            console.log("ОШИБКИ НЕ БЫЛО");
-          } catch (error) {
-            console.error("URL check failed:", error);
-          }
+          const res1 = await axios.get(res.data.auth_url);
+          console.log(res1);
+          console.log(res1.data);
           waitForAuth(res.data.auth_url);
           // window.location.reload();
         } catch (error) {
