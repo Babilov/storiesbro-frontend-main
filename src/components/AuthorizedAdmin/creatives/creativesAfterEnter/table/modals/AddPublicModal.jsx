@@ -56,31 +56,17 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
               },
             }
           );
-          console.log(res.data);
-          console.log("Данные успешно отправлены");
-          const urlObj = new URL(res.data.auth_url);
-
-          // Проверяем путь /oauth/
-          const isOAuthPath = urlObj.pathname.includes("/oauth/");
-          console.log(isOAuthPath);
-          console.log(urlObj);
-          console.log(res.data.auth_url);
-          /*
-          if (isOAuthPath) {
-            setAuthError(false);
-            waitForAuth(res.data.auth_url);
-          } else {
-            setAuthError(true);
-            alert("Ошибка! Попробуйте добавить другую группу");
-          }
-            */
-          waitForAuth(res.data.auth_url);
+          waitForAuth1(res.data.auth_url);
           // window.location.reload();
         } catch (error) {
           console.error("Ошибка при отправке данных:", error);
         }
       }
     }
+  };
+
+  const waitForAuth1 = (authUrl) => {
+    window.location.href = authUrl;
   };
 
   const waitForAuth = (authUrl) => {
@@ -94,7 +80,6 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
             const url = new URL(popup.location.href);
             const error = url.searchParams.get("error");
             const errorDesc = url.searchParams.get("error_description");
-            logToBackend(`ОШИБКА ЙОУУУУ: ${errorDesc}`);
             clearInterval(timer);
             popup.close();
             reject(new Error(errorDesc || error));
@@ -104,7 +89,6 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
         }
 
         if (popup.closed) {
-          logToBackend("ЗАКРЫТО ВРУЧНУЮ");
           clearInterval(timer);
           resolve();
         }
