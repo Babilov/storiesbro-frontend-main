@@ -17,7 +17,6 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
   const permission = true;
   const [noPermissionOpen, setNoPermissionOpen] = useState(false);
   const [selectedPublics, setSelectedPublics] = useState([]);
-  const [authError, setAuthError] = useState(false);
 
   const [listAvailablePublics, setListAvailablePublics] = useState([]);
 
@@ -135,6 +134,37 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
         isFormOpen={open}
         setIsFormOpen={handleClose}
       >
+        <MyButton
+          onClick={() => {
+            const allSelected = filteredPublics.every((item) =>
+              selectedPublics.some((publicItem) => publicItem.id === item.id)
+            );
+            if (allSelected) {
+              setSelectedPublics((prevSelected) =>
+                prevSelected.filter(
+                  (item) =>
+                    !filteredPublics.some((filtered) => filtered.id === item.id)
+                )
+              );
+            } else {
+              const newSelections = filteredPublics.filter(
+                (item) =>
+                  !selectedPublics.some((selected) => selected.id === item.id)
+              );
+              setSelectedPublics((prevSelected) => [
+                ...prevSelected,
+                ...newSelections,
+              ]);
+            }
+          }}
+          options={{ background: "#D6D6D6", marginBottom: "10px" }}
+        >
+          {filteredPublics.every((item) =>
+            selectedPublics.some((publicItem) => publicItem.id === item.id)
+          )
+            ? "Снять выделение"
+            : "Выбрать всё"}
+        </MyButton>
         <MyInput
           error={error}
           value={inputValue}
@@ -161,9 +191,9 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
             },
           }}
         >
-          {filteredPublics.map((item, index) => (
+          {filteredPublics.map((item) => (
             <Box
-              key={index}
+              key={item.id}
               sx={{
                 border: "1px solid #CDCDCD",
                 borderRadius: "10px",
