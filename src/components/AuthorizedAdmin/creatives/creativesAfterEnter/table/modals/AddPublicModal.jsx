@@ -151,10 +151,7 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
         setIsFormOpen={handleClose}
       >
         <Box>
-          <MyButton
-            options={{ background: "rgba(0, 0, 0, 0.08)" }}
-            onClick={selectAll}
-          >
+          <MyButton options={{ background: "#F6A55C" }} onClick={selectAll}>
             {filteredPublics.every((item) =>
               selectedPublics.some((publicItem) => publicItem.id === item.id)
             )
