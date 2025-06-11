@@ -3,12 +3,10 @@ import MyModal from "../../../../../UI/modals/MyModal";
 import MyInput from "../../../../../UI/input/MyInput";
 import { Avatar, Box, Checkbox, Link, Typography } from "@mui/material";
 import MyButton from "../../../../../UI/buttons/MyButton";
-import SuccessModal from "./SuccessModal";
 import NoPermissionModal from "./NoPermissionModal";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { API_URL } from "../../../../../../constants/constatns";
-import logToBackend from "../../../../../../utils/logs";
 
 const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
   const [error, setError] = useState(false);
@@ -101,6 +99,24 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
     setInputValue("");
   };
 
+  const selectAll = () => {
+    const allSelected = filteredPublics.every((item) =>
+      selectedPublics.some((publicItem) => publicItem.id === item.id)
+    );
+    if (allSelected) {
+      setSelectedPublics((prevSelected) =>
+        prevSelected.filter(
+          (item) => !filteredPublics.some((filtered) => filtered.id === item.id)
+        )
+      );
+    } else {
+      const newSelections = filteredPublics.filter(
+        (item) => !selectedPublics.some((selected) => selected.id === item.id)
+      );
+      setSelectedPublics((prevSelected) => [...prevSelected, ...newSelections]);
+    }
+  };
+
   const filteredPublics = listAvailablePublics.filter(
     (item) =>
       item.name.toLowerCase().includes(inputValue.toLowerCase()) ||
@@ -134,37 +150,18 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
         isFormOpen={open}
         setIsFormOpen={handleClose}
       >
-        <MyButton
-          onClick={() => {
-            const allSelected = filteredPublics.every((item) =>
+        <Box>
+          <MyButton
+            options={{ background: "rgba(0, 0, 0, 0.08)" }}
+            onClick={selectAll}
+          >
+            {filteredPublics.every((item) =>
               selectedPublics.some((publicItem) => publicItem.id === item.id)
-            );
-            if (allSelected) {
-              setSelectedPublics((prevSelected) =>
-                prevSelected.filter(
-                  (item) =>
-                    !filteredPublics.some((filtered) => filtered.id === item.id)
-                )
-              );
-            } else {
-              const newSelections = filteredPublics.filter(
-                (item) =>
-                  !selectedPublics.some((selected) => selected.id === item.id)
-              );
-              setSelectedPublics((prevSelected) => [
-                ...prevSelected,
-                ...newSelections,
-              ]);
-            }
-          }}
-          options={{ background: "#D6D6D6", marginBottom: "10px" }}
-        >
-          {filteredPublics.every((item) =>
-            selectedPublics.some((publicItem) => publicItem.id === item.id)
-          )
-            ? "Снять выделение"
-            : "Выбрать всё"}
-        </MyButton>
+            )
+              ? "Снять выделение"
+              : "Выбрать всё"}
+          </MyButton>
+        </Box>
         <MyInput
           error={error}
           value={inputValue}
