@@ -121,7 +121,7 @@ const Table = ({ statistic, open, groupInfo, startDate, endDate }) => {
                       fontWeight: 400,
                     }}
                   >
-                    {(parseInt(info.views) / 1000) * 25}
+                    {Math.floor((parseInt(info.views) / 1000) * 25)}
                   </Typography>
                 </Grid>
               </Grid>

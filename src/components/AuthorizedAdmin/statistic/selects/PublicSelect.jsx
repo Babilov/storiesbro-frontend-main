@@ -5,6 +5,7 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { Avatar, Typography } from "@mui/material";
+import InfoTooltip from "../../../UI/tooltip/InfoTooltip";
 
 const MySelect = ({ publics, publicObj, setPublicObj }) => {
   const handleChange = (event) => {
@@ -12,13 +13,15 @@ const MySelect = ({ publics, publicObj, setPublicObj }) => {
   };
   return (
     <>
-      <Typography
-        variant="h4"
-        sx={{ textAlign: "center", mb: 3, fontSize: "32px", fontWeight: 600 }}
-      >
-        Статистика
-      </Typography>
-
+      <Box>
+        <Typography
+          variant="h4"
+          sx={{ textAlign: "center", mb: 3, fontSize: "32px", fontWeight: 600 }}
+        >
+          Статистика
+        </Typography>
+        <InfoTooltip />
+      </Box>
       <Box
         sx={{
           display: "flex",
