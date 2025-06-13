@@ -15,15 +15,11 @@ const YellowCircle = styled("div")(() => ({
   color: "#fff", // Белый цвет вопроса
   cursor: "default",
   lineHeight: 1,
-  textAlign: "center",
 }));
 
-const InfoTooltip = () => {
-  const tooltipText =
-    "Статистика с сообществ приходит в течении 24–72 часов после публикации историй. В даты, когда сообщество не монетизируется — статистика не отображается.";
-
+const InfoTooltip = ({ tooltipText, placement }) => {
   return (
-    <Tooltip title={tooltipText} arrow placement="top">
+    <Tooltip title={tooltipText} arrow placement={placement}>
       <YellowCircle>?</YellowCircle>
     </Tooltip>
   );

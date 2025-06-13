@@ -8,6 +8,9 @@ import { Avatar, Typography } from "@mui/material";
 import InfoTooltip from "../../../UI/tooltip/InfoTooltip";
 
 const MySelect = ({ publics, publicObj, setPublicObj }) => {
+  const tooltipText =
+    "Статистика с сообществ приходит в течении 24–72 часов после публикации историй. В даты, когда сообщество не монетизируется — статистика не отображается.";
+
   const handleChange = (event) => {
     setPublicObj(event.target.value);
   };
@@ -23,11 +26,11 @@ const MySelect = ({ publics, publicObj, setPublicObj }) => {
       >
         <Typography
           variant="h4"
-          sx={{ mr: 2, textAlign: "center", fontSize: "32px", fontWeight: 600 }}
+          sx={{ mr: 1, textAlign: "center", fontSize: "32px", fontWeight: 600 }}
         >
           Статистика
         </Typography>
-        <InfoTooltip />
+        <InfoTooltip tooltipText={tooltipText} placement={"bottom"} />
       </Box>
       <Box
         sx={{
