@@ -99,7 +99,7 @@ const PublicSettings = () => {
               component="img"
               src={arrowSvg}
               onClick={() => navigate("/publics")}
-              sx={{ cursor: "pointer" }}
+              sx={{ cursor: "pointer", ml: 1 }}
             />
             <Typography className="title" sx={{ m: "0 auto 0 !important" }}>
               Настройки сообщества

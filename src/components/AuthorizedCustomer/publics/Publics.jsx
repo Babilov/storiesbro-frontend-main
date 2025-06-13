@@ -94,7 +94,7 @@ const Publics = () => {
               component="img"
               alt="arrow"
               src={arrow}
-              sx={{ cursor: "pointer" }}
+              sx={{ cursor: "pointer", ml: 1 }}
             />
           </Link>
         </Grid>
