@@ -13,7 +13,7 @@ const MySelect = ({ publics, publicObj, setPublicObj }) => {
   };
   return (
     <>
-      <Box>
+      <Box sx={{ display: "flex", alignItems: "center" }}>
         <Typography
           variant="h4"
           sx={{ textAlign: "center", mb: 3, fontSize: "32px", fontWeight: 600 }}
