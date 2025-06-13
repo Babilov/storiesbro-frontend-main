@@ -93,13 +93,14 @@ const PublicSettings = () => {
               alignItems: "center",
               width: "100%",
               m: "10px 0 40px",
+              p: "0 10px",
             }}
           >
             <Box
               component="img"
               src={arrowSvg}
               onClick={() => navigate("/publics")}
-              sx={{ cursor: "pointer", ml: 1 }}
+              sx={{ cursor: "pointer" }}
             />
             <Typography className="title" sx={{ m: "0 auto 0 !important" }}>
               Настройки сообщества
