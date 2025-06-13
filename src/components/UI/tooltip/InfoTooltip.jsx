@@ -2,9 +2,9 @@ import React from "react";
 import Tooltip from "@mui/material/Tooltip";
 import { styled } from "@mui/material/styles";
 
-const YellowCircle = styled("div")(() => ({
-  width: 24,
-  height: 24,
+const YellowCircle = styled("div")(({ size }) => ({
+  width: { size },
+  height: { size },
   borderRadius: "50%",
   backgroundColor: "#FFEB3B", // Ярко-жёлтый фон
   display: "flex",
@@ -17,10 +17,10 @@ const YellowCircle = styled("div")(() => ({
   lineHeight: 1,
 }));
 
-const InfoTooltip = ({ tooltipText, placement }) => {
+const InfoTooltip = ({ tooltipText, placement, size = 24 }) => {
   return (
     <Tooltip title={tooltipText} arrow placement={placement}>
-      <YellowCircle>?</YellowCircle>
+      <YellowCircle size={size}>?</YellowCircle>
     </Tooltip>
   );
 };

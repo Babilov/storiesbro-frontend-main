@@ -50,18 +50,19 @@ const Table = ({ statistic, open, groupInfo }) => {
           </Typography>
         </Grid>
         <Grid item xs={3} sx={{ pb: 1 }}>
-          <Box>
+          <Box sx={{ display: "flex", alignItems: "center" }}>
             <Typography
               sx={{
                 textAlign: "right",
                 fontSize: { md: "18px", xs: "13px" },
                 ml: 1,
+                mr: 1,
                 fontWeight: 600,
               }}
             >
               Заработано
             </Typography>
-            <InfoTooltip tooltipText={tooltipText} placement="top" />
+            <InfoTooltip tooltipText={tooltipText} placement="top" size={19} />
           </Box>
         </Grid>
         {console.log(statistic)}
