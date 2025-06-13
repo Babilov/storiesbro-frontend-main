@@ -15,6 +15,7 @@ const YellowCircle = styled("div")(() => ({
   color: "#fff", // Белый цвет вопроса
   cursor: "default",
   lineHeight: 1,
+  textAlign: "center",
 }));
 
 const InfoTooltip = () => {

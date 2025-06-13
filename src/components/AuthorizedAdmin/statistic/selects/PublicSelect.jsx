@@ -23,7 +23,7 @@ const MySelect = ({ publics, publicObj, setPublicObj }) => {
       >
         <Typography
           variant="h4"
-          sx={{ textAlign: "center", fontSize: "32px", fontWeight: 600 }}
+          sx={{ mr: 2, textAlign: "center", fontSize: "32px", fontWeight: 600 }}
         >
           Статистика
         </Typography>
