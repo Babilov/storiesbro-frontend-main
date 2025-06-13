@@ -1,7 +1,10 @@
-import { Grid, Typography } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 import React from "react";
+import InfoTooltip from "../../../UI/tooltip/InfoTooltip";
 
-const Table = ({ statistic, open, groupInfo, startDate, endDate }) => {
+const Table = ({ statistic, open, groupInfo }) => {
+  const tooltipText =
+    "Хотите увеличить свой заработок? Мы подготовили для Вас рекомендации по повышению дохода с монетизации историй";
   return (
     groupInfo && (
       <Grid
@@ -47,16 +50,19 @@ const Table = ({ statistic, open, groupInfo, startDate, endDate }) => {
           </Typography>
         </Grid>
         <Grid item xs={3} sx={{ pb: 1 }}>
-          <Typography
-            sx={{
-              textAlign: "right",
-              fontSize: { md: "18px", xs: "13px" },
-              ml: 1,
-              fontWeight: 600,
-            }}
-          >
-            Заработано
-          </Typography>
+          <Box>
+            <Typography
+              sx={{
+                textAlign: "right",
+                fontSize: { md: "18px", xs: "13px" },
+                ml: 1,
+                fontWeight: 600,
+              }}
+            >
+              Заработано
+            </Typography>
+            <InfoTooltip tooltipText={tooltipText} placement="top" />
+          </Box>
         </Grid>
         {console.log(statistic)}
         {statistic &&
