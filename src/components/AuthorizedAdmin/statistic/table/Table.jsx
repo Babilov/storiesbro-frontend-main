@@ -3,8 +3,15 @@ import React from "react";
 import InfoTooltip from "../../../UI/tooltip/InfoTooltip";
 
 const Table = ({ statistic, open, groupInfo }) => {
-  const tooltipText =
-    "Хотите увеличить свой заработок? Мы подготовили для Вас рекомендации по повышению дохода с монетизации историй";
+  const tooltipText = (
+    <span>
+      Хотите увеличить свой заработок? Мы подготовили для Вас{" "}
+      <a href="/admin-help#section1" style={{ textDecoration: "none" }}>
+        рекомендации
+      </a>{" "}
+      по повышению дохода с монетизации историй.
+    </span>
+  );
   return (
     groupInfo && (
       <Grid

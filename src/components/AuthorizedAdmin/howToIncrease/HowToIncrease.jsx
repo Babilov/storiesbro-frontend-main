@@ -4,7 +4,7 @@ import React from "react";
 const HowToIncrease = () => {
   return (
     <Grid item xs={12} className="grid" sx={{ mb: 5 }}>
-      <Typography className="title">
+      <Typography className="title" id="section1">
         Как повысить{" "}
         <Typography component="span" className="orange title">
           доход
