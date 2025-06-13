@@ -3,10 +3,27 @@ import React from "react";
 import InfoTooltip from "../../../UI/tooltip/InfoTooltip";
 
 const Table = ({ statistic, open, groupInfo }) => {
-  const tooltipText = (
+  const tooltipTextRank = (
+    <span>
+      Рейтинг основывается на таких показателях: количество реакций на историях
+      (лайки, ответы), общий коэффициент переходов по ссылкам с сообщества. Чем
+      активнее сообщество, тем больше заработок.{" "}
+      <a
+        href="/admin-help#section1"
+        style={{ textDecoration: "none", color: "#2A5885" }}
+      >
+        Рекомендации
+      </a>
+    </span>
+  );
+
+  const tooltipTextPrice = (
     <span>
       Хотите увеличить свой заработок? Мы подготовили для Вас{" "}
-      <a href="/admin-help#section1" style={{ textDecoration: "none" }}>
+      <a
+        href="/admin-help#section1"
+        style={{ textDecoration: "none", color: "#2A5885" }}
+      >
         рекомендации
       </a>{" "}
       по повышению дохода с монетизации историй.
@@ -46,15 +63,23 @@ const Table = ({ statistic, open, groupInfo }) => {
           </Typography>
         </Grid>
         <Grid item xs={3} sx={{ pb: 1 }}>
-          <Typography
-            sx={{
-              textAlign: "center",
-              fontSize: { md: "18px", xs: "13px" },
-              fontWeight: 600,
-            }}
-          >
-            Рейтинг
-          </Typography>
+          <Box sx={{ display: "flex", alignItems: "center" }}>
+            <Typography
+              sx={{
+                textAlign: "center",
+                fontSize: { md: "18px", xs: "13px" },
+                fontWeight: 600,
+                mr: 1,
+              }}
+            >
+              Рейтинг
+            </Typography>
+            <InfoTooltip
+              tooltipText={tooltipTextRank}
+              placement="top"
+              size={19}
+            />
+          </Box>
         </Grid>
         <Grid item xs={3} sx={{ pb: 1 }}>
           <Box sx={{ display: "flex", alignItems: "center" }}>
@@ -69,7 +94,11 @@ const Table = ({ statistic, open, groupInfo }) => {
             >
               Заработано
             </Typography>
-            <InfoTooltip tooltipText={tooltipText} placement="top" size={19} />
+            <InfoTooltip
+              tooltipText={tooltipTextPrice}
+              placement="top"
+              size={19}
+            />
           </Box>
         </Grid>
         {console.log(statistic)}
@@ -135,7 +164,7 @@ const Table = ({ statistic, open, groupInfo }) => {
                       fontWeight: 400,
                     }}
                   >
-                    {Math.floor((parseInt(info.views) / 1000) * 25)}
+                    {Math.floor((parseInt(info.views) / 1000) * 25)}₽
                   </Typography>
                 </Grid>
               </Grid>

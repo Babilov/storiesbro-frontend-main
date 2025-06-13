@@ -152,7 +152,7 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
       >
         <Box sx={{ width: "50%", mb: 1 }}>
           <MyButton
-            options={{ background: "rgba(246, 165, 92, 0.6);" }}
+            options={{ background: "rgba(246, 165, 92, 1);" }}
             onClick={selectAll}
           >
             {filteredPublics.every((item) =>
