@@ -18,12 +18,12 @@ const MySelect = ({ publics, publicObj, setPublicObj }) => {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          gap: 8,
+          mb: 3,
         }}
       >
         <Typography
           variant="h4"
-          sx={{ textAlign: "center", mb: 3, fontSize: "32px", fontWeight: 600 }}
+          sx={{ textAlign: "center", fontSize: "32px", fontWeight: 600 }}
         >
           Статистика
         </Typography>
