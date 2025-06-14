@@ -66,9 +66,8 @@ const Table = ({ statistic, open, groupInfo }) => {
           <Box
             sx={{
               display: "flex",
-              flexDirection: { xs: "column", md: "row" },
-              alignItems: { md: "center" },
-              justifyContent: { xs: "center" },
+              alignItems: "center",
+              justifyContent: "center",
             }}
           >
             <Typography
@@ -89,7 +88,13 @@ const Table = ({ statistic, open, groupInfo }) => {
           </Box>
         </Grid>
         <Grid item xs={3} sx={{ pb: 1 }}>
-          <Box sx={{ display: "flex", alignItems: "center" }}>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
             <Typography
               sx={{
                 textAlign: "right",
