@@ -14,7 +14,7 @@ const YellowCircle = styled("div")(({ size }) => ({
   alignItems: "center",
   justifyContent: "center",
   fontWeight: "bold",
-  fontSize: size * 0.5,
+  fontSize: 16,
   color: "#fff",
   cursor: "pointer",
   lineHeight: 1,

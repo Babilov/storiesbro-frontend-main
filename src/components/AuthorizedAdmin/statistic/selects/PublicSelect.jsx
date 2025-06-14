@@ -30,7 +30,7 @@ const MySelect = ({ publics, publicObj, setPublicObj }) => {
         >
           Статистика
         </Typography>
-        <InfoTooltip tooltipText={tooltipText} placement={"bottom"} />
+        <InfoTooltip tooltipText={tooltipText} placement={"bottom"} size={19} />
       </Box>
       <Box
         sx={{
