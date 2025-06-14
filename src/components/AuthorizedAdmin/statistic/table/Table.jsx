@@ -63,13 +63,20 @@ const Table = ({ statistic, open, groupInfo }) => {
           </Typography>
         </Grid>
         <Grid item xs={3} sx={{ pb: 1 }}>
-          <Box sx={{ display: "flex", alignItems: "center" }}>
+          <Box
+            sx={{
+              display: "flex",
+              md: { alignItems: "center" },
+              xs: { flexDirectionL: "column", justifyContent: "center" },
+            }}
+          >
             <Typography
               sx={{
                 textAlign: "center",
                 fontSize: { md: "18px", xs: "13px" },
                 fontWeight: 600,
-                mr: 1,
+                md: { mr: 1 },
+                xs: { mr: "3px" },
               }}
             >
               Рейтинг
@@ -87,8 +94,8 @@ const Table = ({ statistic, open, groupInfo }) => {
               sx={{
                 textAlign: "right",
                 fontSize: { md: "18px", xs: "13px" },
-                ml: 1,
-                mr: 1,
+                md: { ml: 1, mr: 1 },
+                xs: { mr: "2px" },
                 fontWeight: 600,
               }}
             >
