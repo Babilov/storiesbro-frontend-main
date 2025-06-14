@@ -44,7 +44,8 @@ const InfoTooltip = ({ tooltipText, placement, size = 24 }) => {
               background: "#333",
               color: "#fff",
               borderRadius: 4,
-              maxWidth: 200,
+              maxWidth: 300,
+              p: "10px, 20px",
             }}
           >
             <Typography variant="body2">{tooltipText}</Typography>

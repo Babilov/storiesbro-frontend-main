@@ -66,8 +66,9 @@ const Table = ({ statistic, open, groupInfo }) => {
           <Box
             sx={{
               display: "flex",
-              md: { alignItems: "center" },
-              xs: { flexDirectionL: "column", justifyContent: "center" },
+              flexDirection: { xs: "column", md: "row" },
+              alignItems: { md: "center" },
+              justifyContent: { xs: "center" },
             }}
           >
             <Typography
@@ -75,8 +76,7 @@ const Table = ({ statistic, open, groupInfo }) => {
                 textAlign: "center",
                 fontSize: { md: "18px", xs: "13px" },
                 fontWeight: 600,
-                md: { mr: 1 },
-                xs: { mr: "3px" },
+                mr: { md: 1, xs: "3px" },
               }}
             >
               Рейтинг
@@ -94,8 +94,8 @@ const Table = ({ statistic, open, groupInfo }) => {
               sx={{
                 textAlign: "right",
                 fontSize: { md: "18px", xs: "13px" },
-                md: { ml: 1, mr: 1 },
-                xs: { mr: "2px" },
+                mr: { md: 1, xs: "2px" },
+                ml: { md: 1, xs: 0 },
                 fontWeight: 600,
               }}
             >
