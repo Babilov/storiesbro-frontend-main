@@ -68,6 +68,7 @@ const Table = ({ statistic, open, groupInfo }) => {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
+              flexDirection: { md: "row", xs: "column" },
             }}
           >
             <Typography
@@ -80,11 +81,7 @@ const Table = ({ statistic, open, groupInfo }) => {
             >
               Рейтинг
             </Typography>
-            <InfoTooltip
-              tooltipText={tooltipTextRank}
-              placement="top"
-              size={19}
-            />
+            <InfoTooltip tooltipText={tooltipTextRank} placement="top" />
           </Box>
         </Grid>
         <Grid item xs={3} sx={{ pb: 1 }}>
@@ -92,7 +89,8 @@ const Table = ({ statistic, open, groupInfo }) => {
             sx={{
               display: "flex",
               alignItems: "center",
-              justifyContent: "flex-end",
+              justifyContent: { md: "flex-end", xs: "center" },
+              flexDirection: { md: "row", xs: "column" },
             }}
           >
             <Typography
@@ -106,11 +104,7 @@ const Table = ({ statistic, open, groupInfo }) => {
             >
               Заработано
             </Typography>
-            <InfoTooltip
-              tooltipText={tooltipTextPrice}
-              placement="top"
-              size={19}
-            />
+            <InfoTooltip tooltipText={tooltipTextPrice} placement="top" />
           </Box>
         </Grid>
         {console.log(statistic)}

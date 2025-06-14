@@ -1,8 +1,9 @@
-import React, { useState, useRef, useEffect } from "react";
-import { styled } from "@mui/material/styles";
+import React, { useState, useRef } from "react";
+import { styled, useTheme } from "@mui/material/styles";
 import Popper from "@mui/material/Popper";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
 import Typography from "@mui/material/Typography";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 const YellowCircle = styled("div")(({ size }) => ({
   width: size,
@@ -13,13 +14,26 @@ const YellowCircle = styled("div")(({ size }) => ({
   alignItems: "center",
   justifyContent: "center",
   fontWeight: "bold",
-  fontSize: 16,
+  fontSize: size * 0.5,
   color: "#fff",
   cursor: "pointer",
   lineHeight: 1,
+  userSelect: "none",
 }));
 
-const InfoTooltip = ({ tooltipText, placement, size = 24 }) => {
+const InfoTooltip = ({ tooltipText, placement = "bottom", size }) => {
+  const [open, setOpen] = useState(false);
+  const anchorRef = useRef(null);
+
+  const theme = useTheme();
+
+  // Определяем брейкпоинты MUI
+  const isXs = useMediaQuery(theme.breakpoints.down("sm"));
+  const isMd = useMediaQuery(theme.breakpoints.between("md", "lg"));
+
+  // Определяем размер в зависимости от брейкпоинта или берем переданный
+  const responsiveSize = size ?? (isXs ? 12 : isMd ? 15 : 19); // fallback
+
   const handleClick = () => {
     setOpen((prev) => !prev);
   };
@@ -28,29 +42,14 @@ const InfoTooltip = ({ tooltipText, placement, size = 24 }) => {
     setOpen(false);
   };
 
-  function getResponsiveSize() {
-    const width = window.innerWidth;
-    if (width < 400) return 12;
-    if (width < 768) return 15;
-    return 19;
-  }
-
-  useEffect(() => {
-    const handleResize = () => {
-      setCircleSize(getResponsiveSize());
-    };
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  const [open, setOpen] = useState(false);
-  const anchorRef = useRef(null);
-  const [circleSize, setCircleSize] = useState(getResponsiveSize());
-
   return (
     <ClickAwayListener onClickAway={handleClickAway}>
       <div>
-        <YellowCircle ref={anchorRef} size={circleSize} onClick={handleClick}>
+        <YellowCircle
+          ref={anchorRef}
+          size={responsiveSize}
+          onClick={handleClick}
+        >
           ?
         </YellowCircle>
         <Popper open={open} anchorEl={anchorRef.current} placement={placement}>
@@ -60,8 +59,7 @@ const InfoTooltip = ({ tooltipText, placement, size = 24 }) => {
               background: "#333",
               color: "#fff",
               borderRadius: 4,
-              maxWidth: 300,
-              p: "10px, 20px",
+              maxWidth: 200,
             }}
           >
             <Typography variant="body2">{tooltipText}</Typography>
