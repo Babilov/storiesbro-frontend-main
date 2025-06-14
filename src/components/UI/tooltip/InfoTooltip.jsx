@@ -28,13 +28,29 @@ const InfoTooltip = ({ tooltipText, placement, size = 24 }) => {
     setOpen(false);
   };
 
+  function getResponsiveSize() {
+    const width = window.innerWidth;
+    if (width < 400) return 12;
+    if (width < 768) return 15;
+    return 19;
+  }
+
+  useEffect(() => {
+    const handleResize = () => {
+      setCircleSize(getResponsiveSize());
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   const [open, setOpen] = useState(false);
   const anchorRef = useRef(null);
+  const [circleSize, setCircleSize] = useState(getResponsiveSize());
 
   return (
     <ClickAwayListener onClickAway={handleClickAway}>
       <div>
-        <YellowCircle ref={anchorRef} size={size} onClick={handleClick}>
+        <YellowCircle ref={anchorRef} size={circleSize} onClick={handleClick}>
           ?
         </YellowCircle>
         <Popper open={open} anchorEl={anchorRef.current} placement={placement}>

@@ -92,7 +92,7 @@ const Table = ({ statistic, open, groupInfo }) => {
             sx={{
               display: "flex",
               alignItems: "center",
-              justifyContent: "center",
+              justifyContent: "flex-end",
             }}
           >
             <Typography
