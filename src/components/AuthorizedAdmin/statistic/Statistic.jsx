@@ -17,41 +17,59 @@ const Statistic = () => {
   const [selectedPublics] = useContext(PublicsContext);
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
-  const [publicObj, setPublicObj] = useState("");
+  const [publicObj, setPublicObj] = useState(null);
   const [statistic, setStatistic] = useState([]);
   const [groupInfo, setGroupInfo] = useState(null);
   const [period, setPeriod] = useState("");
+  const [error, setError] = useState("");
   console.log(period);
 
   const handleClick = async () => {
     setOpen(true);
-    try {
-      const token = localStorage.getItem("access_token");
-      const group = selectedPublics[publicObj];
-      setGroupInfo(group);
-      const dateFrom = dayjs(startDate).format("YYYY-MM-DD");
-      const timestampFrom = Math.floor(new Date(dateFrom).getTime() / 1000);
+    if ((publicObj, startDate, endDate, period)) {
+      try {
+        const token = localStorage.getItem("access_token");
+        const group = selectedPublics[publicObj];
+        setGroupInfo(group);
+        const dateFrom = dayjs(startDate).format("YYYY-MM-DD");
+        const timestampFrom = Math.floor(new Date(dateFrom).getTime() / 1000);
 
-      const dateTo = dayjs(endDate).format("YYYY-MM-DD");
-      const timestampTo = Math.floor(new Date(dateTo).getTime() / 1000);
-      const res = await axios.get(
-        `${API_URL}group_stats/?group_id=${group["group_id"]}&date_from=${timestampFrom}&date_to=${timestampTo}&interval=${period}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`, // Токен в заголовке
-          },
+        const dateTo = dayjs(endDate).format("YYYY-MM-DD");
+        const timestampTo = Math.floor(new Date(dateTo).getTime() / 1000);
+        const res = await axios.get(
+          `${API_URL}group_stats/?group_id=${group["group_id"]}&date_from=${timestampFrom}&date_to=${timestampTo}&interval=${period}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`, // Токен в заголовке
+            },
+          }
+        );
+        logToBackend(
+          `ЧТО ПОСЛАЛ: ${API_URL}group_stats/?group_id=${group["group_id"]}&date_from=${startDate}&date_to=${endDate}&interval=${period}`
+        );
+        logToBackend(`ТО ЧТО ПОЛУЧИЛИ: ${JSON.stringify(res.data.results)}`);
+        // console.log(res.data.results);
+        // console.log(res.data);
+        setStatistic(res.data.results);
+        console.log(statistic);
+        setError("");
+      } catch (e) {
+        logToBackend(`ERROR статистика: ${e}`);
+      }
+    } else {
+      if (!publicObj) {
+        setError("Не выбрано сообщество.");
+      } else {
+        if (!startDate) {
+          setError("Не выбрана начальная дата.");
+        } else {
+          if (!endDate) {
+            setError("Не выбрана конечная дата.");
+          } else {
+            setError("Не выбран период.");
+          }
         }
-      );
-      logToBackend(
-        `ЧТО ПОСЛАЛ: ${API_URL}group_stats/?group_id=${group["group_id"]}&date_from=${startDate}&date_to=${endDate}&interval=${period}`
-      );
-      logToBackend(`ТО ЧТО ПОЛУЧИЛИ: ${JSON.stringify(res.data.results)}`);
-      // console.log(res.data.results);
-      // console.log(res.data);
-      setStatistic(res.data.results);
-      console.log(statistic);
-    } catch (e) {
-      logToBackend(`ERROR статистика: ${e}`);
+      }
     }
   };
 
@@ -70,7 +88,7 @@ const Statistic = () => {
           setEndDate={setEndDate}
         />
         <PeriodSelect period={period} setPeriod={setPeriod} />
-
+        <Typography sx={{ color: "red" }}>{error}</Typography>
         <Box sx={{ width: "40%", m: "20px auto" }}>
           <MyButton
             onClick={handleClick}
