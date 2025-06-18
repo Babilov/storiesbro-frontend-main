@@ -245,6 +245,33 @@ const Table = ({ publics, setPublics }) => {
                   {publicObj["name"]}
                 </Link>
               </Box>
+              {statuses[publicObj.group_id] === 1 ? (
+                <Typography
+                  className="mdSizeText"
+                  sx={{
+                    position: "absolute",
+                    right: 10,
+                    bottom: 2,
+                    fontSize: "12px",
+                    color: "#4CD640",
+                  }}
+                >
+                  Активен
+                </Typography>
+              ) : (
+                <Typography
+                  className="mdSizeText"
+                  sx={{
+                    position: "absolute",
+                    right: 10,
+                    bottom: 2,
+                    fontSize: "12px",
+                    color: "#D25D48",
+                  }}
+                >
+                  Отключен
+                </Typography>
+              )}
               <Typography
                 sx={{
                   position: "absolute",
