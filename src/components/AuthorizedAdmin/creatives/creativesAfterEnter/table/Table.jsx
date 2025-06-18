@@ -272,17 +272,6 @@ const Table = ({ publics, setPublics }) => {
                   Отключен
                 </Typography>
               )}
-              <Typography
-                sx={{
-                  position: "absolute",
-                  right: 10,
-                  bottom: 2,
-                  fontSize: "12px",
-                  color: "#4CD640",
-                }}
-              >
-                Активен
-              </Typography>
             </Box>
             <Box className="spaceAround">
               <Link
