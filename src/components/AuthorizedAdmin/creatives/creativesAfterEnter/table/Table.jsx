@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Divider, Grid, Typography, Box, Avatar } from "@mui/material";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -18,11 +18,32 @@ const Table = ({ publics, setPublics }) => {
     setCount(count + 1);
   };
 
-  const getStatus = async (id) => {
+  /*const getStatus = async (id) => {
     const res = await axios.get(`${API_URL}community_switch/${id}`);
     console.log(res.data.status);
     return res.data.status;
-  };
+  };*/
+
+  const [statuses, setStatuses] = useState({});
+
+  const getStatus = useCallback(
+    async (id) => {
+      if (statuses[id] !== undefined) return statuses[id];
+
+      const res = await axios.get(`${API_URL}community_switch/${id}`);
+      const newStatus = res.data.status;
+
+      setStatuses((prev) => ({ ...prev, [id]: newStatus }));
+      return newStatus;
+    },
+    [statuses]
+  );
+
+  useEffect(() => {
+    publics.forEach((obj) => {
+      getStatus(obj.group_id);
+    });
+  }, [publics, getStatus]);
 
   const [deletePublic, setDeletePublic] = useState(false);
   const [publicObj, setPublicObj] = useState(null);
@@ -135,7 +156,7 @@ const Table = ({ publics, setPublics }) => {
             </Grid>
 
             <Grid item md={2}>
-              {getStatus(publicObj["group_id"]) == 1 ? (
+              {statuses[publicObj.group_id] === 1 ? (
                 <Typography className="mdSizeText" sx={{ color: "#4CD640" }}>
                   Активен
                 </Typography>
