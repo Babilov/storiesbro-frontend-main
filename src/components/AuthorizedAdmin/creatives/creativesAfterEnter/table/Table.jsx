@@ -20,6 +20,7 @@ const Table = ({ publics, setPublics }) => {
 
   const getStatus = async (id) => {
     const res = await axios.get(`${API_URL}community_switch/${id}`);
+    console.log(res.data.status);
     return res.data.status;
   };
 
@@ -134,7 +135,7 @@ const Table = ({ publics, setPublics }) => {
             </Grid>
 
             <Grid item md={2}>
-              {getStatus(publicObj["group_id"]) === 1 ? (
+              {getStatus(publicObj["group_id"]) === "1" ? (
                 <Typography className="mdSizeText" sx={{ color: "#4CD640" }}>
                   Активен
                 </Typography>
