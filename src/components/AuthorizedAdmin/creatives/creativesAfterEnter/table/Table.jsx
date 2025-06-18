@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Divider, Grid, Typography, Box, Avatar } from "@mui/material";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -7,54 +7,87 @@ import DeletePublicModal from "./modals/DeletePublicModal";
 import { API_URL } from "../../../../../constants/constatns";
 
 const Table = ({ publics, setPublics }) => {
+  const [statuses, setStatuses] = useState({});
+  const [loadingStates, setLoadingStates] = useState({});
+  const [deletePublic, setDeletePublic] = useState(false);
+  const [publicObj, setPublicObj] = useState(null);
+  const [count, setCount] = useState(1);
+
   const handleDelete = (id) => {
     setPublicObj(publics.filter((item) => item["id"] === id)[0]);
     setDeletePublic(true);
   };
 
-  const [count, setCount] = useState(1);
-
-  const handleIncrementCount = () => {
-    setCount(count + 1);
-  };
-
-  /*const getStatus = async (id) => {
-    const res = await axios.get(`${API_URL}community_switch/${id}`);
-    console.log(res.data.status);
-    return res.data.status;
-  };*/
-
-  const [statuses, setStatuses] = useState({});
-
-  const getStatus = useCallback(
-    async (id) => {
-      if (statuses[id] !== undefined) return statuses[id];
-
-      const res = await axios.get(`${API_URL}community_switch/${id}`);
-      const newStatus = res.data.status;
-
-      setStatuses((prev) => ({ ...prev, [id]: newStatus }));
-      return newStatus;
-    },
-    [statuses]
-  );
+  const handleIncrementCount = () => setCount(count + 1);
 
   useEffect(() => {
-    publics.forEach((obj) => {
-      getStatus(obj.group_id);
-    });
-  }, [publics, getStatus]);
+    const fetchStatuses = async () => {
+      const newStatuses = {};
+      const newLoadingStates = {};
 
-  const [deletePublic, setDeletePublic] = useState(false);
-  const [publicObj, setPublicObj] = useState(null);
+      // Инициализируем состояния загрузки
+      publics.forEach((obj) => {
+        newLoadingStates[obj.group_id] = true;
+      });
+      setLoadingStates(newLoadingStates);
+
+      // Параллельно запрашиваем все статусы
+      const requests = publics.map((obj) =>
+        axios
+          .get(`${API_URL}community_switch/${obj.group_id}`)
+          .then((res) => ({
+            id: obj.group_id,
+            status: res.data.status,
+          }))
+          .catch(() => ({
+            id: obj.group_id,
+            status: 0, // В случае ошибки считаем сообщество отключенным
+          }))
+      );
+
+      try {
+        const results = await Promise.all(requests);
+        results.forEach(({ id, status }) => {
+          newStatuses[id] = status;
+          newLoadingStates[id] = false;
+        });
+
+        setStatuses((prev) => ({ ...prev, ...newStatuses }));
+        setLoadingStates((prev) => ({ ...prev, ...newLoadingStates }));
+      } catch (error) {
+        console.error("Error fetching statuses:", error);
+      }
+    };
+
+    if (publics.length > 0) {
+      fetchStatuses();
+    }
+  }, [publics]);
 
   useEffect(() => {
     document.body.classList.add("no-scrollbar");
-
-    return () => {
-      document.body.classList.remove("no-scrollbar");
-    };
+    return () => document.body.classList.remove("no-scrollbar");
   }, []);
+
+  const renderStatus = (groupId) => {
+    if (loadingStates[groupId]) {
+      return (
+        <Typography className="mdSizeText" sx={{ color: "#999" }}>
+          Загрузка...
+        </Typography>
+      );
+    }
+
+    return statuses[groupId] === 1 ? (
+      <Typography className="mdSizeText" sx={{ color: "#4CD640" }}>
+        Активен
+      </Typography>
+    ) : (
+      <Typography className="mdSizeText" sx={{ color: "#D25D48" }}>
+        Отключен
+      </Typography>
+    );
+  };
 
   return (
     <Box onClick={handleIncrementCount} sx={{ mb: 2 }}>
@@ -65,6 +98,8 @@ const Table = ({ publics, setPublics }) => {
         publics={publics}
         publicObj={publicObj}
       />
+
+      {/* Десктопная версия */}
       <Box
         sx={{
           border: "1px solid #CDCDCD",
@@ -83,25 +118,6 @@ const Table = ({ publics, setPublics }) => {
           }}
           className="adminTitles"
         >
-          {/* 
-          {count === 1 && (
-            <>
-              <div
-                style={{
-                  position: "fixed",
-                  top: 0,
-                  left: 0,
-                  width: "100%",
-                  height: "100%",
-                  backgroundColor: "rgba(0, 0, 0, 0.7)", // полупрозрачный черный цвет
-                  zIndex: 9999, // чтобы быть поверх остальных элементов
-                }}
-              ></div>
-              <Tooltips text="Здесь вы можете посмотреть и добавить ваши сообщества по названию (id группы) или по ссылке."></Tooltips>
-            </>
-          )}
-          */}
-
           <Grid item xs={3}>
             <Typography variant="h4">Сообщество</Typography>
           </Grid>
@@ -117,7 +133,7 @@ const Table = ({ publics, setPublics }) => {
         {publics.map((publicObj) => (
           <Grid
             container
-            key={publicObj["group_id"]}
+            key={publicObj.group_id}
             className="adminPublics"
             sx={{
               display: "flex",
@@ -134,14 +150,13 @@ const Table = ({ publics, setPublics }) => {
             >
               <Avatar
                 alt="group avatar"
-                src={publicObj["photo"]}
+                src={publicObj.photo}
                 sx={{ borderRadius: "50%", height: "90px", width: "90px" }}
               />
             </Grid>
-
             <Grid item xs={3} sx={{ textAlign: "center" }}>
               <Link
-                to={publicObj["link"]}
+                to={publicObj.link}
                 style={{
                   textAlign: "center",
                   color: "black",
@@ -151,22 +166,12 @@ const Table = ({ publics, setPublics }) => {
                   target: "_blank",
                 }}
               >
-                {publicObj["name"]}
+                {publicObj.name}
               </Link>
             </Grid>
-
             <Grid item md={2}>
-              {statuses[publicObj.group_id] === 1 ? (
-                <Typography className="mdSizeText" sx={{ color: "#4CD640" }}>
-                  Активен
-                </Typography>
-              ) : (
-                <Typography className="mdSizeText" sx={{ color: "#D25D48" }}>
-                  Отключен
-                </Typography>
-              )}
+              {renderStatus(publicObj.group_id)}
             </Grid>
-
             <Grid
               item
               xs={4}
@@ -177,40 +182,21 @@ const Table = ({ publics, setPublics }) => {
               }}
             >
               <Link
-                to={`/publics/setting/${publicObj["group_id"]}`}
-                sx={{
-                  m: 2,
-                  cursor: "pointer",
-                }}
+                to={`/publics/setting/${publicObj.group_id}`}
+                sx={{ m: 2, cursor: "pointer" }}
                 className="linkItem"
               >
                 Настройки
               </Link>
-              {/*<Typography>|</Typography>
-              <Typography
-                className="delete"
-                sx={{
-                  cursor: "pointer",
-
-                  ":hover": { color: "#E37E31" },
-                }}
-                onClick={() => handleDelete(publicObj["group_id"])}
-              >
-                Отключить
-              </Typography>
-              */}
             </Grid>
           </Grid>
         ))}
       </Box>
 
+      {/* Мобильная версия */}
       <Box sx={{ display: { xs: "block", md: "none" } }}>
         {publics.map((publicObj) => (
-          <Box
-            className="grayBorder"
-            sx={{ mb: 2 }}
-            key={publicObj["group_id"]}
-          >
+          <Box className="grayBorder" sx={{ mb: 2 }} key={publicObj.group_id}>
             <Box
               sx={{
                 display: "flex",
@@ -221,7 +207,7 @@ const Table = ({ publics, setPublics }) => {
               <Box sx={{ display: "flex" }}>
                 <Avatar
                   alt="avatar"
-                  src={publicObj["photo"]}
+                  src={publicObj.photo}
                   sx={{
                     m: 2,
                     borderRadius: "50%",
@@ -230,7 +216,7 @@ const Table = ({ publics, setPublics }) => {
                   }}
                 />
                 <Link
-                  to={publicObj["link"]}
+                  to={publicObj.link}
                   style={{
                     textAlign: "center",
                     color: "black",
@@ -242,40 +228,14 @@ const Table = ({ publics, setPublics }) => {
                     target: "_blank",
                   }}
                 >
-                  {publicObj["name"]}
+                  {publicObj.name}
                 </Link>
               </Box>
-              {statuses[publicObj.group_id] === 1 ? (
-                <Typography
-                  className="mdSizeText"
-                  sx={{
-                    position: "absolute",
-                    right: 10,
-                    bottom: 2,
-                    fontSize: "12px",
-                    color: "#4CD640",
-                  }}
-                >
-                  Активен
-                </Typography>
-              ) : (
-                <Typography
-                  className="mdSizeText"
-                  sx={{
-                    position: "absolute",
-                    right: 10,
-                    bottom: 2,
-                    fontSize: "12px",
-                    color: "#D25D48",
-                  }}
-                >
-                  Отключен
-                </Typography>
-              )}
+              {renderStatus(publicObj.group_id)}
             </Box>
             <Box className="spaceAround">
               <Link
-                to={`/publics/setting/${publicObj["group_id"]}`}
+                to={`/publics/setting/${publicObj.group_id}`}
                 style={{
                   fontSize: "12px",
                   fontWeight: 400,
@@ -290,7 +250,7 @@ const Table = ({ publics, setPublics }) => {
               <Typography sx={{ color: "#CBCBCB", m: 2 }}>|</Typography>
               <Typography
                 sx={{ fontSize: "12px", m: 2, cursor: "pointer" }}
-                onClick={() => handleDelete(publicObj["group_id"])}
+                onClick={() => handleDelete(publicObj.group_id)}
               >
                 Отключить
               </Typography>
