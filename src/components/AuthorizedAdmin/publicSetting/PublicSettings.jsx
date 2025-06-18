@@ -41,13 +41,9 @@ const PublicSettings = () => {
     const fetchCaState = async () => {
       try {
         const resCa = await axios.get(`${API_URL}community_status/${groupId}/`);
-
         const resSt = await axios.get(`${API_URL}community_switch/${groupId}/`);
-        console.log(resCa);
-        console.log(resSt);
         setCaState(resCa.data.status);
         setState(resSt.data.status);
-        console.log(groupId);
       } catch (error) {
         logToBackend(`Error GET: ${error}`);
       }

@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Divider, Grid, Typography, Box, Avatar } from "@mui/material";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 import DeletePublicModal from "./modals/DeletePublicModal";
+import { API_URL } from "../../../../../constants/constatns";
 
 const Table = ({ publics, setPublics }) => {
   const handleDelete = (id) => {
@@ -14,6 +16,11 @@ const Table = ({ publics, setPublics }) => {
 
   const handleIncrementCount = () => {
     setCount(count + 1);
+  };
+
+  const getStatus = async (id) => {
+    const res = await axios.get(`${API_URL}community_switch/${id}`);
+    return res.data.status;
   };
 
   const [deletePublic, setDeletePublic] = useState(false);
@@ -168,7 +175,7 @@ const Table = ({ publics, setPublics }) => {
           </Grid>
         ))}
       </Box>
-
+      {/* 
       <Box sx={{ display: { xs: "block", md: "none" } }}>
         {publics.map((publicObj) => (
           <Box
@@ -247,6 +254,7 @@ const Table = ({ publics, setPublics }) => {
           </Box>
         ))}
       </Box>
+      */}
     </Box>
   );
 };
