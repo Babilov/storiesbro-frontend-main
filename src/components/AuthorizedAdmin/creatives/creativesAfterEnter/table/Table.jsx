@@ -134,9 +134,15 @@ const Table = ({ publics, setPublics }) => {
             </Grid>
 
             <Grid item md={2}>
-              <Typography className="mdSizeText" sx={{ color: "#4CD640" }}>
-                Активен
-              </Typography>
+              {getStatus(publicObj["group_id"]) ? (
+                <Typography className="mdSizeText" sx={{ color: "#4CD640" }}>
+                  Активен
+                </Typography>
+              ) : (
+                <Typography className="mdSizeText" sx={{ color: "#D25D48" }}>
+                  Отключен
+                </Typography>
+              )}
             </Grid>
 
             <Grid
