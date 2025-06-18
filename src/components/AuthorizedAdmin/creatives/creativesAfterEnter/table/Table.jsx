@@ -135,7 +135,7 @@ const Table = ({ publics, setPublics }) => {
             </Grid>
 
             <Grid item md={2}>
-              {getStatus(publicObj["group_id"]) === "1" ? (
+              {getStatus(publicObj["group_id"]) == 1 ? (
                 <Typography className="mdSizeText" sx={{ color: "#4CD640" }}>
                   Активен
                 </Typography>
@@ -182,7 +182,7 @@ const Table = ({ publics, setPublics }) => {
           </Grid>
         ))}
       </Box>
-      {/* 
+
       <Box sx={{ display: { xs: "block", md: "none" } }}>
         {publics.map((publicObj) => (
           <Box
@@ -261,7 +261,6 @@ const Table = ({ publics, setPublics }) => {
           </Box>
         ))}
       </Box>
-      */}
     </Box>
   );
 };
