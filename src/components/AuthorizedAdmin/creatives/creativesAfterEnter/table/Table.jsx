@@ -19,12 +19,11 @@ const Table = ({ publics, setPublics }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
-  const [statuses, setStatuses] = useState({});
-  const [loadingStates, setLoadingStates] = useState({});
+  const [enhancedPublics, setEnhancedPublics] = useState([]);
   const [deletePublic, setDeletePublic] = useState(false);
   const [publicObj, setPublicObj] = useState(null);
   const [count, setCount] = useState(1);
-  const [initialLoading, setInitialLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
 
   const handleDelete = (id) => {
     setPublicObj(publics.filter((item) => item["id"] === id)[0]);
@@ -35,49 +34,38 @@ const Table = ({ publics, setPublics }) => {
 
   useEffect(() => {
     const fetchStatuses = async () => {
-      const newStatuses = {};
-      const newLoadingStates = {};
-
-      // Инициализация состояний загрузки
-      publics.forEach((obj) => {
-        newLoadingStates[obj.group_id] = true;
-      });
-      setLoadingStates(newLoadingStates);
-
       try {
-        const requests = publics.map((obj) =>
+        if (publics.length === 0) {
+          setEnhancedPublics([]);
+          return;
+        }
+
+        // Создаем массив запросов для получения статусов
+        const statusRequests = publics.map((publicObj) =>
           axios
-            .get(`${API_URL}community_switch/${obj.group_id}`)
+            .get(`${API_URL}community_switch/${publicObj.group_id}`)
             .then((res) => ({
-              id: obj.group_id,
+              ...publicObj,
               status: res.data.status,
             }))
             .catch(() => ({
-              id: obj.group_id,
-              status: 0,
+              ...publicObj,
+              status: 0, // В случае ошибки считаем сообщество отключенным
             }))
         );
 
-        const results = await Promise.all(requests);
-        results.forEach(({ id, status }) => {
-          newStatuses[id] = status;
-          newLoadingStates[id] = false;
-        });
-
-        setStatuses(newStatuses);
-        setLoadingStates(newLoadingStates);
+        // Выполняем все запросы параллельно
+        const enhancedData = await Promise.all(statusRequests);
+        setEnhancedPublics(enhancedData);
       } catch (error) {
         console.error("Error fetching statuses:", error);
       } finally {
-        setInitialLoading(false);
+        setIsLoading(false);
       }
     };
 
-    if (publics.length > 0) {
-      fetchStatuses();
-    } else {
-      setInitialLoading(false);
-    }
+    setIsLoading(true);
+    fetchStatuses();
   }, [publics]);
 
   useEffect(() => {
@@ -85,12 +73,8 @@ const Table = ({ publics, setPublics }) => {
     return () => document.body.classList.remove("no-scrollbar");
   }, []);
 
-  const renderStatus = (groupId) => {
-    if (loadingStates[groupId] !== false) {
-      return <CircularProgress size={20} sx={{ color: "#FF6B00" }} />;
-    }
-
-    return statuses[groupId] === 1 ? (
+  const renderStatus = (status) => {
+    return status === 1 ? (
       <Typography className="mdSizeText" sx={{ color: "#4CD640" }}>
         Активен
       </Typography>
@@ -101,7 +85,7 @@ const Table = ({ publics, setPublics }) => {
     );
   };
 
-  if (initialLoading) {
+  if (isLoading) {
     return (
       <Box
         sx={{
@@ -157,7 +141,7 @@ const Table = ({ publics, setPublics }) => {
             <Grid item xs={4}></Grid>
           </Grid>
           <Divider />
-          {publics.map((publicObj) => (
+          {enhancedPublics.map((publicObj) => (
             <Grid
               container
               key={publicObj.group_id}
@@ -197,7 +181,7 @@ const Table = ({ publics, setPublics }) => {
                 </Link>
               </Grid>
               <Grid item md={2}>
-                {renderStatus(publicObj.group_id)}
+                {renderStatus(publicObj.status)}
               </Grid>
               <Grid
                 item
@@ -222,7 +206,7 @@ const Table = ({ publics, setPublics }) => {
       ) : (
         // Мобильная версия
         <Box>
-          {publics.map((publicObj) => (
+          {enhancedPublics.map((publicObj) => (
             <Box className="grayBorder" sx={{ mb: 2 }} key={publicObj.group_id}>
               <Box
                 sx={{
@@ -258,7 +242,7 @@ const Table = ({ publics, setPublics }) => {
                     {publicObj.name}
                   </Link>
                 </Box>
-                {renderStatus(publicObj.group_id)}
+                {renderStatus(publicObj.status)}
               </Box>
               <Box className="spaceAround">
                 <Link
