@@ -208,8 +208,7 @@ const Table = ({ publics, setPublics }) => {
                 >
                   <Link
                     to={`/publics/setting/${publicObj.group_id}`}
-                    sx={{
-                      m: 2,
+                    style={{
                       cursor: "pointer",
                       textDecoration: "none",
                       color: "black",
@@ -267,9 +266,10 @@ const Table = ({ publics, setPublics }) => {
                   <Link
                     to={`/publics/setting/${publicObj.group_id}`}
                     style={{
-                      color: "#1976d2",
+                      // color: "#1976d2",
                       textDecoration: "none",
                       color: "black",
+                      textAlign: "right",
                       "&:hover": { color: "#E37E31" },
                     }}
                   >
