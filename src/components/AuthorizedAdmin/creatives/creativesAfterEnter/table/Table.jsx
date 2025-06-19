@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Divider, Grid, Typography, Box, Avatar } from "@mui/material";
+import {
+  Divider,
+  Grid,
+  Typography,
+  Box,
+  Avatar,
+  CircularProgress,
+} from "@mui/material";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
@@ -12,6 +19,7 @@ const Table = ({ publics, setPublics }) => {
   const [deletePublic, setDeletePublic] = useState(false);
   const [publicObj, setPublicObj] = useState(null);
   const [count, setCount] = useState(1);
+  const [isLoading, setIsLoading] = useState(true); // Добавляем общее состояние загрузки
 
   const handleDelete = (id) => {
     setPublicObj(publics.filter((item) => item["id"] === id)[0]);
@@ -22,6 +30,7 @@ const Table = ({ publics, setPublics }) => {
 
   useEffect(() => {
     const fetchStatuses = async () => {
+      setIsLoading(true); // Устанавливаем загрузку при начале запроса
       const newStatuses = {};
       const newLoadingStates = {};
 
@@ -56,11 +65,15 @@ const Table = ({ publics, setPublics }) => {
         setLoadingStates((prev) => ({ ...prev, ...newLoadingStates }));
       } catch (error) {
         console.error("Error fetching statuses:", error);
+      } finally {
+        setIsLoading(false); // Выключаем загрузку после завершения запросов
       }
     };
 
     if (publics.length > 0) {
       fetchStatuses();
+    } else {
+      setIsLoading(false); // Если нет данных для загрузки, выключаем спиннер
     }
   }, [publics]);
 
@@ -70,12 +83,8 @@ const Table = ({ publics, setPublics }) => {
   }, []);
 
   const renderStatus = (groupId) => {
-    if (loadingStates[groupId]) {
-      return (
-        <Typography className="mdSizeText" sx={{ color: "#999" }}>
-          Загрузка...
-        </Typography>
-      );
+    if (loadingStates[groupId] || isLoading) {
+      return <CircularProgress size={20} sx={{ color: "#FF6B00" }} />;
     }
 
     return statuses[groupId] === 1 ? (
@@ -88,6 +97,22 @@ const Table = ({ publics, setPublics }) => {
       </Typography>
     );
   };
+
+  // Добавляем общий спиннер при загрузке
+  if (isLoading) {
+    return (
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "200px",
+        }}
+      >
+        <CircularProgress sx={{ color: "#FF6B00" }} size={60} />
+      </Box>
+    );
+  }
 
   return (
     <Box onClick={handleIncrementCount} sx={{ mb: 2 }}>
