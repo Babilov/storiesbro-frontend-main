@@ -104,7 +104,7 @@ const Table = ({ publics, setPublics }) => {
     );
   }
 
-  const displayPublics = hasFetched ? enhancedPublics : publics;
+  // const displayPublics = hasFetched ? enhancedPublics : publics;
 
   return (
     <Box sx={{ mb: 2 }}>
@@ -146,119 +146,127 @@ const Table = ({ publics, setPublics }) => {
             <Grid item xs={4}></Grid>
           </Grid>
           <Divider />
-          {displayPublics.map((publicObj) => (
-            <Grid
-              container
-              key={publicObj.group_id}
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                borderBottom: "1px solid #CDCDCD",
-                pt: 1,
-                pb: 1,
-              }}
-            >
+          {hasFetched &&
+            enhancedPublics.map((publicObj) => (
               <Grid
-                item
-                xs={3}
-                sx={{ display: "flex", justifyContent: "center" }}
-              >
-                <Avatar
-                  alt="group avatar"
-                  src={publicObj.photo}
-                  sx={{ borderRadius: "50%", height: "90px", width: "90px" }}
-                />
-              </Grid>
-              <Grid item xs={3} sx={{ textAlign: "center" }}>
-                <Link
-                  to={publicObj.link}
-                  style={{
-                    textAlign: "center",
-                    color: "black",
-                    textDecoration: "none",
-                    cursor: "pointer",
-                    fontSize: "18px",
-                  }}
-                >
-                  {publicObj.name}
-                </Link>
-              </Grid>
-              <Grid item md={2}>
-                {hasFetched ? (
-                  renderStatus(publicObj.status)
-                ) : (
-                  <CircularProgress size={20} sx={{ color: "#FF6B00" }} />
-                )}
-              </Grid>
-              <Grid
-                item
-                xs={4}
+                container
+                key={publicObj.group_id}
                 sx={{
                   display: "flex",
                   alignItems: "center",
-                  justifyContent: "center",
+                  borderBottom: "1px solid #CDCDCD",
+                  pt: 1,
+                  pb: 1,
                 }}
               >
-                <Link
-                  to={`/publics/setting/${publicObj.group_id}`}
-                  sx={{ m: 2, cursor: "pointer" }}
+                <Grid
+                  item
+                  xs={3}
+                  sx={{ display: "flex", justifyContent: "center" }}
                 >
-                  Настройки
-                </Link>
+                  <Avatar
+                    alt="group avatar"
+                    src={publicObj.photo}
+                    sx={{ borderRadius: "50%", height: "90px", width: "90px" }}
+                  />
+                </Grid>
+                <Grid item xs={3} sx={{ textAlign: "center" }}>
+                  <Link
+                    to={publicObj.link}
+                    style={{
+                      textAlign: "center",
+                      color: "black",
+                      textDecoration: "none",
+                      cursor: "pointer",
+                      fontSize: "18px",
+                    }}
+                  >
+                    {publicObj.name}
+                  </Link>
+                </Grid>
+                <Grid item md={2}>
+                  {hasFetched ? (
+                    renderStatus(publicObj.status)
+                  ) : (
+                    <CircularProgress size={20} sx={{ color: "#FF6B00" }} />
+                  )}
+                </Grid>
+                <Grid
+                  item
+                  xs={4}
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <Link
+                    to={`/publics/setting/${publicObj.group_id}`}
+                    sx={{ m: 2, cursor: "pointer" }}
+                  >
+                    Настройки
+                  </Link>
+                </Grid>
               </Grid>
-            </Grid>
-          ))}
+            ))}
         </Box>
       ) : (
         <Box>
-          {displayPublics.map((publicObj) => (
-            <Box
-              key={publicObj.group_id}
-              sx={{
-                mb: 2,
-                border: "1px solid #eee",
-                borderRadius: "8px",
-                p: 2,
-              }}
-            >
+          {hasFetched &&
+            enhancedPublics.map((publicObj) => (
               <Box
+                key={publicObj.group_id}
                 sx={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
+                  mb: 2,
+                  border: "1px solid #eee",
+                  borderRadius: "8px",
+                  p: 2,
                 }}
               >
-                <Box sx={{ display: "flex", alignItems: "center" }}>
-                  <Avatar
-                    src={publicObj.photo}
-                    sx={{ width: 56, height: 56, mr: 2 }}
-                  />
-                  <Typography variant="subtitle1">{publicObj.name}</Typography>
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                  }}
+                >
+                  <Box sx={{ display: "flex", alignItems: "center" }}>
+                    <Avatar
+                      src={publicObj.photo}
+                      sx={{ width: 56, height: 56, mr: 2 }}
+                    />
+                    <Typography variant="subtitle1">
+                      {publicObj.name}
+                    </Typography>
+                  </Box>
+                  {hasFetched ? (
+                    renderStatus(publicObj.status)
+                  ) : (
+                    <CircularProgress size={20} sx={{ color: "#FF6B00" }} />
+                  )}
                 </Box>
-                {hasFetched ? (
-                  renderStatus(publicObj.status)
-                ) : (
-                  <CircularProgress size={20} sx={{ color: "#FF6B00" }} />
-                )}
-              </Box>
-              <Box
-                sx={{ display: "flex", justifyContent: "space-around", mt: 2 }}
-              >
-                <Link
-                  to={`/publics/setting/${publicObj.group_id}`}
-                  style={{ color: "#1976d2", textDecoration: "none" }}
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "space-around",
+                    mt: 2,
+                  }}
                 >
-                  Настройки
-                </Link>
-                <Typography
-                  sx={{ color: "#1976d2", cursor: "pointer" }}
-                  onClick={() => handleDelete(publicObj.group_id)}
-                >
-                  Отключить
-                </Typography>
+                  <Link
+                    to={`/publics/setting/${publicObj.group_id}`}
+                    style={{ color: "#1976d2", textDecoration: "none" }}
+                  >
+                    Настройки
+                  </Link>
+                  <Typography
+                    sx={{ color: "#1976d2", cursor: "pointer" }}
+                    onClick={() => handleDelete(publicObj.group_id)}
+                  >
+                    Отключить
+                  </Typography>
+                </Box>
               </Box>
-            </Box>
-          ))}
+            ))}
         </Box>
       )}
     </Box>
