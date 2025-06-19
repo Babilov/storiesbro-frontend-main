@@ -208,7 +208,13 @@ const Table = ({ publics, setPublics }) => {
                 >
                   <Link
                     to={`/publics/setting/${publicObj.group_id}`}
-                    sx={{ m: 2, cursor: "pointer", textDecoration: "none" }}
+                    sx={{
+                      m: 2,
+                      cursor: "pointer",
+                      textDecoration: "none",
+                      color: "black",
+                      "&:hover": { color: "#E37E31" },
+                    }}
                   >
                     Настройки
                   </Link>
@@ -260,16 +266,23 @@ const Table = ({ publics, setPublics }) => {
                 >
                   <Link
                     to={`/publics/setting/${publicObj.group_id}`}
-                    style={{ color: "#1976d2", textDecoration: "none" }}
+                    style={{
+                      color: "#1976d2",
+                      textDecoration: "none",
+                      color: "black",
+                      "&:hover": { color: "#E37E31" },
+                    }}
                   >
                     Настройки
                   </Link>
+                  {/* 
                   <Typography
                     sx={{ color: "#1976d2", cursor: "pointer" }}
                     onClick={() => handleDelete(publicObj.group_id)}
                   >
                     Отключить
                   </Typography>
+                   */}
                 </Box>
               </Box>
             ))}
