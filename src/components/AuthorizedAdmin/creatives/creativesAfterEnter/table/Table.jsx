@@ -66,7 +66,7 @@ const Table = ({ publics, setPublics }) => {
 
     setIsLoading(true);
     fetchStatuses();
-  }, [publics]);
+  }, []);
 
   useEffect(() => {
     document.body.classList.add("no-scrollbar");
