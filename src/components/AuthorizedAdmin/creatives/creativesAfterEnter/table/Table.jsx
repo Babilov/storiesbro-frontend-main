@@ -79,11 +79,17 @@ const Table = ({ publics, setPublics }) => {
 
   const renderStatus = (status) => {
     return status === 1 ? (
-      <Typography className="mdSizeText" sx={{ color: "#4CD640" }}>
+      <Typography
+        className="mdSizeText"
+        sx={{ color: "#4CD640", textAlign: { md: "center" } }}
+      >
         Активен
       </Typography>
     ) : (
-      <Typography className="mdSizeText" sx={{ color: "#D25D48" }}>
+      <Typography
+        className="mdSizeText"
+        sx={{ color: "#D25D48", textAlign: { md: "center" } }}
+      >
         Отключен
       </Typography>
     );
@@ -116,7 +122,7 @@ const Table = ({ publics, setPublics }) => {
         publicObj={publicObj}
       />
 
-      {!isMobile ? (
+      {hasFetched && !isMobile ? (
         <Box
           sx={{
             border: "1px solid #CDCDCD",
@@ -202,7 +208,7 @@ const Table = ({ publics, setPublics }) => {
                 >
                   <Link
                     to={`/publics/setting/${publicObj.group_id}`}
-                    sx={{ m: 2, cursor: "pointer" }}
+                    sx={{ m: 2, cursor: "pointer", textDecoration: "none" }}
                   >
                     Настройки
                   </Link>
