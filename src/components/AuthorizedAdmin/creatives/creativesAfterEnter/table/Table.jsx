@@ -22,55 +22,59 @@ const Table = ({ publics, setPublics }) => {
   const [enhancedPublics, setEnhancedPublics] = useState([]);
   const [deletePublic, setDeletePublic] = useState(false);
   const [publicObj, setPublicObj] = useState(null);
-  const [count, setCount] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
+  const [hasFetched, setHasFetched] = useState(false);
 
   const handleDelete = (id) => {
     setPublicObj(publics.filter((item) => item["id"] === id)[0]);
     setDeletePublic(true);
   };
 
-  const handleIncrementCount = () => setCount(count + 1);
-
   useEffect(() => {
-    const fetchStatuses = async () => {
-      try {
-        if (publics.length === 0) {
-          setEnhancedPublics([]);
-          return;
-        }
+    const fetchData = async () => {
+      if (publics.length === 0 || hasFetched) {
+        setIsLoading(false);
+        return;
+      }
 
-        // Создаем массив запросов для получения статусов
-        const statusRequests = publics.map((publicObj) =>
-          axios
-            .get(`${API_URL}community_switch/${publicObj.group_id}`)
-            .then((res) => ({
-              ...publicObj,
-              status: res.data.status,
-            }))
-            .catch(() => ({
-              ...publicObj,
-              status: 0, // В случае ошибки считаем сообщество отключенным
-            }))
+      setIsLoading(true);
+
+      try {
+        const enhanced = await Promise.all(
+          publics.map(async (publicObj) => {
+            try {
+              const statusRes = await axios.get(
+                `${API_URL}community_switch/${publicObj.group_id}`
+              );
+              return {
+                ...publicObj,
+                status: statusRes.data.status,
+              };
+            } catch (error) {
+              return {
+                ...publicObj,
+                status: 0,
+              };
+            }
+          })
         );
 
-        // Выполняем все запросы параллельно
-        const enhancedData = await Promise.all(statusRequests);
-        setEnhancedPublics(enhancedData);
+        setEnhancedPublics(enhanced);
+        setHasFetched(true);
       } catch (error) {
-        console.error("Error fetching statuses:", error);
+        console.error("Error fetching data:", error);
       } finally {
         setIsLoading(false);
       }
     };
 
-    setIsLoading(true);
-    fetchStatuses();
-  }, []);
+    fetchData();
+  }, [publics]); // Зависимость только от publics
 
   useEffect(() => {
-    document.body.classList.add("no-scrollbar");
-    return () => document.body.classList.remove("no-scrollbar");
+    return () => {
+      document.body.classList.remove("no-scrollbar");
+    };
   }, []);
 
   const renderStatus = (status) => {
@@ -85,7 +89,7 @@ const Table = ({ publics, setPublics }) => {
     );
   };
 
-  if (isLoading) {
+  if (isLoading && !hasFetched) {
     return (
       <Box
         sx={{
@@ -100,8 +104,10 @@ const Table = ({ publics, setPublics }) => {
     );
   }
 
+  const displayPublics = hasFetched ? enhancedPublics : publics;
+
   return (
-    <Box onClick={handleIncrementCount} sx={{ mb: 2 }}>
+    <Box sx={{ mb: 2 }}>
       <DeletePublicModal
         open={deletePublic}
         setOpen={setDeletePublic}
@@ -111,7 +117,6 @@ const Table = ({ publics, setPublics }) => {
       />
 
       {!isMobile ? (
-        // Десктопная версия
         <Box
           sx={{
             border: "1px solid #CDCDCD",
@@ -141,11 +146,10 @@ const Table = ({ publics, setPublics }) => {
             <Grid item xs={4}></Grid>
           </Grid>
           <Divider />
-          {enhancedPublics.map((publicObj) => (
+          {displayPublics.map((publicObj) => (
             <Grid
               container
               key={publicObj.group_id}
-              className="adminPublics"
               sx={{
                 display: "flex",
                 alignItems: "center",
@@ -174,14 +178,17 @@ const Table = ({ publics, setPublics }) => {
                     textDecoration: "none",
                     cursor: "pointer",
                     fontSize: "18px",
-                    target: "_blank",
                   }}
                 >
                   {publicObj.name}
                 </Link>
               </Grid>
               <Grid item md={2}>
-                {renderStatus(publicObj.status)}
+                {hasFetched ? (
+                  renderStatus(publicObj.status)
+                ) : (
+                  <CircularProgress size={20} sx={{ color: "#FF6B00" }} />
+                )}
               </Grid>
               <Grid
                 item
@@ -195,7 +202,6 @@ const Table = ({ publics, setPublics }) => {
                 <Link
                   to={`/publics/setting/${publicObj.group_id}`}
                   sx={{ m: 2, cursor: "pointer" }}
-                  className="linkItem"
                 >
                   Настройки
                 </Link>
@@ -204,63 +210,48 @@ const Table = ({ publics, setPublics }) => {
           ))}
         </Box>
       ) : (
-        // Мобильная версия
         <Box>
-          {enhancedPublics.map((publicObj) => (
-            <Box className="grayBorder" sx={{ mb: 2 }} key={publicObj.group_id}>
+          {displayPublics.map((publicObj) => (
+            <Box
+              key={publicObj.group_id}
+              sx={{
+                mb: 2,
+                border: "1px solid #eee",
+                borderRadius: "8px",
+                p: 2,
+              }}
+            >
               <Box
                 sx={{
                   display: "flex",
-                  borderBottom: "1px solid #CBCBCB",
-                  position: "relative",
+                  justifyContent: "space-between",
+                  alignItems: "center",
                 }}
               >
-                <Box sx={{ display: "flex" }}>
+                <Box sx={{ display: "flex", alignItems: "center" }}>
                   <Avatar
-                    alt="avatar"
                     src={publicObj.photo}
-                    sx={{
-                      m: 2,
-                      borderRadius: "50%",
-                      height: "70px",
-                      width: "70px",
-                    }}
+                    sx={{ width: 56, height: 56, mr: 2 }}
                   />
-                  <Link
-                    to={publicObj.link}
-                    style={{
-                      textAlign: "center",
-                      color: "black",
-                      textDecoration: "none",
-                      cursor: "pointer",
-                      fontSize: "12px",
-                      fontWeight: 600,
-                      marginTop: "16px",
-                      target: "_blank",
-                    }}
-                  >
-                    {publicObj.name}
-                  </Link>
+                  <Typography variant="subtitle1">{publicObj.name}</Typography>
                 </Box>
-                {renderStatus(publicObj.status)}
+                {hasFetched ? (
+                  renderStatus(publicObj.status)
+                ) : (
+                  <CircularProgress size={20} sx={{ color: "#FF6B00" }} />
+                )}
               </Box>
-              <Box className="spaceAround">
+              <Box
+                sx={{ display: "flex", justifyContent: "space-around", mt: 2 }}
+              >
                 <Link
                   to={`/publics/setting/${publicObj.group_id}`}
-                  style={{
-                    fontSize: "12px",
-                    fontWeight: 400,
-                    textDecoration: "none",
-                    margin: 2,
-                    cursor: "pointer",
-                    color: "black",
-                  }}
+                  style={{ color: "#1976d2", textDecoration: "none" }}
                 >
                   Настройки
                 </Link>
-                <Typography sx={{ color: "#CBCBCB", m: 2 }}>|</Typography>
                 <Typography
-                  sx={{ fontSize: "12px", m: 2, cursor: "pointer" }}
+                  sx={{ color: "#1976d2", cursor: "pointer" }}
                   onClick={() => handleDelete(publicObj.group_id)}
                 >
                   Отключить
