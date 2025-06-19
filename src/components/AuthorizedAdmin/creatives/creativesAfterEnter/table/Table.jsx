@@ -261,6 +261,7 @@ const Table = ({ publics, setPublics }) => {
                     display: "flex",
                     justifyContent: "space-around",
                     mt: 2,
+                    pt: "10px",
                     borderTop: "1px solid #CDCDCD",
                   }}
                 >
