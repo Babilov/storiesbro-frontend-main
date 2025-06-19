@@ -211,7 +211,7 @@ const Table = ({ publics, setPublics }) => {
                     style={{
                       cursor: "pointer",
                       textDecoration: "none",
-                      color: "black",
+                      color: "#1976d2",
                       "&:hover": { color: "#E37E31" },
                     }}
                   >
@@ -229,7 +229,7 @@ const Table = ({ publics, setPublics }) => {
                 key={publicObj.group_id}
                 sx={{
                   mb: 2,
-                  border: "1px solid #eee",
+                  border: "1px solid #CDCDCD",
                   borderRadius: "8px",
                   p: 2,
                 }}
@@ -261,16 +261,14 @@ const Table = ({ publics, setPublics }) => {
                     display: "flex",
                     justifyContent: "space-around",
                     mt: 2,
+                    borderTop: "1px solid #CDCDCD",
                   }}
                 >
                   <Link
                     to={`/publics/setting/${publicObj.group_id}`}
                     style={{
-                      // color: "#1976d2",
+                      color: "#1976d2",
                       textDecoration: "none",
-                      color: "black",
-                      textAlign: "right",
-                      "&:hover": { color: "#E37E31" },
                     }}
                   >
                     Настройки
