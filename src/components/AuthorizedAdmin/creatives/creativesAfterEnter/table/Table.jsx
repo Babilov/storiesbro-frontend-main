@@ -24,7 +24,7 @@ const Table = ({ publics, setPublics }) => {
   const [deletePublic, setDeletePublic] = useState(false);
   const [publicObj, setPublicObj] = useState(null);
   const [count, setCount] = useState(1);
-  const [isLoading, setIsLoading] = useState(true);
+  const [initialLoading, setInitialLoading] = useState(true);
 
   const handleDelete = (id) => {
     setPublicObj(publics.filter((item) => item["id"] === id)[0]);
@@ -35,48 +35,48 @@ const Table = ({ publics, setPublics }) => {
 
   useEffect(() => {
     const fetchStatuses = async () => {
-      setIsLoading(true);
       const newStatuses = {};
       const newLoadingStates = {};
 
+      // Инициализация состояний загрузки
       publics.forEach((obj) => {
         newLoadingStates[obj.group_id] = true;
       });
       setLoadingStates(newLoadingStates);
 
-      const requests = publics.map((obj) =>
-        axios
-          .get(`${API_URL}community_switch/${obj.group_id}`)
-          .then((res) => ({
-            id: obj.group_id,
-            status: res.data.status,
-          }))
-          .catch(() => ({
-            id: obj.group_id,
-            status: 0,
-          }))
-      );
-
       try {
+        const requests = publics.map((obj) =>
+          axios
+            .get(`${API_URL}community_switch/${obj.group_id}`)
+            .then((res) => ({
+              id: obj.group_id,
+              status: res.data.status,
+            }))
+            .catch(() => ({
+              id: obj.group_id,
+              status: 0,
+            }))
+        );
+
         const results = await Promise.all(requests);
         results.forEach(({ id, status }) => {
           newStatuses[id] = status;
           newLoadingStates[id] = false;
         });
 
-        setStatuses((prev) => ({ ...prev, ...newStatuses }));
-        setLoadingStates((prev) => ({ ...prev, ...newLoadingStates }));
+        setStatuses(newStatuses);
+        setLoadingStates(newLoadingStates);
       } catch (error) {
         console.error("Error fetching statuses:", error);
       } finally {
-        setIsLoading(false);
+        setInitialLoading(false);
       }
     };
 
     if (publics.length > 0) {
       fetchStatuses();
     } else {
-      setIsLoading(false);
+      setInitialLoading(false);
     }
   }, [publics]);
 
@@ -86,7 +86,7 @@ const Table = ({ publics, setPublics }) => {
   }, []);
 
   const renderStatus = (groupId) => {
-    if (loadingStates[groupId] || isLoading) {
+    if (loadingStates[groupId] !== false) {
       return <CircularProgress size={20} sx={{ color: "#FF6B00" }} />;
     }
 
@@ -101,7 +101,7 @@ const Table = ({ publics, setPublics }) => {
     );
   };
 
-  if (isLoading) {
+  if (initialLoading) {
     return (
       <Box
         sx={{
