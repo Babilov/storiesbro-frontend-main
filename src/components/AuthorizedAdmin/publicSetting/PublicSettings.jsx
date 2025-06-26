@@ -402,7 +402,7 @@ const PublicSettings = () => {
                   textAlign: "center",
                   mt: 2,
                   cursor: "pointer",
-                  color: state === 1 ? "#D25D48" : "black",
+                  color: state === 1 ? "#4CD640" : "black",
                 }}
                 onClick={() => onSwitchClick(1)}
               >
