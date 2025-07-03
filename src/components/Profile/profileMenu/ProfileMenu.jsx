@@ -25,6 +25,7 @@ const ProfileMenu = () => {
       linkText: "Изменение пароля",
       linkHref: "/password",
     },
+    /*
     {
       icon: <SettingsIcon sx={{ mr: 1 }} />,
       linkText: "Настройка уведомлений",
@@ -34,7 +35,8 @@ const ProfileMenu = () => {
       icon: <NotificationsIcon sx={{ mr: 1 }} />,
       linkText: "История уведомлений",
       linkHref: "/history",
-    },
+    }*/
+    ,
   ];
   return <MyMenu links={links} />;
 };

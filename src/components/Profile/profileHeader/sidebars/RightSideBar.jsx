@@ -14,7 +14,7 @@ const RightSideBar = ({ open, setOpen }) => {
   const handleExit = () => {
     localStorage.clear();
   };
-  
+
   return (
     <Modal open={open} onClose={() => setOpen(false)}>
       <Box
@@ -63,7 +63,7 @@ const RightSideBar = ({ open, setOpen }) => {
           Изменение пароля
         </NavLink>
         <Divider />
-
+        {/* 
         <NavLink
           className="navLink menuItem"
           to="/alerts"
@@ -73,7 +73,7 @@ const RightSideBar = ({ open, setOpen }) => {
           Настройка уведомлений
         </NavLink>
         <Divider />
-
+        
         <NavLink
           className="navLink menuItem"
           to="/history"
@@ -83,17 +83,9 @@ const RightSideBar = ({ open, setOpen }) => {
           История уведомлений
         </NavLink>
         <Divider />
-        <NavLink
-          className="navLink menuItem"
-          to="/"
-          onClick={handleExit}
-        >
-          <Box
-            component="img"
-            alt="exit"
-            src={exit}
-            sx={{ mr: 1, ml: 1 }}
-          />
+        */}
+        <NavLink className="navLink menuItem" to="/" onClick={handleExit}>
+          <Box component="img" alt="exit" src={exit} sx={{ mr: 1, ml: 1 }} />
           Выйти
         </NavLink>
       </Box>
