@@ -37,7 +37,7 @@ const LoginForm = ({ isLoginFormOpen, setIsLoginFormOpen }) => {
   const [yourEmail, setYourEmail] = useState("");
   const [userId, setUserId] = useState(null);
 
-  console.log(successOpen);
+  // console.log(successOpen);
 
   const openChangePassword = (yourEmail) => {
     setIsLoginFormOpen(false);
@@ -47,7 +47,7 @@ const LoginForm = ({ isLoginFormOpen, setIsLoginFormOpen }) => {
 
   return (
     <>
-      <SuccessPasswordChange open={successOpen} setOpen={setSuccessOpen} />
+      <SuccessPasswordChange open={true} setOpen={setSuccessOpen} />
       <ConfirmationForm
         isConfirmFormOpen={isConfirmFormOpen}
         setIsConfirmPageOpen={setIsConfirmPageOpen}
