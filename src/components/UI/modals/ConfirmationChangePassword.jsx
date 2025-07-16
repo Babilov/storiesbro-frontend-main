@@ -14,7 +14,7 @@ const ConfirmationChangePassword = ({
 }) => {
   const handleClick = async () => {
     const email_lower = yourEmail.toLowerCase();
-    const response = await axios.post(`${API_URL}api_users/check_email`, {
+    const response = await axios.post(`${API_URL}check_email`, {
       email: email_lower,
     });
     const result = response.data["exists"];
