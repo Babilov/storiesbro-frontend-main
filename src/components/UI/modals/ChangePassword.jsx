@@ -19,7 +19,7 @@ const ChangePassword = ({
   const handleConfirmForm = async () => {
     if (password === passwordConfirm) {
       try {
-        await axios.post(`${API_URL}password_change/${email}/`, {
+        await axios.post(`${API_URL}password_code_confirm/${email}/`, {
           password: password,
           confirmation_code: passwordCodeConfirm,
         });
