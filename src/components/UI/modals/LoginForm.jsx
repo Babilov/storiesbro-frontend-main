@@ -47,7 +47,7 @@ const LoginForm = ({ isLoginFormOpen, setIsLoginFormOpen }) => {
 
   return (
     <>
-      <SuccessPasswordChange open={true} setOpen={setSuccessOpen} />
+      <SuccessPasswordChange open={successOpen} setOpen={setSuccessOpen} />
       <ConfirmationForm
         isConfirmFormOpen={isConfirmFormOpen}
         setIsConfirmPageOpen={setIsConfirmPageOpen}

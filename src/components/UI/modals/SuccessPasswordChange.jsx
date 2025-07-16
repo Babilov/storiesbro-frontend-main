@@ -8,6 +8,7 @@ const SuccessPasswordChange = ({ open, setOpen }) => {
       title="Успешное изменение пароля!"
       isFormOpen={open}
       setIsFormOpen={() => setOpen(false)}
+      width="50%"
     >
       <Typography
         sx={{ textAlign: "center", fontSize: "18px", fontWeight: 400, mb: 1 }}
