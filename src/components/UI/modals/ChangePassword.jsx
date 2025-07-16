@@ -4,6 +4,8 @@ import { Box } from "@mui/material";
 import GradientButton from "../buttons/GradientButton";
 import MyInput from "../input/MyInput";
 import ErrorMessage from "../errors/ErrorMessage";
+import { API_URL } from "../../../constants/constatns";
+import axios from "axios";
 
 const ChangePassword = ({
   isChangePasswordOpen,
@@ -16,9 +18,16 @@ const ChangePassword = ({
 
   const handleConfirmForm = async () => {
     if (password === passwordConfirm) {
+      try {
+        await axios.post(`${API_URL}password_change/${email}/`, {
+          password: password,
+          confirmation_code: passwordCodeConfirm,
+        });
+      } catch (error) {
+        console.error("Ошибка", error);
+      }
       setIsChangePasswordOpen(false);
-    }
-    if (password !== passwordConfirm) {
+    } else if (password !== passwordConfirm) {
       setError(true);
       setErrorMessage("*Пароли не совпадают");
     } else {

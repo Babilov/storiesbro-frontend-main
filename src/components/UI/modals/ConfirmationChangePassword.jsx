@@ -20,10 +20,6 @@ const ConfirmationChangePassword = ({
     const result = response.data["exists"];
     if (result) {
       setIsChangePasswordOpen(false);
-      axios.post(`${API_URL}password_change/${email_lower}/`).catch((error) => {
-        // Обработка ошибки, если необходимо
-        console.error(error);
-      });
       openChangePassword(email_lower);
     } else {
       setError(true);
