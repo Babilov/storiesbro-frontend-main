@@ -15,7 +15,10 @@ const ChangePassword = () => {
     } else {
       try {
         await axios.post(
-          `${API_URL}password_change/${localStorage.getItem("email")}/`
+          `${API_URL}password_change/${localStorage.getItem("email")}/`,
+          {
+            password: password,
+          }
         );
       } catch (error) {
         console.error("Ошибка", error);
