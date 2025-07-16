@@ -15,9 +15,9 @@ const ConfirmationChangePassword = ({
   const handleClick = async () => {
     try {
       const email_lower = yourEmail.toLowerCase();
-      const response = await axios.get(`${API_URL}check_email/${email_lower}`);
+      const response = await axios.get(`${API_URL}check_email/${email_lower}`); // чек емэил
       if (response.status === 200) {
-        await axios.get(`${API_URL}password_change/${email_lower}`);
+        await axios.get(`${API_URL}password_change/${email_lower}`); // отправка кода да-да не удивляйтесь
         setIsChangePasswordOpen(false);
         openChangePassword(email_lower);
       }

@@ -11,6 +11,7 @@ const ChangePassword = ({
   isChangePasswordOpen,
   setIsChangePasswordOpen,
   email,
+  setSuccess,
 }) => {
   // const handleClick = () => {
   //   setIsChangePasswordOpen(false);
@@ -27,6 +28,7 @@ const ChangePassword = ({
         console.error("Ошибка", error);
       }
       setIsChangePasswordOpen(false);
+      setSuccess(true);
     } else if (password !== passwordConfirm) {
       setError(true);
       setErrorMessage("*Пароли не совпадают");

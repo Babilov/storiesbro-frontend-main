@@ -6,6 +6,7 @@ import ChangePassword from "./ChangePassword";
 import LoginFormInfo from "./LoginFormInfo";
 import RegistrationForm from "./RegistrationForm";
 import ConfirmationChangePassword from "./ConfirmationChangePassword";
+import SuccessPasswordChange from "./SuccessPasswordChange";
 
 const LoginForm = ({ isLoginFormOpen, setIsLoginFormOpen }) => {
   const handleChangeConfirm = () => {
@@ -32,17 +33,19 @@ const LoginForm = ({ isLoginFormOpen, setIsLoginFormOpen }) => {
   const [isChangePasswordOpen, setIsChangePasswordOpen] = useState(false);
   const [isChangeConfirm, setIsChangeConfirm] = useState(false);
   const [isRegistrationForm, setIsRegistrationForm] = useState(false);
-  const [yourEmail, setYourEmail] = useState("")
-  const [userId, setUserId] = useState(null)
+  const [successOpen, setSuccessOpen] = useState(false);
+  const [yourEmail, setYourEmail] = useState("");
+  const [userId, setUserId] = useState(null);
 
   const openChangePassword = (yourEmail) => {
     setIsLoginFormOpen(false);
     setIsChangePasswordOpen(true);
-    setYourEmail(yourEmail)
+    setYourEmail(yourEmail);
   };
 
   return (
     <>
+      <SuccessPasswordChange open={successOpen} setOpen={setSuccessOpen} />
       <ConfirmationForm
         isConfirmFormOpen={isConfirmFormOpen}
         setIsConfirmPageOpen={setIsConfirmPageOpen}
@@ -52,6 +55,7 @@ const LoginForm = ({ isLoginFormOpen, setIsLoginFormOpen }) => {
         isChangePasswordOpen={isChangePasswordOpen}
         setIsChangePasswordOpen={setIsChangePasswordOpen}
         email={yourEmail}
+        setSuccess={setSuccessOpen}
       />
       <ConfirmationChangePassword
         isChangePasswordOpen={isChangeConfirm}
