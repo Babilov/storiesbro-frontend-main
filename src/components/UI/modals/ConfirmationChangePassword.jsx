@@ -13,14 +13,15 @@ const ConfirmationChangePassword = ({
   openChangePassword,
 }) => {
   const handleClick = async () => {
-    const email_lower = yourEmail.toLowerCase();
-    const response = await axios.get(`${API_URL}check_email/${email_lower}`);
-    const result = response.data["exists"];
-    if (result) {
-      await axios.post(`${API_URL}api_users/password_change/${email_lower}`);
-      setIsChangePasswordOpen(false);
-      openChangePassword(email_lower);
-    } else {
+    try {
+      const email_lower = yourEmail.toLowerCase();
+      const response = await axios.get(`${API_URL}check_email/${email_lower}`);
+      if (response.status === 200) {
+        await axios.post(`${API_URL}api_users/password_change/${email_lower}`);
+        setIsChangePasswordOpen(false);
+        openChangePassword(email_lower);
+      }
+    } catch {
       setError(true);
     }
   };
