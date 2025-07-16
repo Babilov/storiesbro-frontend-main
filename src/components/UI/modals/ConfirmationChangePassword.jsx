@@ -17,7 +17,7 @@ const ConfirmationChangePassword = ({
       const email_lower = yourEmail.toLowerCase();
       const response = await axios.get(`${API_URL}check_email/${email_lower}`);
       if (response.status === 200) {
-        await axios.post(`${API_URL}api_users/password_change/${email_lower}`);
+        await axios.post(`${API_URL}password_change/${email_lower}`);
         setIsChangePasswordOpen(false);
         openChangePassword(email_lower);
       }
