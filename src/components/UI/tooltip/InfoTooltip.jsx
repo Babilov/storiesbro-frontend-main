@@ -52,7 +52,12 @@ const InfoTooltip = ({ tooltipText, placement = "bottom", size }) => {
         >
           ?
         </YellowCircle>
-        <Popper open={open} anchorEl={anchorRef.current} placement={placement}>
+        <Popper
+          open={open}
+          anchorEl={anchorRef.current}
+          placement={placement}
+          sx={{ opacity: 1, zIndex: theme.zIndex.tooltip }}
+        >
           <div
             style={{
               padding: "8px 12px",
@@ -60,6 +65,7 @@ const InfoTooltip = ({ tooltipText, placement = "bottom", size }) => {
               color: "#fff",
               borderRadius: 4,
               maxWidth: 200,
+              opacity: 1,
             }}
           >
             <Typography variant="body2">{tooltipText}</Typography>

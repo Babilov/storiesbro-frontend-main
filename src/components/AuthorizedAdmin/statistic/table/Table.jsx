@@ -10,7 +10,7 @@ const Table = ({ statistic, open, groupInfo }) => {
       активнее сообщество, тем больше заработок.{" "}
       <a
         href="/admin-help#section1"
-        style={{ textDecoration: "none", color: "#2A5885" }}
+        style={{ textDecoration: "none", color: "blue" }}
       >
         Рекомендации
       </a>
@@ -22,7 +22,7 @@ const Table = ({ statistic, open, groupInfo }) => {
       Хотите увеличить свой заработок? Мы подготовили для Вас{" "}
       <a
         href="/admin-help#section1"
-        style={{ textDecoration: "none", color: "#2A5885" }}
+        style={{ textDecoration: "none", color: "blue" }}
       >
         рекомендации
       </a>{" "}

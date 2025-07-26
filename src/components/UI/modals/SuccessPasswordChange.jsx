@@ -11,7 +11,7 @@ const SuccessPasswordChange = ({ open, setOpen }) => {
       width="50%"
     >
       <Typography
-        sx={{ textAlign: "center", fontSize: "18px", fontWeight: 400, mb: 1 }}
+        sx={{ textAlign: "center", fontSize: "18px", fontWeight: 400, mb: 2 }}
       >
         Видим, что входите с нового устройства, отправили код на Вашу почту
       </Typography>
