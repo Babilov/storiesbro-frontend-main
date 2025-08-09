@@ -375,7 +375,8 @@ const PublicSettings = () => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item container xs={12}>
+          <Grid container spacing={2}>
+            {/* Заголовок */}
             <Grid item xs={12}>
               <Typography
                 sx={{
@@ -388,13 +389,13 @@ const PublicSettings = () => {
                 Рекламные креативы
               </Typography>
             </Grid>
-            <Grid item container xs={12}>
-              {periods.map((period) => (
-                <Grid item xs={4}>
-                  <PeriodBlock period={period} />
-                </Grid>
-              ))}
-            </Grid>
+
+            {/* 3 блока в ряд */}
+            {periods.map((period) => (
+              <Grid item xs={12} sm={4} key={period}>
+                <PeriodBlock period={period} />
+              </Grid>
+            ))}
           </Grid>
           {/*         
           <Grid
