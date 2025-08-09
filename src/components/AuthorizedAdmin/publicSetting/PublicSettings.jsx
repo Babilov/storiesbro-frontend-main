@@ -7,6 +7,7 @@ import logToBackend from "../../../utils/logs";
 import CustomToolTip from "../../UI/tooltip/CustomTooltip";
 import arrowSvg from "./images/arrowSvg.svg";
 import { API_URL } from "../../../constants/constatns";
+import PeriodBlock from "./PeriodBlock";
 
 const PublicSettings = () => {
   const params = useParams();
@@ -14,6 +15,7 @@ const PublicSettings = () => {
   const [state, setState] = useState(1);
   const [publicObj, setPublic] = useState(undefined);
   const groupId = params.id;
+  const periods = ["morning", "day", "evening"];
 
   useEffect(() => {
     const fetchData = async () => {
@@ -373,10 +375,27 @@ const PublicSettings = () => {
               </Grid>
             </Grid>
           </Grid>
-
+          <Grid item container xs={12}>
+            <Typography
+              sx={{
+                fontSize: { sm: "18px", xs: "12px" },
+                fontWeight: 600,
+                textAlign: "center",
+                mb: 2,
+              }}
+            >
+              Рекламные креативы
+            </Typography>
+            {periods.map((period) => (
+              <Grid item xs={4}>
+                <PeriodBlock period={period} />
+              </Grid>
+            ))}
+          </Grid>
+          {/*         
           <Grid
             item
-            md={4}
+            md={12}
             container
             className="grayBorder"
             sx={{ m: "40px auto", p: 2 }}
@@ -424,7 +443,7 @@ const PublicSettings = () => {
                 Отключить
               </Typography>
             </Grid>
-          </Grid>
+          </Grid> */}
         </>
       ) : (
         <Typography>Загрузка...</Typography>
