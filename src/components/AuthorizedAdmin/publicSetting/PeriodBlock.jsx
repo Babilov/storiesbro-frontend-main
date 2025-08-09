@@ -20,7 +20,7 @@ const PeriodBlock = ({ period }) => {
   }, []);
 
   const selectAdPeriod = async (selectedState) => {
-    await axios.post(`${COMMUNITY_URL}community/${id}/toggle_ad_slot/`, {
+    await axios.post(`${COMMUNITY_URL}${id}/toggle_ad_slot/`, {
       slot: period,
       enabled: selectedState,
     });
