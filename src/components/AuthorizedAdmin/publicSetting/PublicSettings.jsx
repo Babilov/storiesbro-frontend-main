@@ -64,21 +64,9 @@ const PublicSettings = () => {
       logToBackend(`Error POST: ${error}`);
     }
   };
-  /*
-  const onSwitchClick = async (st) => {
-    try {
-      await axios.post(`${API_URL}community_switch/${groupId}/`, {
-        status: st,
-      });
-      setState(st);
-      console.log(groupId);
-    } catch (error) {
-      logToBackend(`Error POST: ${error}`);
-    }
-  };
-*/
+
   const navigate = useNavigate();
-  // тест
+
   return (
     <Grid container className="grid">
       {publicObj !== undefined ? (
@@ -375,28 +363,30 @@ const PublicSettings = () => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid container spacing={2}>
-            {/* Заголовок */}
-            <Grid item xs={12}>
-              <Typography
-                sx={{
-                  fontSize: { sm: "18px", xs: "12px" },
-                  fontWeight: 600,
-                  textAlign: "center",
-                  mb: 2,
-                }}
-              >
-                Рекламные креативы
-              </Typography>
-            </Grid>
-
-            {/* 3 блока в ряд */}
-            {periods.map((period) => (
-              <Grid item xs={12} sm={4} key={period} className="grayBorder">
-                <PeriodBlock period={period} />
+          <Box px={2}>
+            <Grid container spacing={2}>
+              {/* Заголовок */}
+              <Grid item xs={12}>
+                <Typography
+                  sx={{
+                    fontSize: { sm: "18px", xs: "12px" },
+                    fontWeight: 600,
+                    textAlign: "center",
+                    mb: 2,
+                  }}
+                >
+                  Рекламные креативы
+                </Typography>
               </Grid>
-            ))}
-          </Grid>
+
+              {/* 3 блока в ряд */}
+              {periods.map((period) => (
+                <Grid item xs={12} sm={4} key={period} className="grayBorder">
+                  <PeriodBlock period={period} />
+                </Grid>
+              ))}
+            </Grid>
+          </Box>
           {/*         
           <Grid
             item
