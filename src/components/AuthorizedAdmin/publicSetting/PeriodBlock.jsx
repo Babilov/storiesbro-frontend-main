@@ -1,6 +1,29 @@
+import axios from "axios";
 import { Box, Typography } from "@mui/material";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+
+import { API_URL } from "../../../constants/constatns";
 
 const PeriodBlock = ({ period }) => {
+  const [state, setState] = useState(true);
+  const { id } = useParams();
+  useEffect(() => {
+    const getState = async () => {
+      const res = await axios.get(`${API_URL}community/${id}/toggle_ad_slot/`);
+      const state = res.data;
+      setState(state);
+    };
+    getState();
+  }, []);
+
+  const selectAdPeriod = async (selectedState) => {
+    await axios.post(`${API_URL}community/${id}/toggle_ad_slot/`, {
+      slot: period,
+      enabled: selectedState,
+    });
+  };
+
   return (
     <Box>
       <Typography
@@ -20,13 +43,23 @@ const PeriodBlock = ({ period }) => {
       </Typography>
       <Box sx={{ display: "flex", justifyContent: "space-around" }}>
         <Box>
-          <Typography>Включён</Typography>
+          <Typography
+            onClick={() => selectAdPeriod(true)}
+            sx={{ cursor: "pointer", color: state ? "#4CD640" : "black" }}
+          >
+            Включён
+          </Typography>
         </Box>
         <Box>
           <Typography>|</Typography>
         </Box>
         <Box>
-          <Typography>Отключить</Typography>
+          <Typography
+            onClick={() => selectAdPeriod(false)}
+            sx={{ cursor: "pointer", color: !state ? "red" : "black" }}
+          >
+            Отключить
+          </Typography>
         </Box>
       </Box>
     </Box>
