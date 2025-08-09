@@ -10,7 +10,7 @@ const PeriodBlock = ({ period }) => {
   useEffect(() => {
     const getState = async () => {
       const res = await axios.get(
-        `${COMMUNITY_URL}${id}/toggle_ad_slot/?slot=${period}`
+        `${COMMUNITY_URL}${id}/toggle_ad_slot/?slot=${period}/`
       );
       const state = res.data;
       setState(state);
