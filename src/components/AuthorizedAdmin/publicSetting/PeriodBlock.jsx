@@ -14,7 +14,7 @@ const PeriodBlock = ({ period }) => {
       );
       const state = res.data;
       setState(state);
-      console.log(state);
+      console.log(state.data);
     };
     getState();
   }, []);
