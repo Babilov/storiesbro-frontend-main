@@ -385,7 +385,14 @@ const PublicSettings = () => {
               sx={{ display: "flex", justifyContent: "center" }}
             >
               {periods.map((period) => (
-                <Grid item xs={12} sm={3} key={period} className="grayBorder">
+                <Grid
+                  item
+                  xs={12}
+                  sm={3}
+                  key={period}
+                  className="grayBorder"
+                  sx={{ m: "0px 10px" }}
+                >
                   <PeriodBlock period={period} />
                 </Grid>
               ))}
