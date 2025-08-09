@@ -70,6 +70,7 @@ const PeriodBlock = ({ period }) => {
           <Typography
             onClick={() => selectAdPeriod(true)}
             sx={{
+              fontSize: { xs: "12px", md: "16px" },
               cursor: "pointer",
               color:
                 state === null
