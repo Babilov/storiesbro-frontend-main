@@ -18,7 +18,7 @@ const PeriodBlock = ({ period }) => {
     };
     getState();
   }, []);
-
+  console.log("aboba");
   const selectAdPeriod = async (selectedState) => {
     await axios.post(`${COMMUNITY_URL}${id}/toggle_ad_slot/`, {
       slot: period,
