@@ -12,10 +12,8 @@ const PeriodBlock = ({ period }) => {
       const res = await axios.get(
         `${API_URL}community/${id}/toggle_ad_slot/?slot=${period}`
       );
-      const state = res.data;
+      const state = res.data.enabled;
       setState(state);
-      console.log(res.data);
-      console.log(state);
     };
     getState();
   }, []);
