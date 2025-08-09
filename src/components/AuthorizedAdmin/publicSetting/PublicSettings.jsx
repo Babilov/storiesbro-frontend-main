@@ -64,7 +64,7 @@ const PublicSettings = () => {
       logToBackend(`Error POST: ${error}`);
     }
   };
-
+  /*
   const onSwitchClick = async (st) => {
     try {
       await axios.post(`${API_URL}community_switch/${groupId}/`, {
@@ -76,7 +76,7 @@ const PublicSettings = () => {
       logToBackend(`Error POST: ${error}`);
     }
   };
-
+*/
   const navigate = useNavigate();
   // тест
   return (

@@ -2,8 +2,7 @@ import axios from "axios";
 import { Box, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-
-import { API_URL } from "../../../constants/constatns";
+import { COMMUNITY_URL } from "../../../constants/constatns";
 
 const PeriodBlock = ({ period }) => {
   const [state, setState] = useState(true);
@@ -11,7 +10,7 @@ const PeriodBlock = ({ period }) => {
   useEffect(() => {
     const getState = async () => {
       const res = await axios.get(
-        `${API_URL}community/${id}/toggle_ad_slot/?slot=${period}`
+        `${COMMUNITY_URL}community/${id}/toggle_ad_slot/?slot=${period}`
       );
       const state = res.data;
       setState(state);
@@ -21,7 +20,7 @@ const PeriodBlock = ({ period }) => {
   }, []);
 
   const selectAdPeriod = async (selectedState) => {
-    await axios.post(`${API_URL}community/${id}/toggle_ad_slot/`, {
+    await axios.post(`${COMMUNITY_URL}community/${id}/toggle_ad_slot/`, {
       slot: period,
       enabled: selectedState,
     });
