@@ -363,30 +363,30 @@ const PublicSettings = () => {
               </Grid>
             </Grid>
           </Grid>
-          <Box px={2}>
-            <Grid container spacing={2}>
-              {/* Заголовок */}
-              <Grid item xs={12}>
-                <Typography
-                  sx={{
-                    fontSize: { sm: "18px", xs: "12px" },
-                    fontWeight: 600,
-                    textAlign: "center",
-                    mb: 2,
-                  }}
-                >
-                  Рекламные креативы
-                </Typography>
-              </Grid>
+          <Grid container spacing={2}>
+            {/* Заголовок */}
+            <Grid item xs={12}>
+              <Typography
+                sx={{
+                  fontSize: { sm: "18px", xs: "12px" },
+                  fontWeight: 600,
+                  textAlign: "center",
+                  mb: 2,
+                }}
+              >
+                Рекламные креативы
+              </Typography>
+            </Grid>
 
-              {/* 3 блока в ряд */}
+            {/* 3 блока в ряд */}
+            <Grid container spacing={2}>
               {periods.map((period) => (
                 <Grid item xs={12} sm={4} key={period} className="grayBorder">
                   <PeriodBlock period={period} />
                 </Grid>
               ))}
             </Grid>
-          </Box>
+          </Grid>
           {/*         
           <Grid
             item
