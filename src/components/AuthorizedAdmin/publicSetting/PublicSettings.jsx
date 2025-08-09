@@ -365,7 +365,7 @@ const PublicSettings = () => {
           </Grid>
           <Grid container spacing={2} sx={{ mt: 2 }}>
             {/* Заголовок */}
-            <Grid item xs={12}>
+            <Grid item xs={12} sx={{ mb: 2 }}>
               <Typography
                 sx={{
                   fontSize: { sm: "18px", xs: "12px" },

@@ -66,7 +66,7 @@ const PeriodBlock = ({ period }) => {
           : "№3 Вечерний"}
       </Typography>
       <Box sx={{ display: "flex", justifyContent: "space-around" }}>
-        <Box>
+        <Box sx={{ p: "0 0 10px" }}>
           <Typography
             onClick={() => selectAdPeriod(true)}
             sx={{
