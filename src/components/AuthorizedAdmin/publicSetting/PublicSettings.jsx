@@ -392,7 +392,7 @@ const PublicSettings = () => {
 
             {/* 3 блока в ряд */}
             {periods.map((period) => (
-              <Grid item xs={12} sm={4} key={period}>
+              <Grid item xs={12} sm={4} key={period} className="grayBorder">
                 <PeriodBlock period={period} />
               </Grid>
             ))}

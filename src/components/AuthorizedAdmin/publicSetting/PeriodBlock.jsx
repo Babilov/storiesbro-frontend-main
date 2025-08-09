@@ -18,9 +18,16 @@ const PeriodBlock = ({ period }) => {
           ? "№2 Дневной"
           : "№3 Вечерний"}
       </Typography>
-      <Box>
-        <Typography>Включён</Typography>
-        <Typography>Отключить</Typography>
+      <Box sx={{ display: "flex", justifyContent: "space-around" }}>
+        <Box>
+          <Typography>Включён</Typography>
+        </Box>
+        <Box>
+          <Typography>|</Typography>
+        </Box>
+        <Box>
+          <Typography>Отключить</Typography>
+        </Box>
       </Box>
     </Box>
   );
