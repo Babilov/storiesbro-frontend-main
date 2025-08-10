@@ -52,7 +52,7 @@ const PublicSettings = () => {
 
   const onCaClick = async (ca) => {
     try {
-      if (ca === null) {
+      if (ca === "") {
         await axios.post(`${API_URL}community_switch/${groupId}/`, {
           status: ca,
         });
@@ -361,7 +361,7 @@ const PublicSettings = () => {
                       color: caState == 0 ? "#E37E31" : "black",
                       ":hover": { color: "#E37E31" },
                     }}
-                    onClick={() => onCaClick(null)}
+                    onClick={() => onCaClick("")}
                   >
                     Не постить
                   </Typography>
