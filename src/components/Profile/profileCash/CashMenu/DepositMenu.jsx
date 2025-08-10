@@ -8,7 +8,8 @@ import { CashContext } from "../CashContext";
 import Comission from "./Comisson";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { MY_URL } from "../../../../constants/constatns";
+import { API_URL, MY_URL } from "../../../../constants/constatns";
+import { fetchWithAuth } from "../../../../api/token";
 
 const DepositMenu = ({ isDeposit }) => {
   const handleClick = async () => {
@@ -20,9 +21,9 @@ const DepositMenu = ({ isDeposit }) => {
       }
     }*/
     try {
-      await axios.post(`${MY_URL}payments/api/withdrawal/`, {
-        amount: cash,
-        card_number: requisites,
+      await fetchWithAuth(`${MY_URL}payments/api/withdrawal/`, {
+        method: "POST",
+        body: { amount: cash, card_number: requisites },
       });
     } catch {
       setErrorModalOpen(true);

@@ -34,20 +34,24 @@ export async function fetchWithAuth(url, options = {}) {
   const headers = {
     ...options.headers,
     Authorization: `Bearer ${token}`,
+    "Content-Type": "application/json",
   };
 
+  // Проверка токена
   await axios.post(
     `${API_URL}token-check/`,
-    {},
-    {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({ access_token: token }),
-    }
+    { access_token: token }, // Данные для POST
+    { headers }
   );
 
+  // Если тебе надо именно отправить { amount, card_number }
+  if (options.method === "POST" && options.body) {
+    const data = options.body;
+    const res = await axios.post(url, data, { headers });
+    return res.data;
+  }
+
+  // Для GET-запросов и остальных случаев
   const response = await fetch(url, { ...options, headers });
 
   if (response.status === 401) {
