@@ -52,9 +52,15 @@ const PublicSettings = () => {
 
   const onCaClick = async (ca) => {
     try {
-      await axios.post(`${API_URL}community_status/${groupId}/`, {
-        status: ca,
-      });
+      if (ca === null) {
+        await axios.post(`${API_URL}community_switch/${groupId}/`, {
+          status: ca,
+        });
+      } else {
+        await axios.post(`${API_URL}community_status/${groupId}/`, {
+          status: ca,
+        });
+      }
       setCaState(ca);
       console.log(groupId);
     } catch (error) {
