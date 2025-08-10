@@ -361,7 +361,7 @@ const PublicSettings = () => {
                       color: caState == 0 ? "#E37E31" : "black",
                       ":hover": { color: "#E37E31" },
                     }}
-                    onClick={() => onCaClick("null")}
+                    onClick={() => onCaClick(null)}
                   >
                     Не постить
                   </Typography>
