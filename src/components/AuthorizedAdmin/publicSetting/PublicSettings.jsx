@@ -12,7 +12,6 @@ import PeriodBlock from "./PeriodBlock";
 const PublicSettings = () => {
   const params = useParams();
   const [caState, setCaState] = useState("МЦА");
-  const [state, setState] = useState(1);
   const [publicObj, setPublic] = useState(undefined);
   const groupId = params.id;
   const periods = ["morning", "day", "evening"];
@@ -43,9 +42,7 @@ const PublicSettings = () => {
     const fetchCaState = async () => {
       try {
         const resCa = await axios.get(`${API_URL}community_status/${groupId}/`);
-        const resSt = await axios.get(`${API_URL}community_switch/${groupId}/`);
         setCaState(resCa.data.status);
-        setState(resSt.data.status);
       } catch (error) {
         logToBackend(`Error GET: ${error}`);
       }
@@ -355,7 +352,10 @@ const PublicSettings = () => {
                       textAlign: { md: "center", xs: "left" },
                       cursor: "pointer",
                       ":hover": { color: "#E37E31" },
+                      color: caState == 0 ? "#E37E31" : "black",
+                      ":hover": { color: "#E37E31" },
                     }}
+                    onClick={() => onCaClick(null)}
                   >
                     Не постить
                   </Typography>
