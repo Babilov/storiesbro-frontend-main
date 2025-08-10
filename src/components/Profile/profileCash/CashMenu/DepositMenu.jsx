@@ -7,15 +7,25 @@ import MyButton from "../../../UI/buttons/MyButton";
 import { CashContext } from "../CashContext";
 import Comission from "./Comisson";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { MY_URL } from "../../../../constants/constatns";
 
 const DepositMenu = ({ isDeposit }) => {
-  const handleClick = () => {
-    if (error) {
+  const handleClick = async () => {
+    /*if (error) {
       setErrorModalOpen(true);
     } else {
       if (newRequisites) {
         setCodeModal(true);
       }
+    }*/
+    try {
+      await axios.post(`${MY_URL}/payments/api/withdrawal/`, {
+        amount: cash,
+        card_number: requisites,
+      });
+    } catch {
+      setErrorModalOpen(true);
     }
   };
 
