@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Grid, Typography } from "@mui/material";
 
 import DepositSelect from "./DepositSelect";
@@ -7,11 +7,11 @@ import MyButton from "../../../UI/buttons/MyButton";
 import { CashContext } from "../CashContext";
 import Comission from "./Comisson";
 import { Link } from "react-router-dom";
-import axios from "axios";
-import { API_URL, MY_URL } from "../../../../constants/constatns";
 import { fetchWithAuth } from "../../../../api/token";
+import { MY_URL } from "../../../../constants/constatns";
 
 const DepositMenu = ({ isDeposit }) => {
+  const DEPOSIT_URL = `${MY_URL}api/payments/conclusions/`;
   const handleClick = async () => {
     /*if (error) {
       setErrorModalOpen(true);
@@ -21,7 +21,7 @@ const DepositMenu = ({ isDeposit }) => {
       }
     }*/
     try {
-      await fetchWithAuth(`${MY_URL}api/payments/conclusions/`, {
+      await fetchWithAuth(DEPOSIT_URL, {
         method: "POST",
         body: { amount: cash, card_number: requisites },
       });
@@ -34,6 +34,22 @@ const DepositMenu = ({ isDeposit }) => {
       setErrorModalOpen(true);
     }
   };
+
+  const [deposit, setDeposit] = useState([]);
+
+  useEffect(() => {
+    const getDeposit = async () => {
+      try {
+        const res = await fetchWithAuth(DEPOSIT_URL);
+        setDeposit(res.data);
+        console.log(res);
+        console.log(res.data);
+      } catch {
+        console.log("error");
+      }
+    };
+    getDeposit();
+  }, []);
 
   const [cash, setCash] = useState(0);
   const [requisites, setRequisites] = useState("");
