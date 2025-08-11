@@ -352,7 +352,7 @@ const PublicSettings = () => {
                       fontWeight: { sm: 400, xs: 500 },
                       textAlign: { md: "center", xs: "left" },
                       cursor: "pointer",
-                      color: caState == "НЕТ" ? "#E37E31" : "black",
+                      color: caState == "NO" ? "#E37E31" : "black",
                       ":hover": { color: "#E37E31" },
                     }}
                     onClick={() => onCaClick("NO")}
