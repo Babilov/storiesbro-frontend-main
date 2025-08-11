@@ -1,22 +1,33 @@
 import { Box } from "@mui/material";
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import GetMoneyTable from "../../components/Profile/profileCash/getMoney/GetMoneyTable";
 import CashError from "../../components/Profile/profileCash/CashModals/CashError";
 import { CashContext } from "../../components/Profile/profileCash/CashContext";
 import CashConfirmationModal from "../../components/Profile/profileCash/CashModals/CashConfirmationModal";
 import GetMoneyMobileTable from "../../components/Profile/profileCash/getMoney/GetMoneyMobileTable";
+import { fetchWithAuth } from "../../api/token";
+import { MY_URL } from "../../constants/constatns";
 
 const GetMoney = () => {
-  const operations = [
-    {
-      uuid: "0",
-      requisites: "Visa: 0000",
-      date: "04.07.2023 15:19",
-      money: 1,
-      status: "В процессе",
-    },
-  ];
+  const DEPOSIT_URL = `${MY_URL}api/payments/conclusions/`;
+
+  const [operations, setOperations] = useState([]);
+
+  useEffect(() => {
+    const getDeposit = async () => {
+      try {
+        const res = await fetchWithAuth(DEPOSIT_URL);
+        setOperations(res.data);
+        console.log(res);
+        console.log(res.data);
+      } catch {
+        console.log("error");
+      }
+    };
+    getDeposit();
+  }, []);
+
   const [, , errorModalOpen, setErrorModalOpen, codeModal, setCodeModal] =
     useContext(CashContext);
 

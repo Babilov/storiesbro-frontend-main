@@ -35,22 +35,6 @@ const DepositMenu = ({ isDeposit }) => {
     }
   };
 
-  const [deposit, setDeposit] = useState([]);
-
-  useEffect(() => {
-    const getDeposit = async () => {
-      try {
-        const res = await fetchWithAuth(DEPOSIT_URL);
-        setDeposit(res.data);
-        console.log(res);
-        console.log(res.data);
-      } catch {
-        console.log("error");
-      }
-    };
-    getDeposit();
-  }, []);
-
   const [cash, setCash] = useState(0);
   const [requisites, setRequisites] = useState("");
   const [, setComissionModalOpen, , setErrorModalOpen, , setCodeModal] =
