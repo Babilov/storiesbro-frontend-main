@@ -355,7 +355,7 @@ const PublicSettings = () => {
                       color: caState == "НЕТ" ? "#E37E31" : "black",
                       ":hover": { color: "#E37E31" },
                     }}
-                    onClick={() => onCaClick("НЕТ")}
+                    onClick={() => onCaClick("No")}
                   >
                     Не постить
                   </Typography>
