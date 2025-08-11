@@ -52,15 +52,10 @@ const PublicSettings = () => {
 
   const onCaClick = async (ca) => {
     try {
-      if (ca === "") {
-        await axios.post(`${API_URL}community_switch/${groupId}/`, {
-          status: ca,
-        });
-      } else {
-        await axios.post(`${API_URL}community_status/${groupId}/`, {
-          status: ca,
-        });
-      }
+      await axios.post(`${API_URL}community_status/${groupId}/`, {
+        status: ca,
+      });
+
       setCaState(ca);
       console.log(groupId);
     } catch (error) {
@@ -357,11 +352,10 @@ const PublicSettings = () => {
                       fontWeight: { sm: 400, xs: 500 },
                       textAlign: { md: "center", xs: "left" },
                       cursor: "pointer",
-                      ":hover": { color: "#E37E31" },
-                      color: caState == 0 ? "#E37E31" : "black",
+                      color: caState == "НЕТ" ? "#E37E31" : "black",
                       ":hover": { color: "#E37E31" },
                     }}
-                    onClick={() => onCaClick("")}
+                    onClick={() => onCaClick("НЕТ")}
                   >
                     Не постить
                   </Typography>
