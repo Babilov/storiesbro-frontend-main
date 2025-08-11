@@ -21,14 +21,15 @@ const DepositMenu = ({ isDeposit }) => {
       }
     }*/
     try {
-      /*await fetchWithAuth(`${MY_URL}payments/api/withdrawal/`, {
+      await fetchWithAuth(`${MY_URL}api/payments/conclusions/`, {
         method: "POST",
         body: { amount: cash, card_number: requisites },
-      });*/
+      });
+      /*
       await axios.post(`${MY_URL}api/payments/conclusions/`, {
         amount: cash,
         card_number: requisites,
-      });
+      });*/
     } catch {
       setErrorModalOpen(true);
     }
