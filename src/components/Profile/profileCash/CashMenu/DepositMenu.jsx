@@ -25,7 +25,7 @@ const DepositMenu = ({ isDeposit }) => {
         method: "POST",
         body: { amount: cash, card_number: requisites },
       });*/
-      await axios.post(`${MY_URL}payments/api/withdrawal/`, {
+      await axios.post(`${MY_URL}/api/payments/conclusions/`, {
         amount: cash,
         card_number: requisites,
       });
