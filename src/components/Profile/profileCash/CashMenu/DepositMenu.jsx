@@ -18,7 +18,7 @@ const DepositMenu = ({ isDeposit }) => {
         method: "POST",
         body: { amount: cash, card_number: requisites },
       });
-      console.log(res);
+      setOperations([...operations, res]);
     } catch {
       setErrorModalOpen(true);
     }
@@ -26,8 +26,16 @@ const DepositMenu = ({ isDeposit }) => {
 
   const [cash, setCash] = useState(0);
   const [requisites, setRequisites] = useState("");
-  const [, setComissionModalOpen, , setErrorModalOpen, , setCodeModal] =
-    useContext(CashContext);
+  const [
+    ,
+    setComissionModalOpen,
+    ,
+    setErrorModalOpen,
+    ,
+    setCodeModal,
+    operations,
+    setOperations,
+  ] = useContext(CashContext);
 
   return (
     <Grid
