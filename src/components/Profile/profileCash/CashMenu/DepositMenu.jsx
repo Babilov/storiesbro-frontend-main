@@ -13,23 +13,12 @@ import { MY_URL } from "../../../../constants/constatns";
 const DepositMenu = ({ isDeposit }) => {
   const DEPOSIT_URL = `${MY_URL}api/payments/conclusions/`;
   const handleClick = async () => {
-    /*if (error) {
-      setErrorModalOpen(true);
-    } else {
-      if (newRequisites) {
-        setCodeModal(true);
-      }
-    }*/
     try {
-      await fetchWithAuth(DEPOSIT_URL, {
+      const res = await fetchWithAuth(DEPOSIT_URL, {
         method: "POST",
         body: { amount: cash, card_number: requisites },
       });
-      /*
-      await axios.post(`${MY_URL}api/payments/conclusions/`, {
-        amount: cash,
-        card_number: requisites,
-      });*/
+      console.log(res);
     } catch {
       setErrorModalOpen(true);
     }
