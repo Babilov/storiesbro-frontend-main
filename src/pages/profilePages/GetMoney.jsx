@@ -12,15 +12,15 @@ import { MY_URL } from "../../constants/constatns";
 const GetMoney = () => {
   const DEPOSIT_URL = `${MY_URL}api/payments/conclusions/`;
 
-  const [operations, setOperations] = useState([]);
+  const [operations, setOperations] = useState(null);
 
   useEffect(() => {
     const getDeposit = async () => {
       try {
         const res = await fetchWithAuth(DEPOSIT_URL);
-        setOperations(res.data);
+        setOperations(res.results);
         console.log(res);
-        console.log(res.data);
+        console.log(res.results);
       } catch {
         console.log("error");
       }
