@@ -39,7 +39,7 @@ const GetMoney = () => {
     <Box>
       <CashError open={errorModalOpen} setOpen={setErrorModalOpen} />
       {/*<CashConfirmationModal open={codeModal} setOpen={setCodeModal} /> */}
-      <GetMoneyTable operations={operations} />
+      <GetMoneyTable />
       <GetMoneyMobileTable operations={operations} />
     </Box>
   );

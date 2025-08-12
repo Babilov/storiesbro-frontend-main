@@ -1,7 +1,18 @@
 import { Divider, Grid, Typography } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import { CashContext } from "../CashContext";
+import { useContext } from "react";
 
-const GetMoneyTable = ({ operations }) => {
+const GetMoneyTable = () => {
+  const [
+    ,
+    ,
+    errorModalOpen,
+    setErrorModalOpen,
+    codeModal,
+    setCodeModal,
+    operations,
+    setOperations,
+  ] = useContext(CashContext);
   return (
     operations && (
       <Grid
