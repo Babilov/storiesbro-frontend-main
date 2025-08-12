@@ -12,27 +12,28 @@ import { MY_URL } from "../../constants/constatns";
 const GetMoney = () => {
   const DEPOSIT_URL = `${MY_URL}api/payments/conclusions/`;
 
-  const [operations, setOperations] = useState(null);
-
   useEffect(() => {
     const getDeposit = async () => {
       try {
         const res = await fetchWithAuth(DEPOSIT_URL);
         setOperations(res.results);
-        console.log(res);
-        console.log(res.results);
       } catch {
         console.log("error");
       }
     };
     getDeposit();
-    const interval = setInterval(getDeposit, 5000); // обновляем каждые 5 секунд
-
-    return () => clearInterval(interval); // чистим при размонтировании
   }, []);
 
-  const [, , errorModalOpen, setErrorModalOpen, codeModal, setCodeModal] =
-    useContext(CashContext);
+  const [
+    ,
+    ,
+    errorModalOpen,
+    setErrorModalOpen,
+    codeModal,
+    setCodeModal,
+    operations,
+    setOperations,
+  ] = useContext(CashContext);
 
   return (
     <Box>

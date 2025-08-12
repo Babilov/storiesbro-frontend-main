@@ -4,15 +4,16 @@ import ProfileHeader from "../../components/Profile/profileHeader/ProfileHeader"
 import DepositMenu from "../../components/Profile/profileCash/CashMenu/DepositMenu";
 import { CashContext } from "../../components/Profile/profileCash/CashContext";
 import { useNavigate } from "react-router-dom";
-import redirectPng from "./images/redirect.png"
+import redirectPng from "./images/redirect.png";
 
 const CashPattern = ({ children, isDeposit, title }) => {
   const [comissionModalOpen, setComissionModalOpen] = useState(false);
   const [errorModalOpen, setErrorModalOpen] = useState(false);
   const [codeModal, setCodeModal] = useState(false);
+  const [operations, setOperations] = useState(null);
 
   const navigate = useNavigate();
- 
+
   return (
     <CashContext.Provider
       value={[
@@ -22,17 +23,25 @@ const CashPattern = ({ children, isDeposit, title }) => {
         setErrorModalOpen,
         codeModal,
         setCodeModal,
+        operations,
+        setOperations,
       ]}
     >
       <ProfileHeader />
       <Container>
-      <Box
-        component="img"
-        alt="back"
-        src={redirectPng}
-        sx={{position: "absolute", float: "left", width: "45px", height: "38", cursor: "pointer"}}
-        onClick={() => navigate("/cash")}
-      />
+        <Box
+          component="img"
+          alt="back"
+          src={redirectPng}
+          sx={{
+            position: "absolute",
+            float: "left",
+            width: "45px",
+            height: "38",
+            cursor: "pointer",
+          }}
+          onClick={() => navigate("/cash")}
+        />
         <Typography
           variant="h3"
           sx={{

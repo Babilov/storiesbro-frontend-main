@@ -39,8 +39,6 @@ const DepositMenu = ({ isDeposit }) => {
   const [requisites, setRequisites] = useState("");
   const [, setComissionModalOpen, , setErrorModalOpen, , setCodeModal] =
     useContext(CashContext);
-  const error = false;
-  const newRequisites = true;
 
   return (
     <Grid
