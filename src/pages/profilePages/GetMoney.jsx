@@ -26,6 +26,9 @@ const GetMoney = () => {
       }
     };
     getDeposit();
+    const interval = setInterval(getDeposit, 5000); // обновляем каждые 5 секунд
+
+    return () => clearInterval(interval); // чистим при размонтировании
   }, []);
 
   const [, , errorModalOpen, setErrorModalOpen, codeModal, setCodeModal] =
