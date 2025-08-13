@@ -19,6 +19,7 @@ const DepositMenu = ({ isDeposit }) => {
         body: { amount: cash, card_number: requisites },
       });
       setOperations([...operations, res]);
+      console.log(operations);
     } catch {
       setErrorModalOpen(true);
     }
