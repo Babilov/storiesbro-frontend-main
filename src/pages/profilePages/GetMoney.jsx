@@ -16,7 +16,7 @@ const GetMoney = () => {
     const getDeposit = async () => {
       try {
         const res = await fetchWithAuth(DEPOSIT_URL);
-        setOperations(res.results);
+        setOperations((prev) => [...res.results, ...prev]);
       } catch {
         console.log("error");
       }
