@@ -2,8 +2,8 @@ import { Divider, Grid, Typography } from "@mui/material";
 import { CashContext } from "../CashContext";
 import { useContext } from "react";
 
-const GetMoneyTable = () => {
-  const [
+const GetMoneyTable = ({ operations }) => {
+  /*const [
     ,
     ,
     errorModalOpen,
@@ -12,7 +12,7 @@ const GetMoneyTable = () => {
     setCodeModal,
     operations,
     setOperations,
-  ] = useContext(CashContext);
+  ] = useContext(CashContext);*/
   return (
     operations && (
       <Grid
