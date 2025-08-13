@@ -4,7 +4,6 @@ import React, { useContext, useEffect, useState } from "react";
 import GetMoneyTable from "../../components/Profile/profileCash/getMoney/GetMoneyTable";
 import CashError from "../../components/Profile/profileCash/CashModals/CashError";
 import { CashContext } from "../../components/Profile/profileCash/CashContext";
-import CashConfirmationModal from "../../components/Profile/profileCash/CashModals/CashConfirmationModal";
 import GetMoneyMobileTable from "../../components/Profile/profileCash/getMoney/GetMoneyMobileTable";
 import { fetchWithAuth } from "../../api/token";
 import { MY_URL } from "../../constants/constatns";
