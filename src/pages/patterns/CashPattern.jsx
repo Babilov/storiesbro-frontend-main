@@ -10,7 +10,7 @@ const CashPattern = ({ children, isDeposit, title }) => {
   const [comissionModalOpen, setComissionModalOpen] = useState(false);
   const [errorModalOpen, setErrorModalOpen] = useState(false);
   const [codeModal, setCodeModal] = useState(false);
-  const [operations, setOperations] = useState(null);
+  const [operations, setOperations] = useState([]);
 
   const navigate = useNavigate();
 
