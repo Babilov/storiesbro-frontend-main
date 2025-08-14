@@ -9,8 +9,10 @@ import Comission from "./Comisson";
 import { Link } from "react-router-dom";
 import { fetchWithAuth } from "../../../../api/token";
 import { MY_URL } from "../../../../constants/constatns";
+import { useBalance } from "../../../../context/BalancContext";
 
 const DepositMenu = ({ isDeposit }) => {
+  const { balance, setBalance } = useBalance();
   const DEPOSIT_URL = `${MY_URL}api/payments/conclusions/`;
   const handleClick = async () => {
     try {
@@ -18,8 +20,8 @@ const DepositMenu = ({ isDeposit }) => {
         method: "POST",
         body: { amount: cash, card_number: requisites },
       });
+      setBalance(balance - cash);
       setOperations((prev) => [res, ...prev]);
-      console.log(operations);
     } catch {
       setErrorModalOpen(true);
     }

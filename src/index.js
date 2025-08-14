@@ -8,6 +8,7 @@ import "./styles/index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { store } from "./store";
+import { BalanceProvider } from "./context/BalancContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 const THEME = createTheme({
@@ -24,12 +25,14 @@ root.render(
   <ThemeProvider theme={THEME}>
     {/*<React.StrictMode> */}
     <BrowserRouter>
-      <Provider store={store}>
-        <App />
-      </Provider>
+      <BalanceProvider>
+        <Provider store={store}>
+          <App />
+        </Provider>
+      </BalanceProvider>
     </BrowserRouter>
     {/* </React.StrictMode> */}
-  </ThemeProvider>,
+  </ThemeProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function

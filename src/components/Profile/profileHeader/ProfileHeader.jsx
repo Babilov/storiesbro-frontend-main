@@ -12,11 +12,12 @@ import AdminLeftSideBar from "../../AuthorizedAdmin/adminLeftSideBar/AdminLeftSi
 import axios from "axios";
 import { API_URL } from "../../../constants/constatns";
 import { fetchWithAuth } from "../../../api/token";
+import { useBalance } from "../../../context/BalancContext";
 
 const ProfileHeader = () => {
   const [leftSidebarOpen, setLeftSidebarOpen] = useState(false);
   const [rightSidebarOpen, setRightSidebarOpen] = useState(false);
-  const [balance, setBalance] = useState(null);
+  const { balance, setBalance } = useBalance();
 
   const navigate = useNavigate();
 
@@ -26,7 +27,7 @@ const ProfileHeader = () => {
       setBalance(res.balance);
     };
     getMoney();
-  }, []);
+  }, [setBalance]);
 
   return (
     <Box
@@ -79,7 +80,7 @@ const ProfileHeader = () => {
           </MyButton>
                 </Box>*/}
         <Typography sx={{ display: { lg: "block", xs: "none" } }}>
-          {balance && balance + "₽"}
+          {balance}₽
         </Typography>
         <Box
           component="img"
