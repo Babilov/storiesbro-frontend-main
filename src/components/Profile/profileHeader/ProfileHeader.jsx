@@ -80,7 +80,7 @@ const ProfileHeader = () => {
           </MyButton>
                 </Box>*/}
         <Typography sx={{ display: { lg: "block", xs: "none" } }}>
-          {balance}
+          {balance && balance + "₽"}
         </Typography>
         <Box
           component="img"
