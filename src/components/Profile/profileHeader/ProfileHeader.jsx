@@ -11,6 +11,7 @@ import "./sidebars/sidebarStyles/style.css";
 import AdminLeftSideBar from "../../AuthorizedAdmin/adminLeftSideBar/AdminLeftSideBar";
 import axios from "axios";
 import { API_URL } from "../../../constants/constatns";
+import { fetchWithAuth } from "../../../api/token";
 
 const ProfileHeader = () => {
   const [leftSidebarOpen, setLeftSidebarOpen] = useState(false);
@@ -20,7 +21,11 @@ const ProfileHeader = () => {
 
   useEffect(() => {
     const getMoney = async () => {
-      const res = await axios.get(`${API_URL}payments/get_user_balance/`);
+      const res = await fetchWithAuth(`${API_URL}payments/get_user_balance/`, {
+        headers: {
+          Accept: "application/json",
+        },
+      });
       console.log(res);
     };
     getMoney();
