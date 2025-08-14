@@ -24,7 +24,6 @@ const ProfileHeader = () => {
     const getMoney = async () => {
       const res = await fetchWithAuth(`${API_URL}payments/get_user_balance/`);
       setBalance(res.balance);
-      console.log(res);
     };
     getMoney();
   }, []);

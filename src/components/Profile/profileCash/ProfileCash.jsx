@@ -1,9 +1,19 @@
 import { Box, Typography } from "@mui/material";
 import MyInput from "../../UI/input/MyInput";
 import ProfileCashButton from "./ProfileCashButton";
+import { useEffect, useState } from "react";
+import { fetchWithAuth } from "../../../api/token";
+import { API_URL } from "../../../constants/constatns";
 
 const ProfileCash = () => {
-  const cash = 0;
+  const [balance, setBalance] = useState(null);
+  useEffect(() => {
+    const getMoney = async () => {
+      const res = await fetchWithAuth(`${API_URL}payments/get_user_balance/`);
+      setBalance(res.balance);
+    };
+    getMoney();
+  }, []);
 
   return (
     <Box
@@ -18,7 +28,7 @@ const ProfileCash = () => {
         <Typography sx={{ fontWeight: 600, fontSize: "18px", mr: 2 }}>
           Баланс
         </Typography>
-        <MyInput value={cash} disabled={true} />
+        <MyInput value={balance} disabled={true} />
         <Typography sx={{ fontWeight: 600, fontSize: "20px" }}>₽</Typography>
       </Box>
       <Box
