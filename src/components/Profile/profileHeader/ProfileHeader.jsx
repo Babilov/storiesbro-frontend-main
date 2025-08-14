@@ -16,16 +16,14 @@ import { fetchWithAuth } from "../../../api/token";
 const ProfileHeader = () => {
   const [leftSidebarOpen, setLeftSidebarOpen] = useState(false);
   const [rightSidebarOpen, setRightSidebarOpen] = useState(false);
+  const [balance, setBalance] = useState(null);
 
   const navigate = useNavigate();
 
   useEffect(() => {
     const getMoney = async () => {
-      const res = await fetchWithAuth(`${API_URL}payments/get_user_balance/`, {
-        headers: {
-          Accept: "application/json",
-        },
-      });
+      const res = await fetchWithAuth(`${API_URL}payments/get_user_balance/`);
+      setBalance(res.balance);
       console.log(res);
     };
     getMoney();
@@ -82,7 +80,7 @@ const ProfileHeader = () => {
           </MyButton>
                 </Box>*/}
         <Typography sx={{ display: { lg: "block", xs: "none" } }}>
-          0₽
+          {balance}
         </Typography>
         <Box
           component="img"
