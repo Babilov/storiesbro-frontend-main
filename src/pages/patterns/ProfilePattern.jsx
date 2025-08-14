@@ -6,13 +6,13 @@ import axios from "axios";
 import { API_URL } from "../../constants/constatns";
 
 const Profile = ({ children, title }) => {
-  //const tokken = useSelector((store) => store.user);
-  const tokken = localStorage["token"];
+  const token = localStorage.getItem("token");
+
   useEffect(() => {
     axios
       .get(`${API_URL}profile/`, {
         withCredentials: true,
-        headers: { Authorization: `Bearer ${tokken}` },
+        headers: { Authorization: `Bearer ${token}` },
       })
       .then(function (response) {
         localStorage.setItem("email", response["data"]["email"]);
@@ -20,7 +20,7 @@ const Profile = ({ children, title }) => {
       .catch(function (error) {
         console.error("Error fetching profile data:", error);
       });
-  }, [tokken]);
+  }, [token]);
   return (
     <>
       <ProfileHeader />

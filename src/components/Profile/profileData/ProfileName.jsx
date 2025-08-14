@@ -10,16 +10,15 @@ import { API_URL } from "../../../constants/constatns";
 const ProfileName = () => {
   const [name, setName] = useState("");
   const [isEdit, setIsEdit] = useState(false);
-  // const [editedName, setEditedName] = useState("");
-  // const [isDirty, setIsDirty] = useState(false); // Новое состояние для отслеживания изменений в инпуте
-  const tokken = localStorage["token"];
+
+  const token = localStorage.getItem("token");
 
   useEffect(() => {
     const fetchProfile = async () => {
       try {
         const response = await axios.get(`${API_URL}profile/`, {
           withCredentials: true,
-          headers: { Authorization: `Bearer ${tokken}` },
+          headers: { Authorization: `Bearer ${token}` },
         });
         setName(response.data);
       } catch (error) {
@@ -27,7 +26,7 @@ const ProfileName = () => {
       }
     };
     fetchProfile();
-  }, [tokken]);
+  }, [token]);
 
   localStorage.setItem("new_name", name);
 
