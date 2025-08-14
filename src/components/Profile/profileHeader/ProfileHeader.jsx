@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Typography } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useNavigate } from "react-router-dom";
@@ -9,12 +9,22 @@ import RightSideBar from "./sidebars/RightSideBar";
 
 import "./sidebars/sidebarStyles/style.css";
 import AdminLeftSideBar from "../../AuthorizedAdmin/adminLeftSideBar/AdminLeftSideBar";
+import axios from "axios";
+import { API_URL } from "../../../constants/constatns";
 
 const ProfileHeader = () => {
   const [leftSidebarOpen, setLeftSidebarOpen] = useState(false);
   const [rightSidebarOpen, setRightSidebarOpen] = useState(false);
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const getMoney = async () => {
+      const res = await axios.get(`${API_URL}payments/get_user_balance/`);
+      console.log(res);
+    };
+    getMoney();
+  }, []);
 
   return (
     <Box
