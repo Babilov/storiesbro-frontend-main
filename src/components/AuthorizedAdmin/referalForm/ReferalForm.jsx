@@ -24,8 +24,6 @@ const ReferalForm = () => {
     const getRef = async () => {
       const res = await getReferal();
       setLink(res.referral_link);
-      console.log(res);
-      console.log(link);
     };
     getRef();
   });

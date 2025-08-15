@@ -1,5 +1,5 @@
 import { Box, Grid, Typography } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 
 import copy from "./images/copy.svg";
@@ -7,10 +7,12 @@ import check from "./images/check.svg";
 import ProfileLinks from "./ProfileLinks";
 import ProfileLinksAdmin from "./ProfileLinksAdmin";
 import ProfileSteps from "./ProfileSteps";
+import { getReferal } from "../../../utils/getReferal";
 
 const ProfileLowComission = () => {
   const refUrl = "Storisbro.com/?_ref=2Rh46f3L";
   const [icon, setIcon] = useState(copy);
+  const [link, setLink] = useState("");
 
   const handleChangeIcon = () => {
     setIcon(check);
@@ -18,6 +20,15 @@ const ProfileLowComission = () => {
       setIcon(copy);
     }, 2000);
   };
+
+  useEffect(() => {
+    const getRef = async () => {
+      const res = await getReferal();
+      setLink(res.referral_link);
+    };
+    getRef();
+  });
+
   return (
     <Grid container>
       {localStorage.getItem("statusAccount") === "admin" && (
@@ -46,14 +57,14 @@ const ProfileLowComission = () => {
             variant="body1"
             sx={{ color: "#2A5885", fontSize: "18px", fontWeight: 400 }}
           >
-            {refUrl}
+            {link}
           </Typography>
           <CopyToClipboard text={refUrl}>
             <Box
               component="img"
               alt="copy"
               onClick={handleChangeIcon}
-              src={copy}
+              src={icon}
               sx={{ cursor: "pointer" }}
             />
           </CopyToClipboard>
