@@ -1,7 +1,8 @@
 import axios from "axios";
 import { API_URL } from "../constants/constatns";
+import { fetchWithAuth } from "../api/token";
 
 export const getReferal = async () => {
-  const res = await axios.get(`${API_URL}ref/referral-link/`);
+  const res = fetchWithAuth(`${API_URL}ref/referral-link/`);
   return res;
 };
