@@ -1,22 +1,29 @@
 import { Box, Grid, Typography } from "@mui/material";
-import React from "react";
-import { CopyToClipboard } from 'react-copy-to-clipboard'
+import React, { useState } from "react";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 
 import copy from "./images/copy.svg";
+import check from "./images/check.svg";
 import ProfileLinks from "./ProfileLinks";
 import ProfileLinksAdmin from "./ProfileLinksAdmin";
 import ProfileSteps from "./ProfileSteps";
 
 const ProfileLowComission = () => {
   const refUrl = "Storisbro.com/?_ref=2Rh46f3L";
+  const [icon, setIcon] = useState(copy);
+
+  const handleChangeIcon = () => {
+    setIcon(check);
+    setTimeout(() => {
+      setIcon(copy);
+    }, 2000);
+  };
   return (
     <Grid container>
-      {localStorage.getItem('statusAccount') === 'admin' &&
+      {localStorage.getItem("statusAccount") === "admin" && (
         <ProfileLinksAdmin />
-      }
-      {localStorage.getItem('statusAccount') === 'customer' &&
-        <ProfileLinks />
-      }
+      )}
+      {localStorage.getItem("statusAccount") === "customer" && <ProfileLinks />}
       <Grid item md={5} xs={12} sx={{ m: "0 auto" }}>
         <Typography
           variant="h4"
@@ -42,12 +49,13 @@ const ProfileLowComission = () => {
             {refUrl}
           </Typography>
           <CopyToClipboard text={refUrl}>
-          <Box
-            component="img"
-            alt="copy"
-            src={copy}
-            sx={{ cursor: "pointer" }}
-          />
+            <Box
+              component="img"
+              alt="copy"
+              onClick={handleChangeIcon}
+              src={copy}
+              sx={{ cursor: "pointer" }}
+            />
           </CopyToClipboard>
         </Box>
       </Grid>

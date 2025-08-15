@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Link, Typography } from "@mui/material";
 
 import copy from "./images/copy.svg";
@@ -7,9 +7,10 @@ import money from "./images/money.svg";
 import scrooge from "./images/scrooge.svg";
 import check from "./images/check.svg";
 import { CopyToClipboard } from "react-copy-to-clipboard";
+import { getReferal } from "../../../utils/getReferal";
 
 const ReferalForm = () => {
-  const link = "Storisbro.com/?_ref=2Rh46f3L";
+  const [link, setLink] = useState("");
   const [icon, setIcon] = useState(copy);
 
   const handleChangeIcon = () => {
@@ -18,6 +19,11 @@ const ReferalForm = () => {
       setIcon(copy);
     }, 2000);
   };
+
+  useEffect(() => {
+    const res = getReferal();
+    console.log(res);
+  });
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column" }}>
