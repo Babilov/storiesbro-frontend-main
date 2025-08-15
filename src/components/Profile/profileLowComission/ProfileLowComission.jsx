@@ -10,7 +10,6 @@ import ProfileSteps from "./ProfileSteps";
 import { getReferal } from "../../../utils/getReferal";
 
 const ProfileLowComission = () => {
-  const refUrl = "Storisbro.com/?_ref=2Rh46f3L";
   const [icon, setIcon] = useState(copy);
   const [link, setLink] = useState("");
 
@@ -59,7 +58,7 @@ const ProfileLowComission = () => {
           >
             {link}
           </Typography>
-          <CopyToClipboard text={refUrl}>
+          <CopyToClipboard text={link}>
             <Box
               component="img"
               alt="copy"
