@@ -20,8 +20,8 @@ const ReferalForm = () => {
     }, 2000);
   };
 
-  useEffect(() => {
-    const res = getReferal();
+  useEffect(async () => {
+    const res = await getReferal();
     console.log(res);
   });
 

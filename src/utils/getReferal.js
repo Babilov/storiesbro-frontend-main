@@ -4,5 +4,5 @@ import { fetchWithAuth } from "../api/token";
 
 export const getReferal = async () => {
   const res = fetchWithAuth(`${API_URL}ref/referral-link/`);
-  return res;
+  return res.referral_link;
 };
