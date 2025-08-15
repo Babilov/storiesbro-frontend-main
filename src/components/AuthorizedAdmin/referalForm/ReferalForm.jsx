@@ -20,9 +20,12 @@ const ReferalForm = () => {
     }, 2000);
   };
 
-  useEffect(async () => {
-    const res = await getReferal();
-    console.log(res);
+  useEffect(() => {
+    const getRef = async () => {
+      const res = await getReferal();
+      setLink(res);
+    };
+    getRef();
   });
 
   return (
