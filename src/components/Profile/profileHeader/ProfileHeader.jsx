@@ -9,7 +9,6 @@ import RightSideBar from "./sidebars/RightSideBar";
 
 import "./sidebars/sidebarStyles/style.css";
 import AdminLeftSideBar from "../../AuthorizedAdmin/adminLeftSideBar/AdminLeftSideBar";
-import axios from "axios";
 import { API_URL } from "../../../constants/constatns";
 import { fetchWithAuth } from "../../../api/token";
 import { useBalance } from "../../../context/BalancContext";

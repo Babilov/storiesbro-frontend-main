@@ -1,10 +1,10 @@
-import React from "react";
 import { Box } from "@mui/material";
 
 import up from "./images/up.svg";
 import list from "./images/list.svg";
 import question from "./images/question.svg";
 import tagUser from "./images/tagUser.svg";
+import moneys from "./images/moneys.svg";
 import MyMenu from "../../UI/menu/MyMenu";
 
 const AuthorizedAdminMenu = () => {
@@ -21,11 +21,11 @@ const AuthorizedAdminMenu = () => {
       linkHref: "/statistic",
     },
 
-    // {
-    //   icon: <Box component="img" alt="refeal" src={moneys} />,
-    //   linkText: "Реф. система",
-    //   linkHref: "/referal",
-    // },
+    {
+      icon: <Box component="img" alt="refeal" src={moneys} />,
+      linkText: "Реф. система",
+      linkHref: "/referal",
+    },
 
     {
       icon: <Box component="img" alt="help" src={question} />,

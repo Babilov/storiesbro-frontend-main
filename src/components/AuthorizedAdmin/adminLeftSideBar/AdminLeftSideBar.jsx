@@ -1,5 +1,4 @@
 import { Box, Divider, Modal, Typography } from "@mui/material";
-import React from "react";
 import { NavLink } from "react-router-dom";
 
 import list from "./images/list.svg";
@@ -8,6 +7,7 @@ import tagUser from "./images/tagUser.svg";
 import logo from "./images/logo.png";
 import cross from "./images/cross.svg";
 import trend from "./images/trend.svg";
+import moneys from "./images/moneys.svg";
 
 const AdminLeftSideBar = ({ open, setOpen }) => {
   return (
@@ -119,7 +119,7 @@ const AdminLeftSideBar = ({ open, setOpen }) => {
             </NavLink>
           </Box>
 
-          {/* <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
+          <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
             <Box component="img" alt="moneys" src={moneys} sx={{ mr: 1 }} />
             <NavLink
               to="/referal"
@@ -128,7 +128,7 @@ const AdminLeftSideBar = ({ open, setOpen }) => {
             >
               Реф. система
             </NavLink>
-          </Box> */}
+          </Box>
 
           <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
             <Box
