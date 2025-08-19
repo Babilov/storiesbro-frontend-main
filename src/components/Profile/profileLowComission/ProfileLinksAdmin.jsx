@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Grid, Typography } from "@mui/material";
 
 import comissionLogo from "./images/comissionLogo.svg";
@@ -9,12 +9,14 @@ import GradientButton from "../../UI/buttons/GradientButton";
 import vk from "./images/comissionCross.svg";
 import axios from "axios";
 import { API_URL } from "../../../constants/constatns";
+import { getReferal } from "../../../utils/getReferal";
 
 const ProfileLinksAdmin = () => {
   const id = localStorage.getItem("id");
+
   const addLinks = async () => {
     try {
-      await axios.post(`${API_URL}commision/add_link/${id}/`);
+      await axios.post(`${API_URL}commision/add_link/${id}/`, { link: link });
     } catch {
       console.log("Ошибка addLinks");
     }
@@ -22,11 +24,22 @@ const ProfileLinksAdmin = () => {
 
   const subscribe = async () => {
     try {
-      await axios.post(`${API_URL}api/commision/subscribe_storisbro/${id}/`);
+      await axios.post(`${API_URL}commision/subscribe_storisbro/${id}/`);
     } catch {
       console.log("Ошибка subscribe");
     }
   };
+
+  const [link, setLink] = useState("");
+
+  useEffect(() => {
+    const getRef = async () => {
+      const res = await getReferal();
+      setLink(res.referral_link);
+    };
+    getRef();
+  });
+
   return (
     <>
       <Grid item xs={12} md={6}>
