@@ -7,8 +7,26 @@ import comissionCross from "./images/comissionCross.svg";
 import GradientButton from "../../UI/buttons/GradientButton";
 
 import vk from "./images/comissionCross.svg";
+import axios from "axios";
+import { API_URL } from "../../../constants/constatns";
 
 const ProfileLinksAdmin = () => {
+  const id = localStorage.getItem("id");
+  const addLinks = async () => {
+    try {
+      await axios.post(`${API_URL}commision/add_link/${id}/`);
+    } catch {
+      console.log("Ошибка addLinks");
+    }
+  };
+
+  const subscribe = async () => {
+    try {
+      await axios.post(`${API_URL}api/commision/subscribe_storisbro/${id}/`);
+    } catch {
+      console.log("Ошибка subscribe");
+    }
+  };
   return (
     <>
       <Grid item xs={12} md={6}>
@@ -92,7 +110,7 @@ const ProfileLinksAdmin = () => {
             Ссылки 0
           </Typography>
           <Box sx={{ display: "flex", alignItems: "center" }}>
-            <GradientButton>Добавить</GradientButton>
+            <GradientButton handleClick={addLinks}>Добавить</GradientButton>
           </Box>
         </Box>
         <Box
@@ -183,7 +201,7 @@ const ProfileLinksAdmin = () => {
             Вы не подписаны
           </Typography>
           <Box sx={{ display: "flex", alignItems: "center" }}>
-            <GradientButton>Подписаться</GradientButton>
+            <GradientButton handleClick={subscribe}>Подписаться</GradientButton>
           </Box>
         </Box>
         <Box

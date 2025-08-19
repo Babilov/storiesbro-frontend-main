@@ -12,14 +12,14 @@ import axios from "axios";
 const ProfileSteps = () => {
   const [errorModalOpen, setErrorModalOpen] = useState(false);
   const [susccesModalOpen, setSusccesModalOpen] = useState(false);
-  const user_id = localStorage.getItem("id");
+  const id = localStorage.getItem("id");
 
-  const handleClickLowCommission = () => {
-    axios
-      .post(`${API_URL}api_communities/communities/check_all/${user_id}`)
-      .catch((error) => {
-        console.error(error);
-      });
+  const handleClickLowCommission = async () => {
+    try {
+      await axios.post(`${API_URL}commision/low_commission/${id}/`);
+    } catch {
+      console.log("Ошибка lowComission");
+    }
   };
   return (
     <>
@@ -69,14 +69,7 @@ const ProfileSteps = () => {
             2. Нажмите “Ссылка добавлена”.
           </Typography>
           <Box sx={{ width: "50%" }}>
-            <GradientButton
-              handleClick={
-                // error
-                //   ? () => setErrorModalOpen(true)
-                //   : () => setSusccesModalOpen(true)
-                handleClickLowCommission
-              }
-            >
+            <GradientButton handleClick={handleClickLowCommission}>
               Ссылка добавлена
             </GradientButton>
           </Box>
