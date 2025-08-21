@@ -40,6 +40,16 @@ const ProfileLinksAdmin = () => {
     getRef();
   });
 
+  useEffect(() => {
+    const getLinks = async () => {
+      const res = await axios.get(
+        `${API_URL}commision/check_links/${id}/?check_link=${link}`
+      );
+      console.log(res);
+    };
+    getLinks();
+  }, [link]);
+
   return (
     <>
       <Grid item xs={12} md={6}>
