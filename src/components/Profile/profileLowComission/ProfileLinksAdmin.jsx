@@ -44,12 +44,13 @@ const ProfileLinksAdmin = () => {
 
   useEffect(() => {
     const getLinks = async () => {
-      const res = await axios.get(
-        `${API_URL}commision/check_links/${id}/?check_link=${link}/`
-      );
-      console.log(res);
-      setLinksCount(res.data.results);
-      console.log(linksCount);
+      if (link !== "") {
+        const res = await axios.get(
+          `${API_URL}commision/check_links/${id}/?check_link=${link}`
+        );
+        setLinksCount(res.data.results);
+        console.log(linksCount);
+      }
     };
     getLinks();
   }, [link]);
@@ -59,7 +60,7 @@ const ProfileLinksAdmin = () => {
       const res = await axios.get(
         `${API_URL}commision/subscribe_storisbro/${id}/`
       );
-      console.log(res);
+      setIsSubscribe(res.data.subscribed);
     };
     getIsSubscribe();
   }, []);
