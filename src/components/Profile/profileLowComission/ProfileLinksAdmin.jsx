@@ -32,6 +32,7 @@ const ProfileLinksAdmin = () => {
 
   const [link, setLink] = useState("");
   const [linksCount, setLinksCount] = useState(null);
+  const [isSubscribe, setIsSubscribe] = useState(false);
 
   useEffect(() => {
     const getRef = async () => {
@@ -44,7 +45,7 @@ const ProfileLinksAdmin = () => {
   useEffect(() => {
     const getLinks = async () => {
       const res = await axios.get(
-        `${API_URL}commision/check_links/${id}/?check_link=${link}`
+        `${API_URL}commision/check_links/${id}/?check_link=${link}/`
       );
       console.log(res);
       setLinksCount(res.data.results);
@@ -52,6 +53,16 @@ const ProfileLinksAdmin = () => {
     };
     getLinks();
   }, [link]);
+
+  useEffect(() => {
+    const getIsSubscribe = async () => {
+      const res = await axios.get(
+        `${API_URL}commision/subscribe_storisbro/${id}/`
+      );
+      console.log(res);
+    };
+    getIsSubscribe();
+  }, []);
 
   return (
     <>
