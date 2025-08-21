@@ -31,6 +31,7 @@ const ProfileLinksAdmin = () => {
   };
 
   const [link, setLink] = useState("");
+  const [linksCount, setLinksCount] = useState(null);
 
   useEffect(() => {
     const getRef = async () => {
@@ -45,7 +46,7 @@ const ProfileLinksAdmin = () => {
       const res = await axios.get(
         `${API_URL}commision/check_links/${id}/?check_link=${link}`
       );
-      console.log(res);
+      setLinksCount(res.result);
     };
     getLinks();
   }, [link]);
@@ -130,7 +131,7 @@ const ProfileLinksAdmin = () => {
           }}
         >
           <Typography sx={{ fontSize: "18px", fontWeight: 600, mb: 2 }}>
-            Ссылки 0
+            Ссылки {linksCount}
           </Typography>
           <Box sx={{ display: "flex", alignItems: "center" }}>
             <GradientButton handleClick={addLinks}>Добавить</GradientButton>
