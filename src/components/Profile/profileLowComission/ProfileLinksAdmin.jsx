@@ -236,11 +236,15 @@ const ProfileLinksAdmin = () => {
           }}
         >
           <Typography sx={{ fontSize: "18px", fontWeight: 600, mb: 2 }}>
-            Вы не подписаны
+            Вы {!isSubscribe ? "не" : "успешно"} подписаны
           </Typography>
-          <Box sx={{ display: "flex", alignItems: "center" }}>
-            <GradientButton handleClick={subscribe}>Подписаться</GradientButton>
-          </Box>
+          {subscribe && (
+            <Box sx={{ display: "flex", alignItems: "center" }}>
+              <GradientButton handleClick={subscribe}>
+                Подписаться
+              </GradientButton>
+            </Box>
+          )}
         </Box>
         <Box
           sx={{
