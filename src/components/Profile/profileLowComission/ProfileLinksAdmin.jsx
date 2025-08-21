@@ -46,7 +46,9 @@ const ProfileLinksAdmin = () => {
       const res = await axios.get(
         `${API_URL}commision/check_links/${id}/?check_link=${link}`
       );
+      console.log(res);
       setLinksCount(res.results);
+      console.log(linksCount);
     };
     getLinks();
   }, [link]);
