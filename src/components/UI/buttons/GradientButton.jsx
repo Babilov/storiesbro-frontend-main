@@ -11,10 +11,12 @@ const GradientButton = ({
   const [animate, setAnimate] = useState(true);
 
   const startAnimation = () => {
-    setAnimate(true);
-    setTimeout(() => {
-      setAnimate(false);
-    }, 800); // Длительность анимации в миллисекундах (в данном случае 0.8 секунды)
+    if (!disabled) {
+      setAnimate(true);
+      setTimeout(() => {
+        setAnimate(false);
+      }, 800);
+    } // Длительность анимации в миллисекундах (в данном случае 0.8 секунды)
   };
 
   useEffect(() => {
