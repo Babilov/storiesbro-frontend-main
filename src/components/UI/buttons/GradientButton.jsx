@@ -20,14 +20,16 @@ const GradientButton = ({
   };
 
   useEffect(() => {
-    startAnimation(); // Запускаем анимацию при монтировании компонента
+    if (!disabled) {
+      startAnimation(); // Запускаем анимацию при монтировании компонента
 
-    // Затем устанавливаем интервал повторения каждые 10 секунд
-    const intervalId = setInterval(() => {
-      startAnimation();
-    }, 10000);
+      // Затем устанавливаем интервал повторения каждые 10 секунд
+      const intervalId = setInterval(() => {
+        startAnimation();
+      }, 10000);
 
-    return () => clearInterval(intervalId);
+      return () => clearInterval(intervalId);
+    }
   }, []); // Пустой массив зависимостей, чтобы эффект выполнялся только при монтировании компонента
 
   const buttonStyles = {
