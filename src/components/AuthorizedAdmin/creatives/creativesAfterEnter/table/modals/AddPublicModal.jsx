@@ -150,7 +150,7 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
         <Box sx={{ display: "flex", justifyContent: "center" }}>
           <MyButton
             onClick={() => setLimitModalOpen(false)}
-            options={{ backgroundColor: "#E37E32" }}
+            options={{ background: "#E37E31" }}
           >
             Понятно
           </MyButton>
