@@ -16,8 +16,10 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
   const [noPermissionOpen, setNoPermissionOpen] = useState(false);
   const [selectedPublics, setSelectedPublics] = useState([]);
   const [listAvailablePublics, setListAvailablePublics] = useState([]);
+  const [limitModalOpen, setLimitModalOpen] = useState(false); // модалка про лимит
 
   const MAX_PUBLICS = 30;
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!publics || !addedPublics) return;
@@ -27,8 +29,6 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
     );
     setListAvailablePublics(filteredPublics);
   }, [open, publics, addedPublics]);
-
-  const navigate = useNavigate();
 
   const handleClick = async () => {
     if (error) {
@@ -91,7 +91,7 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
         const availableSlots = MAX_PUBLICS - currentTotal;
 
         if (availableSlots <= 0) {
-          alert("У вас уже добавлено максимальное количество сообществ (30)");
+          setLimitModalOpen(true);
           return prevSelected;
         }
 
@@ -107,16 +107,20 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
   );
 
   // ---- handleCheckboxChange с учетом addedPublics ----
-  const handleCheckboxChange = (item) => {
+  const handleCheckboxChange = (item, disabled) => {
+    if (disabled) {
+      // если клик по заблокированному чекбоксу
+      setLimitModalOpen(true);
+      return;
+    }
+
     setSelectedPublics((prevSelected) => {
       if (prevSelected.some((publicItem) => publicItem.id === item.id)) {
         return prevSelected.filter((publicItem) => publicItem.id !== item.id);
       } else {
         const totalCount = addedPublics.length + prevSelected.length;
         if (totalCount >= MAX_PUBLICS) {
-          alert(
-            "Нельзя добавить больше 30 сообществ (включая уже добавленные)"
-          );
+          setLimitModalOpen(true);
           return prevSelected;
         }
         return [...prevSelected, item];
@@ -130,10 +134,29 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
 
   return (
     <>
+      {/* Модальное окно про лимит */}
+      <MyModal
+        width="40%"
+        isFormOpen={limitModalOpen}
+        setIsFormOpen={() => setLimitModalOpen(false)}
+        title="Ограничение ВКонтакте"
+        titleFont="26px"
+      >
+        <Typography sx={{ fontSize: "18px", textAlign: "center", mb: 2 }}>
+          К сожалению, ВК имеет ограничения на привязанные сообщества к одному
+          аккаунту (не больше 30). Вам необходимо привязать ещё один аккаунт и
+          добавить оставшиеся сообщества через него.
+        </Typography>
+        <Box sx={{ display: "flex", justifyContent: "center" }}>
+          <MyButton onClick={() => setLimitModalOpen(false)}>Понятно</MyButton>
+        </Box>
+      </MyModal>
+
       <NoPermissionModal
         open={noPermissionOpen}
         setOpen={setNoPermissionOpen}
       />
+
       <MyModal
         width="90%"
         title="Добавление сообщества"
@@ -179,42 +202,47 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
             },
           }}
         >
-          {filteredPublics.map((item) => (
-            <Box
-              key={item.id}
-              sx={{
-                border: "1px solid #CDCDCD",
-                borderRadius: "10px",
-                p: "10px",
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                mb: "7px",
-              }}
-            >
-              <Box sx={{ display: "flex", alignItems: "center" }}>
-                <Avatar
-                  alt="public avatar"
-                  src={item.image}
-                  sx={{ height: "30px", width: "30px" }}
-                />
-                <Typography sx={{ ml: "50px" }}>{item.name}</Typography>
-              </Box>
-              <Checkbox
-                style={{ color: "black" }}
-                checked={selectedPublics.some(
-                  (publicItem) => publicItem.id === item.id
-                )}
-                disabled={
-                  isLimitReached &&
-                  !selectedPublics.some(
+          {filteredPublics.map((item) => {
+            const disabled =
+              isLimitReached &&
+              !selectedPublics.some((publicItem) => publicItem.id === item.id);
+
+            return (
+              <Box
+                key={item.id}
+                sx={{
+                  border: "1px solid #CDCDCD",
+                  borderRadius: "10px",
+                  p: "10px",
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  mb: "7px",
+                  cursor: disabled ? "not-allowed" : "pointer",
+                }}
+                onClick={() => {
+                  if (disabled) setLimitModalOpen(true);
+                }}
+              >
+                <Box sx={{ display: "flex", alignItems: "center" }}>
+                  <Avatar
+                    alt="public avatar"
+                    src={item.image}
+                    sx={{ height: "30px", width: "30px" }}
+                  />
+                  <Typography sx={{ ml: "50px" }}>{item.name}</Typography>
+                </Box>
+                <Checkbox
+                  style={{ color: "black" }}
+                  checked={selectedPublics.some(
                     (publicItem) => publicItem.id === item.id
-                  )
-                }
-                onChange={() => handleCheckboxChange(item)}
-              />
-            </Box>
-          ))}
+                  )}
+                  disabled={disabled}
+                  onChange={() => handleCheckboxChange(item, disabled)}
+                />
+              </Box>
+            );
+          })}
         </Box>
 
         <Link
