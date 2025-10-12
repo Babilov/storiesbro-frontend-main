@@ -90,9 +90,15 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
         const currentTotal = addedPublics.length + prevSelected.length;
         const availableSlots = MAX_PUBLICS - currentTotal;
 
+        // Если лимит уже достигнут — просто показать модалку
         if (availableSlots <= 0) {
           setLimitModalOpen(true);
           return prevSelected;
+        }
+
+        // Если добавление полностью заполнит лимит — тоже показать модалку
+        if (newSelections.length > availableSlots) {
+          setLimitModalOpen(true);
         }
 
         return [...prevSelected, ...newSelections.slice(0, availableSlots)];
@@ -150,9 +156,9 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
         <Box sx={{ display: "flex", justifyContent: "center" }}>
           <MyButton
             onClick={() => setLimitModalOpen(false)}
-            options={{ background: "#E37E31" }}
+            options={{ background: "#0077FF" }}
           >
-            Понятно
+            Добавить аккаунт
           </MyButton>
         </Box>
       </MyModal>
