@@ -15,8 +15,9 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
   const permission = true;
   const [noPermissionOpen, setNoPermissionOpen] = useState(false);
   const [selectedPublics, setSelectedPublics] = useState([]);
-
   const [listAvailablePublics, setListAvailablePublics] = useState([]);
+
+  const MAX_PUBLICS = 30;
 
   useEffect(() => {
     if (!publics || !addedPublics) return;
@@ -24,9 +25,8 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
       (publicItem) =>
         !addedPublics.some((selected) => selected.group_id === publicItem.id)
     );
-
     setListAvailablePublics(filteredPublics);
-  }, [open, publics, selectedPublics]);
+  }, [open, publics, addedPublics]);
 
   const navigate = useNavigate();
 
@@ -44,17 +44,14 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
           const token = localStorage.getItem("access_token");
           const res = await axios.post(
             `${API_URL}add_user_group/`,
-            {
-              selectedPublics,
-            },
+            { selectedPublics },
             {
               headers: {
-                Authorization: `Bearer ${token}`, // Токен в заголовке
+                Authorization: `Bearer ${token}`,
               },
             }
           );
           waitForAuth1(res.data.auth_url);
-          // window.location.reload();
         } catch (error) {
           console.error("Ошибка при отправке данных:", error);
         }
@@ -64,33 +61,6 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
 
   const waitForAuth1 = (authUrl) => {
     window.location.href = authUrl;
-  };
-
-  const waitForAuth = (authUrl) => {
-    return new Promise((resolve, reject) => {
-      const popup = window.open(authUrl, "_blank");
-
-      const timer = setInterval(() => {
-        try {
-          // Пытаемся прочитать URL попапа (работает только если попап на том же домене)
-          if (popup.location.href.includes("error=")) {
-            const url = new URL(popup.location.href);
-            const error = url.searchParams.get("error");
-            const errorDesc = url.searchParams.get("error_description");
-            clearInterval(timer);
-            popup.close();
-            reject(new Error(errorDesc || error));
-          }
-        } catch (e) {
-          // Блокируется политика CORS - это нормально
-        }
-
-        if (popup.closed) {
-          clearInterval(timer);
-          resolve();
-        }
-      }, 500);
-    });
   };
 
   const handleClose = () => {
@@ -103,6 +73,7 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
     const allSelected = filteredPublics.every((item) =>
       selectedPublics.some((publicItem) => publicItem.id === item.id)
     );
+
     if (allSelected) {
       setSelectedPublics((prevSelected) =>
         prevSelected.filter(
@@ -113,7 +84,15 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
       const newSelections = filteredPublics.filter(
         (item) => !selectedPublics.some((selected) => selected.id === item.id)
       );
-      setSelectedPublics((prevSelected) => [...prevSelected, ...newSelections]);
+
+      setSelectedPublics((prevSelected) => {
+        const availableSlots = MAX_PUBLICS - prevSelected.length;
+        if (availableSlots <= 0) {
+          alert("Вы уже выбрали максимальное количество сообществ (30)");
+          return prevSelected;
+        }
+        return [...prevSelected, ...newSelections.slice(0, availableSlots)];
+      });
     }
   };
 
@@ -128,18 +107,17 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
       if (prevSelected.some((publicItem) => publicItem.id === item.id)) {
         return prevSelected.filter((publicItem) => publicItem.id !== item.id);
       } else {
+        if (prevSelected.length >= MAX_PUBLICS) {
+          alert("Нельзя добавить больше 30 сообществ");
+          return prevSelected;
+        }
         return [...prevSelected, item];
       }
     });
-    console.log(selectedPublics);
   };
 
   return (
     <>
-      {/*{!authError && (
-        <SuccessModal open={successOpen} setOpen={setSuccessOpen} />
-      )} */}
-
       <NoPermissionModal
         open={noPermissionOpen}
         setOpen={setNoPermissionOpen}
@@ -162,6 +140,7 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
               : "Выбрать всё"}
           </MyButton>
         </Box>
+
         <MyInput
           error={error}
           value={inputValue}
@@ -171,12 +150,12 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
 
         <Box
           sx={{
-            maxHeight: "240px", // Замените эту высоту на необходимую
+            maxHeight: "240px",
             overflowY: "auto",
             "&::-webkit-scrollbar": {
               width: "12px",
-              borderColor: "#000", // Замените цвет на желаемый
-              borderRadius: "10px", // Замените на необходимое значение
+              borderColor: "#000",
+              borderRadius: "10px",
             },
             "&::-webkit-scrollbar-thumb": {
               backgroundColor: "#E37E31",
@@ -214,6 +193,12 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
                 checked={selectedPublics.some(
                   (publicItem) => publicItem.id === item.id
                 )}
+                disabled={
+                  selectedPublics.length >= MAX_PUBLICS &&
+                  !selectedPublics.some(
+                    (publicItem) => publicItem.id === item.id
+                  )
+                }
                 onChange={() => handleCheckboxChange(item)}
               />
             </Box>
@@ -226,6 +211,7 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
         >
           требования к сообществам
         </Link>
+
         <Box sx={{ width: "50%", m: "0 auto" }}>
           <MyButton onClick={handleClick} options={{ background: "#4CD640" }}>
             Добавить
