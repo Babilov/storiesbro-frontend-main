@@ -18,7 +18,7 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
   const [listAvailablePublics, setListAvailablePublics] = useState([]);
   const [limitModalOpen, setLimitModalOpen] = useState(false); // модалка про лимит
 
-  const MAX_PUBLICS = 30;
+  const MAX_PUBLICS = 50;
   const navigate = useNavigate();
 
   useEffect(() => {
