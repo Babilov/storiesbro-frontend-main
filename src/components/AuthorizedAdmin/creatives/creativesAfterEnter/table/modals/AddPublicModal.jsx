@@ -69,6 +69,7 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
     setInputValue("");
   };
 
+  // ---- selectAll с учетом добавленных ----
   const selectAll = () => {
     const allSelected = filteredPublics.every((item) =>
       selectedPublics.some((publicItem) => publicItem.id === item.id)
@@ -86,11 +87,14 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
       );
 
       setSelectedPublics((prevSelected) => {
-        const availableSlots = MAX_PUBLICS - prevSelected.length;
+        const currentTotal = addedPublics.length + prevSelected.length;
+        const availableSlots = MAX_PUBLICS - currentTotal;
+
         if (availableSlots <= 0) {
-          alert("Вы уже выбрали максимальное количество сообществ (30)");
+          alert("У вас уже добавлено максимальное количество сообществ (30)");
           return prevSelected;
         }
+
         return [...prevSelected, ...newSelections.slice(0, availableSlots)];
       });
     }
@@ -102,19 +106,27 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
       item.link.toLowerCase().includes(inputValue.toLowerCase())
   );
 
+  // ---- handleCheckboxChange с учетом addedPublics ----
   const handleCheckboxChange = (item) => {
     setSelectedPublics((prevSelected) => {
       if (prevSelected.some((publicItem) => publicItem.id === item.id)) {
         return prevSelected.filter((publicItem) => publicItem.id !== item.id);
       } else {
-        if (prevSelected.length >= MAX_PUBLICS) {
-          alert("Нельзя добавить больше 30 сообществ");
+        const totalCount = addedPublics.length + prevSelected.length;
+        if (totalCount >= MAX_PUBLICS) {
+          alert(
+            "Нельзя добавить больше 30 сообществ (включая уже добавленные)"
+          );
           return prevSelected;
         }
         return [...prevSelected, item];
       }
     });
   };
+
+  // ---- блокировка чекбоксов ----
+  const isLimitReached =
+    addedPublics.length + selectedPublics.length >= MAX_PUBLICS;
 
   return (
     <>
@@ -194,7 +206,7 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
                   (publicItem) => publicItem.id === item.id
                 )}
                 disabled={
-                  selectedPublics.length >= MAX_PUBLICS &&
+                  isLimitReached &&
                   !selectedPublics.some(
                     (publicItem) => publicItem.id === item.id
                   )
