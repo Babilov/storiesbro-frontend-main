@@ -148,7 +148,12 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
           добавить оставшиеся сообщества через него.
         </Typography>
         <Box sx={{ display: "flex", justifyContent: "center" }}>
-          <MyButton onClick={() => setLimitModalOpen(false)}>Понятно</MyButton>
+          <MyButton
+            onClick={() => setLimitModalOpen(false)}
+            options={{ backgroundColor: "#F5F5F5" }}
+          >
+            Понятно
+          </MyButton>
         </Box>
       </MyModal>
 
