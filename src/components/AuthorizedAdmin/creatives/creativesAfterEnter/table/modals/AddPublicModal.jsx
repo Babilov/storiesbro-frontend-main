@@ -134,6 +134,11 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
     });
   };
 
+  const addAcc = async () => {
+    const res = await axios.get(`${API_URL}communities/vk/link-account/`);
+    console.log(res);
+  };
+
   // ---- блокировка чекбоксов ----
   const isLimitReached =
     addedPublics.length + selectedPublics.length >= MAX_PUBLICS;
@@ -155,7 +160,7 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
         </Typography>
         <Box sx={{ display: "flex", justifyContent: "center" }}>
           <MyButton
-            onClick={() => setLimitModalOpen(false)}
+            onClick={() => addAcc()}
             options={{ background: "#0077FF" }}
           >
             Добавить аккаунт
