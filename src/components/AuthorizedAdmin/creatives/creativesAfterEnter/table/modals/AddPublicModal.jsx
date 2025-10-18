@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import MyModal from "../../../../../UI/modals/MyModal";
 import MyInput from "../../../../../UI/input/MyInput";
 import { Avatar, Box, Checkbox, Link, Typography } from "@mui/material";
@@ -11,6 +11,8 @@ import { fetchWithAuth } from "../../../../../../api/token";
 import * as VKID from "@vkid/sdk";
 
 const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
+  const vkOneTapRef = useRef(null);
+
   const [error, setError] = useState(false);
   const [successOpen, setSuccessOpen] = useState(false);
   const [inputValue, setInputValue] = useState("");
@@ -92,34 +94,34 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
   };
 
   useEffect(() => {
-    (async () => {
-      try {
-        const { codeVerifier, codeChallenge } = await generatePKCEPair();
-        sessionStorage.setItem("code_challenge", codeChallenge);
-        sessionStorage.setItem("code_verifier", codeVerifier);
-        const state = generateState();
-        sessionStorage.setItem("state", state);
+    if (!limitModalOpen || !vkOneTapRef.current) return;
 
-        VKID.Config.init({
-          app: 51786441,
-          redirectUrl: `${MY_URL}accounts/vk/login/callback/`,
-          state,
-          codeChallenge,
-          codeChallengeMethod: "S256",
-          scope: "groups stories stats video",
-          responseMode: VKID.ConfigResponseMode.Callback,
-        });
+    const initVKOneTap = async () => {
+      const { codeVerifier, codeChallenge } = await generatePKCEPair();
+      sessionStorage.setItem("code_challenge", codeChallenge);
+      sessionStorage.setItem("code_verifier", codeVerifier);
+      const state = generateState();
+      sessionStorage.setItem("state", state);
 
-        const oneTap = new VKID.OneTap();
-        oneTap
-          .render({ container: document.getElementById("VkIdSdkOneTap") })
-          .on(VKID.OneTapInternalEvents.LOGIN_SUCCESS, handleVkAuth)
-          .on(VKID.WidgetEvents.ERROR, (err) => console.log(err));
-      } catch (err) {
-        console.log(err);
-      }
-    })();
-  }, []);
+      VKID.Config.init({
+        app: 51786441,
+        redirectUrl: `${MY_URL}accounts/vk/login/link-callback/`,
+        state,
+        codeChallenge,
+        codeChallengeMethod: "S256",
+        scope: "groups stories stats video",
+        responseMode: VKID.ConfigResponseMode.Callback,
+      });
+
+      const oneTap = new VKID.OneTap();
+      oneTap
+        .render({ container: vkOneTapRef.current })
+        .on(VKID.OneTapInternalEvents.LOGIN_SUCCESS, handleVkAuth)
+        .on(VKID.WidgetEvents.ERROR, (err) => console.log(err));
+    };
+
+    initVKOneTap();
+  }, [limitModalOpen]);
 
   useEffect(() => {
     if (!publics || !addedPublics) return;
@@ -240,7 +242,6 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
 
   return (
     <>
-      <Box id="VkIdSdkOneTap" sx={{ mt: 2 }}></Box>
       {/* Модальное окно про лимит */}
       <MyModal
         width="40%"
@@ -255,7 +256,7 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
           добавить оставшиеся сообщества через него.
         </Typography>
         <Box sx={{ display: "flex", justifyContent: "center" }}>
-          <Box id="VkIdSdkOneTap" sx={{ mt: 2 }}></Box>
+          <Box ref={vkOneTapRef} sx={{ mt: 2 }}></Box>
         </Box>
       </MyModal>
 
