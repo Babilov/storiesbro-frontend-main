@@ -111,6 +111,7 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
         });
 
         const oneTap = new VKID.OneTap();
+        console.log(oneTap);
         oneTap
           .render({ container: document.getElementById("VkIdSdkOneTap") })
           .on(VKID.OneTapInternalEvents.LOGIN_SUCCESS, handleVkAuth)
