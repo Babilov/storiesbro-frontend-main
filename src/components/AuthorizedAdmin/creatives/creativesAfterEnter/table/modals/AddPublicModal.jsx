@@ -7,6 +7,7 @@ import NoPermissionModal from "./NoPermissionModal";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { API_URL } from "../../../../../../constants/constatns";
+import { fetchWithAuth } from "../../../../../../api/token";
 
 const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
   const [error, setError] = useState(false);
@@ -135,7 +136,7 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
   };
 
   const addAcc = async () => {
-    const res = await axios.get(`${API_URL}communities/vk/link-account/`);
+    const res = await fetchWithAuth(`${API_URL}communities/vk/link-account/`);
     console.log(res);
   };
 
