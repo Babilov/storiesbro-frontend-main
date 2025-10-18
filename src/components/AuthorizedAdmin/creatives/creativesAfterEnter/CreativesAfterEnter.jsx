@@ -10,8 +10,6 @@ import { API_URL } from "../../../../constants/constatns";
 import axios from "axios";
 import logToBackend from "../../../../utils/logs";
 import { fetchWithAuth, refreshToken } from "../../../../api/token";
-import MyButton from "../../../UI/buttons/MyButton";
-import var2 from "./images/var2.svg";
 
 const CreativesAfterEnter = () => {
   const [publics, setPublics, selectedPublics, setSelectedPublics] =
