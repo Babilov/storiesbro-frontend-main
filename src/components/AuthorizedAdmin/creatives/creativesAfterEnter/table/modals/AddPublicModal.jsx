@@ -102,7 +102,7 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
 
         VKID.Config.init({
           app: 51786441,
-          redirectUrl: `${MY_URL}accounts/vk/login/link-callback/`,
+          redirectUrl: `${MY_URL}accounts/vk/login/callback/`,
           state,
           codeChallenge,
           codeChallengeMethod: "S256",
