@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import MyModal from "../../../../../UI/modals/MyModal";
 import MyInput from "../../../../../UI/input/MyInput";
 import { Avatar, Box, Checkbox, Link, Typography } from "@mui/material";
@@ -19,8 +19,6 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
   const [selectedPublics, setSelectedPublics] = useState([]);
   const [listAvailablePublics, setListAvailablePublics] = useState([]);
   const [limitModalOpen, setLimitModalOpen] = useState(false); // модалка про лимит
-
-  const vkContainerRef = useRef(null);
 
   const MAX_PUBLICS = 30;
   const navigate = useNavigate();
@@ -104,7 +102,7 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
 
         VKID.Config.init({
           app: 51786441,
-          redirectUrl: `${MY_URL}accounts/vk/login/callback/`,
+          redirectUrl: `${MY_URL}accounts/vk/login/link-callback/`,
           state,
           codeChallenge,
           codeChallengeMethod: "S256",
@@ -113,9 +111,8 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
         });
 
         const oneTap = new VKID.OneTap();
-        console.log(oneTap);
         oneTap
-          .render({ container: vkContainerRef.current })
+          .render({ container: document.getElementById("VkIdSdkOneTap") })
           .on(VKID.OneTapInternalEvents.LOGIN_SUCCESS, handleVkAuth)
           .on(VKID.WidgetEvents.ERROR, (err) => console.log(err));
       } catch (err) {
@@ -243,6 +240,7 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
 
   return (
     <>
+      <Box id="VkIdSdkOneTap" sx={{ mt: 2 }}></Box>
       {/* Модальное окно про лимит */}
       <MyModal
         width="40%"
@@ -257,7 +255,7 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
           добавить оставшиеся сообщества через него.
         </Typography>
         <Box sx={{ display: "flex", justifyContent: "center" }}>
-          <Box id="VkIdSdkOneTap" sx={{ mt: 2 }} ref={vkContainerRef}></Box>
+          <Box id="VkIdSdkOneTap" sx={{ mt: 2 }}></Box>
         </Box>
       </MyModal>
 
