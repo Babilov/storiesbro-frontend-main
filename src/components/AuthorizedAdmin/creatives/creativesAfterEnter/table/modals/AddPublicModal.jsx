@@ -22,7 +22,7 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
 
   const MAX_PUBLICS = 30;
   const navigate = useNavigate();
-
+  /*
   const generateState = () =>
     Math.random().toString(36).substring(2) + Date.now();
 
@@ -121,7 +121,7 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
       }
     })();
   }, []);
-
+*/
   useEffect(() => {
     if (!publics || !addedPublics) return;
     const filteredPublics = publics.filter(
@@ -255,7 +255,7 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
           добавить оставшиеся сообщества через него.
         </Typography>
         <Box sx={{ display: "flex", justifyContent: "center" }}>
-          <Box id="VkIdSdkOneTap" sx={{ mt: 2 }}></Box>
+          {/*<Box id="VkIdSdkOneTap" sx={{ mt: 2 }}></Box>*/}
         </Box>
       </MyModal>
 
