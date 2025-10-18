@@ -54,6 +54,7 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
 
   const handleVkAuth = (data) => {
     const { code, state, device_id } = data;
+    console.log(`DATA: ${data}`);
     sessionStorage.setItem("device_id", device_id);
     localStorage.setItem("device_id", device_id);
     const codeVerifier = sessionStorage.getItem("code_verifier");
@@ -64,7 +65,7 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
     const token = localStorage.getItem("access_token");
     axios
       .get(
-        `/accounts/vk/login/callback/?code=${code}&state=${state}&device_id=${device_id}&code_verifier=${codeVerifier}`,
+        `/accounts/vk/login/link-callback/?code=${code}&state=${state}&device_id=${device_id}&code_verifier=${codeVerifier}`,
         {
           headers: {
             Authorization: `Bearer ${token}`, // Токен в заголовке
@@ -101,7 +102,7 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
 
         VKID.Config.init({
           app: 51786441,
-          redirectUrl: `${MY_URL}accounts/vk/login/callback/`,
+          redirectUrl: `${MY_URL}accounts/vk/login/link-callback/`,
           state,
           codeChallenge,
           codeChallengeMethod: "S256",
@@ -231,11 +232,6 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
         return [...prevSelected, item];
       }
     });
-  };
-
-  const addAcc = async () => {
-    const res = await fetchWithAuth(`${MY_URL}communities/vk/link-account/`);
-    console.log(res);
   };
 
   // ---- блокировка чекбоксов ----
