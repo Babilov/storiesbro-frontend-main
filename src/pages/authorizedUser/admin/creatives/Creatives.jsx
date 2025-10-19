@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import CreativessBeforeEnter from "../../../../components/AuthorizedAdmin/creatives/creativesBefoteEnter/CreativessBeforeEnter";
 import CreativesAfterEnter from "../../../../components/AuthorizedAdmin/creatives/creativesAfterEnter/CreativesAfterEnter";
 import { refreshToken } from "../../../../api/token";
 
 const Creatives = () => {
   const [authedVk, setAuthedVk] = useState(false);
+  const wsRef = useRef(null); // ссылка на текущее соединение
+
+  // Обновляем токен при монтировании
   useEffect(() => {
     const refresh = async () => {
       await refreshToken();
@@ -14,24 +17,53 @@ const Creatives = () => {
     });
   }, []);
 
-  const token = localStorage.getItem("access_token");
+  // Создание WebSocket — только один раз при монтировании
+  useEffect(() => {
+    const token = localStorage.getItem("access_token");
+    if (!token) return;
 
-  const ws = new WebSocket(
-    `wss://storisbro.com/ws/auth_status/?token=${token}`
-  );
-  ws.onmessage = (event) => {
-    const data = JSON.parse(event.data);
-    console.log("Auth status changed:", data["authenticated"]);
-    setAuthedVk(data["authenticated"]);
-  };
+    const ws = new WebSocket(
+      `wss://storisbro.com/ws/auth_status/?token=${token}`
+    );
+    wsRef.current = ws;
 
-  function disconnectWebSocket(ws) {
-    if (ws && ws.readyState === WebSocket.OPEN) {
-      ws.close();
-      console.log("WebSocket connection closed");
+    ws.onopen = () => {
+      console.log("✅ WebSocket connected");
+    };
+
+    ws.onmessage = (event) => {
+      const data = JSON.parse(event.data);
+      console.log("Auth status changed:", data["authenticated"]);
+      setAuthedVk(data["authenticated"]);
+    };
+
+    ws.onerror = (err) => {
+      console.error("WebSocket error:", err);
+    };
+
+    ws.onclose = () => {
+      console.log("❌ WebSocket disconnected");
+    };
+
+    // cleanup при размонтировании
+    return () => {
+      if (wsRef.current) {
+        wsRef.current.close();
+        wsRef.current = null;
+        console.log("🧹 WebSocket cleaned up on unmount");
+      }
+    };
+  }, []);
+
+  // Функция для ручного отключения
+  const disconnectWebSocket = () => {
+    if (wsRef.current && wsRef.current.readyState === WebSocket.OPEN) {
+      wsRef.current.close();
+      wsRef.current = null;
+      console.log("🔌 WebSocket connection closed manually");
       setAuthedVk(false);
     }
-  }
+  };
 
   return (
     <>
@@ -41,10 +73,11 @@ const Creatives = () => {
         <CreativesAfterEnter
           setAuthedVk={setAuthedVk}
           disconnectWebSocket={disconnectWebSocket}
-          ws={ws}
+          ws={wsRef.current}
         />
       )}
     </>
   );
 };
+
 export default Creatives;
