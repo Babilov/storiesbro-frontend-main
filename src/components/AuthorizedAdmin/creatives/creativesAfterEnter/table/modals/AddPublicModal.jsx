@@ -10,7 +10,13 @@ import { API_URL, MY_URL } from "../../../../../../constants/constatns";
 import { fetchWithAuth } from "../../../../../../api/token";
 import * as VKID from "@vkid/sdk";
 
-const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
+const AddPublicModal = ({
+  open,
+  setOpen,
+  publics,
+  addedPublics,
+  setAuthedVk,
+}) => {
   const [error, setError] = useState(false);
   const [successOpen, setSuccessOpen] = useState(false);
   const [inputValue, setInputValue] = useState("");
@@ -155,7 +161,16 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
           аккаунту (не больше 30). Вам необходимо привязать ещё один аккаунт и
           добавить оставшиеся сообщества через него.
         </Typography>
-        <Box sx={{ display: "flex", justifyContent: "center" }}>хуй</Box>
+        <Box sx={{ display: "flex", justifyContent: "center" }}>
+          <MyButton
+            onClick={() => {
+              setAuthedVk(false);
+            }}
+            options={{ background: "#4CD640" }}
+          >
+            Добавить
+          </MyButton>
+        </Box>
       </MyModal>
 
       <NoPermissionModal
