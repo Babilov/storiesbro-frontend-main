@@ -11,8 +11,6 @@ import { fetchWithAuth } from "../../../../../../api/token";
 import * as VKID from "@vkid/sdk";
 
 const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
-  const vkOneTapRef = useRef(null);
-
   const [error, setError] = useState(false);
   const [successOpen, setSuccessOpen] = useState(false);
   const [inputValue, setInputValue] = useState("");
@@ -24,104 +22,6 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
 
   const MAX_PUBLICS = 30;
   const navigate = useNavigate();
-
-  const generateState = () =>
-    Math.random().toString(36).substring(2) + Date.now();
-
-  const base64UrlEncode = (arrayBuffer) => {
-    const bytes = new Uint8Array(arrayBuffer);
-    const base64 = btoa(String.fromCharCode(...bytes));
-    return base64.replace(/=/g, "").replace(/\+/g, "-").replace(/\//g, "_");
-  };
-
-  const generatePKCEPair = async () => {
-    const randomString = (length = 128) => {
-      const chars =
-        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~";
-      return Array.from({ length }, () =>
-        chars.charAt(Math.floor(Math.random() * chars.length))
-      ).join("");
-    };
-
-    const codeVerifier = randomString();
-    const encoder = new TextEncoder();
-    const hashBuffer = await crypto.subtle.digest(
-      "SHA-256",
-      encoder.encode(codeVerifier)
-    );
-    const codeChallenge = base64UrlEncode(hashBuffer);
-
-    return { codeVerifier, codeChallenge };
-  };
-
-  const handleVkAuth = (data) => {
-    const { code, state, device_id } = data;
-    console.log(`DATA: ${data}`);
-    sessionStorage.setItem("device_id", device_id);
-    localStorage.setItem("device_id", device_id);
-    const codeVerifier = sessionStorage.getItem("code_verifier");
-    const storedState = sessionStorage.getItem("state");
-    if (state !== storedState) {
-      return;
-    }
-    const token = localStorage.getItem("access_token");
-    axios
-      .get(
-        `/accounts/vk/login/link-callback/?code=${code}&state=${state}&device_id=${device_id}&code_verifier=${codeVerifier}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`, // Токен в заголовке
-          },
-        }
-      )
-      .then((res) => {
-        localStorage.setItem("vk_access_token", res.data.access_token);
-        localStorage.setItem("is_authed", "true");
-        const group_redirect = res.data.groups_auth_url;
-        localStorage.setItem("group_redirect", group_redirect);
-        const token = localStorage.getItem("access_token");
-        axios.get(`${API_URL}valid_token/?device_id=${device_id}`, {
-          headers: {
-            Authorization: `Bearer ${token}`, // Токен в заголовке
-          },
-        });
-
-        window.location.reload();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  useEffect(() => {
-    if (!limitModalOpen || !vkOneTapRef.current) return;
-
-    const initVKOneTap = async () => {
-      const { codeVerifier, codeChallenge } = await generatePKCEPair();
-      sessionStorage.setItem("code_challenge", codeChallenge);
-      sessionStorage.setItem("code_verifier", codeVerifier);
-      const state = generateState();
-      sessionStorage.setItem("state", state);
-
-      VKID.Config.init({
-        app: 51786441,
-        redirectUrl: `${MY_URL}accounts/vk/login/link-callback/`,
-        state,
-        codeChallenge,
-        codeChallengeMethod: "S256",
-        scope: "groups stories stats video",
-        responseMode: VKID.ConfigResponseMode.Callback,
-      });
-
-      const oneTap = new VKID.OneTap();
-      oneTap
-        .render({ container: vkOneTapRef.current })
-        .on(VKID.OneTapInternalEvents.LOGIN_SUCCESS, handleVkAuth)
-        .on(VKID.WidgetEvents.ERROR, (err) => console.log(err));
-    };
-
-    initVKOneTap();
-  }, [limitModalOpen]);
 
   useEffect(() => {
     if (!publics || !addedPublics) return;
@@ -255,9 +155,7 @@ const AddPublicModal = ({ open, setOpen, publics, addedPublics }) => {
           аккаунту (не больше 30). Вам необходимо привязать ещё один аккаунт и
           добавить оставшиеся сообщества через него.
         </Typography>
-        <Box sx={{ display: "flex", justifyContent: "center" }}>
-          <Box ref={vkOneTapRef} sx={{ mt: 2 }}></Box>
-        </Box>
+        <Box sx={{ display: "flex", justifyContent: "center" }}>хуй</Box>
       </MyModal>
 
       <NoPermissionModal
