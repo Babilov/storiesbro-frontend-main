@@ -168,9 +168,9 @@ const AddPublicModal = ({
             onClick={() => {
               disconnectWebSocket(ws);
             }}
-            options={{ background: "#4CD640" }}
+            options={{ background: "#0077FF" }}
           >
-            Добавить
+            Добавить аккаунт ВК
           </MyButton>
         </Box>
       </MyModal>
