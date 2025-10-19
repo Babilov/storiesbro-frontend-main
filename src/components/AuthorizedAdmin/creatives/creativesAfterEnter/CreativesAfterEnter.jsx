@@ -11,7 +11,7 @@ import axios from "axios";
 import logToBackend from "../../../../utils/logs";
 import { fetchWithAuth, refreshToken } from "../../../../api/token";
 
-const CreativesAfterEnter = () => {
+const CreativesAfterEnter = ({ setAuthedVk }) => {
   const [publics, setPublics, selectedPublics, setSelectedPublics] =
     useContext(PublicsContext);
   const [openAdd, setOpenAdd] = useState(false);
@@ -90,38 +90,6 @@ const CreativesAfterEnter = () => {
           },
         }}
       >
-        {/*
-          <Box
-          sx={{
-            width: { md: "35%", sm: "50", xs: "75" },
-          }}
-        >
-          
-          <a href={redirect} style={{ textDecoration: "none" }}>
-            <MyButton
-              // onClick={removeRedirect}
-              options={{
-                background: "white",
-                color: "black",
-                border: "2px solid #0077FF",
-                borderRadius: "90px",
-              }}
-            >
-              <Box sx={{ display: "flex", justifyContent: "space-around" }}>
-                <Typography>Дать доступ к группам</Typography>
-                <Box
-                  sx={{ width: "23px" }}
-                  component="img"
-                  alt="группа"
-                  src={var2}
-                />
-              </Box>
-            </MyButton>
-          </a>
-        </Box>
-          
-          */}
-
         <AddPublicButton setOpen={setOpenAdd} />
       </Box>
       <AddPublicModal
@@ -129,6 +97,7 @@ const CreativesAfterEnter = () => {
         setOpen={setOpenAdd}
         publics={publics}
         addedPublics={selectedPublics}
+        setAuthedVk={setAuthedVk}
       />
       <Table publics={selectedPublics} setPublics={setSelectedPublics} />
     </Grid>
