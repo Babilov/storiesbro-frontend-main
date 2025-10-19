@@ -11,7 +11,7 @@ import axios from "axios";
 import logToBackend from "../../../../utils/logs";
 import { fetchWithAuth, refreshToken } from "../../../../api/token";
 
-const CreativesAfterEnter = ({ setAuthedVk }) => {
+const CreativesAfterEnter = ({ setAuthedVk, disconnectWebSocket, ws }) => {
   const [publics, setPublics, selectedPublics, setSelectedPublics] =
     useContext(PublicsContext);
   const [openAdd, setOpenAdd] = useState(false);
@@ -98,6 +98,8 @@ const CreativesAfterEnter = ({ setAuthedVk }) => {
         publics={publics}
         addedPublics={selectedPublics}
         setAuthedVk={setAuthedVk}
+        disconnectWebSocket={disconnectWebSocket}
+        ws={ws}
       />
       <Table publics={selectedPublics} setPublics={setSelectedPublics} />
     </Grid>

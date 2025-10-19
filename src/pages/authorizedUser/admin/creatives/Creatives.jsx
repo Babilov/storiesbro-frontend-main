@@ -25,12 +25,24 @@ const Creatives = () => {
     setAuthedVk(data["authenticated"]);
   };
 
+  function disconnectWebSocket(ws) {
+    if (ws && ws.readyState === WebSocket.OPEN) {
+      ws.close();
+      console.log("WebSocket connection closed");
+      setAuthedVk(false);
+    }
+  }
+
   return (
     <>
       {!authedVk ? (
         <CreativessBeforeEnter />
       ) : (
-        <CreativesAfterEnter setAuthedVk={setAuthedVk} />
+        <CreativesAfterEnter
+          setAuthedVk={setAuthedVk}
+          disconnectWebSocket={disconnectWebSocket}
+          ws={ws}
+        />
       )}
     </>
   );

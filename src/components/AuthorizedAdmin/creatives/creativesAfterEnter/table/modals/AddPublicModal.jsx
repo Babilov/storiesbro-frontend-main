@@ -16,6 +16,8 @@ const AddPublicModal = ({
   publics,
   addedPublics,
   setAuthedVk,
+  disconnectWebSocket,
+  ws,
 }) => {
   const [error, setError] = useState(false);
   const [successOpen, setSuccessOpen] = useState(false);
@@ -164,7 +166,7 @@ const AddPublicModal = ({
         <Box sx={{ display: "flex", justifyContent: "center" }}>
           <MyButton
             onClick={() => {
-              setAuthedVk(false);
+              disconnectWebSocket(ws);
             }}
             options={{ background: "#4CD640" }}
           >
