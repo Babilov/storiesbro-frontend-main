@@ -32,6 +32,11 @@ const AddPublicModal = ({
   const navigate = useNavigate();
 
   useEffect(() => {
+    const res = fetchWithAuth(`${API_URL}vk/groups/`);
+    console.log("РЕЗЗЗЗ", res);
+  }, []);
+
+  useEffect(() => {
     if (!publics || !addedPublics) return;
     const filteredPublics = publics.filter(
       (publicItem) =>
