@@ -32,8 +32,11 @@ const AddPublicModal = ({
   const navigate = useNavigate();
 
   useEffect(() => {
-    const res = fetchWithAuth(`${API_URL}vk/groups/`);
-    console.log("РЕЗЗЗЗ", res);
+    const getGroupsCount = async () => {
+      const res = await fetchWithAuth(`${API_URL}vk/user-groups/`);
+      console.log("РЕЗЗЗЗ", res);
+    };
+    getGroupsCount();
   }, []);
 
   useEffect(() => {
