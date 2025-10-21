@@ -34,7 +34,7 @@ const CreativessBeforeEnter = () => {
     return { codeVerifier, codeChallenge };
   };
 
-  const handleVkAuth = async (data) => {
+  const handleVkAuth = (data) => {
     const { code, state, device_id } = data;
     sessionStorage.setItem("device_id", device_id);
     localStorage.setItem("device_id", device_id);
@@ -44,7 +44,7 @@ const CreativessBeforeEnter = () => {
       return;
     }
     const token = localStorage.getItem("access_token");
-    await axios
+    axios
       .get(
         `/accounts/vk/login/callback/?code=${code}&state=${state}&device_id=${device_id}&code_verifier=${codeVerifier}`,
         {
@@ -64,8 +64,10 @@ const CreativessBeforeEnter = () => {
             Authorization: `Bearer ${token}`, // Токен в заголовке
           },
         });
-
         window.location.reload();
+      })
+      .then(async () => {
+        await axios.post(`${API_URL}user/link/linked-account/`);
       })
       .catch((err) => {
         console.log(err);
