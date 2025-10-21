@@ -64,10 +64,12 @@ const CreativessBeforeEnter = () => {
             Authorization: `Bearer ${token}`, // Токен в заголовке
           },
         });
-        window.location.reload();
       })
       .then(async () => {
         await axios.post(`${API_URL}user/link/linked-account/`);
+      })
+      .then(() => {
+        window.location.reload();
       })
       .catch((err) => {
         console.log(err);
