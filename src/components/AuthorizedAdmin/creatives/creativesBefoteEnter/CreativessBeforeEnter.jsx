@@ -34,7 +34,7 @@ const CreativessBeforeEnter = () => {
     return { codeVerifier, codeChallenge };
   };
 
-  const handleVkAuth = (data) => {
+  const handleVkAuth = async (data) => {
     const { code, state, device_id } = data;
     sessionStorage.setItem("device_id", device_id);
     localStorage.setItem("device_id", device_id);
@@ -44,7 +44,7 @@ const CreativessBeforeEnter = () => {
       return;
     }
     const token = localStorage.getItem("access_token");
-    axios
+    await axios
       .get(
         `/accounts/vk/login/callback/?code=${code}&state=${state}&device_id=${device_id}&code_verifier=${codeVerifier}`,
         {
