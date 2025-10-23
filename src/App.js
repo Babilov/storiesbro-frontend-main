@@ -95,7 +95,7 @@ function App() {
           Accept: "application/json",
         },
       });
-      logToBackend(`GET SELECTED:::: ${JSON.stringify(response)}`);
+      // logToBackend(`GET SELECTED:::: ${JSON.stringify(response)}`);
       setSelectedPublics(response.groups);
     } catch (error) {
       console.error("Ошибка при загрузке сообществ", error);

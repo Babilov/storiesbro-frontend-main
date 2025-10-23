@@ -39,6 +39,7 @@ const AddPublicModal = ({
       console.log("РЕЗЗЗЗ", res);
       setAddedPublicsCount(MAX_PUBLICS - res.count);
       logToBackend(`ДОБАВЛЕНО: ${MAX_PUBLICS - res.count}`);
+      logToBackend(`ОТВЕТ ОТ ФУНКЦИИ: ${res.count}`);
     };
     getGroupsCount();
   }, []);
