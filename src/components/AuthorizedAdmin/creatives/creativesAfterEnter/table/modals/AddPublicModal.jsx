@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { API_URL, MY_URL } from "../../../../../../constants/constatns";
 import { fetchWithAuth } from "../../../../../../api/token";
 import * as VKID from "@vkid/sdk";
+import logToBackend from "../../../../../../utils/logs";
 
 const AddPublicModal = ({
   open,
@@ -37,6 +38,7 @@ const AddPublicModal = ({
       const res = await fetchWithAuth(`${API_URL}vk/user-groups/`);
       console.log("РЕЗЗЗЗ", res);
       setAddedPublicsCount(MAX_PUBLICS - res.count);
+      logToBackend(`ДОБАВЛЕНО: ${MAX_PUBLICS - res.count}`);
     };
     getGroupsCount();
   }, []);
@@ -109,7 +111,7 @@ const AddPublicModal = ({
       setSelectedPublics((prevSelected) => {
         const currentTotal = addedPublicsCount + prevSelected.length;
         const availableSlots = MAX_PUBLICS - currentTotal;
-
+        logToBackend(`АВТОМАТИЧЕСКИ: ДОСТУПНЫЕ СЛОТЫ ${availableSlots}`);
         // Если лимит уже достигнут — просто показать модалку
         if (availableSlots <= 0) {
           setLimitModalOpen(true);
@@ -145,6 +147,7 @@ const AddPublicModal = ({
         return prevSelected.filter((publicItem) => publicItem.id !== item.id);
       } else {
         const totalCount = addedPublicsCount + prevSelected.length;
+        logToBackend(`ВРУЧНУЮ: СКОЛЬКО ДОБАВИЛИ ${totalCount}`);
         if (totalCount >= MAX_PUBLICS) {
           setLimitModalOpen(true);
           return prevSelected;
