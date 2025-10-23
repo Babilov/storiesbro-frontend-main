@@ -37,8 +37,8 @@ const AddPublicModal = ({
     const getGroupsCount = async () => {
       const res = await fetchWithAuth(`${API_URL}vk/user-groups/`);
       console.log("РЕЗЗЗЗ", res);
-      setAddedPublicsCount(MAX_PUBLICS - res.count);
-      logToBackend(`ДОБАВЛЕНО: ${MAX_PUBLICS - res.count}`);
+      setAddedPublicsCount(res.count);
+      logToBackend(`ДОБАВЛЕНО: ${res.count}`);
       logToBackend(`ОТВЕТ ОТ ФУНКЦИИ: ${res.count}`);
     };
     getGroupsCount();
