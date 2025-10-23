@@ -26,7 +26,8 @@ const AddPublicModal = ({
   const [noPermissionOpen, setNoPermissionOpen] = useState(false);
   const [selectedPublics, setSelectedPublics] = useState([]);
   const [listAvailablePublics, setListAvailablePublics] = useState([]);
-  const [limitModalOpen, setLimitModalOpen] = useState(false); // модалка про лимит
+  const [limitModalOpen, setLimitModalOpen] = useState(false);
+  const [addedPublicsCount, setAddedPublicsCount] = useState(0);
 
   const MAX_PUBLICS = 30;
   const navigate = useNavigate();
@@ -35,6 +36,7 @@ const AddPublicModal = ({
     const getGroupsCount = async () => {
       const res = await fetchWithAuth(`${API_URL}vk/user-groups/`);
       console.log("РЕЗЗЗЗ", res);
+      setAddedPublicsCount(MAX_PUBLICS - res.count);
     };
     getGroupsCount();
   }, []);
@@ -105,7 +107,7 @@ const AddPublicModal = ({
       );
 
       setSelectedPublics((prevSelected) => {
-        const currentTotal = addedPublics.length + prevSelected.length;
+        const currentTotal = addedPublicsCount + prevSelected.length;
         const availableSlots = MAX_PUBLICS - currentTotal;
 
         // Если лимит уже достигнут — просто показать модалку
@@ -142,7 +144,7 @@ const AddPublicModal = ({
       if (prevSelected.some((publicItem) => publicItem.id === item.id)) {
         return prevSelected.filter((publicItem) => publicItem.id !== item.id);
       } else {
-        const totalCount = addedPublics.length + prevSelected.length;
+        const totalCount = addedPublicsCount + prevSelected.length;
         if (totalCount >= MAX_PUBLICS) {
           setLimitModalOpen(true);
           return prevSelected;
@@ -154,7 +156,7 @@ const AddPublicModal = ({
 
   // ---- блокировка чекбоксов ----
   const isLimitReached =
-    addedPublics.length + selectedPublics.length >= MAX_PUBLICS;
+    addedPublicsCount + selectedPublics.length >= MAX_PUBLICS;
 
   return (
     <>
