@@ -212,7 +212,7 @@ const AddPublicModal = ({
           </MyButton>
         </Box>
         <MyButton
-          options={{ background: "white" }}
+          options={{ background: "red" }}
           onClick={() => disconnectWebSocket(ws)}
         >
           Выйти
