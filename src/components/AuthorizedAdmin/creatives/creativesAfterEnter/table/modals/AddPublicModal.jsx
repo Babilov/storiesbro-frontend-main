@@ -8,7 +8,6 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { API_URL, MY_URL } from "../../../../../../constants/constatns";
 import { fetchWithAuth } from "../../../../../../api/token";
-import * as VKID from "@vkid/sdk";
 import logToBackend from "../../../../../../utils/logs";
 
 const AddPublicModal = ({
@@ -212,7 +211,12 @@ const AddPublicModal = ({
               : "Выбрать всё"}
           </MyButton>
         </Box>
-
+        <MyButton
+          options={{ background: "white" }}
+          onClick={() => disconnectWebSocket(ws)}
+        >
+          Выйти
+        </MyButton>
         <MyInput
           error={error}
           value={inputValue}
