@@ -66,68 +66,94 @@ const PeriodBlock = ({ period }) => {
       <Box
         sx={{
           display: "flex",
-          justifyContent: "center", // выравниваем по центру горизонтально
-          alignItems: "center", // по центру вертикально
-          gap: { xs: 1, md: 3 }, // равные интервалы между элементами
+          justifyContent: "center",
+          alignItems: "stretch", // чтобы блоки были одинаковой высоты
           pb: 1,
         }}
       >
-        <Typography
+        {/* Левый блок */}
+        <Box
+          sx={{
+            flex: 1,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            textAlign: "center",
+          }}
           onClick={() => selectAdPeriod(true)}
+        >
+          <Typography
+            sx={{
+              fontSize: { xs: "12px", md: "16px" },
+              cursor: "pointer",
+              color:
+                state === null
+                  ? neutralColor
+                  : state
+                  ? enabledColor
+                  : neutralColor,
+              transition: "color 0.3s ease",
+              "&:hover": {
+                color: hoverColorEnabled,
+              },
+              userSelect: "none",
+            }}
+          >
+            Включён
+          </Typography>
+        </Box>
+
+        {/* Разделитель */}
+        <Box
           sx={{
-            minWidth: 80, // гарантирует визуальную "весомость" и ровность
+            px: 2,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            userSelect: "none",
+          }}
+        >
+          <Typography
+            sx={{
+              fontSize: { xs: "14px", md: "18px" },
+              opacity: 0.7,
+            }}
+          >
+            |
+          </Typography>
+        </Box>
+
+        {/* Правый блок */}
+        <Box
+          sx={{
+            flex: 1,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
             textAlign: "center",
-            fontSize: { xs: "12px", md: "16px" },
-            cursor: "pointer",
-            color:
-              state === null
-                ? neutralColor
-                : state
-                ? enabledColor
-                : neutralColor,
-            transition: "color 0.3s ease",
-            "&:hover": {
-              color: hoverColorEnabled,
-            },
-            userSelect: "none",
           }}
-        >
-          Включён
-        </Typography>
-
-        <Typography
-          sx={{
-            lineHeight: 1,
-            userSelect: "none",
-            fontSize: { xs: "12px", md: "16px" },
-            opacity: 0.8,
-          }}
-        >
-          |
-        </Typography>
-
-        <Typography
           onClick={() => selectAdPeriod(false)}
-          sx={{
-            minWidth: 80, // тот же размер, что и у "Включён"
-            textAlign: "center",
-            fontSize: { xs: "12px", md: "16px" },
-            cursor: "pointer",
-            color:
-              state === null
-                ? neutralColor
-                : !state
-                ? disabledColor
-                : neutralColor,
-            transition: "color 0.3s ease",
-            "&:hover": {
-              color: hoverColorDisabled,
-            },
-            userSelect: "none",
-          }}
         >
-          Отключить
-        </Typography>
+          <Typography
+            sx={{
+              fontSize: { xs: "12px", md: "16px" },
+              cursor: "pointer",
+              color:
+                state === null
+                  ? neutralColor
+                  : !state
+                  ? disabledColor
+                  : neutralColor,
+              transition: "color 0.3s ease",
+              "&:hover": {
+                color: hoverColorDisabled,
+              },
+              userSelect: "none",
+            }}
+          >
+            Отключить
+          </Typography>
+        </Box>
       </Box>
     </Box>
   );
