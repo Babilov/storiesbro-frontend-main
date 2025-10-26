@@ -211,12 +211,14 @@ const AddPublicModal = ({
               : "Выбрать всё"}
           </MyButton>
         </Box>
+        {/*
         <MyButton
           options={{ background: "red" }}
           onClick={() => disconnectWebSocket(ws)}
         >
           Выйти
         </MyButton>
+        */}
         <MyInput
           error={error}
           value={inputValue}
