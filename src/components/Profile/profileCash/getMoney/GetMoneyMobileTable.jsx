@@ -46,7 +46,7 @@ const GetMoneyMobileTable = ({ operations }) => {
               Сумма
             </Grid>
             <Grid item xs={10} className="data">
-              {operation["amount"]}{" "}
+              {Math.floor(operation["amount"])}{" "}
               <Typography component="span" sx={{ fontWeight: 500 }}>
                 ₽
               </Typography>
@@ -55,8 +55,24 @@ const GetMoneyMobileTable = ({ operations }) => {
             <Grid item xs={2} className="label">
               Статус
             </Grid>
-            <Grid item xs={10} className="data">
-              {operation["status"]}
+            <Grid
+              item
+              xs={10}
+              className="data"
+              sx={{
+                color:
+                  operation["status"] === "paid"
+                    ? "#4CD640"
+                    : operation["status"] === "pending"
+                    ? "#161616"
+                    : "#D25D48",
+              }}
+            >
+              {operation["status"] === "paid"
+                ? "Выплачено"
+                : operation["status"] === "pending"
+                ? "В процессе"
+                : "Отменено"}
             </Grid>
           </Grid>
         ))}{" "}

@@ -79,13 +79,27 @@ const GetMoneyTable = ({ operations }) => {
             </Grid>
             <Grid item xs={1}>
               <Typography sx={{ fontSize: "18px" }}>
-                {operation["amount"]}₽
+                {Math.floor(operation["amount"])}₽
               </Typography>
               <Divider sx={{ mt: 5 }} />
             </Grid>
             <Grid item xs={2}>
-              <Typography sx={{ fontSize: "18px" }}>
-                {operation["status"]}
+              <Typography
+                sx={{
+                  fontSize: "18px",
+                  color:
+                    operation["status"] === "paid"
+                      ? "#4CD640"
+                      : operation["status"] === "pending"
+                      ? "#161616"
+                      : "#D25D48",
+                }}
+              >
+                {operation["status"] === "paid"
+                  ? "Выплачено"
+                  : operation["status"] === "pending"
+                  ? "В процессе"
+                  : "Отменено"}
               </Typography>
               <Divider sx={{ mt: 5 }} />
             </Grid>
