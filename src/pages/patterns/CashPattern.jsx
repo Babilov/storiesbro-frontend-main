@@ -30,34 +30,42 @@ const CashPattern = ({ children, isDeposit, title }) => {
       <ProfileHeader />
       <Box
         sx={{
-          p: { md: "0 130px", xs: "0 16px" }, // совпадает с ProfileHeader
+          p: { md: "0 130px", xs: "0 16px" }, // те же отступы, что и в ProfileHeader
           mt: 3,
         }}
       >
+        {/* Заголовок и стрелка в одной строке */}
         <Box
-          component="img"
-          alt="back"
-          src={redirectPng}
           sx={{
-            width: 45,
-            height: 38,
-            cursor: "pointer",
-            position: "relative",
-            top: "5px",
-          }}
-          onClick={() => navigate("/cash")}
-        />
-        <Typography
-          variant="h3"
-          sx={{
-            textAlign: "center",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
             mb: 3,
-            fontSize: { md: "32px", xs: "24px" },
-            fontWeight: 600,
+            gap: 1.5, // расстояние между стрелкой и заголовком
           }}
         >
-          {title}
-        </Typography>
+          <Box
+            component="img"
+            alt="back"
+            src={redirectPng}
+            sx={{
+              width: 45,
+              height: 38,
+              cursor: "pointer",
+            }}
+            onClick={() => navigate("/cash")}
+          />
+          <Typography
+            variant="h3"
+            sx={{
+              fontSize: { md: "32px", xs: "24px" },
+              fontWeight: 600,
+            }}
+          >
+            {title}
+          </Typography>
+        </Box>
+
         <DepositMenu isDeposit={isDeposit} />
         {children}
       </Box>
