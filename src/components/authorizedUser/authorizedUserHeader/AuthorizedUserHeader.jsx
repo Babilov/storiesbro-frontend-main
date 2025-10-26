@@ -17,7 +17,7 @@ const AuthorizedUserHeader = ({ ismainpage = false, isCustomer }) => {
   useEffect(() => {
     const getMoney = async () => {
       const res = await fetchWithAuth(`${API_URL}payments/get_user_balance/`);
-      setBalance(res.balance);
+      setBalance(Math.floor(res.balance));
     };
     getMoney();
   }, []);
@@ -118,7 +118,7 @@ const AuthorizedUserHeader = ({ ismainpage = false, isCustomer }) => {
           </MyButton> */}
         </Box>
         <Typography sx={{ display: { xs: "none", lg: "block" } }}>
-          {balance}
+          {balance}₽
         </Typography>
         <ExitMenu open={open} setOpen={setOpen} />
       </Grid>

@@ -20,7 +20,7 @@ const DepositMenu = ({ isDeposit }) => {
         method: "POST",
         body: { amount: cash, card_number: requisites },
       });
-      setBalance(balance - cash);
+      setBalance(Math.floor(balance - cash));
       setOperations((prev) => [res, ...prev]);
     } catch {
       setErrorModalOpen(true);

@@ -10,7 +10,7 @@ const ProfileCash = () => {
   useEffect(() => {
     const getMoney = async () => {
       const res = await fetchWithAuth(`${API_URL}payments/get_user_balance/`);
-      setBalance(res.balance);
+      setBalance(Math.floor(res.balance));
     };
     getMoney();
   }, []);

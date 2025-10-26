@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { API_URL } from "../../../constants/constatns";
 
 const PeriodBlock = ({ period }) => {
-  const [state, setState] = useState(null); // Изначально null — загрузка
+  const [state, setState] = useState(null);
   const { id } = useParams();
 
   useEffect(() => {
@@ -14,11 +14,10 @@ const PeriodBlock = ({ period }) => {
         const res = await axios.get(
           `${API_URL}community/${id}/toggle_ad_slot/?slot=${period}`
         );
-        const enabled = res.data.enabled;
-        setState(enabled);
+        setState(res.data.enabled);
       } catch (error) {
         console.error("Ошибка загрузки состояния:", error);
-        setState(false); // Можно по умолчанию выключить, если ошибка
+        setState(false);
       }
     };
     getState();
@@ -33,20 +32,18 @@ const PeriodBlock = ({ period }) => {
           enabled: selectedState,
         }
       );
-      setState(selectedState); // Обновляем локальный state сразу после успешного поста
+      setState(selectedState);
       console.log(res);
     } catch (error) {
       console.error("Ошибка при изменении состояния:", error);
     }
   };
 
-  // Цвета для текста кнопок
   const enabledColor = "#4CD640";
   const disabledColor = "red";
   const neutralColor = "black";
-  const hoverColorEnabled = "#3CB530"; // чуть темнее зеленого
-  const hoverColorDisabled = "#CC3333"; // чуть темнее красного
-  const hoverColorNeutral = "#555555";
+  const hoverColorEnabled = "#3CB530";
+  const hoverColorDisabled = "#CC3333";
 
   return (
     <Box>
@@ -65,53 +62,72 @@ const PeriodBlock = ({ period }) => {
           ? "№2 Дневной"
           : "№3 Вечерний"}
       </Typography>
-      <Box sx={{ display: "flex", justifyContent: "space-around" }}>
-        <Box sx={{ p: "0 0 10px" }}>
-          <Typography
-            onClick={() => selectAdPeriod(true)}
-            sx={{
-              fontSize: { xs: "12px", md: "16px" },
-              cursor: "pointer",
-              color:
-                state === null
-                  ? neutralColor
-                  : state
-                  ? enabledColor
-                  : neutralColor,
-              transition: "color 0.3s ease",
-              "&:hover": {
-                color: hoverColorEnabled,
-              },
-              userSelect: "none",
-            }}
-          >
-            Включён
-          </Typography>
-        </Box>
-        <Box>
-          <Typography>|</Typography>
-        </Box>
-        <Box>
-          <Typography
-            onClick={() => selectAdPeriod(false)}
-            sx={{
-              cursor: "pointer",
-              color:
-                state === null
-                  ? neutralColor
-                  : !state
-                  ? disabledColor
-                  : neutralColor,
-              transition: "color 0.3s ease",
-              "&:hover": {
-                color: hoverColorDisabled,
-              },
-              userSelect: "none",
-            }}
-          >
-            Отключить
-          </Typography>
-        </Box>
+
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center", // выравниваем по центру горизонтально
+          alignItems: "center", // по центру вертикально
+          gap: { xs: 1, md: 3 }, // равные интервалы между элементами
+          pb: 1,
+        }}
+      >
+        <Typography
+          onClick={() => selectAdPeriod(true)}
+          sx={{
+            minWidth: 80, // гарантирует визуальную "весомость" и ровность
+            textAlign: "center",
+            fontSize: { xs: "12px", md: "16px" },
+            cursor: "pointer",
+            color:
+              state === null
+                ? neutralColor
+                : state
+                ? enabledColor
+                : neutralColor,
+            transition: "color 0.3s ease",
+            "&:hover": {
+              color: hoverColorEnabled,
+            },
+            userSelect: "none",
+          }}
+        >
+          Включён
+        </Typography>
+
+        <Typography
+          sx={{
+            lineHeight: 1,
+            userSelect: "none",
+            fontSize: { xs: "12px", md: "16px" },
+            opacity: 0.8,
+          }}
+        >
+          |
+        </Typography>
+
+        <Typography
+          onClick={() => selectAdPeriod(false)}
+          sx={{
+            minWidth: 80, // тот же размер, что и у "Включён"
+            textAlign: "center",
+            fontSize: { xs: "12px", md: "16px" },
+            cursor: "pointer",
+            color:
+              state === null
+                ? neutralColor
+                : !state
+                ? disabledColor
+                : neutralColor,
+            transition: "color 0.3s ease",
+            "&:hover": {
+              color: hoverColorDisabled,
+            },
+            userSelect: "none",
+          }}
+        >
+          Отключить
+        </Typography>
       </Box>
     </Box>
   );
