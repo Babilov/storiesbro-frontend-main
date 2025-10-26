@@ -118,7 +118,7 @@ const AuthorizedUserHeader = ({ ismainpage = false, isCustomer }) => {
           </MyButton> */}
         </Box>
         <Typography sx={{ display: { xs: "none", lg: "block" } }}>
-          {balance}₽
+          {balance} ₽
         </Typography>
         <ExitMenu open={open} setOpen={setOpen} />
       </Grid>
