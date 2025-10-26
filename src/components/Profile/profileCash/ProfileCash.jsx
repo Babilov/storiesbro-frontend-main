@@ -25,33 +25,20 @@ const ProfileCash = () => {
       }}
     >
       <Box sx={{ display: "flex", alignItems: "center" }}>
-        <Typography sx={{ fontWeight: 600, fontSize: "18px", mr: 2 }}>
-          Баланс
+        <Typography sx={{ fontWeight: 600, fontSize: "18px", mr: 1 }}>
+          Баланс:
         </Typography>
-        <Box
-          sx={{
-            px: 2,
-            py: 1,
-            border: "1px solid #ccc",
-            borderRadius: "8px",
-            minWidth: "100px",
-            textAlign: "center",
-            fontWeight: 500,
-            fontSize: "16px",
-            mr: 1,
-            backgroundColor: "#f9f9f9",
-          }}
-        >
+        <Typography sx={{ fontSize: "18px", fontWeight: 500, mr: 1 }}>
           {balance !== null ? balance : "—"}
-        </Box>
-        <Typography sx={{ fontWeight: 600, fontSize: "20px" }}>₽</Typography>
+        </Typography>
+        <Typography sx={{ fontWeight: 600, fontSize: "18px" }}>₽</Typography>
       </Box>
 
       <Box
         sx={{
-          m: { lg: "0 160px 0 0", xs: "0 auto" },
+          ml: { lg: 4, xs: 0 },
+          mt: { xs: 2, lg: 0 },
           display: "flex",
-          width: { lg: "50%", md: "50%", xs: "100%" },
         }}
       >
         <ProfileCashButton
