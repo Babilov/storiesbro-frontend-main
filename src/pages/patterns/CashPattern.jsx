@@ -1,4 +1,4 @@
-import { Box, Container, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import React, { useState } from "react";
 import ProfileHeader from "../../components/Profile/profileHeader/ProfileHeader";
 import DepositMenu from "../../components/Profile/profileCash/CashMenu/DepositMenu";
@@ -28,17 +28,22 @@ const CashPattern = ({ children, isDeposit, title }) => {
       ]}
     >
       <ProfileHeader />
-      <Container>
+      <Box
+        sx={{
+          p: { md: "0 130px", xs: "0 16px" }, // совпадает с ProfileHeader
+          mt: 3,
+        }}
+      >
         <Box
           component="img"
           alt="back"
           src={redirectPng}
           sx={{
-            position: "absolute",
-            float: "left",
-            width: "45px",
-            height: "38",
+            width: 45,
+            height: 38,
             cursor: "pointer",
+            position: "relative",
+            top: "5px",
           }}
           onClick={() => navigate("/cash")}
         />
@@ -55,7 +60,7 @@ const CashPattern = ({ children, isDeposit, title }) => {
         </Typography>
         <DepositMenu isDeposit={isDeposit} />
         {children}
-      </Container>
+      </Box>
     </CashContext.Provider>
   );
 };
