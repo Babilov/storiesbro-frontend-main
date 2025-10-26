@@ -27,29 +27,36 @@ const ProfileHeader = () => {
     };
     getMoney();
   }, []);
+
   return (
     <Box
       sx={{
+        position: "relative",
         display: "flex",
-        justifyContent: "space-between",
+        justifyContent: "center",
         alignItems: "center",
         p: { md: "0 130px", xs: "0 16px" },
+        height: "80px",
       }}
     >
-      {/*<Box sx={{display: "flex", alignItems: "center"}}> */}
+      {/* Левый блок — меню */}
       <MenuIcon
-        sx={{ mr: { md: 5, xs: 2 }, cursor: "pointer" }}
+        sx={{
+          position: "absolute",
+          left: { md: 130, xs: 16 },
+          cursor: "pointer",
+        }}
         onClick={() => setLeftSidebarOpen(true)}
       />
       <AdminLeftSideBar open={leftSidebarOpen} setOpen={setLeftSidebarOpen} />
-      {/*</Box>*/}
+
+      {/* Центр — логотип */}
       <Box
         component="img"
         alt="logo"
         src={logo}
         sx={{
           width: { xs: "50px", md: "80px" },
-          m: "5px 10px",
           cursor: "pointer",
         }}
         onClick={() =>
@@ -60,23 +67,17 @@ const ProfileHeader = () => {
           )
         }
       />
+
+      {/* Правый блок — баланс и профиль */}
       <Box
         sx={{
+          position: "absolute",
+          right: { md: 130, xs: 16 },
           display: "flex",
-          justifyContent: "flex-end",
           alignItems: "center",
-          width: { md: "15%", xs: "fit-content" },
+          gap: 1,
         }}
       >
-        {/*<Box sx={{width: "70%", display: {lg: "block", xs: "none"}}}>
-                     <MyButton
-            options={{ background: "#E68B46", color: "white", mr: 1 }}
-          >
-            <Link to="/cash" style={{ textDecoration: "none" }}>
-              <Typography sx={{ color: "white" }}>Пополнить</Typography>
-            </Link>
-          </MyButton>
-                </Box>*/}
         <Typography sx={{ display: { lg: "block", xs: "none" } }}>
           {balance}₽
         </Typography>
