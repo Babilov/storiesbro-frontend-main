@@ -30,20 +30,21 @@ const CashPattern = ({ children, isDeposit, title }) => {
       <ProfileHeader />
       <Box
         sx={{
-          p: { md: "0 130px", xs: "0 16px" }, // те же отступы, что и в ProfileHeader
+          p: { md: "0 130px", xs: "0 16px" }, // такие же отступы, как у ProfileHeader
           mt: 3,
         }}
       >
-        {/* Заголовок и стрелка в одной строке */}
+        {/* Контейнер для заголовка и стрелки */}
         <Box
           sx={{
+            position: "relative",
             display: "flex",
-            alignItems: "center",
             justifyContent: "center",
+            alignItems: "center",
             mb: 3,
-            gap: 1.5, // расстояние между стрелкой и заголовком
           }}
         >
+          {/* Стрелка слева */}
           <Box
             component="img"
             alt="back"
@@ -52,12 +53,18 @@ const CashPattern = ({ children, isDeposit, title }) => {
               width: 45,
               height: 38,
               cursor: "pointer",
+              position: "absolute",
+              left: 0,
+              top: "50%",
+              transform: "translateY(-50%)",
             }}
             onClick={() => navigate("/cash")}
           />
+          {/* Заголовок по центру */}
           <Typography
             variant="h3"
             sx={{
+              textAlign: "center",
               fontSize: { md: "32px", xs: "24px" },
               fontWeight: 600,
             }}
