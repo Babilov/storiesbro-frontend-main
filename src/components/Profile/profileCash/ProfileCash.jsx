@@ -32,14 +32,13 @@ const ProfileCash = () => {
             textAlign: "center",
             fontWeight: 500,
             fontSize: "16px",
-            mr: 1,
           }}
         >
           {balance !== null ? balance : "—"}
+          <Typography sx={{ fontWeight: 600, fontSize: "20px", mr: 1 }}>
+            ₽
+          </Typography>
         </Box>
-        <Typography sx={{ fontWeight: 600, fontSize: "20px", mr: 1 }}>
-          ₽
-        </Typography>
       </Box>
 
       <Box
