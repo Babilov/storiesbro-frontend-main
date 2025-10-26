@@ -29,9 +29,6 @@ const ProfileCash = () => {
         </Typography>
         <Box
           sx={{
-            px: 2,
-            py: 1,
-            minWidth: "100px",
             textAlign: "center",
             fontWeight: 500,
             fontSize: "16px",
@@ -40,7 +37,9 @@ const ProfileCash = () => {
         >
           {balance !== null ? balance : "—"}
         </Box>
-        <Typography sx={{ fontWeight: 600, fontSize: "20px" }}>₽</Typography>
+        <Typography sx={{ fontWeight: 600, fontSize: "20px", mr: 1 }}>
+          ₽
+        </Typography>
       </Box>
 
       <Box
