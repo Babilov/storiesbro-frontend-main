@@ -2,7 +2,7 @@ import { Box, Grid, Typography } from "@mui/material";
 import React from "react";
 import InfoTooltip from "../../../UI/tooltip/InfoTooltip";
 
-const Table = ({ statistic, open, groupInfo }) => {
+const Table = ({ statistic, open, groupInfo, error }) => {
   console.log("Сука: ", statistic.length);
   const tooltipTextRank = (
     <span>
@@ -177,7 +177,9 @@ const Table = ({ statistic, open, groupInfo }) => {
         })}
     </Grid>
   ) : (
-    <Typography sx={{ display: open ? "flex" : "none" }}>Нет данных</Typography>
+    <Typography sx={{ display: open && error === "" ? "flex" : "none" }}>
+      Нет данных
+    </Typography>
   );
 };
 

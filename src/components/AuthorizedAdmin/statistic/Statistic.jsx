@@ -95,7 +95,12 @@ const Statistic = () => {
         </Box>
       </Grid>
       <Grid item md={12} xs={12} sx={{ m: "50px auto" }}>
-        <Table statistic={statistic} open={open} groupInfo={groupInfo} />
+        <Table
+          statistic={statistic}
+          open={open}
+          groupInfo={groupInfo}
+          error={error}
+        />
       </Grid>
     </>
   );
