@@ -177,9 +177,11 @@ const Table = ({ statistic, open, groupInfo, error }) => {
         })}
     </Grid>
   ) : (
-    <Typography sx={{ display: open && error === "" ? "flex" : "none" }}>
-      Нет данных
-    </Typography>
+    <Box sx={{ display: "flex", justifyContent: "center" }}>
+      <Typography sx={{ display: open && error === "" ? "flex" : "none" }}>
+        Нет данных
+      </Typography>
+    </Box>
   );
 };
 
