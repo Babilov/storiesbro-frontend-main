@@ -3,9 +3,7 @@ import React from "react";
 import InfoTooltip from "../../../UI/tooltip/InfoTooltip";
 
 const Table = ({ statistic, open, groupInfo }) => {
-  console.log(groupInfo);
-  console.log(groupInfo.length);
-  console.log(statistic);
+  console.log("Сука: ", statistic.length);
   const tooltipTextRank = (
     <span>
       Рейтинг основывается на таких показателях: количество реакций на историях
@@ -32,7 +30,7 @@ const Table = ({ statistic, open, groupInfo }) => {
       по повышению дохода с монетизации историй.
     </span>
   );
-  return statistic.length > 0 ? (
+  return statistic.length() > 0 ? (
     <Grid
       container
       sx={{
@@ -109,7 +107,6 @@ const Table = ({ statistic, open, groupInfo }) => {
           <InfoTooltip tooltipText={tooltipTextPrice} placement="top" />
         </Box>
       </Grid>
-      {console.log(statistic)}
       {statistic &&
         Object.entries(statistic).map(([date, info]) => {
           return (
