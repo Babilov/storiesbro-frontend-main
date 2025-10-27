@@ -177,7 +177,7 @@ const Table = ({ statistic, open, groupInfo }) => {
         })}
     </Grid>
   ) : (
-    <Typography>Нет данных</Typography>
+    <Typography sx={{ display: open ? "flex" : "none" }}>Нет данных</Typography>
   );
 };
 
