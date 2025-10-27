@@ -32,7 +32,7 @@ const Table = ({ statistic, open, groupInfo }) => {
       по повышению дохода с монетизации историй.
     </span>
   );
-  return groupInfo.length ? (
+  return statistic.length > 0 ? (
     <Grid
       container
       sx={{
