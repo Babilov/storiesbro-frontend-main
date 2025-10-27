@@ -15,6 +15,10 @@ const DepositMenu = ({ isDeposit }) => {
   const { balance, setBalance } = useBalance();
   const DEPOSIT_URL = `${MY_URL}api/payments/conclusions/`;
   const handleClick = async () => {
+    if (cash <= 0 || requisites.length === 0) {
+      setErrorModalOpen(true);
+      return;
+    }
     try {
       const res = await fetchWithAuth(DEPOSIT_URL, {
         method: "POST",
