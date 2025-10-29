@@ -28,9 +28,9 @@ const LoginFormInfo = ({
       setClickCount(1);
       return;
     }
-    const email_lower = email.toLowerCase();
+    // const email_lower = email.toLowerCase();
     try {
-      const response = await loginFunc(email_lower, password);
+      const response = await loginFunc(email, password);
       // logToBackend(JSON.stringify(response.data));
       if (response.status === 200) {
         const data = await response.data;
