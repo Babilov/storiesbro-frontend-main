@@ -35,7 +35,6 @@ const AddPublicModal = ({
   useEffect(() => {
     const getGroupsCount = async () => {
       const res = await fetchWithAuth(`${API_URL}vk/user-groups/`);
-      console.log("РЕЗЗЗЗ", res);
       setAddedPublicsCount(res.count);
       logToBackend(`ДОБАВЛЕНО: ${res.count}`);
       logToBackend(`ОТВЕТ ОТ ФУНКЦИИ: ${res.count}`);

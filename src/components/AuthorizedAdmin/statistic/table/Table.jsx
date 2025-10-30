@@ -3,7 +3,6 @@ import React from "react";
 import InfoTooltip from "../../../UI/tooltip/InfoTooltip";
 
 const Table = ({ statistic, open, groupInfo, error }) => {
-  console.log("Сука: ", statistic.length);
   const tooltipTextRank = (
     <span>
       Рейтинг основывается на таких показателях: количество реакций на историях

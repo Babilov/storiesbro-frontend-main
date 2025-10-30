@@ -37,8 +37,6 @@ const LoginForm = ({ isLoginFormOpen, setIsLoginFormOpen }) => {
   const [yourEmail, setYourEmail] = useState("");
   const [userId, setUserId] = useState(null);
 
-  // console.log(successOpen);
-
   const openChangePassword = (yourEmail) => {
     setIsLoginFormOpen(false);
     setIsChangePasswordOpen(true);

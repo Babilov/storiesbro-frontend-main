@@ -49,7 +49,6 @@ const ProfileLinksAdmin = () => {
           `${API_URL}commision/check_links/${id}/?check_link=${link}`
         );
         setLinksCount(res.data.results);
-        console.log(linksCount);
       }
     };
     getLinks();

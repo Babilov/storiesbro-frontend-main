@@ -24,9 +24,6 @@ const AuthorizedUserPattern = ({
         },
       });
       localStorage.setItem("is_vk_authed", isAuthed["data"]["authenticated"]);
-
-      // console.log(isAuthed.data.authenticated);
-      // setAuthed(isAuthed.data.authenticated);
     };
     fetchIsAuthed();
   }, []);

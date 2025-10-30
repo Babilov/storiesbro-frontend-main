@@ -33,7 +33,6 @@ const PeriodBlock = ({ period }) => {
         }
       );
       setState(selectedState);
-      console.log(res);
     } catch (error) {
       console.error("Ошибка при изменении состояния:", error);
     }

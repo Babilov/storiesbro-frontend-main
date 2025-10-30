@@ -28,12 +28,11 @@ const Creatives = () => {
     wsRef.current = ws;
 
     ws.onopen = () => {
-      console.log("✅ WebSocket connected");
+      console.log("WebSocket connected");
     };
 
     ws.onmessage = (event) => {
       const data = JSON.parse(event.data);
-      console.log("Auth status changed:", data["authenticated"]);
       setAuthedVk(data["authenticated"]);
     };
 
@@ -42,7 +41,7 @@ const Creatives = () => {
     };
 
     ws.onclose = () => {
-      console.log("❌ WebSocket disconnected");
+      console.log("WebSocket disconnected");
     };
 
     // cleanup при размонтировании
@@ -50,7 +49,7 @@ const Creatives = () => {
       if (wsRef.current) {
         wsRef.current.close();
         wsRef.current = null;
-        console.log("🧹 WebSocket cleaned up on unmount");
+        console.log("WebSocket cleaned up on unmount");
       }
     };
   }, []);
@@ -60,7 +59,6 @@ const Creatives = () => {
     if (wsRef.current && wsRef.current.readyState === WebSocket.OPEN) {
       wsRef.current.close();
       wsRef.current = null;
-      console.log("🔌 WebSocket connection closed manually");
       setAuthedVk(false);
     }
   };

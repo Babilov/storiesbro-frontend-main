@@ -51,7 +51,6 @@ const LoginFormInfo = ({
         return data;
       } else {
         setError(true);
-        console.log("error!!!");
       }
     } catch (e) {
       setError(true);

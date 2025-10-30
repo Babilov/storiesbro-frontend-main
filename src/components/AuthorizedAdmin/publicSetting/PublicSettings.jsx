@@ -57,7 +57,6 @@ const PublicSettings = () => {
       });
 
       setCaState(ca);
-      console.log(groupId);
     } catch (error) {
       logToBackend(`Error POST: ${error}`);
     }

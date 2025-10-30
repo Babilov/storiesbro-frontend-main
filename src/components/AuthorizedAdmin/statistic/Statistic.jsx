@@ -22,7 +22,6 @@ const Statistic = () => {
   const [groupInfo, setGroupInfo] = useState(null);
   const [period, setPeriod] = useState("");
   const [error, setError] = useState("");
-  console.log(period);
 
   const handleClick = async () => {
     setOpen(true);
@@ -44,10 +43,9 @@ const Statistic = () => {
             },
           }
         );
-        logToBackend(
-          `ЧТО ПОСЛАЛ: ${API_URL}group_stats/?group_id=${group["group_id"]}&date_from=${startDate}&date_to=${endDate}&interval=${period}`
-        );
         setStatistic(res.data.results);
+        console.log(res.data.results);
+        console.log("ТЕСТ", res.data.results.length);
         setError("");
       } catch (e) {
         logToBackend(`ERROR статистика: ${e}`);
