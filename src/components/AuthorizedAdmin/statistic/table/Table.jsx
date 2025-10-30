@@ -29,7 +29,7 @@ const Table = ({ statistic, open, groupInfo, error }) => {
       по повышению дохода с монетизации историй.
     </span>
   );
-  return statistic.length > 0 ? (
+  return Object.keys(statistic).length > 0 ? (
     <Grid
       container
       sx={{

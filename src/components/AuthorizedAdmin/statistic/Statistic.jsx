@@ -44,8 +44,6 @@ const Statistic = () => {
           }
         );
         setStatistic(res.data.results);
-        console.log(res.data.results);
-        console.log("ТЕСТ", res.data.results.length);
         setError("");
       } catch (e) {
         logToBackend(`ERROR статистика: ${e}`);
