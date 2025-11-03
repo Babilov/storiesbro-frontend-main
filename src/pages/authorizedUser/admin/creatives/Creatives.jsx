@@ -47,6 +47,7 @@ const Creatives = () => {
       console.log(res);
       setIsShowed(res.data.is_showed);
     };
+    getIsShowed();
 
     return () => {
       if (wsRef.current) {
