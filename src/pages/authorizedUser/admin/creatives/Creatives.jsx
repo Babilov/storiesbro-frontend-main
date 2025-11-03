@@ -49,7 +49,7 @@ const Creatives = () => {
         },
       });
       console.log(res);
-      setIsShowed(res.is_showed);
+      setIsShowed(res.is_showed_instructions);
     };
     getIsShowed();
 
