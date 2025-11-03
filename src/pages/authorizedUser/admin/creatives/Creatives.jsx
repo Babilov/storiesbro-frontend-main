@@ -8,7 +8,7 @@ import { API_URL } from "../../../../constants/constatns";
 const Creatives = () => {
   const [authedVk, setAuthedVk] = useState(false);
   const [showVideo, setShowVideo] = useState(false);
-  const [isShowed, setIsShowed] = useState(false);
+  const [isShowed, setIsShowed] = useState(true);
   const wsRef = useRef(null);
 
   // Обновляем токен при монтировании
