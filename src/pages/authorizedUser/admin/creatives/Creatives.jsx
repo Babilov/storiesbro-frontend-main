@@ -2,10 +2,14 @@ import React, { useEffect, useRef, useState } from "react";
 import CreativessBeforeEnter from "../../../../components/AuthorizedAdmin/creatives/creativesBefoteEnter/CreativessBeforeEnter";
 import CreativesAfterEnter from "../../../../components/AuthorizedAdmin/creatives/creativesAfterEnter/CreativesAfterEnter";
 import { refreshToken } from "../../../../api/token";
+import axios from "axios";
+import { API_URL } from "../../../../constants/constatns";
 
 const Creatives = () => {
   const [authedVk, setAuthedVk] = useState(false);
-  const wsRef = useRef(null); // ссылка на текущее соединение
+  const [showVideo, setShowVideo] = useState(false);
+  const [isShowed, setIsShowed] = useState(false);
+  const wsRef = useRef(null);
 
   // Обновляем токен при монтировании
   useEffect(() => {
@@ -13,11 +17,11 @@ const Creatives = () => {
       await refreshToken();
     };
     refresh().then(() => {
-      console.log("refreshed!!!");
+      console.log("");
     });
   }, []);
 
-  // Создание WebSocket — только один раз при монтировании
+  // Подключаем WebSocket
   useEffect(() => {
     const token = localStorage.getItem("access_token");
     if (!token) return;
@@ -27,24 +31,23 @@ const Creatives = () => {
     );
     wsRef.current = ws;
 
-    ws.onopen = () => {
-      console.log("WebSocket connected");
-    };
+    ws.onopen = () => console.log("WebSocket connected");
 
     ws.onmessage = (event) => {
       const data = JSON.parse(event.data);
       setAuthedVk(data["authenticated"]);
     };
 
-    ws.onerror = (err) => {
-      console.error("WebSocket error:", err);
+    ws.onerror = (err) => console.error("WebSocket error:", err);
+
+    ws.onclose = () => console.log("WebSocket disconnected");
+
+    const getIsShowed = async () => {
+      const res = await axios.get(`${API_URL}api/show_instruction/`);
+      console.log(res.data.isShowed);
+      setIsShowed(res.data.is_showed);
     };
 
-    ws.onclose = () => {
-      console.log("WebSocket disconnected");
-    };
-
-    // cleanup при размонтировании
     return () => {
       if (wsRef.current) {
         wsRef.current.close();
@@ -54,14 +57,45 @@ const Creatives = () => {
     };
   }, []);
 
-  // Функция для ручного отключения
+  // Разрыв соединения с показом видео
   const disconnectWebSocket = () => {
+    // показываем видео
+    setShowVideo(true);
+  };
+
+  // Когда видео заканчивается — реально закрываем сокет
+  const handleVideoEnd = () => {
     if (wsRef.current && wsRef.current.readyState === WebSocket.OPEN) {
       wsRef.current.close();
       wsRef.current = null;
-      setAuthedVk(false);
     }
+    setShowVideo(false);
+    setAuthedVk(false);
   };
+
+  // Можно показать оверлей с видео (например, на весь экран)
+  if (showVideo && !isShowed) {
+    return (
+      <div
+        style={{
+          position: "fixed",
+          inset: 0,
+          backgroundColor: "black",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          zIndex: 9999,
+        }}
+      >
+        <video
+          src="/videos/test.mp4"
+          autoPlay
+          onEnded={handleVideoEnd}
+          style={{ width: "80%", maxWidth: "800px", borderRadius: "12px" }}
+        />
+      </div>
+    );
+  }
 
   return (
     <>
