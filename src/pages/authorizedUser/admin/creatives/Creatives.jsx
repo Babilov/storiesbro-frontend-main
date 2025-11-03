@@ -60,6 +60,9 @@ const Creatives = () => {
         },
       });
       setIsShowed(res.is_showed_instructions);
+      if (res.is_showed_instructions) {
+        handleVideoEnd();
+      }
     };
     getIsShowed();
 
