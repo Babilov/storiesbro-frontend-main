@@ -44,7 +44,7 @@ const Creatives = () => {
 
     const getIsShowed = async () => {
       const res = await axios.get(`${API_URL}api/show_instruction/`);
-      console.log(res.data.isShowed);
+      console.log(res);
       setIsShowed(res.data.is_showed);
     };
 
