@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import CreativessBeforeEnter from "../../../../components/AuthorizedAdmin/creatives/creativesBefoteEnter/CreativessBeforeEnter";
 import CreativesAfterEnter from "../../../../components/AuthorizedAdmin/creatives/creativesAfterEnter/CreativesAfterEnter";
-import { refreshToken } from "../../../../api/token";
+import { fetchWithAuth, refreshToken } from "../../../../api/token";
 import axios from "axios";
 import { API_URL } from "../../../../constants/constatns";
 
@@ -43,7 +43,11 @@ const Creatives = () => {
     ws.onclose = () => console.log("WebSocket disconnected");
 
     const getIsShowed = async () => {
-      const res = await axios.get(`${API_URL}api/show_instruction/`);
+      const res = await fetchWithAuth(`${API_URL}api/show_instruction/`, {
+        headers: {
+          Accept: "application/json",
+        },
+      });
       console.log(res);
       setIsShowed(res.data.is_showed);
     };
