@@ -42,17 +42,6 @@ const Creatives = () => {
 
     ws.onclose = () => console.log("WebSocket disconnected");
 
-    const getIsShowed = async () => {
-      const res = await fetchWithAuth(`${API_URL}api/show_instruction/`, {
-        headers: {
-          Accept: "application/json",
-        },
-      });
-      console.log(res);
-      setIsShowed(res.is_showed_instructions);
-    };
-    getIsShowed();
-
     return () => {
       if (wsRef.current) {
         wsRef.current.close();
@@ -64,6 +53,16 @@ const Creatives = () => {
 
   // Разрыв соединения с показом видео
   const disconnectWebSocket = () => {
+    const getIsShowed = async () => {
+      const res = await fetchWithAuth(`${API_URL}api/show_instruction/`, {
+        headers: {
+          Accept: "application/json",
+        },
+      });
+      setIsShowed(res.is_showed_instructions);
+    };
+    getIsShowed();
+
     // показываем видео
     setShowVideo(true);
   };
